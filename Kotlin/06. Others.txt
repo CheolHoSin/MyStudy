@@ -1,0 +1,372 @@
+06.03. Ranges
+
+06.03.01. Ranges
+
+range expression 은 rangeTo functions 로 형성돼 있으며  .. operator 형태를 취하고 in 과 !in 으로 보완합니다. range 는 어떤 비교가능한 type 을 위해 정의되지만 integral primitive types 에 최적화된 구현을 갖추고 있습니다. 여기 ranges 를 사용한 몇 가지 예들이 있습니다.
+
+---
+if (i in 1..10) { // equivalent of 1 <= i && i <= 10
+     println(i)
+}
+---
+
+integral type ranges (IntRange, LongRange, CharRange) 는 추가적인 특징을 가집니다. 그들은 iterate 될 수 있습니다. compiler 는 이것을 java 의 indexed for-loop 와 유사하게 변경하되 추가적인 overhead 를 발생시키지 않습니다.
+
+---
+for (i in 1..4) print(i) // prints "1234"
+
+for (i in 4..1) print(i) // prints nothing
+---
+
+numbers 를 역순으로 iterate 하고 싶다면 어떻게 할까요? 간단합니다. standard library 에 정의된 downTo() function 을 사용하면 됩니다.
+
+---
+for (i in 4 downTo 1) print(i)  // prints "4321"
+---
+
+numbers 를 1이 아닌 임의의 step 으로 iterate 할 수 있을까요? 물론입니다. step() function 이 도와줄 거에요.
+
+---
+for (i in 1...4 step 2) print(i)  // prints "13"
+
+for (i in 4 downTo 1 step 2) print(i)  // prints "42"
+---
+
+마지막 element 를 포함하지않는 range 를 생성하고 싶다면 until function 을 사용하세요.
+
+---
+for (i in 1 until 10) {  // i in [1, 10), 10 is excluded
+     println(i)
+}
+---
+
+06.03.02. How it works
+
+Ranges 는 library 에 있는 일반 interface 인 CloseRange<T> 를 구현합니다.
+
+CloseRange<T> 는 수학적으로 닫힌 간격을 나타내고 비교가능한 types 에 대해 정의돼 있습니다. 두 개의 endpoints 를 갖는데, range 에 포함되는 start 와 endInclusive 입니다. 주요 operation 은 contains 가 있고 일반적으로 in/!in operators 의 형태로 사용됩니다.
+
+integral type progressions (IntProgression, LongProgression, CharProgression) 은 대수적 progression 을 나타냅니다. Progressions 는 first element, last element, 그리고 0 이 아닌 step 으로 정의됩니다. 첫번째 element 는 first 이고 이어지는 elements 는 이전 element 에 step 을 더합니다. last element 는 progression 이 비어있지 않으면 iteration 에 의해 항상 hit 됩니다.
+
+progresssion 은 Iterable<N> 의 subtype 인데, 여기서 N 은 Int 나 Long, Char 각각이 가능합니다. 따라서 for-loops 와, map, fileter 등과 같은 functions 에서 사용할 수 있습니다. Progression 에 대한 iteration 은 java/javascript 의 indexed for-loop 와 동등합니다.
+
+---
+for (int i = first; i != last; i += step) {
+    // ...
+}
+---
+
+integral types 를 위해 .. operator 는 CloseRange<T> 와 *Progression 둘 다를 구현하는 object 를 생성합니다. 예를 들어, IntRange 는 CloseRange<Int> 를 구현하고 IntProgression 을 확장하기 때문에 IntProgression 에 정의된 모든 operations 가 IntRange 에서도 역시 사용 가능합니다. downTo() 와 step() function 의 결과는 항상 *Progression 입니다.
+
+Progressions 는 그들의 companion object 에 정의된 fromClosedRange function 으로 구성돼 있습니다.
+
+---
+IntProgression.fromClosedRange(start, end, step)
+---
+
+progression 의 last element 는 양의 step 에 대해선 end value 보다 크지 않은 최댓값을 찾고, 음의 step 에 대해선 end value 보다 작지 않은 최솟값을 찾도록 계산합니다. 그 계산 결과는 (last - first ) % step == 0 를 만족합니다.
+
+06.03.03. Utility Functions
+
+- rangeTo()
+
+integral types 에서 rangeTo() operators 는 간단히 *Range classes 의 constructor 를 call 합니다. 예를 들면 이렇습니다.
+
+---
+class Int {
+    // ...
+    operator fun rangeTo(other: Long): LongRange = LongRange(this, other)
+    // ...
+    operator fun rangeTo(other: Int): IntRange = IntRange(this, other)
+    // ...
+}
+---
+
+floating point numbers (Double, Float) 은 rangeTo operator 를 정의하지 않고 generic Comparable type 을 위한 standard library 에 의해 제공되는 것을 대신 사용합니다.
+
+---
+public operator fun <T: Comparable<T>> T.rangeTo(that: T): ClosedRange<T>
+---
+
+이 function 에 의해 return 되는 range 는 iteration 을 위해 사용될 수 없습니다.
+
+- downTo
+
+downTo() extension function 은 integral types 의 어떤 pair 로 정의돼 있는데, 여기 두가지 예가 있습니다.
+
+---
+fun Long.downTo(other: Int): LongProgression {
+    return LongProgression.fromClosedRange(this, other.toLong(), -1L)
+}
+
+fun Byte.downTo(other: Int): IntProgression {
+    return IntProgression.fromClosedRange(this.toInt(), other, -1)
+}
+---
+
+- reversed()
+
+reversed() extension functions 는 각 *Progression classes 를 위해 정의돼 있고 그들 모두는 역순의 progression 을 return 합니다.
+
+---
+fun IntProgression.reversed(): IntProgression {
+     return IntProgression.fromClosedRange(last, first, -step)
+}
+---
+
+- step()
+
+step() extension functions 은 *Progression classes 로 정의가 돼 있고, 그들 모두는 수정된 step values (function parameter) 로 progressions 를 return 합니다. step value 는 항상 양의 값을 요구하므로 이 function 은 iteration 의 방향을 바꿀 수 없습니다.
+
+---
+fun IntProgression.step(step: Int): IntProgression {
+    if (step <= 0) throw IllegalArgumentException("Step must be positive was: $step")
+    return IntProgression.fromClosedRange(first, last, if (this.step > 0) step else -step)
+}
+
+fun CharProgression.step(step: Int): CharProgression {
+    if (step <= 0) throw IllegalArgumentException("Step must be positive was: $step")
+    return CharProgression.fromClosedRange(first, last, if (this.step > 0) step else -step)
+}
+---
+
+(last-first) % step == 0 를 무조건 유지하기 때문에 return 된 progression 의 last value 는 original progression 의 last value 와 다를 수 있다는 걸 알아두세요. 여기 그 예가 있습니다.
+
+---
+(1..12 step 2).last == 11 // progression with values [1, 3, 5, 7, 9, 11]
+(1..12 step 3).last == 10 // progression with values [1, 4, 7, 10]
+(1..12 step 4).last == 9  // progression with values [1, 5, 9]
+---
+
+06.04. Type Checks and Casts: 'is' and 'as'
+
+06.04.01. is and !is Operators
+
+object 가 runtime 때 주어진 type 으로 변형할 수 있는지는 is operator 를 사용해 check 할 수 있고 그 반대는 !is 입니다.
+
+---
+if (obj is String) {
+    print(obj.length)
+}
+
+if (obj !is String) {  // same as !(obj is String)
+    print("Not a String")
+}
+else {
+    print(obj.length)
+}
+---
+
+06.04.02. Smart Casts
+
+많은 경우, kotlin 에서는 명시적으로 cast operators 를 사용할 필요가 없는데, 왜냐하면 compiler 가 immuatble values 에 대한 is-checks 와 명시적 casts 를 추적하여 필요할 때 자동적으로 (safe) casts 를 삽입하기 때문입니다.
+
+---
+fun demo(x: Any) {
+    if (x is String) {
+        print(x.length) // x is automatically cast to String
+    }
+}
+---
+
+compiler 는 negative check 가 return 하더라도 cast 가 안전한지 충분히 알 수 있습니다.
+
+---
+    if (x !is String) return
+    print(x.length)  // x is automatically cast to String
+---
+
+또는 && 와 || 오른편에 있어도 가능합니다.
+
+---
+    // x is automatically cast to string on the right-hand side of '||'
+    if (x !is String || x.length == 0) return
+
+    // x is automatically cast to string on the right-hand side of '&&'
+    if (x is String && x.length > 0) {
+        print(x.length) // x is automatically cast to String
+    }
+---
+
+이러한 smart casts 는 when-expressions 와 while-loops 에서도 동작합니다.
+
+---
+when (x) {
+    is Int -> print(x + 1)
+    is String -> print(x.length + 1)
+    is IntArray -> print(x.sum())
+}
+---
+
+compiler 는 variable 이 check 와 사용 사이에서 변할 수 없다는 걸 보장하지 못할 때 동작하지 않습니다. 좀 더 상세히 말하자면, smart casts 는 다음 규칙에 따라서만 적용할 수 있습니다.
+
+- val local variables - 항상
+- val property - property 가 private 또는 internal 이거나 check 가 property 가 선언된 같은 모듈 내에서 수행될 때만. smart cast 는 open properties 나 custom getters 를 가진 properties 에 대해서는 적용할 수 없습니다.
+- var local variable - variable 이 check 와 사용 사이에 변경이 되지 않고 그것을 변경하는 lamda 내에서 capture 되지 않은 경우에만.
+- var properties - 절대 불가 (왜냐하면 variable 은 다른 코드에서 언제든지 바뀔 수가 있기 때문입니다.)
+
+06.04.03. "Unsafe" cast operator
+일반적으로, cast operator 는 cast 가 가능하지 않으면 exception 을 던집니다. 그걸 unsafe 라고 부릅니다. kotlin 내에서 unsafe cast 는 infix operator 인 as 로 가능합니다. (operator 
+precedence 를 보세요)
+
+---
+val x: String = y as String
+---
+
+null 은 이 타입이 nullable 이 아닐 때 String 으로 cast 될 수 없다는 걸 알아두세요, 즉 y 가 null 이면 위의 코드는 exception 을 발생시킵니다. java cast semantics 에 맞추기 위해 이처럼 cast 오른쪽에 nullable type 을 가져야 합니다.
+
+---
+val x: String? = y as String?
+---
+
+06.04.04. "Safe" (nullable) cast operator
+
+exception 이 발생하는 걸 피하기 위해, safe cast operator 로 as? 를 사용할 수 있는데, 이는 실패했을 때 null 을 return 합니다.
+
+---
+val x: String? = y as? String
+---
+
+as? 오른편이 non-null type String 이라는 사실에도 불구하고 cast 결과는 nullable 입니다.
+
+06.08. Null Safety
+
+06.08.01. Nullable types and Non-Null Types
+
+Kotlin 의 type system 은 code 부터 null 참조의 위협을 없애는 것을 목표로 하고 있는데 이는 The Billion Dollar Mistake 로 알려져 있습니다.
+
+java 를 포함한 많은 프로그래밍 언어에서 가장 일반적인 함정 중 하나가 null 참조를 하는 member 에 접근함으로서 null reference exception 을 일으키는 겁니다. java 에서 이것은 NullPointerException 이나 축약해서 NPE 와 동등할 겁니다.
+
+Kotlin 의 type system 는 코드에서 NullPointerException 이 갖는 것들을 제거하는 겁니다. NPE 가 가진 것들을 발생시킬 수 있는 유일한 것들은 다음과 같습니다.
+
+- throw NullPointerException() 에 대한 명시적 call
+- 아래에서 설명하는 !! operator 의 사용
+- 외부 java code 가 NPE 을 발생시키는 경우
+- 초기화와 관련해 어떤 데이터 불일치가 존재하는 경우 (constructor 내에서 사용가능한 초기화되지 않은 this 가 어디선가 사용될 때)
+
+kotlin 에서 type system 은 null 을 가질 수 있는 참조 (nullable references) 와 그러지 못하는 것 (non-null references) 를 구분합니다. 예를 들어, String type 의 정규 variable 은 null 을 가지지 못합니다.
+
+---
+var a: String = "abc"
+a = null // compliation error
+---
+
+nulls 를 허용하기 위해, String? 으로 써서 nullable string 으로서 variable 을 선언합니다.
+
+---
+var b: String? = "abc"
+b = null // ok
+---
+
+이제, method 를 부르거나 a 에 대한 property 에 접근하려면 NPE 를 발생시키지 않는다는게 보장되므로 안전하게 말할 수 있습니다.
+
+---
+val l = a.length
+---
+
+하지만 b 와 같은 property 접근하려면, 안전하지 않을 수 있고 compiler 는 error 을 보고합니다.
+
+---
+val l = b.length
+---
+
+그렇다해도 여전히 해당 property 에 접근할 필요가 있습니다, 그렇죠? 그걸 할 수 있는 몇 가지 방법이 있습니다.
+
+05.08.02. Checking for null in conditions
+
+먼저, b 이 null 인지 명시적으로 check 고 두가지 options 를 분리해서 다룰 수 있습니다.
+
+---
+val l = if (b != null) b.length else -1
+---
+
+compiler 는 실행한 check 에 대한 정보를 추적해서 if 내에 length 를 부를 수 있도록 합니다. 더 복잡한 conditions 또한 지원합니다.
+
+---
+if (b != null && b.length > 0) {
+    print("String of length ${b.length}")
+} else {
+    print("Empty string")
+}
+
+이는 오직 b 가 immutable (즉 check 와 사용 사이에 변경이 되지 않는 local variable 또는 backing field 를 가지고 override 할 수 없는 member val) 한 곳에서 동작하는데 그렇지 않으면 b가 check 이 후 null 로 바뀌기 때문이라는 걸 알아두세요.
+
+05.08.03. Safe Calls
+
+두번째 option 은 ? 로 쓰여지는 safe call opertator 입니다.
+
+---
+b?.length
+---
+
+이는 b 가 null 이 아니면 b.length 를 return 하고 그렇지 않으면 null 을 return 합니다. 이 expression 의 type 은 Int? 입니다.
+
+safe calls 은 chains 에서 유용합니다. 예를 들어, 직원인 Bob 이 한 부서 에 배정될 수 있고 (혹은 그렇지 않을 수 있고) 차례로 또 다른 직원이 부장으로 있을 있고, 이 때 Bob 의 부장의 이름 (있는 경우) 을 얻는 건 다음과 같이 쓸 수 있습니다.
+
+---
+bob?.department?.head?.name
+---
+
+이들 properies 중 어느것 하나라도 null 이면 그 chain 은 null 을 return 합니다.
+
+오직 non-null values 에 대한 특정 operation 만을 수행하기 위해서 safe call operator 를 let 과 함께 쓸 수 있습니다.
+
+---
+val listWithNulls: List<String?> = listOf("A", null)
+for (item in listWithNulls) {
+    item?.let { prinlnt(it) } // prints A and ignores null
+}
+---
+
+05.08.04. Elvis Operator
+
+nullable reference r 을 가졌을 때, r 이 null 이 아니면 사용하고 그렇지 않으면 non-null value 인 x 를 사용하겠다고 말할 수 있습니다.
+
+---
+val l: Int = if (b != null) b.length else -1
+---
+
+완전한 if-expression 에 따라 이는 ?: 로 쓰여진 Elvis Operator 와 함께 표현될 수 있습니다.
+
+---
+val l = b?.length ?: -1
+---
+
+?: 왼쪽에 expression 에 있는 expression 이 null 이 아니면 elvis operator 는 그것을 return 하고 그렇지 않으면 오른쪽에 있는 expression 을 return 합니다. 오른편에 있는 expression 은 오직 왼쪽편이 null 일 때만 evaluate 된다는 걸 알아두세요.
+
+throw 와 return 이 kotlin 에서는 expression 이기 때문에 elvis operator 오른편에서 역시 사용될 수 있다는 걸 알아두세요. 이는 매우 유용할 수 있는데 예를 들어 checking function arguments  에서 그렇습니다.
+
+---
+fun foo(node: Node): String? {
+    val parent = node.getParent() ?: return null
+    val name = node.getName() ?: throw illegalArgumentException("name expected")
+    // ...
+}
+---
+
+05.08.05. The !! Operator
+
+NPE를 좋아하는 사람들을 위한 세번째 option 입니다. b!! 를 쓸 수 있고 이는 b 의 non-null value 를 return 하거나 (즉, 예시의 String), b 가 null 이면 NPE 를 발생시킵니다.
+
+---
+val l = b!!.length
+---
+
+그러므로 NPE 를 원하면 그것을 사용할 순 있지만 그것을 명시적으로 요청해야 하므로 갑자기 튀어나오지 않습니다.
+
+05.08.06. Safe Casts
+
+정규 casts 는 object 가 target type 이 아닐 때 ClassCastException 을 발생시킵니다. 또다른 option 은 시도가 성공적이지 않을 때 null 을 return 하게 하는 safe casts 를 사용하는 겁니다.
+
+---
+val aInt: Int? = a as? Int
+---
+
+05.08.07. Collections of Nullable Type
+
+nullable type 의 element 로 이루어진 collection 을 가지고 있고 non-null elements 만 filter 하길 원하다면 filterNotNull 을 사용해 할 수 있습니다.
+
+---
+val nullableList: List<Int?> = listOf(1, 2, null, 4)
+val intList: List<Int> = nullableList.filterNotNull()
+---

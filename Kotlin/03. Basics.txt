@@ -1,0 +1,277 @@
+03.01. Basic Types
+
+03.01.12. String Templates
+
+String 은 template expressions 를 포함하는데, 즉 evaluated 된 code 의 부분과 그 결과가 string 으로 concatenate 됩니다. template expression 은 dollar sign ($) 으로 시작하고 간단한 이름을 포함합니다.
+
+---
+val i = 10
+val s = "i = $i" // evaluates to "i = 10"
+---
+
+또는 curly braces 내에 임의의 표현이 포함될 수 있습니다.
+
+---
+val s = "abc"
+val str = "$s.length is ${s.length}" // evaluates to "abc.length is 3"
+---
+
+Tempates 은 raw strings 내와 escaped string 내에서 모두 지원됩니다. $ 문자를 글자 그대로 raw string (backslash escaping 을 지원하지 않는) 내에 표현하고 싶다면 다음 syntax 를 사용하세요.
+
+---
+val price = """
+${'$'}9.99
+"""
+---
+
+03.02. Packages and Imports
+
+03.02.01. Packages
+
+소스 파일은 package 정의와 함께 시작합니다.
+
+---
+package foo.bar
+
+fun baz() {}
+
+class Goo {}
+
+//...
+---
+
+소스 파일의 모든 컨텐츠(클래스와 함수들과 같이)은 package 정의에 의해 포함됩니다. 위의 예에서 baz() 의 fullname 은 foo.bar.baz 이고 Goo 의 fullname 은 foo.bar.Goo 입니다.
+package 가 명시되지 않으면 그 파일의 컨텐츠는 이름 없는 default package 에 속하게 됩니다.
+
+03.02.02. Default Imports
+많은 packages 이 kotlin file 에 기본적으로 import 됩니다.
+
+- kotlin.*
+- kotlin.annotation.*
+- kotlin.collections.*
+- kotlin.comparisons.* (1.1 버전 부터)
+- kotlin.io.*
+- kotlin.ranges.*
+- kotlin.sequences.*
+- kotlin.text.*
+
+추가적인 패키지들은 타겟 플랫폼에 따라 import 됩니다.
+
+- JVM:
+ - java.lang.*
+ - kotlin.jvm.*
+
+- JS:
+ - kotlin.js.*
+
+03.02.03. Imports
+
+기본적인 import 와 별개로 각각 파일은 자기 자신만의 import 지시자를 포함할 수 있습니다. import 를 위한 문법은 grammer 에 설명돼 있습니다.
+
+---
+import
+(used by preamble)
+  : "import" SimpleName{"."} ("." "*" | "as" SimpleName)? SEMI?
+  ;
+---
+
+예를 들어 single name 으로 가져올 수 있습니다.
+
+---
+import foo.bar // Bar is now accessible without qulification
+---
+
+또는 한 scope 의 모든 접근 가능한 컨텐츠(package, class, object 등)을 가져올 수 있습니다.
+
+---
+import foo.* // everything in 'foo' becomes accessible
+----
+
+이름 충돌이 있다면 as 키워드를 사용해 충돌난 대상을 지역적으로 재명명하여 disambiguate 할 수 있습니다.
+
+---
+import foo.Bar // Bar is accessible
+import bar.Bar as bBar // bBar stands for 'bar.Bar'
+---
+
+import 키워드는 import 하는 클래스에 제한되지 않습니다. 다른 정의들을 import 하는데도 사용할 수 있습니다.
+- top-level 함수와 properties
+- object declarations 내 정의돼 있는 함수와 properties
+- enum constants
+
+03.02.04. Visibility of Top-level Declarations
+top-level declaration 이 private 로 지정돼 있으면 그것이 정의된 파일 내에서 private 입니다.
+
+03.03. Control Flow: if, when, for, while
+
+03.03.01. if Expression
+
+Kotlin 에서 if 는 expression 입니다. 즉 value 를 return 합니다. 그러므로 ternary operator (condition?then:else) 가 없고 보통 if 가 이 역할을 잘 수행합니다.
+
+---
+// Traditional usage
+var max = a
+if (a < b) max = b
+
+// with else
+var max: Int
+if (a > b) {
+    max = a
+} else {
+    max = b
+}
+
+// As expression
+val max = if (a > b) a else b
+---
+
+if braches 는 blocks 가 될 수 있고, 마지막 expression 은 이 block 의 value 가 됩니다.
+
+---
+val max = if (a > b) {
+    print("Choose a")
+    a
+} else {
+    print("Choose b") 
+    b
+}
+---
+
+if 를 statement 로 사용하기 보다 expression 으로 사용한다면 (예를 들어, 그것의 value 를 return 하거나 variable 로 그것을 assign 하는 것), expression 은 else branch 를 가질 필요가 있습니다.
+
+grammar for if 를 보세요.
+
+03.03.02. When Expression
+
+when 은 C와 같은 언어의 switch operator 를 대체합니다. 가장 간단한 형태로는 이와 같이 생겼습니다.
+
+---
+when (x) {
+    1 -> print("x == 1")
+    2 -> print("x == 2")
+    else -> { // Note the block
+        print("x is neither 1 nor 2")
+    }
+}
+---
+
+when 은 어떤 branch condion 을 만족할 때까지 순서대로 모든 branches 에 대해 argument 를 match 합니다. when 은 expression 이나 statement 둘 다로 쓰일 수 있습니다. expression 으로서 사용된다면 반족된 branch 의 value 는 전체 expression 의 value 가 됩니다. statement 로 사용할 때는 개별 branches 의 value 가 무시됩니다. (if 와 같이, branch 는 block 이 될 수 있고 그것의 value 는 block 에 있는 마지막 expression 의 value 입니다.)
+
+else branch 는 어떤 다른 branch conditions 도 만족하지 않을 때 evaluate 됩니다. when 이 expression 으로 사용될 때, else branch 는 의무적입니다. 그렇지 않으면 compiler 는 모든 가능한 cases 가 branch conditions 로 cover 된다는 걸 증명할 수 있어야 합니다.
+
+많은 cases 가 같은 방법으로 다뤄져야 한다면 branch conditions 는 comma 로 결합될 수 있습니다.
+
+---
+when (x) {
+    0, 1 -> print("x == 0 or x == 1")
+    else -> print("otherwise")
+}
+---
+
+임의의 expressions (constants 만이 아닌) 를 branch conditions 로 사용할 수 있습니다.
+
+---
+when (x) {
+    parseInt(s) -> print("s encodes x")
+    else -> print("s does not encoes x")
+}
+---
+
+range 나 collection 을 가지고 in 이나 !in 사용해 value 를 check 할 수도 있습니다.
+
+---
+when (x) {
+    in 1..0 -> print("x is in the range")
+    in validNumber -> print("x is valid")
+    !in 10..20 -> print("x is outsie the range")
+    else -> print("none of the above")
+}
+---
+
+value 를 check 하는 또다른 방법은 특정한 타입인지를 알기위해 is 나 !is 를 사용하는 것입니다. 알아둬야 할 것은, smart casts 때문에 어떤 추가적인 checks 없이 type 의 methods 와 properties 에 접근할 수 있다는 겁니다.
+
+---
+fun hasPrefix(x: Any) = when(x) {
+    is String -> x.startsWith("prefix")
+    else -> false
+}
+---
+
+when 을 if-else if chain 를 대체하는데 사용할 수 있습니다. 어떤 argument 도 지원되지 않는다면 branch conditions 는 단순히 boolean expression 가 되고 branch 는 그 condition 이 true 일 때 동작합니다.
+
+---
+when {
+    x.isOdd() -> print("x is odd")
+    x.isEven() -> print("x is even")
+    else -> print("x is funny")
+}
+---
+
+grammar for when 을 보세요.
+
+
+03.03.03. For Loops
+
+for loop 는 iterator 를 제공하는 어떤 것이든 iterate 합니다. 이는 C# 과 같은 language 에 있는 foreach loop 와 동등합니다. syntax 는 다음과 같습니다.
+
+---
+for (item in collection) print(item)
+---
+
+body 는 block 될 수 있습니다.
+
+---
+for (item: Int in ints) {
+    // ...
+}
+---
+
+전에 언급했듯, for 은 iterator 를 제공하는 어느 것이든 iterate 합니다. 즉,
+
+- member-function 이나 extension function iterator() 를 가지고 있고 return type 이
+    - member-function 이나 extension-function next() 를 가지고 있고
+    - member-function 이나 extension-function hasNext() 가 Boolean 을 return 하는 경우
+
+이러한 세 functions 는 모두 operator 로 표기가 되야 합니다.
+
+array 에 대한 for loop 는 index-based loop 로 complie 되고, iterator object 는 생성하지 않습니다.
+
+array 나 list 를 index 로 iterate  하기 원한다면 이 방법을 사용할 수 있습니다.
+
+---
+for (i in array.indices) {
+    print(array[i])
+}
+---
+
+range 에 대한 iteration 은 어떠한 추가적인 object 를 생성하지 않는 최적화된 구현으로 complie 된다는 걸 알아두세요.
+
+또는 withIndex library function 을 사용할 수도 있습니다.
+
+---
+for ((index, value) in array.withIndex()) {
+    println("the element at $index is $value")
+}
+---
+
+grammar for for 을 보세요.
+
+03.03.04. While Loops
+
+while 과 do..while 은 평상시처럼 동작합니다.
+
+---
+while (x > 0) {
+    x--
+}
+
+do {
+    val y = retrieveData()
+} while (y != null)  // y is visible here!
+---
+
+grammar for while 을 보세요.
+
+03.03.05. Break and continue in loops
+
+Kotlin 은 전통적인 break 와 continue operators 를 loops 내에서 지원합니다. returns and jumps 를 보세요.

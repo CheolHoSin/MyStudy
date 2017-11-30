@@ -1,0 +1,342 @@
+02.01. Basic Syntax
+
+02.01.01. Defining packages
+
+package my.demo
+import java.util.*
+
+//...
+
+디렉토리와 패키지에 매치될 필요는 없습니다. 소스 파일은 파일 시스템 내 임의에 위치해 있어도 됩니다.
+
+02.01.02. Defining functions
+
+Int parameters 와 Int return type 을 가진 함수입니다.
+
+---
+fun sum(a: Int, b:Int): Int {
+	return a + b
+}
+---
+
+expression body 와 유추되는 return type 을 가진 함수입니다:
+---
+fun sum(a: Int, b:Int) = a + b
+---
+
+어떤 의미있는 value 도 return 하지 않는 함수입니다:
+---
+fun printSum(a: Int, b:Int): Unit {
+	println("sum of $a and $b is ${a + b}")
+}
+---
+
+Unit return type 은 생략 가능합니다.
+---
+fun printSum(a: Int, b:Int) {
+	println("sum of $a and $b is ${a + b}")
+}
+---
+
+02.01.03. Defining Variables
+
+Assign-once (read-only) local variable:
+
+---
+val a: Int = 1 // immediate assignment
+val b = 2 // 'Int' type is inferred
+val c: Int // Type required when no initializer is provided
+c = 3 // deffered assignment
+---
+
+Mutable variable:
+
+---
+var x = 5 // 'Int' type is inferred
+x += 1
+---
+
+Top-level variables
+
+---
+val PI = 3.14
+var x = 0
+
+fun incrementX() {
+    x += 1
+}
+---
+
+02.01.04. Comments
+
+java 와 javascript 와 같이, kotlin 은 end-of-line 과 block comments 를 지원합니다.
+
+---
+// This is an end-of-line comment
+
+/* This is a block comment 
+   on multiple lines */
+---
+
+java 와 달리 kotlin 에서 block comments 는 nested 될 수 있습니다.
+
+doucmentation comment syntax 에 대한 정보는 Documenting Kotlin Code 를 보세요.
+
+02.01.05. Using string templates
+
+---
+var a = 1
+// simple name in template
+val s1 = "a is $a"
+
+a = 2
+// arbitrary expression in template:
+val s2 = "${s1.replace("is", "was")}, but now is $a"
+---
+
+String templates 를 보세요.
+
+02.01.06. Using conditional expressions
+
+---
+fun maxOf(a: Int, b: Int) : Int {
+    if (a > b) {
+        return a
+    } else {
+        return b
+    }
+}
+---
+
+if 를 expression 으로 사용할 수 있습니다.
+
+---
+fun maxOf(a: Int, b: Int) = if (a > b) a else b
+---
+
+if-expressions 를 보세요.
+
+02.01.06. Using nullable values and checking for null
+
+참조자는 null value 가 가능할 때  nullable 로 명시적으로 표기되야 합니다.
+
+str 이 integer 를 가지지 못하면 null 을 return 합니다.
+
+---
+fun parseInt(str: String): Int? {
+    // ...
+}
+---
+
+nullable value 를 return 하는 function 를 사용합니다.
+
+---
+fun printProduct(arg1: String, arg2: String) {
+    val x = parseInt(arg1)
+    val y = parseInt(arg2)
+
+    // Using 'x * y' yields error because they may hold nulls.
+    if (x != null && y != null) {
+        // x and y are automatically cast to non-nullable after null check
+        println(x * y)
+    }
+    else {
+        println("either '$arg1' or '$arg2' is not a number")
+    }
+}
+---
+
+또는
+
+---
+
+// ...
+if (x == null) {
+    println("wrong number format in arg1: '$arg1'")
+    return
+}
+if (y == null) {
+    println("wrong number format in arg2" '$arg2'")
+    return
+}
+
+// x and y are automatically ast to non-nullable after null check
+println(x * y)
+---
+
+02.01.07. Using type checks and automatic casts
+
+is operator 는 expression 이 type 의 instance 인지를 check 합니다. immutable local variable 이나 property 는 기술된 type 에 대해 check 된다면 그것을 명시적으로 cast 할 필요가 없습니다.
+
+---
+fun getStringLength(obj: Any): Int? {
+    if (obj is String) {
+        // 'obj' is automatically cast to 'string' in this branch
+        return obj.length
+    }
+
+    return null
+}
+---
+
+또는 이렇게도 쓸 수 있고
+
+---
+fun getStringLength(obj: Any): Int? {
+    if (obj !is String) return null
+
+    // 'obj' is automatically cast to 'String' in this branch
+
+    return obj.length
+}
+---
+
+심지어는 이렇게도 쓸 수 있습니다.
+
+---
+fun getStringLength(obj: Any): Int? {
+    // 'obj' is automatically cast to 'String' on the right-hand side of '&&'
+    if (obj is String && obj.length > 0) {
+        return obj.length
+    }
+
+    return null
+}
+---
+
+classes 와 Type casts 를 보세요.
+
+02.01.08. Using for loop
+
+---
+val items = listOf("apple", "banana", "kiwi")
+for (item in items) {
+    println(item)
+}
+---
+
+이거나
+
+---
+val items = listOf("apple", "banana", "kiwi")
+for (index in items.indices) {
+    println("item at $index is ${items[index]}")
+}
+
+for loop 를 보세요.
+
+
+
+02.01.09. Using a while loop
+
+---
+val items = listOf("apple", "banana", "kiwi")
+var index = 0
+while (index < items.size) {
+    println("item at $index is ${items[index]}")
+    index++
+}
+---
+
+while loop 를 보세요.
+
+02.01.10. Using when expression
+
+---
+fun describe(obj: Any): String =
+when(obj) {
+    1          -> "One"
+    "Hello"    -> "Greeting"
+    is Long    -> "Long"
+    !is String -> "Not a string"
+    else       -> "unknown"
+}
+---
+
+when expression 을 보세요
+
+02.01.11. Using ranges
+
+number 가 range 내에 있는지 확인하기 위해 in operator 를 사용하세요
+
+---
+val x = 10
+val y = 9
+if (x in 1..y+1) {
+    println("fits in range")
+}
+---
+
+number 가 range 외에 있는지 확인하세요.
+
+---
+val list = listOf("a", "b", "c")
+
+if (-1 !in 0..list.lastIndex) {
+    println("-1 is out of range")
+}
+if (list.size !in list.indices) {
+    println("list size is out of valid list indices range too")
+}
+---
+
+range 에 대해 iterate 하세요
+
+---
+for (x in 1..5) {
+    print(x)
+}
+---
+
+혹은 progression 에 대해서 iterate 하세요.
+
+---
+for (x in 1..10 step 2) {
+     print(x)
+}
+for (x in 9 downTo 0 step 3) {
+     print(x)
+}
+---
+
+ranges 를 보세요.
+
+02.01.12. Using Collections
+
+collection 에 대한 iteration
+
+---
+for (item in items) {
+    println(item)
+}
+---
+
+collection 이 object 를 포함하는지 확인하기 위해 in operator 를 사용하세요.
+
+---
+when {
+    "orange" in items -> println("juicy")
+    "apple" in items -> printlin("apple is fine too")
+}
+---
+
+collections 를 filter 하고 map 하기 위해 lamda expression 을 사용하세요.
+
+---
+fruits
+.filter { it.startWith("a") }
+.sortedBy { it }
+.map { it.toUpperCase() }
+.forEach { println(it) }
+---
+
+Higher-order functions and lamdas 를 보세요.
+
+02.01.13. Creating basic classes and thier instances
+
+---
+val rectangle = Rectangle(5.0, 2.0) // no 'new' keyword required
+val triangle = Triangle(3.0, 4.0, 5.0)
+---
+
+classes 와 objects and instances 를 보세요.

@@ -1,0 +1,973 @@
+05.01. Functions
+
+05.01.01. Function Declarations
+
+Kotlin 에서 functions 는 fun 키워드를 사용해 정의합니다.
+
+---
+fun double(x: Int): Int {
+    return 2 * x
+}
+---
+
+05.01.02. Function Usage
+
+functions 을 call 하는 것은 전통적인 접근을 사용합니다.
+
+---
+val result = double(2)
+---
+
+
+member functions 를 call 하는 것은 dot notation (.) 을 사용합니다.
+---
+Sample().foo() // create instance of class Sample and call foo
+---
+
+05.01.03. Parameters
+function parameters 는 Pascal notation 을 사용해 정의됩니다. 즉 name:type. Parameters 는 commas(,) 를 사용해 구분됩니다. 각 parameters 는 명시적으로 type 되어야 합니다.
+
+---
+fun powerOf(number: Int, exponent: Int) {
+....
+}
+---
+
+05.01.04. Default Arguments
+function parameters 는 default values 를 가질 수 있고, 이는 해당 argument 를 생략했을 때 사용됩니다. 이 방법을 통해 다른 언어에 비해 overloads 수를 줄일 수 있도록 합니다.
+
+---
+fun read(b: Array<Byte>, off: Int = 0, len: Int = b.size) {
+...
+}
+---
+
+default values 는 value 와 함께 쓰인 type 뒤에 = 을 사용해 정의합니다.
+
+overriding methods 는 항상 base method 와 같은 defauolt parameter values 를 사용합니다. default parameters values 를 가진 method 를 overiding 할 때, default parameter values 는 기술에서 반드시 생략해야 합니다.
+
+---
+open class A {
+    open fun foo(i: Int = 10) { ... }
+}
+
+class B: A() {
+    override fun foo(i: Int) { ... } // no default value allowed
+}
+
+default parameters 가 어떠한 default value 도 가지지 않은 parameters 를 선행한다면, default value 는 오직 명명된 arguments 를 사용하여 함수 호출하는 것으로만 사용할 수 있습니다.
+
+---
+fun foo(bar: Int = 0, baz: Int) { /* ... */ }
+foo(baz = 1) // The default value bar = 0 is used
+---
+
+괄호 밖에서 마지막 argument인 lamda 가 function call 로 전달됐다면, default parameters 로 어떠한 value 도 전달하지 않는 것을 허용합니다.
+
+---
+fun foo(bar: Int = 0, baz: Int = 1, qux: () -> Unit)
+{ /* ... */ }
+
+foo(1) { println("hello") } // Uses the default value baz = 1
+foo { println("hello") } // Uses both default values bar = 0 and baz = 1
+---
+
+05.01.05. Named Arguments
+
+function parameters 는 functions 을 call 할 때 명명할 수 있습니다. function 이 매우 많은 수 의 parameters 나 default parameters 를 가지고 있을 때 매우 편리합니다.
+
+주어진 함수가 다음과 같다면,
+---
+fun reformat(str: String,
+             normalizeCase: Boolean = true,
+             upperCaseFirstLetter: Boolean = true,
+             divideByCamelHumps: Boolean = false,
+             wordSeparator: Char = ' ') {
+...
+}
+---
+
+default arguments 를 사용해 이 function 을 call 할 수 있습니다.
+---
+reformat(str)
+---
+
+그러나 non-default 를 가지고 call할 때, call 은 다음과 같을 것입니다.
+
+---
+reformat(str, true, true, false, '_')
+---
+
+named arguments 를 사용하면 코드를 훨씬 더 읽기 좋게 만들 수 있습니다.
+
+---
+reformat(str,
+    normalizeCase = true,
+    upperCaseFirstLetter = true,
+    devideByCamelHumps = false,
+    wordSeparator = '_'
+)
+---
+
+모든 arguments 를 필요로 하지 않는다면 이렇게 쓸 수도 있습니다.
+
+---
+reformat(str, wordSeparator = '_')
+---
+
+function 이 positional 하고 named arguments 둘 다 사용해 call 될 때, 모든 positional arguments 는 최초 named argument 전에 위치해야 합니다. 예를 들어 f(1, y = 2) 를 call 하는 건 가능하지만 f(x = 1, 2) 는 안됩니다.
+
+Variable number of arguments(vararg) 는 spread operator 를 사용해 named form 으로 전달될 수 있습니다.
+
+---
+fun foo(vararg strings: String) { /* ... */ }
+
+foo(strings = *arrayOf("a", "b", "c"))
+foo(strings = "A") // Not required for a single value
+---
+
+named argument 문법은 java functions 를 호출할 땐 사용할 수 없다는 걸 명심하세요. 왜냐하면 java bytecode 는 항상 function parameters 의 이름을 유지하지 않기 때문입니다.
+
+05.01.06. Unit-returning functions
+function 이 어떤 유용한 value 도 return 하지 않는다면, 그것의 return type 은 Unit 입니다. Unit 은 오직 하나의 value - Unit 으로만 이루어진 type 입니다. 이 value 는 명시적으로 return 할 필요 없습니다.
+
+---
+fun printHello(name: String?): Unit {
+    if (name != null)
+        println("Hello ${name}")
+    else
+        println("Hi there!")
+    // 'return Unit' or 'return' is optional
+}
+---
+
+05.01.07. Single-Expression functions
+functions 이 single expression 을 return 하는 경우, curly braces 는 생략할 수 있고 body 는 a = symbol 뒤에 명시합니다.
+
+---
+fun double(x: Int): Int = x * 2
+---
+
+return type 이 compiler 에 의해 유추될 수 있기 때문에 명시적으로 return type 을 정의하는 건 선택적입니다.
+
+---
+fun double(x: Int) = x * 2
+---
+
+05.01.08. Explicit return types
+
+block body 를 가진 functons 은 Unit 을 return 하려는 게 아닌 이상, 항상 명시적으로 return type 을 기술해야 합니다. Kotlin 은 block bodies 가 있는 function 의 return type 을 유추하지 못하는데, 왜냐하면 그러한 functions 은 body 내에 복잡한 컨트롤 flow 를 가질 수 있고 return type 이 읽는 사람(때때로는 컴파일러에게 까지) 불명확해지기 때문입니다.
+
+05.01.09. Variable number of arguments (Varargs)
+function 의 parameter 하나는 (일반적으로 마지막 parameter) vararg modifier 로 표시할 수 있습니다.
+
+---
+func <T> asList(varargs ts: T): List<T> {
+    val result = ArrayList<T>()
+    for (t in ts) // ts is an Array
+        result.add(t)
+    return result
+}
+---
+
+arguments 의 variable 한 숫자를 function 에 전달할 수 있습니다.
+---
+val list = asList(1, 2, 3)
+---
+
+function 내에서 T type 의 vararg-parameter 는 T 의 array 로 보입니다, 즉 위의 예에서 ts variable 은 Array<out T> 를 가집니다.
+
+오직 하나의 parameter 만 vararg 로 표시할 수 있습니다. vararg parameter 가 리스트 내에 마지막에 오지 않으면 이어지는 parameters 의 values 는 문법적으로 명명된 argument 를 사용해 전달할 수 있고, 만일 parameter 가 function type 을 갖는다면 괄호 밖 lamda 를 전달함으로서 이어지는 parameter 를 전달할 수 있습니다.
+
+vararg-function 를 call 할 때, 예를 들어 asList(1, 2, 3) 처럼 하나 하나 arguments 를 전달할 수도 있습니다.만일 이미 array 를 가지고 있고 그 내용을 function 으로 전달하고 싶다면 spread operator 를 사용할 수 있습니다, (array 를 *와 함께 사용)
+
+---
+val a = arrayOf(1, 2, 3)
+val list = asList(-1, 0, *a, 4)
+---
+
+05.01.10. Infix notation
+inifx notations 를 사용해 function 를 call 하는 경우는 다음과 같습니다.
+
+- member functions 나 extension functions 일 때
+- single parameter 를 가지고 있을 때
+- infix keyword 를 표시했을 때
+
+---
+// Define extension to Int
+infix fun Int.shl(x: Int): Int {
+...
+}
+
+// call extension function using infix notation
+
+1 shl 2
+
+// is the same as
+
+1.shl(2)
+---
+
+05.01.11. Local Functions
+Kotlin 은 local functions, 즉 다른 function 내에 있는 function 을 지원합니다.
+
+---
+fun dfs(graph: Graph) {
+    fun dfs(current: Vertex, visited: Set<Vertex>) {
+        if (!visited.add(current)) return
+        for (v in current.neighbors)
+            dfs(v, visited)
+    }
+
+    dfs(graph.vertices[0], HashSet())
+}
+---
+
+Local function 는 바깥 functions 의 local variables 에 접근할 수 있습니다. 위의 경우라면 visited 는 local varialbe 이 될 수 있습니다.
+
+---
+fun dfs(graph: Graph) {
+    val visited = HashSet<Vertex>()
+    fun dfs(current: Vertex) {
+        if (!visited.add(current)) return
+        for (v in current.neighbors)
+            dfs(v)
+    }
+
+    dfs(graph.vertices[0])
+}
+---
+
+05.01.12. Member Functions
+member function 은 class 나 object 내에 정의된 function 입니다.
+
+---
+class Sample() {
+    fun foo() { print("Foo") }
+}
+---
+
+Member functions 는 dot notation 으로 call 할 수 있습니다.
+
+---
+Sample().foo() // creates instance of class Sample and calls foo
+---
+
+05.01.13. Generic Functions
+functions 는 function 이름 전에 angle brackets(< >) 을 사용해 기술된 generic parameters 를 가집니다.
+
+---
+fun <T> singletonList(item: T): List<T> {
+    // ...
+}
+---
+
+05.01.14. Inline Functions
+
+05.01.15. Extension Functions
+
+05.01.16. Higher-Order Functions and Lamdas
+
+05.01.17. Tail recursive functions
+Kotlin 은 tail recursion 으로 알려진 functional programming 기법을 지원합니다. 이것은 어떤 알고리즘들을 loops 를 사용해 작성하는 대신 recursive function 로 사용해 작성하도록 가능하게 하면서 stack overflow 의 위험없이 사용 가능하게 합니다. function 을 tailrec modifier 로 표시하고 요구되는 form 을 만족시키면 recursion 을 최적화하여 대신 빠르고 효율적으로 루프 기반 버전을 남깁니다.
+
+---
+tailrec fun findFixPoint(x: Double = 1.0): Double
+        = if (x == Math.cos(x)) x else
+findFixPoint(Math.cos(x))
+----
+
+이 코드는 수학적 상수인 cosine 의 fixpoint 를 계산합니다. 단순히 1.0 에서 시작해 더 이상 결과가 바뀌지 않을 때까지 Math.cos 를 call 하고, 결과적으로 0.7390851332151607 이 됩니다. 결과 코드는 더 전통적인 스타일의 이 코드와 동등합니다.
+
+---
+private fun findFixPoint(): Double {
+    var x = 1.0
+    while (true) {
+       val y = Math.cos(x)
+       if (x == y) return y
+       x = y
+    }
+}
+---
+
+tailrec modifier 를 받기 위해서 function 은 실행하는 마지막 operation 으로 그 자신을 call 해야 합니다. recursive call 이후 더 많은 코드가 있을 경우에는 tail recursion 을 쓰지 말아야 하고, try/catch/finally blocks 과 함께 사용할 수 없습니다. 현재 tail recursion 은 오직 JVM backend 에서만 지원됩니다.
+
+
+05.02. Lamdas
+
+05.02.01. Higher-Order Functions
+
+high-order functions 은 parameters 로서 functions 을 받아 function 을 return 하는 function 입니다. 그러한 function 의 좋은 예로 lock() 이 있습니다. 이 함수는 lock object 와 function 을 받아 lock 을 취득하여 function 를 실행하고 lock 을 해제합니다.
+
+---
+fun <T> lock(lock: Lock, body: () -> T): T {
+    lock.lock()
+    try {
+        return body()
+    }
+    finally {
+        lock.unlock()
+    }
+}
+---
+
+위의 코드를 분석해봅시다. body 는 function type () -> T 를 가지고 있고, 이것은 아무런 parameter 도 받지 않고 type T 의 value 를 return 하는 function 이라 가정합니다. 그것은 try-block 내에서 실행되고 그동안 lock 에 의해 보호됩니다. 그리고 그 결과는 lock() function 에 의해 return 됩니다.
+
+lock 을 call 하고 싶다면 또다른 function 을 argument 로 넘겨줄 수 있습니다.
+
+---
+fun toBeSynchronized() = sharedResource.operation()
+
+val result = lock(lock, ::toBeSynchronized)
+---
+
+또 lamda expression 을 넘기기 위한 훨씬 더 편한 방법이 있습니다.
+
+---
+val result = lock(lock, { sharedResource.operation()})
+---
+
+Lamda expressions 는 아래 상세 내용에 설명돼 있습니다만 이 section 을 계속할 목적이라면 요약된 내용만 보세요.
+
+- lamda expression 은 항상 curly braces 로 감싸집니다.
+- 그것의 parameters 는 -> 전에 정의됩니다. (parameter types 은 생략해도 됩니다)
+- body 는 -> 뒤에 옵니다.
+
+Kotlin 에서 function 에 전달되는 마지막 parameter 가 function 이고 lamda expression 을 해당하는 argument 로 전달하고자 한다면 편리한 방법이 있는데, 그것을 괄호 바깥에 기술하는 것입니다.
+
+---
+lock(lock) {
+    sharedResource.operation()
+}
+---
+
+high-order function 의 또 다른 예는 map() 이 될 겁니다.
+
+---
+fun <T, R> List<T>.map(transform: (T) -> R): List<R>
+{
+    val result = arrayListOf<R>()
+    for (item in this)
+        result.add(transform(item))
+    return result
+}
+---
+
+이 function 은 다음과 같이 call 합니다.
+
+---
+val doubled = ints.map { value -> value * 2 }
+---
+
+lamda가 해당 call 의 유일한 argument 라면 call 안의 괄호가 전체적으로 생략될 수 있다는 걸 알아두세요.
+
+05.02.02. it: implicit name of a single parameter
+
+또다른 유용한 약속은 function 리터럴이 오직 하나의 parameter 를 가질 때, 그것의 선언이 생략될 수 있고(-> 과 함께) 그 이름이 it 가 될 것이라는 겁니다.
+
+---
+ints.map { it * 2 }
+---
+
+이 약속은 LINQ-style 코드를 작성할 수 있게 합니다.
+
+---
+strings.filter { it.length == 5 }.sortedBy { it }.map { it.toUpperCase() }
+---
+
+05.02.03. Underscore for unused variables (since 1.1)
+
+lamda parameter 가 사용되지 않는다면, 이름 대신 underscore 를 위치시킬 수 있습니다.
+
+---
+map.forEach { _, value -> println("$value!") }
+---
+
+05.02.04. Destructuring in Lamdas (since 1.1)
+
+05.02.05. Inline Functions
+
+05.02.06 Lamda Expressions and Anonymous Functions
+
+lamda expression 이나 anonymous function 은 function literal 입니다. 즉 선언하지 않았지만 expression 으로서 즉시 넘길 수 있는 function 입니다. 다음의 예를 생각해보세요.
+
+---
+max(strings, { a, b -> a.length < b.length })
+---
+
+Function max 는 higher-order function 입니다. 즉 function value 를 두번째 argument 로 받습니다. 두번째 argument 는 스스로 function 이 되는 expression, 즉 function literal 입니다. function 으로서 다음과 동일합니다.
+
+---
+fun compare(a: String, b: String): Boolean =
+a.length < b.length
+---
+
+05.02.07. Function Types
+
+또다른 function 을 parameter 로 허용하는 function 의 경우, 해당 parameter 를 위한 function type 을 기술해야 합니다. 예를 들어 위에 언급한 function max 는 다음과 같이 정의합니다.
+
+---
+fun <T> max(collection: Collection<T>, less: (T, T) -> Boolean): T? {
+    var max: T? = null
+    for (it in collection)
+        if (max == null || less(max, it))
+            max = it
+    return max
+}
+---
+
+parameter less 의 타입은 (T, T) -> Boolean 입니다. 즉 function 은 T type parameter 두 개를 받아 Boolean 하나를 return 합니다. 첫번째 parameter 가 두번째 parameter 보다 작으면 true 입니다.
+
+body 내 4번째 줄의 less 는 function 으로 사용됩니다. T type argument 두 개를 넘겨 call 합니다.
+
+function type 은 위에 쓰거나 각 parameter 의 의미를 기록하길 원한다면 명명된 parameters 를 가질 수 있습니다.
+
+---
+val compare: (x: T, y: T) -> Int = ...
+---
+
+function type 을 nullable variable 로 선언하기 위해 전체 function type 을 괄호로 감싸고 뒤에 물음표를 놓으세요
+
+---
+var sum: ((Int, Int) -> Int)? = null
+---
+
+05.02.08. Lamda Expression Syntax
+
+lamda expressions 의 완전한 syntatic form, 즉 function type 의 literals 은 다음과 같습니다.
+
+---
+val sum = { x: Int, y: Int -> x + y }
+---
+
+lamda expression 은 항상 curly braces 로 둘러싸여 있으며 완전한 syntatic form 에서 parameter 선언은 curly braes 안에 오고 선택적 type annotations 를 가집니다. body 는 -> 표시 뒤에 옵니다. lamda 의 유추되는 return 타입이 Unit 이 아니라면, lamda body 안에 있는 마지막(혹은 single 일 수도 있음) expression 이 return value 로 취급된다.
+
+모든 optional annotations 을 빼버리면, 남는 건 이와 같을 것입니다.
+
+---
+val sum: (Int, Int) -> Int = { x, y -> x + y }
+---
+
+일반적으로 lamda expression 은 유일한 parameter 를 가집니다. kotlin 이 그 signature 을 스스로 알아낼 수 있다면, 유일한 parameter 를 선언할 필요가 없고 it 라는 이름으로 암시적으로 선언될 겁니다.
+
+---
+ints.filter { it > 0 } // this literal is of type
+'(it: Int) -> Boolean'
+---
+
+qualified return syntax 를 사용해 lamada 로부터 value 를 명시적으로 return 할 수 있습니다. 그렇지 않으면 마지막 expression 의 value 는 암시적으로 return 됩니다. 그러므로 다음의 두 snippets 는 동일합니다.
+
+---
+ints.filter {
+    val shouldFilter = it > 0
+    shouldFilter
+}
+
+ints.filter {
+    val shouldFilter = it > 0
+    return@filter shouldFilter
+}
+
+function 이 last parameter 로 또 다른 function 을 받는다면 lamda expression argument 가 괄호 쳐진 argument list 바깥에 올 수 있다는 걸 알아두세요.
+
+05.02.09. Anonymous Functions
+
+위에 있는 lamda expression syntax 에 빠뜨린 한 가지는 function 의 return type 을 기술하는 능력입니다. 대부분 return type 이 자동으로 유추되기 때문에 필요없습니다. 하지만 명시적으로 기술하길 원한다면 anonymous function 으로 대체하십시오.
+
+---
+fun(x: Int, y: Int): Int = x + y
+---
+
+anonymous function 은 마치 이름을 생략한 정규 function 선언처럼 보입니다. body 는 expression 이나 block 이 모두 가능합니다.
+
+---
+fun(x: Int, y: Int): Int {
+     return x + y
+}
+---
+
+parameter 와 return type 은 context 로부터 유추될 수 있는 경우에 parameter type 을 생략할 수 있다는 것만 빼고 정규 functions 의 경우와 동일한 방법으로 기술됩니다.
+
+---
+ints.filter(fun(item) = item>0)
+---
+
+anonymous functions 를 위한 return type 유추는 normal functions 경우와 동일하게 작동한다. return type 은 expression body 를 가진 anonymous functions 의 경우 자동으로 유추되고, block body 를 가진 anonymous functions 의 경우 명시적으로 기술 되어야 한다.
+
+anonymous functions parameters 는 항상 괄호 안에 넘겨진다. 요컨대 function 을 괄호 밖으로 두는 syntax 는 오직 lamda expressions 에서만 동작합니다.
+
+lamda expressions 와 anonymous functions 의 또 다른 차이점은 non-local returns 의 동작입니다. label 이 없는 return statement 는 항상 fun keyword 로 선언된 function 으로부터 return 합니다. 이것은 lamda expression 내의 return 이 eclosing function 으로부터 return 이 될 것이고, 반면 anonymous function 은 anonymous function 그 자신으로부터 return 될 것이라는 걸 의미합니다.
+
+05.02.10. Closure
+lamda expression 이나 anonymous function 은 ( local function 과 object expression 의 경우도 마찬가지로) 그것의 closure, 즉 바깥 scope 에서 선언된 variables 에 접근할 수 있습니다. java 와 달리 closure 에 capture 된 varaibles 는 수정될 수 있습니다.
+
+---
+var sum = 0
+ints.filter { it > 0 }.forEach {
+    sum += it
+}
+print(sum)
+---
+
+05.02.11. Function Literals with Receiver
+
+Kotlin 은 function literal 을 receiver object 를 기술하면서 call 할 수 있는 방법을 제공합니다. function literal body 내에서 추가적인 한정자 없이 receiver object 에 있는 method 를 호출할 수 있습니다. 이것은 extension functions 와 비슷한데, function body 내에 있는 receiver object 의 members 에 접근할 수 있도록 합니다. 이러한 사용의 가장 핵심적인 예가 Type-safe Groovy-style builders 입니다.
+
+이러한 function literal 의 type 은 receiver 와 함께 하는 function type 입니다.
+
+---
+sum: Int.(other: Int) -> Int
+---
+
+funtion literal 은 receiver object 에 있는 메서드인 것처럼 call 할 수 있습니다.
+
+---
+1.sum(2)
+---
+
+anonymous function syntax 는 receiver type function literal 을 직접 기술하는 걸 허용합니다. 이는 receiver 를 가진 function type 의 variable 을 선언하고 그것을 나중에 사용할 필요가 있을 때 유용합니다.
+
+---
+val sum = fun Int.(other: Int): Int = this + other
+---
+
+function-with-receiver type 의 non-literal value 를 argument 로 배정하거나 넘길 수도 있고, 그 반대의 경우 receiver type 의 추가적인 첫번째 parameter 를 가질 것으로 예상되는 일반 function 을 argument 로 배정하거나 넘길 수 있습니다. 예를 들어, String.(Int) -> Boolean 과 (String, Int) -> Boolean types 는 호환됩니다.
+
+---
+val represents: String.(Int) -> Boolean = { other -> toIntOrNull() == other }
+println("123".represents(123)) // true
+
+fun testOperation(op: (String, Int) -> Boolean, a: String, b: Int, c: Boolean) =
+    assert(op(a, b) == c)
+
+testOperation(represents, "100", 100, true) // ok
+---
+
+Lamda expressions 는 receiver type 이 context 로부터 유추 가능할 때 receiver 와 함께 function literals 로 사용될 수 있습니다.
+
+---
+class HTML {
+    fun body() { ... }
+}
+
+fun html(init: HTML.() -> Unit): HTML {
+    val html = HTML()    // create the receiver object
+    html.init()          // pass the receiver object to the lamda
+
+    return html
+}
+
+html {        // lamda with receiver begins here
+    body()    // calling a method on the receiver object
+}
+---
+
+05.03.01. Inline Functions
+
+Hight-order functions 를 사용하면 특정 runtime 패널티가 부과되는데, 각 function 은 object 이고 closure, 즉 function 의 body 에서 접근할 수 있는 variables 인 closure 를 captures 합니다. Memory 할당(function objecs 와 classes 둘 다를 위한) 과 virtual calls 는 runtime overhead 를 야기합니다.
+
+그러나 많은 경우에서 대부분의 overhead 는 lamda expression 을 inlining 함으로서 제거할 수 있습니다. 아래의 functions 은 이 상황의 좋은 예입니다. 즉 lock function 은 call 위치에서 쉽게 inline 할 수 있습니다. 다음의 경우를 살펴보세요.
+
+---
+lock(1) { foo() }
+---
+
+parameter 를 위한 function object 생성과 call 생성 대신 컴파일러는 다음의 코드를 뱉어냅니다.
+
+---
+l.lock()
+try {
+    foo()
+}
+finally {
+    l.unlock()
+}
+---
+
+우리가 처음부터 원한 것이 아닌가요?
+
+컴파일러가 이렇게 하도록 우리는 lock() function 에 inline modifier 를 표시합니다.
+
+---
+inline fun <T> lock(lock: Lock, body: () -> T): T {
+    // ...
+}
+---
+
+inline modifier 는 function 그 자체와 lamda 둘 다를 그곳에 전달하게 합니다. 모든 내용이 call site 안에 inline 됩니다.
+
+inline 하는 것은 코드가 늘어나게 만들 수 있습니다. 그러나 우리가 적절한 방법으로 그것을 사용한다면(즉 거대한 함수를 inline 하는 걸 피하는 것), 성능에서 그만큼 효과를 볼 겁니다. loops 내의 megamorphic call-site 에서라면 특히요.
+
+05.03.02. noinline
+
+inline function 으로 전달되는 lamdas 의 일부만 inline 되길 원하는 경우, function parameter 에 noinline modifier 를 표시하세요.
+
+---
+inline fun foo(inlined: () -> Unit, noinline notInlined: () -> Unit) {
+    // ...
+}
+---
+
+inline 가능한 lamda 는 오직 inline function 안에서 call 하거나 inlinable arguments 로 전달하는 게 가능합니다만, noinline 한 것들은 우리가 원하는 어떤 방식으로든 조작할 수 있습니다. fields 에 저장되거나 주변으로 넘겨지는 것들 등.
+
+inline function 이 어떠한 inlineable function parameters 와 reified type parameters 도 갖지 않는다면 컴파일러가 경고를 표시할 거라는 결 알아두세요. 그러한 functions 를 inline 하는 것은  이득이 되지 않을 가능성이 높기 때문입니다. ( inline 이 꼭 필요하다 생각되면 annotation @Suppress("NOTHING_TO_INLINE") 을 사용해서 겨고를 무시할 수 있습니다. )
+
+05.03.03. Non-local returns
+
+kotlin 에서 보통, 명시되지 않은 return 은 오직 명명된 function 이나 anonymous function 을 빠져나올 때 사용할 수 있습니다. 이말인즉, lamda 를 빠져나오기 위해선 label 을 사용해야한다는 겁니다. lamda 는 둘러싸고 있는 function 이 return 되게 할 수 없기 때문에 lamda 내에서 순수 return 이 금지됩니다.
+
+---
+fun foo() {
+    ordinaryFunction {
+        return // ERROR: can not make 'foo' return here
+    }
+}
+---
+
+lamda 를 전달한 function 이 inline 되면 그 return 역시 inline 될 수 있고, 그것이 허용됩니다.
+
+---
+fun foo() {
+    inlineFunction {
+        return // OK: the lamda is inlined
+    }
+}
+---
+
+그러한 returns 를 (lamda 에 위치했지만 둘러싸인 function 에 존재하는 경우) non-local returns 라 합니다. 종종 inline functions 가 둘러싸는 이러한 종류의 loop 내 구조에 익숙합니다.
+
+---
+fun hasZeros(ints: List<Int>): Boolean {
+    ints.forEach {
+        if (it == 0) return true // returns from hasZeros
+    }
+    return false
+}
+---
+
+몇몇 inline functions 는 lamdas 이 parameters 로서 function body 에 직접 전달되는게 아니라 local object 나 nested function 과 같이 또 다른 execution context 에 전달될 수도 있다는 걸 알아두세요. 이러한 경우 non-local control flow 는 또한 lamdas 에서 허용되지 않습니다. 이를 명시하려면 lamda parameter 는 crossinline modifier 로 표시되야 합니다.
+
+---
+inline fun f(crossinline body: () -> Unit) {
+    val f = object: Runnable {
+        override fun run() = body()
+    }
+    // ...
+}
+---
+
+break 와 continue 는 아직 inline lamdas 에서 사용할 수 없지만, 앞으로 지원할 계획입니다.
+
+05.03.04. Reified type parameters
+
+때때로 전달되는 type 을 parameter 로 접근할 필요가 있습니다.
+
+---
+fun <T> TreeNode.findParentOfType(clazz: Class<T>):
+T? {
+    var p = parent
+    while (p != null && !clazz.isInstance(p)) {
+        p = p.parent
+    }
+    @Suppress("UNCHECKED_CAST")
+    return p as T?
+}
+---
+
+여기서 우리는 tree 를 순회하여 noe 가 특정 type 인지 아닌지 check 하는 reflection 을 사용합니다.
+
+---
+treeNode.findParentOfType(MyTreeNode::class.java)
+---
+
+우리가 실제로 원하는 건 이 function 으로 단순히 type 을 전달하고 것입니다. 즉, 이와 같이 호출하길 원합니다.
+
+---
+treeNode.findParentOfType<MyTreeNode>()
+---
+
+이렇게 하기 위해, inline functions 은 reified type parameters 를 지원하고 있습니다. 우리는 이와 같이 쓸 수 있습니다.
+
+---
+inline fun <reified T> TreeNode.findParentOfType():
+T? {
+    var p = parent
+    while (p != null && p !is T) {
+        p = p.parent
+    }
+    return p as T?
+}
+---
+
+reified modifier 로 type parameter 를 명시했고, 이제 function 내에서 거의 일반적인 class 인 것처럼 접근할 수 있습니다. function 이 inline 됐기 때문에 어떠란 reflection 도 필요로 하지 않고 !is 와 as 와 같은 operators 가 이제 동작합니다. 또한 위에 언급한 바와 같이 myTree.findParentOfType<MyTreeNodeType>() 로 call 할 수 있습니다.
+
+reflection 이 많은 경우 필요로 되지 않음에도 불구하고 여전히 refied type parameter 과 함께 reflection 을 쓸 수 있습니다.
+
+---
+inline fun <reified T> membersOf() = T::class.members
+
+fun main(s: Array<String>) {
+    println(membersOf<StringBuilder>().joinToString("\n"))
+}
+---
+
+일반적인 functions (inline 으로 표시되지 않은) reified parameters 를 가질 수 없습니다. run-time representation (예를 들어 non-reified type parameter 나 Nothing 같은 fictious type) 를 가지지 않은 type 은 reified type parameter 를 위한 argument 로 사용될 수 없습니다.
+
+low-level 설명은 spec document 에서 볼 수 있습니다.
+
+05.03.05. Inline properties (since 1.1)
+
+inline modifier 는 backing field 를 가지지 않은 properties 의 접근자로 사용될 수 있습니다. 개별 property accessors 에 annotate 할 수 있습니다.
+
+---
+val foo: Foo
+    inline get() = Foo()
+
+var bar: Bar
+    get() = ...
+    inline set(v) { ... }
+---
+
+두 accessors 로서 inline 을 표시하면 전체 property 를 anotate 할 수도 있습니다. 
+
+---
+inline var bar: Bar
+    get() = ...
+    set(v) { ... }
+---
+
+call site 에서 inline accessors 는 정규 inline functions 처럼 inline 됩니다.
+
+05.03.06. Restrictions for public API inline functions
+
+inline function 이 public 이거나 protected 이고 private 나 internal 선언의 부분이 아닐 때, 모듈의 public API 로 간주됩니다. 다른 모듈에서 불려질 수 있고 이러한 call site 에서도 역시 inline 될 수 있습니다.
+
+이것은 inline function 을 선언하는 모듈 변경 뒤 re-compiled 하지 않고 모듈을 call 하는 경우 모듈 변경에 의해 binary 비호환성의 특정 위험을 부과합니다.
+
+모듈의 non-public API 내 변경으로 인해 유도되는 그러한 비호환성의 위험을 제거하기 위해서, public API inline functions 는 non-public API 선언, 즉, 그들 내부에서 private 과 internal 선언 및 그들의 부분 사용을 금지해야 합니다.
+
+public API inline functions 를 허용하기 위해 interanl 선언은 @PublishedApi 로 annotate 해야 한다. inernal inline function 이 @PublishedApi 로 표시되면 그 몸체 역시 public 인 것처럼 체크된다.
+
+05.04.01. Coroutines
+
+어떤 APIs 는 long-running operations 로 시작하고 (network IO, file IO, CPU- or GPU-intensive work 등) 그게 끝날 때까지 caller 를 block 할 필요가 있습니다. Coroutines 는 thread 를 blocking 하는 것을 피하고 더 cheaper 하고 더 조종 가능한 operation 으로 교체할 방법을 제공합니다. 바로 coroutine 의 suspension 입니다.
+
+Coroutines 는 libraries 에 complications 를 넣어 비동기 프로그래밍을 단순화합니다. 프로그램의 로직은 coroutine 에서 순서대로(sequentially) 표현될 수 있고, 하위 library 가 비동기성을 알아낼 것입니다. library 는 사용자 코드의 관련 부분을 callback 으로 감싸고, 관련 이벤트를 subscribe 하고, 다른 threads(심지어는 다른 장치) 에서 실행을 schedule 할 수 있으며 코드는 순서대로 동작하는 것처럼 단순하게 남는다.
+
+다른 언어에서 가능한 많은 비동기 메커니즘은 Kotlin coroutines 를 사용하여 libraries 로 구현할 수 있습니다. 이것은 C# 과 ECMAScript 의 async/await, Go 의 channels 와 select, C# 과 Python 의 generators/yield 를 포함합니다. 그러한 구조를 제공하는 libraries 에 대해선 아래 description 을 읽어보세요.
+
+05.04.02. Blocking vs Suspending
+
+일반적으로 Coroutines 는 thread 을 blocking 하지 않고 supended 될 수 있는 computations 입니다. Blocking threads 는 종종 expensive 한데, 특히 high load 하에서는 오직 상대적으로 적은 수의 threads 만을 유지할 수 있기 때문에 그들 중 하나를 blocking 하는 건 다른 중요한 작업들이 delayed 되는 결과를 초래합니다.
+
+반면 Coroutine suspension 은 거의 free 합니다. 어떠한 context switch 나 어떤 다른 OS 연관도 필요로 되지 않습니다. 그리고 그것을 기반으로 suspension 을 user library 에 의해 높은 수준으로 제어할 수 있습니다. library 저자로서 suspension 에서 일어나는 일을 결정할 수 있고 필요에 따라 optimize/log/intercept 가 가능합니다.
+
+또다른 차이는 coroutines 가 임의의 instructions 에서 suspend 될 수 없으며, 특별히 표시된 functions 를 calls 하는 소위 suspension points 라 불리는 곳에서만 가능하다는 겁니다.
+
+05.04.03. Suspending functions
+
+suspension 은 특별한 modifier, 즉 suspend 로 표시된 function 을 호출할 때 발생합니다.
+
+---
+suspend fun doSomething(foo: Foo): Bar {
+    ...
+}
+---
+
+이러한 functions 를 suspending functions 라 부르는데, 그것들을 calls 하면 coroutine 을 suspend 할 수 있기 때문입니다. (quesition 에서 call 을 위한 result 가 이미 가능하다면 library 는 suspension 없이 진행하도록 결정할 수 있습니다.) suspending function 은 일반 functions 와 동일한 방법으로 parameters 와 return valeus 를 가질 수 있습니다만, 오직 coroutines 나 다른 suspending functions 에서만 call 할 수 있습니다. 사실 coroutine 을 시작하기 위해 적어도 하나 이상의 suspending function 이 필요로 되고 그것은 일반적으로 anonymous 입니다. (즉 suspending lamda). 그 예로 간략화한 async() function ( from kolinx.coroutines library ) 를 보세요.
+
+---
+fun <T> async(block: suspend () -> T)
+---
+
+여기서 async() 는 일반 function ( suspending function 이 아니라 ) 입니다만 block parameter 는 suspend modifier 를 가진 함수, suspend () -> T 를 가집니다. 따라서 lamda 를 async() 로 넘길 때 그것은 suspending lamda 이고 그로부터 suspending function 을 호출할 수 있습니다.
+
+---
+async {
+    doSomething(foo)
+    ...
+}
+---
+
+Note: 최근 suspending function types 는 supertypes 로 사용될 수 없고 anonymous suspending functions 는 현재 지원되지 않습니다.
+
+계속 비유하자면, await() 는 어떤 computation 이 끝나고 결과를 return 할 때까지 coroutine 을 suspend 하는 suspending function 이 될 수 있습니다 (그러므로 async {} block 내로부터 call 도 가능합니다).
+
+---
+async {
+    ...
+    val result = computation.await()
+    ...
+}
+
+async/await functions 가 kotlinx.coroutines 에서 어떻게 동작하는지에 대한 더 많은 정보는 here 에서 찾을 수 있습니다.
+
+suspending functions 인 await() 와 doSomething() 이 main() 과 같은 일반 function 에서 호출될 수 없다는 걸 알아두세요.
+
+---
+fun main(args: Array<String>) {
+    doSomething()  // ERROR: Suspending function called from a non-coroutine context
+}
+---
+
+또 suspending functions 는 virtual 이 될 수 있고, 이를 overriding 할 때엔 suspend modifier 가 기술되어야 한다는 걸 알아두세요.
+
+---
+interface Base {
+    suspend fun foo()
+}
+
+class Derieved: Base {
+    override suspend fun foo() { ... }
+}
+---
+
+05.04.04. @RestrictsSuspension annotation
+
+Extension functions (와 람다) 또한 일반 function 처럼 suspend 로 표시될 수 있습니다. 이것은 사용자가 extend 한 DSLs 와 다른 APIs 의 생성을 가능케 합니다. 어떤 경우 library 저자는 coroutine 을 suspending 하는 새로운 방법을 추가하지 못하게 할 필요가 있습니다.
+
+이를 달성하기 위해, @RestrictsSuspension annotation 를 사용할 수 있습니다. receiver class 나 interface R 을 @RestrictsSuspension 으로 annotate 할 때, 모든 suspending extensions 는 R 의 members 는 물론 그것에 대한 다른 extensions 로 위임할 필요가 있습니다. (프로그램이 끝나지 않는다면) extensions 은 각각 다른 것으로 무한히 위임할 수 없기 때문에, 이것은 모든 suspensions 가 libarary 저자가 완벽히 제어할 수 있는 R 의 member 를 call 함으로서 발생한다는 것을 보장합니다.
+
+이것은 모든 suspension 이 library 내에서 특별한 방법으로 handle 할 수 있는 rare 케이스에 관련된 것입니다. 예를 들어 아래에 설명된 buildSequence() function 에 따라 generators 를 구현할 때, coroutines 에서 어느 suspending call 라도 어떠 다른 function 이 아닌 yield() 나 yieldAll() 에서 call 하는 것을 끝맺어야 할 필요가 있습니다. 이것이 SequenceBuilder 를 @RestrictsSuspension 으로 annotate 한 이유입니다.
+
+---
+@RestrictsSuspension
+public abstract class SequenceBuilder<in T> {
+    ...
+}
+---
+
+Github 에 있는 소스를 보세요.
+
+05.04.05. The inner working of coroutines
+
+여기서 내부적으로 coroutine 어떻게 동작하는지에 대해 완벽히 설명하진 않겠습니다만 무슨 일이 일어나고 있는지에 대한 대강의 감은 중요합니다.
+
+Coroutines 는 compliation 기법 (VM 이나 OS 편으로부터 지원이 전혀 필요 없는) 을 통해 완전히 구현됐고 suspension 은 code transformation 을 통해 동작합니다. 일반적으로 모든 suspending function (optimizations 가 적용될 수 있지만 여기서 다루지 않겠습니다) 은 suspending calls 에 연관되는 states 가 있는 states machine 으로 transform 됩니다. suspension 바로 전에, 다음 state 는 연관된 local variables 등과 함께 compiler-generated class 의 필드에 저장됩니다. 해당 coroutine 을 재개할 때, local variables 는 복원되고 state machine 은 suspension 바로 다음 state 부터 동작한다.
+
+suspend 된 coruotine 은 suspend 상태와 locals 보관하는 object 로서 저장되고 넘겨집니다. 그러한 object 의 type 은 Continuation 이고, 여기서 설명된 전체적인 코드 transformation 은 전통적인 Continuation-passing style 에 해당합니다. 따라서 suspending functions 는 내부적으로 Continuation type 의 여분 parameter 를 가집니다.
+
+coroutines 가 어떻게 동작하는지에 관한 더 많은 상세는 this design document 에서 찾을 수 있습니다. 다른 언어 (C# 이나 ECMAScript 2016) 에서 async/await 의 유사한 설명은 여기에 연관돼 있습니다. 그들이 구현하는 language features 가 kotlin coroutines 만큼 일반적이지 않음에도 불구하고 말입니다.
+
+05.04.06. Experimental status of coroutines
+
+coroutines 의 설계는 실험적인데, 이말인즉 앞으로의 releases 에서 바뀔 수 있다는 겁니다. kotlin 1.1 에서 coroutines 를 compile 할 때 기본적으로 경고를 보고합니다: The feature "coroutines" is experimental. 이 경고를 제거하기 위해선 opt-in flag 를 기술할 필요가 있습니다.
+
+실험적인 상태 때문에 standard library 에서 coroutine-related API 는 kotlin.coroutines.experimental package 하에 있습니다. 설계가 끝나고 실험적인 상태가 끌어올려질 때 최종 API 는 kotlin.coroutines 으로 옮겨질 것이며 experimental package 는 이전과의 호환성을 위해 (가능한 분리된 artifact 에서) 유지될 것입니다.
+
+IMPORTANT NOTE: library authors 는 이 같은 약속을 따르길 권장합니다. coroutine-based APIs 를 노출하는 packages 에 experimetal (예를 들어 co.example.experimental) suffix 를 추가하세요. 이것으로 library 는 binary compatible 을 유지합니다. final API 가 released 되면, 다음 steps 을 따르세요.
+
+- 모든 APIs 를 com.example (experimental suffix 을 뺀) 로 복사하세요
+- backward 호환성을 유지하기 위해 experimental package 는 남겨두세요
+
+이것은 당신의 사용자들에게 migration issues 를 최소화 할 겁니다.
+
+05.04.07. Stanard APIs
+
+Coroutines 는 세 가지 주요 요소로 이루어집니다.
+
+- language support ( 위에서 설명했듯, suspending functions )
+- low-level core API in the Kotlin Standard Library
+- high-level APIs that can be sued directly in the user code
+
+05.04.08. Low-level API: kotlin.coroutines
+
+Low-level API 는 상대적으로 작으며 higher-level libraries 를 생성하기 위한 용도 외에 사용해선 안됩니다. 두 가지 main packages 로 구성돼 있습니다.
+
+- 다음과 같은 main types 와 primitives 로 이루어진 kotlin.coroutines.experimental
+    - createCoroutine(),
+    - startCoroutine(),
+    - suspendCoroutine();
+
+- suspendedCoroutineOrReturn 처럼 훨씬 lower-level 인 내장 함수를 가진 kotlin.coroutines.experimental.intrinsics.
+
+이러한 APIs 의 사용에 대해 더 자세한 내용은 here 에서 찾을 수 있습니다.
+
+05.04.09. Generators API in kotlin.coroutines
+
+kotlin.coroutines.experimental 에 있는 application-level functions 은 이것밖에 없습니다.
+
+- buildSequence()
+- buildIterator()
+
+이것들은 kotlin-stdlib 에 ship 돼 있는데, 왜냐하면 sequences 와 연관되기 때문입니다. 사실 이 함수들 (그리고 여기서 buildSequence() 만 제한할 수 있습니다) 은 generators 를 구현하는데, 즉  lazy sequence 를 cheap 하게 build 할 수 있는 방법을 제공합니다.
+
+---
+val fibonacciSeq = buildSequence {
+    var a = 0
+    var b = 1
+
+    yield(1)
+
+    while (true) {
+        yield(a + b)
+
+        val tmp = a + b
+        a = b
+        b = tmp
+    }
+}
+---
+
+이것은 yield() function 을 호출함으로서 연속적인 Fibonacci 숫자를 산출하는 coroutine 을 생성함으로서 lazy 하고 잠재적으로 무한한 Fibonacci 수열을 생성합니다. 그러한 sequence 가 전부 iterating 될 때, iterator 의 모든 step 은 다음 number 를 생성하는 coroutine 의 또 다른 부분을 실행시킵니다. 그래서 이러한 수열 바깥에 있는 어떤 완성된 숫자들의 리스트를 가져갈 수 있습니다. 예를 들어 fibonacciSeq.take(8).toList() 는 [1, 1, 2, 3, 5, 8, 13, 21] 이라는 결과가 나옵니다. 그리고 coroutines 는 이것을 실용하기에 충분히 cheap 합니다.
+
+그러한 sequence 의 실제 laziness 를 시연하기 위해, buildSequence() call 안에서 어떤 debug output 을 print 해봅시다.
+
+---
+val lazySeq = buildSequence {
+    print("START ")
+    for (i in 1...5) {
+        yield(i)
+        print("STEP ")
+    }
+    print("END")
+}
+
+
+// Print the first three elements of the sequence
+lazySeq.take(3).forEach { print("$it ") }
+---
+
+위의 코드를 돌려보면 처음에는 세 개의 요소를 출력합니다. 숫자들은 생성되는 loop 에서 STEPs 와 함께 interleved 됩니다. 이는 그 computation 이 실제로 lazy 하다는 걸 의미합니다. 1 을 출력하기 위해 첫 yield(i) 까지 실행하고 그 방법을 따라 START 를 출력 합니다. 그리고 나서 2 를 출력하기 위해 다음 yield(i) 를 실행시킬 필요가 있고 이것은 STEP 을 출력합니다. 3 도 똑같습니다. 그리고 다음 STEP 은 출력되지 않는데 (END 와 함께) 왜냐하면 수열의 요소를 더 요청하지 않았기 때문입니다.
+
+한 번에 collection ( 또는 수열 ) 값을 yield 하기 위해서는 yieldAll() function 이 가능합니다.
+
+---
+val lazySeq = buildSequence {
+    yield(0)
+    yieldAll(1..10)
+}
+
+lazySeq.forEach { print("$it ") }
+---
+
+buildIterator() 는 buildSequence() 와 유사하게 동작합니다만 lazy iterator 를 return 합니다.
+
+SequenceBuilder class(위에 설명한 @RestrictsSuspension annotation 을 지닌) 에 suspending extensions 를 작성함으로써 buildSequence() 에 대해 custom yielding logic 을 추가할 수 있습니다.
+
+---
+suspend fun SequenceBuilder<Int>.yieldIfOdd(x: Int) {
+    if (x % 2 != 0) yield(x)
+}
+
+val lazySeq = buildSequence {
+    for (i in 1..10) yieldIfOdd(i)
+}
+---
+
+05.04.10. Other high-level APIs: kotlinx.coroutines
+
+coroutines 에 연관된 핵심 APIs 만이 kotlin standard Library 로부터 가능합니다. 이건 거의 핵심 primitives 와 interface 로 구성돼 있고 모든 coroutine-based libraries 가 사용할 수 있게끔 돼 있습니다.
+
+coroutines 에 기반한 대부분의 application-level 의 APIs 은 분리된 library 로 release 돼 있습니다. kotlinx.coroutines 가 그것입니다. 이 library 는 다음을 포괄합니다.
+
+- kotlinx-coroutines-core 와 함께 Platform-agnostic 한 비동기 프로그래밍
+    - 이 모듈은 select 와 다른 편리한 primitives 를 제공하는 Go 와 같은 channels 를 포함합니다.
+    - 이 library 에 대한 포괄적인 guide 는 here 에서 가능합니다.
+
+- JDK 8 의 CompletableFuture 에 기반한 APIs: kotlinx-coroutines-jdk8
+- JDK 7 이상의 APIs 에 기반한 Non-blocking IO (NIO)
+- Swing(kotlinx-coroutines-swing) 과 javaFx(kotlin-coroutines-javafx) 를 위한 지원
+- RxJava 를 위한 지원: ktlinx-coroutines-rx
+
+이 libraries 는 일반적인 작업을 쉽게만들어주는 편리한 APIs 와 coroutine-based libraries 를 어떻게 빌드해야 하는지에 대한 end-to-end 예시들 둘 다를 제공합니다.

@@ -1,0 +1,144 @@
+11.01. Documenting Kotlin Code
+
+11.01.01. Documenting Kotlin Code
+
+Kotlin cde 를 document 하는데 사용하는 언어는 (java 의 javadoc 과 동등한 것은) KDoc 이라 불립니다. 본질적으로, KDoc 는 block tags (Kotlin 의 기술 구조로 확장된) 를 위한 javaDoc 의 syntax 와 inline markup 을 위한 Markdown 이 결합합니다.
+
+11.01.02. Generating the Documentation
+
+Kotlin 의 Documentation 을 생산하는 tool 은 Dokka 라 불립니다. 사용 지침에 대해선 Dokka README 를 보세요.
+
+Dokka 는 Gradle, Maven 과 Ant 를 위한 plugins 를 가지고 있으므로 documentation generation 을 build process 에 합칠 수 있습니다.
+
+11.01.03. KDoc Syntax
+
+javaDoc 를 사용하는 것과 비슷하게 KDoc comments 는 /** 로 시작해서 */ 로 끝납니다. comment 의 모든 line 은 asterisk 로 시작하고 comment 의 contents 부분으로 여겨지지 않습니다.
+
+약속에 따르면, documentation text 의 첫번째 문단 (첫째 빈 라인까지 text 의 block) 은 그 요소의 요약 설명이고 그 다음 text 는 상세 설명입니다.
+
+모든 block tag 는 새로운 line 에서 시작하며 @ 문자로 시작합니다.
+
+여기 KDoc 를 사용해 doumented 된 class 의 예를 보세요.
+
+---
+/**
+ * A group of *members*.
+ *
+ * This class has no useful logic; it's just a documentation example.
+ *
+ * @param T the type of a member in this group.
+ * @property name the name of this group.
+ * @constructor Creates an empty group.
+ */
+class Group<T>(val name: String) {
+    /**
+     * Adds a [member] to this group.
+     * @return the new size of the group.
+     */
+    fun add(member: T): Int { ... }
+}
+---
+
+11.01.04. Block Tags
+
+KDoc 은 현재 다음의 block tags 를 지원합니다.
+
+@param <name>
+
+function 의 value parameter 또는 class 나 property, function 의 type parameter 를 document 합니다. 설명으로부터 parameter 이름을 더 잘 분리하길 원하면, parameter 이름을 brackets 로 감싸세요. 따라서 다음 두 syntaxes 는 동등합니다.
+
+@param name description.
+@param[name] description.
+
+@return
+
+function 의 return value 를 document 합니다.
+
+@constructor
+
+class 의 primary constructor 를 document 합니다.
+
+@receiver
+
+extension function 의 receiver 를 document 합니다.
+
+@property <name>
+
+기술된 이름을 가진 class 의 property 를 document 합니다. 이 tag 는 primary constructor 에서 선언된 properties 를 document 하는데 사용될 수 있는데, 여기에 property 정의가 이상해지기 전에 doc comment 를 직접 놓습니다.
+
+@throw <class>, @exception <class>
+
+method 에 의해 던져질 수 있는 exception 을 document 합니다. kotlin 은 check 된 exceptions 를 가지지 않기 때문에, 모든 가능한 exceptions 가 document 될 거라는 기대 또한 하지 않습니다만 여전히 이 tag 를 사용해 class 의 사용자를 위한 유용한 정보를 제공할 수 있습니다.
+
+@sample <identifier>
+
+기술된 정규화된 이름을 가진 function 의 body 를 현재 element 에 대한 documentation 에 내장하여 그 element 가 어떻게 사용될 수 있는지에 대한 예를 보여줍니다.
+
+@see <identifier>
+
+기술된 class 나 method 에 link 를 추가해 documentation 의 block 도 볼 수 있게 합니다.
+
+@author
+
+document 한 element 의 저자를 기술합니다.
+
+@since
+
+document 된 element 가 소개된 software 의 version 을 기술합니다.
+
+@suppress
+
+생성된 documentation 으로부터 element 를 제외합니다. Module 의 공식 API 의 부분이 아니지만 여전히 외부적으로 visible 해야 하는 elements 를 위해 사용됩니다.
+
+<!> KDoc 은 @deprecated tag 를 지원하지 않습니다. 대신 @Deprecated annotation 을 사용해주세요.
+
+
+11.01.05. Inline Markup
+
+Inline markup 을 위해, KDoc 는 정규 Markdown syntax 를 사용하며, 이는 code 내의 다른 elements 와 link 하기 위한 shothand syntax 를 지원합니다.
+
+11.01.06. elements 에 연결하기
+
+또다른 element(class, method, property 나 parameter) 에 연결하기 위해 squaure brackets 에 이름을 넣으세요.
+
+Use the method [foo] for this purpose.
+
+link 를 위한 custom label 을 기술하고자 한다면 Markdown reference-style syntax 를 사용하세요.
+
+Use [this method][foo] for this purpose
+
+link 내에 정규화된 이름을 사용할 수도 있습니다. JavaDoc 과 다르게 정규화된 이름은 항상 dot 문자를 사용해 components 를 구분하고 method 이름 바로 전에 나옵니다.
+
+Use [kotlin.reflect.KClass.properties] to enumerate the properties of the class.
+
+link 내 이름은 document 된 element 내부에서 사용되는 것처럼 같은 규칙을 사용해 resolve 될 수 있습니다. 특히 이는 현재 파일로 이름을 import 했다면 KDoc comment 내에서 이것을 사용해 완전히 명시할 필요가 없다는 걸 의미합니다.
+
+KDoc 은 link 내에 overload 된 members 를 resolve 하는 어떠한 syntax 도 가지지 않는다는 걸 알아두세요. kotlin documentation genration tool 이 function 의 모든 overloads 에 대한 documentation 을 같은 페이지에 해주기 때문에, 명확한 overload 된 function 을 식별하는 건 link 를 동작시키기에 필요로 되지 않습니다.
+
+11.01.07. Module and Package Documentation
+
+module 전체를 위한 documentation 은 package 와 동일한데, 분리된 Markdown file 로 제공되고, -include command line parameter 나 Ant, Maven 그리고 Gradle plugins 에 해당parameters 를 사용해 Dokka 에 해당 file 의 경로를 넘겨줍니다.
+
+file 내에서, module 전체와 개별 packages 들을 위한 documentation 은 해당되는 first-level headings 에 소개됩니다. heading 의 text 는 module 에 대해선 "Module <module name>" 이 되야 하고, package 에 대해선 "Package <package qulified name>" 이 되야 합니다.
+
+여기 file 의 content 에 대한 예가 있습니다.
+
+# Module kotlin-demo
+
+그 모듈은 Dokka syntax 를 사용한다는 걸 보여줍니다.
+
+# Module kotlin-demo
+
+The module shows the Dokka syntax usage.
+
+# Package org.jetbrains.kotlin.demo
+
+Contains assorted useful stuff.
+
+## Level 2 heading
+
+Text after this heading is also part of documentation for `org.jetbrains.kotlin.demo`
+
+# Package org.jetbrains.kotlin.demo2
+
+Useful stuff in another package.

@@ -1,0 +1,210 @@
+05.01. Classes
+
+05.01.08. Overriding Properties
+properties 를 override 하는 것은 method 를 override 하는 방법과 유사하게 동작합니다. superclass 에 선언된 properties 는 derived class 에 재선언되는데 override 가 먼저 와야 하고, 동일한 type 을 가저야 합니다. 각 선언된 property 는 initializer 나 getter method 와 함께 override 할 수 있습니다.
+
+---
+open class Foo {
+     open val x: Int get() { ... }
+}
+
+class Bar1 : Foo() {
+    override val x: Int = ...
+}
+
+val property 를 var property 로 override 할 수도 있지만 반대는 안됩니다. 이는 val property 가 getter method 를 기본적으로 선언하고 그것을 var 로 override 하는 것은 derived class 해서 setter method 를 추가적으로 선언하기 때문에 허용됩니다.
+
+primary constructor 에서 override 키워드를 property 선언의 부분으로 사용할 수 있다는 걸 알아두세요.
+
+---
+interfae Foo {
+    val count: Int
+}
+
+class Bar1(override val count: Int) : Foo
+
+class Bar2 : Foo {
+    override var count: Int = 0
+}
+---
+
+
+05.02. Properties and Fields
+
+05.02.01/ Declaring Properties
+
+Kotlin 내 classes 는 properties 를 가지고 있습니다. 이것들은 var keyword 를 사용해서 mutable 하게 선언되거나, val keyword 를 사용해서 read-only 하게 선언될 수 있습니다.
+
+---
+class Address {
+    var name: String = ...
+    var street: String = ...
+    var city: String = ...
+    var state" String? = ...
+    var zip: String = ...
+}
+---
+
+property 를 사용하기 위해, java 내에 있는 field 인 것처럼 간단히 참조합니다.
+
+---
+fun copyAddress(address: Address): Address {
+    val result = Address()  // there's no 'new' keyword in Kotlin
+    result.name = address.name  // accessors are called
+    result.street = address.street
+
+    // ...
+
+    return result
+}
+---
+
+05.02.02. Getters and Setters
+
+property 를 선언하기 위한 full syntax 는 이렇습니다.
+
+---
+var <propertyName>[: <PropertyType>] [= <property_initializer>]
+    [<getter>]
+    [<setter>]
+---
+
+initializer, getter, setter 는 선택적입니다. property type 은 initializer 으로부터 (또는 아래에 보여지는 것처럼 getter retury type 으로부터) 유추될 수 있다면 선택적입니다.
+
+예:
+
+---
+var allByDefault: Int? // error: explicit initializer required, default getter and setter implied
+var initialized = 1 // has type Int, default getter and setter
+---
+
+read-only property 선언의 full syntax 는 mutable property 와 두 가지 방법에서 다릅니다. read-only property 는 var 대신 val 로 시작할 수 있고 setter 를 허용하지 않습니다.
+
+---
+val simple: Int? // has type Int, default getter, must be initialized in constructor
+val inferredType = 1 // has type Int and a default getter
+---
+
+보통 functions 와 매우 유사하게 property 선언 내에 바로 custom accessors 를 작성할 수 있습니다. 여기 custom getter 의 예가 있습니다.
+
+---
+val isEmpty: Boolean
+    get() = this.size == 0
+---
+
+custom setter 는 이와 같습니다.
+
+---
+val stringRepresentation: String
+    get() = this.toString()
+    set(value) {
+        setDataFromString(value)  // parses the string and assigns values to other properties
+    }
+---
+
+약속에 따라 setter parameter 의 이름은 value 이지만 선호하는 이름이 있다면 다른 이름을 선택할 수 있습니다.
+
+kotlin 1.1 부터, getter 가 property type 을 유추할 수 있다면 생략할 수 있습니다.
+
+---
+val isEmpty get() = this.size == 0  // has type Boolean
+---
+
+accessor 의 visibility 를 바꾸거나 annotate 하길 원하지만 기본 구현을 바꾸고 싶지 않다면 body 를 정의하지 않고 accessor 를 정의할 수 있습니다.
+
+---
+var setterVisibility: String = "abc"
+    private set // the setter is private and has the default implementation
+
+var setterWithAnnotation: Any? = null
+    @Inject set // annotate the setter with Inject
+---
+
+05.02.03. Backing Fields
+
+Kotlin 의 classes 는 fields 를 가질 수 없습니다. 하지만 때때로 custom accessors 를 사용핼 때 backing field 를 가져야 할 필요가 있습니다. 이러한 목적을 위해 kotlin 은 field identifier 를 사용해 접근할 수 있는 autuomatic backing field 를 제공합니다.
+
+---
+var counter = 0 // this initializer value is written directly to the backing field
+    set(value) {
+        if (value >= 0 field = value
+    }
+---
+
+field identifier 는 property 의 accesors 에서만 사용될 수 있습니다.
+
+accessors 의 적어도 하나의 기본 구현을 사용하거나 custom accesors 가 field identifier 를 통해 backing field 를 참조하고 있다면 property 에 해당하는 backing field 가 생성될 것입니다.
+
+예를 들어, 다음의 경우에서 backing field 는 존재하지 않을 겁니다.
+
+---
+val isEmpty: Boolean
+    get() = this.size == 0
+---
+
+05.02.04. Backing Properties
+
+이러한 "implicit bcking field" scheme 에 맞지 않는 무언가를 하려고 하면, backing property 를 가지는 것으로 돌아갈 수 있습니다.
+
+---
+private var _table: Map<String, Int>? = null
+public val table: Map<String, Int>
+    get() {
+        if (_table == null) {
+            _table = HashMap()  // Type parameters are inferred
+        }
+        return _table ?: throw AssertionError("Set to null by another thread")
+    }
+---
+
+모든 면에서, 이것은 java 와 같은데, private properties 에 getter 와 setter 없이 접근하는게 최적화 돼 있기 때문에 어떤 function call overhead 도 발생하지 않습니다.
+
+05.02.05. Compile-Time Constants
+
+compile 시간에 알려지는 properties values 는 const modifier 를 사용해 compile time constants 로 표시할 수 있습니다. properties 는 다음의 요구사항을 만족할 필요가 있습니다.
+
+- Top-level 또는 object 의 멤버
+- String 이나 primitive type 의 value 로 초기화 된 것
+- custom getter 가 아님
+
+이러한 properties 는 annotations 에 사용될 수 있습니다.
+
+---
+const val SUBSYSTEM_DEPRECATED: String = "This subsystem is deprecated"
+
+@Deprecated(SUBSYSTEM_DEPRECATED) fun foo() { ... }
+---
+
+05.02.06. Last-Initialized Properties
+
+일반적으로, non-null type 을 가지도록 선언된 properties 는 constructor 에서 초기화돼야 합니다. 하지만 아주 가끔씩 이게 불편할 수 있습니다. 예를 들어, properties 가 dependency injection 을 통해 초기화 될 수 있거나 unit test 의 setup method 에서 초기화될 수 있습니다. 이 경우, constructor 내 non-null initializer 는 제공할 필요가 없지만, 여전히 class 의 body 내에 있는 property 를 참조할 때 null checks 를 피하고 싶습니다.
+
+이러한 경우를 다루기 위해 property 에 lateinit modifier 를 표시할 수 있습니다.
+
+---
+public class MyTest {
+    lateinit var subject: TestSubject
+
+    @SetUp fun setup() {
+        subject = TestSubject()
+    }
+
+    @Test fun test() {
+        subject.method()    // dereference directly
+    }
+}
+---
+
+modifier 는 class ( primary constructor 가 아닌 ) 의 body 내에서 선언된 var properties 에서만 사용될 수 있으며 property 는 custom getter 나 setter 를 가져서는 안됩니다. propety 타입은 non-null 이어야 하고 primitive type 이어서는 안됩니다.
+
+초기화되기 전에 lateinit property 에 접근하는 것은 특별한 exception 을 발생시키는데, 접근되는 property 와 initialized 된 적이 없다는 사실을 정확히 식별합니다.
+
+05.02.07. Overriding Properties
+
+See Overrding Properties
+
+05.02.08. Delegated Properties
+
+properties 의 대부분은 backing field 로부터 간단히 읽는 것 뿐입니다. (그리고 작성하기도 합니다). 반면 custom getters 와 setters 는 property 의 어떤 행동이든 구현할 수 있습니다. 그 사이 어디엔가 property 가 동작하는지에 대한 특정한 일반적 pattern 이 있습니다. 몇 가지 예를 들면 lazy values, 주어진 key 를 사용해 map 을 읽는 것, database 에 접근, access 에서 listener 에게 notify 하기, 등이 있습니다.
+
+그러한 일반적인 동작들은 delegated properties 를 사용하는 libraries 로서 구현될 수 있습니다.
