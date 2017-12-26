@@ -1,24 +1,24 @@
-11.01. Documenting Kotlin Code
+ï»¿11.01. Documenting Kotlin Code
 
 11.01.01. Documenting Kotlin Code
 
-Kotlin cde ¸¦ document ÇÏ´Âµ¥ »ç¿ëÇÏ´Â ¾ğ¾î´Â (java ÀÇ javadoc °ú µ¿µîÇÑ °ÍÀº) KDoc ÀÌ¶ó ºÒ¸³´Ï´Ù. º»ÁúÀûÀ¸·Î, KDoc ´Â block tags (Kotlin ÀÇ ±â¼ú ±¸Á¶·Î È®ÀåµÈ) ¸¦ À§ÇÑ javaDoc ÀÇ syntax ¿Í inline markup À» À§ÇÑ Markdown ÀÌ °áÇÕÇÕ´Ï´Ù.
+Kotlin cde ë¥¼ document í•˜ëŠ”ë° ì‚¬ìš©í•˜ëŠ” ì–¸ì–´ëŠ” (java ì˜ javadoc ê³¼ ë™ë“±í•œ ê²ƒì€) KDoc ì´ë¼ ë¶ˆë¦½ë‹ˆë‹¤. ë³¸ì§ˆì ìœ¼ë¡œ, KDoc ëŠ” block tags (Kotlin ì˜ ê¸°ìˆ  êµ¬ì¡°ë¡œ í™•ì¥ëœ) ë¥¼ ìœ„í•œ javaDoc ì˜ syntax ì™€ inline markup ì„ ìœ„í•œ Markdown ì´ ê²°í•©í•©ë‹ˆë‹¤.
 
 11.01.02. Generating the Documentation
 
-Kotlin ÀÇ Documentation À» »ı»êÇÏ´Â tool Àº Dokka ¶ó ºÒ¸³´Ï´Ù. »ç¿ë ÁöÄ§¿¡ ´ëÇØ¼± Dokka README ¸¦ º¸¼¼¿ä.
+Kotlin ì˜ Documentation ì„ ìƒì‚°í•˜ëŠ” tool ì€ Dokka ë¼ ë¶ˆë¦½ë‹ˆë‹¤. ì‚¬ìš© ì§€ì¹¨ì— ëŒ€í•´ì„  Dokka README ë¥¼ ë³´ì„¸ìš”.
 
-Dokka ´Â Gradle, Maven °ú Ant ¸¦ À§ÇÑ plugins ¸¦ °¡Áö°í ÀÖÀ¸¹Ç·Î documentation generation À» build process ¿¡ ÇÕÄ¥ ¼ö ÀÖ½À´Ï´Ù.
+Dokka ëŠ” Gradle, Maven ê³¼ Ant ë¥¼ ìœ„í•œ plugins ë¥¼ ê°€ì§€ê³  ìˆìœ¼ë¯€ë¡œ documentation generation ì„ build process ì— í•©ì¹  ìˆ˜ ìˆìŠµë‹ˆë‹¤.
 
 11.01.03. KDoc Syntax
 
-javaDoc ¸¦ »ç¿ëÇÏ´Â °Í°ú ºñ½ÁÇÏ°Ô KDoc comments ´Â /** ·Î ½ÃÀÛÇØ¼­ */ ·Î ³¡³³´Ï´Ù. comment ÀÇ ¸ğµç line Àº asterisk ·Î ½ÃÀÛÇÏ°í comment ÀÇ contents ºÎºĞÀ¸·Î ¿©°ÜÁöÁö ¾Ê½À´Ï´Ù.
+javaDoc ë¥¼ ì‚¬ìš©í•˜ëŠ” ê²ƒê³¼ ë¹„ìŠ·í•˜ê²Œ KDoc comments ëŠ” /** ë¡œ ì‹œì‘í•´ì„œ */ ë¡œ ëë‚©ë‹ˆë‹¤. comment ì˜ ëª¨ë“  line ì€ asterisk ë¡œ ì‹œì‘í•˜ê³  comment ì˜ contents ë¶€ë¶„ìœ¼ë¡œ ì—¬ê²¨ì§€ì§€ ì•ŠìŠµë‹ˆë‹¤.
 
-¾à¼Ó¿¡ µû¸£¸é, documentation text ÀÇ Ã¹¹øÂ° ¹®´Ü (Ã¹Â° ºó ¶óÀÎ±îÁö text ÀÇ block) Àº ±× ¿ä¼ÒÀÇ ¿ä¾à ¼³¸íÀÌ°í ±× ´ÙÀ½ text ´Â »ó¼¼ ¼³¸íÀÔ´Ï´Ù.
+ì•½ì†ì— ë”°ë¥´ë©´, documentation text ì˜ ì²«ë²ˆì§¸ ë¬¸ë‹¨ (ì²«ì§¸ ë¹ˆ ë¼ì¸ê¹Œì§€ text ì˜ block) ì€ ê·¸ ìš”ì†Œì˜ ìš”ì•½ ì„¤ëª…ì´ê³  ê·¸ ë‹¤ìŒ text ëŠ” ìƒì„¸ ì„¤ëª…ì…ë‹ˆë‹¤.
 
-¸ğµç block tag ´Â »õ·Î¿î line ¿¡¼­ ½ÃÀÛÇÏ¸ç @ ¹®ÀÚ·Î ½ÃÀÛÇÕ´Ï´Ù.
+ëª¨ë“  block tag ëŠ” ìƒˆë¡œìš´ line ì—ì„œ ì‹œì‘í•˜ë©° @ ë¬¸ìë¡œ ì‹œì‘í•©ë‹ˆë‹¤.
 
-¿©±â KDoc ¸¦ »ç¿ëÇØ doumented µÈ class ÀÇ ¿¹¸¦ º¸¼¼¿ä.
+ì—¬ê¸° KDoc ë¥¼ ì‚¬ìš©í•´ doumented ëœ class ì˜ ì˜ˆë¥¼ ë³´ì„¸ìš”.
 
 ---
 /**
@@ -41,91 +41,91 @@ class Group<T>(val name: String) {
 
 11.01.04. Block Tags
 
-KDoc Àº ÇöÀç ´ÙÀ½ÀÇ block tags ¸¦ Áö¿øÇÕ´Ï´Ù.
+KDoc ì€ í˜„ì¬ ë‹¤ìŒì˜ block tags ë¥¼ ì§€ì›í•©ë‹ˆë‹¤.
 
 @param <name>
 
-function ÀÇ value parameter ¶Ç´Â class ³ª property, function ÀÇ type parameter ¸¦ document ÇÕ´Ï´Ù. ¼³¸íÀ¸·ÎºÎÅÍ parameter ÀÌ¸§À» ´õ Àß ºĞ¸®ÇÏ±æ ¿øÇÏ¸é, parameter ÀÌ¸§À» brackets ·Î °¨½Î¼¼¿ä. µû¶ó¼­ ´ÙÀ½ µÎ syntaxes ´Â µ¿µîÇÕ´Ï´Ù.
+function ì˜ value parameter ë˜ëŠ” class ë‚˜ property, function ì˜ type parameter ë¥¼ document í•©ë‹ˆë‹¤. ì„¤ëª…ìœ¼ë¡œë¶€í„° parameter ì´ë¦„ì„ ë” ì˜ ë¶„ë¦¬í•˜ê¸¸ ì›í•˜ë©´, parameter ì´ë¦„ì„ brackets ë¡œ ê°ì‹¸ì„¸ìš”. ë”°ë¼ì„œ ë‹¤ìŒ ë‘ syntaxes ëŠ” ë™ë“±í•©ë‹ˆë‹¤.
 
 @param name description.
 @param[name] description.
 
 @return
 
-function ÀÇ return value ¸¦ document ÇÕ´Ï´Ù.
+function ì˜ return value ë¥¼ document í•©ë‹ˆë‹¤.
 
 @constructor
 
-class ÀÇ primary constructor ¸¦ document ÇÕ´Ï´Ù.
+class ì˜ primary constructor ë¥¼ document í•©ë‹ˆë‹¤.
 
 @receiver
 
-extension function ÀÇ receiver ¸¦ document ÇÕ´Ï´Ù.
+extension function ì˜ receiver ë¥¼ document í•©ë‹ˆë‹¤.
 
 @property <name>
 
-±â¼úµÈ ÀÌ¸§À» °¡Áø class ÀÇ property ¸¦ document ÇÕ´Ï´Ù. ÀÌ tag ´Â primary constructor ¿¡¼­ ¼±¾ğµÈ properties ¸¦ document ÇÏ´Âµ¥ »ç¿ëµÉ ¼ö ÀÖ´Âµ¥, ¿©±â¿¡ property Á¤ÀÇ°¡ ÀÌ»óÇØÁö±â Àü¿¡ doc comment ¸¦ Á÷Á¢ ³õ½À´Ï´Ù.
+ê¸°ìˆ ëœ ì´ë¦„ì„ ê°€ì§„ class ì˜ property ë¥¼ document í•©ë‹ˆë‹¤. ì´ tag ëŠ” primary constructor ì—ì„œ ì„ ì–¸ëœ properties ë¥¼ document í•˜ëŠ”ë° ì‚¬ìš©ë  ìˆ˜ ìˆëŠ”ë°, ì—¬ê¸°ì— property ì •ì˜ê°€ ì´ìƒí•´ì§€ê¸° ì „ì— doc comment ë¥¼ ì§ì ‘ ë†“ìŠµë‹ˆë‹¤.
 
 @throw <class>, @exception <class>
 
-method ¿¡ ÀÇÇØ ´øÁ®Áú ¼ö ÀÖ´Â exception À» document ÇÕ´Ï´Ù. kotlin Àº check µÈ exceptions ¸¦ °¡ÁöÁö ¾Ê±â ¶§¹®¿¡, ¸ğµç °¡´ÉÇÑ exceptions °¡ document µÉ °Å¶ó´Â ±â´ë ¶ÇÇÑ ÇÏÁö ¾Ê½À´Ï´Ù¸¸ ¿©ÀüÈ÷ ÀÌ tag ¸¦ »ç¿ëÇØ class ÀÇ »ç¿ëÀÚ¸¦ À§ÇÑ À¯¿ëÇÑ Á¤º¸¸¦ Á¦°øÇÒ ¼ö ÀÖ½À´Ï´Ù.
+method ì— ì˜í•´ ë˜ì ¸ì§ˆ ìˆ˜ ìˆëŠ” exception ì„ document í•©ë‹ˆë‹¤. kotlin ì€ check ëœ exceptions ë¥¼ ê°€ì§€ì§€ ì•Šê¸° ë•Œë¬¸ì—, ëª¨ë“  ê°€ëŠ¥í•œ exceptions ê°€ document ë  ê±°ë¼ëŠ” ê¸°ëŒ€ ë˜í•œ í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤ë§Œ ì—¬ì „íˆ ì´ tag ë¥¼ ì‚¬ìš©í•´ class ì˜ ì‚¬ìš©ìë¥¼ ìœ„í•œ ìœ ìš©í•œ ì •ë³´ë¥¼ ì œê³µí•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.
 
 @sample <identifier>
 
-±â¼úµÈ Á¤±ÔÈ­µÈ ÀÌ¸§À» °¡Áø function ÀÇ body ¸¦ ÇöÀç element ¿¡ ´ëÇÑ documentation ¿¡ ³»ÀåÇÏ¿© ±× element °¡ ¾î¶»°Ô »ç¿ëµÉ ¼ö ÀÖ´ÂÁö¿¡ ´ëÇÑ ¿¹¸¦ º¸¿©Áİ´Ï´Ù.
+ê¸°ìˆ ëœ ì •ê·œí™”ëœ ì´ë¦„ì„ ê°€ì§„ function ì˜ body ë¥¼ í˜„ì¬ element ì— ëŒ€í•œ documentation ì— ë‚´ì¥í•˜ì—¬ ê·¸ element ê°€ ì–´ë–»ê²Œ ì‚¬ìš©ë  ìˆ˜ ìˆëŠ”ì§€ì— ëŒ€í•œ ì˜ˆë¥¼ ë³´ì—¬ì¤ë‹ˆë‹¤.
 
 @see <identifier>
 
-±â¼úµÈ class ³ª method ¿¡ link ¸¦ Ãß°¡ÇØ documentation ÀÇ block µµ º¼ ¼ö ÀÖ°Ô ÇÕ´Ï´Ù.
+ê¸°ìˆ ëœ class ë‚˜ method ì— link ë¥¼ ì¶”ê°€í•´ documentation ì˜ block ë„ ë³¼ ìˆ˜ ìˆê²Œ í•©ë‹ˆë‹¤.
 
 @author
 
-document ÇÑ element ÀÇ ÀúÀÚ¸¦ ±â¼úÇÕ´Ï´Ù.
+document í•œ element ì˜ ì €ìë¥¼ ê¸°ìˆ í•©ë‹ˆë‹¤.
 
 @since
 
-document µÈ element °¡ ¼Ò°³µÈ software ÀÇ version À» ±â¼úÇÕ´Ï´Ù.
+document ëœ element ê°€ ì†Œê°œëœ software ì˜ version ì„ ê¸°ìˆ í•©ë‹ˆë‹¤.
 
 @suppress
 
-»ı¼ºµÈ documentation À¸·ÎºÎÅÍ element ¸¦ Á¦¿ÜÇÕ´Ï´Ù. Module ÀÇ °ø½Ä API ÀÇ ºÎºĞÀÌ ¾Æ´ÏÁö¸¸ ¿©ÀüÈ÷ ¿ÜºÎÀûÀ¸·Î visible ÇØ¾ß ÇÏ´Â elements ¸¦ À§ÇØ »ç¿ëµË´Ï´Ù.
+ìƒì„±ëœ documentation ìœ¼ë¡œë¶€í„° element ë¥¼ ì œì™¸í•©ë‹ˆë‹¤. Module ì˜ ê³µì‹ API ì˜ ë¶€ë¶„ì´ ì•„ë‹ˆì§€ë§Œ ì—¬ì „íˆ ì™¸ë¶€ì ìœ¼ë¡œ visible í•´ì•¼ í•˜ëŠ” elements ë¥¼ ìœ„í•´ ì‚¬ìš©ë©ë‹ˆë‹¤.
 
-<!> KDoc Àº @deprecated tag ¸¦ Áö¿øÇÏÁö ¾Ê½À´Ï´Ù. ´ë½Å @Deprecated annotation À» »ç¿ëÇØÁÖ¼¼¿ä.
+<!> KDoc ì€ @deprecated tag ë¥¼ ì§€ì›í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤. ëŒ€ì‹  @Deprecated annotation ì„ ì‚¬ìš©í•´ì£¼ì„¸ìš”.
 
 
 11.01.05. Inline Markup
 
-Inline markup À» À§ÇØ, KDoc ´Â Á¤±Ô Markdown syntax ¸¦ »ç¿ëÇÏ¸ç, ÀÌ´Â code ³»ÀÇ ´Ù¸¥ elements ¿Í link ÇÏ±â À§ÇÑ shothand syntax ¸¦ Áö¿øÇÕ´Ï´Ù.
+Inline markup ì„ ìœ„í•´, KDoc ëŠ” ì •ê·œ Markdown syntax ë¥¼ ì‚¬ìš©í•˜ë©°, ì´ëŠ” code ë‚´ì˜ ë‹¤ë¥¸ elements ì™€ link í•˜ê¸° ìœ„í•œ shothand syntax ë¥¼ ì§€ì›í•©ë‹ˆë‹¤.
 
-11.01.06. elements ¿¡ ¿¬°áÇÏ±â
+11.01.06. elements ì— ì—°ê²°í•˜ê¸°
 
-¶Ç´Ù¸¥ element(class, method, property ³ª parameter) ¿¡ ¿¬°áÇÏ±â À§ÇØ squaure brackets ¿¡ ÀÌ¸§À» ³ÖÀ¸¼¼¿ä.
+ë˜ë‹¤ë¥¸ element(class, method, property ë‚˜ parameter) ì— ì—°ê²°í•˜ê¸° ìœ„í•´ squaure brackets ì— ì´ë¦„ì„ ë„£ìœ¼ì„¸ìš”.
 
 Use the method [foo] for this purpose.
 
-link ¸¦ À§ÇÑ custom label À» ±â¼úÇÏ°íÀÚ ÇÑ´Ù¸é Markdown reference-style syntax ¸¦ »ç¿ëÇÏ¼¼¿ä.
+link ë¥¼ ìœ„í•œ custom label ì„ ê¸°ìˆ í•˜ê³ ì í•œë‹¤ë©´ Markdown reference-style syntax ë¥¼ ì‚¬ìš©í•˜ì„¸ìš”.
 
 Use [this method][foo] for this purpose
 
-link ³»¿¡ Á¤±ÔÈ­µÈ ÀÌ¸§À» »ç¿ëÇÒ ¼öµµ ÀÖ½À´Ï´Ù. JavaDoc °ú ´Ù¸£°Ô Á¤±ÔÈ­µÈ ÀÌ¸§Àº Ç×»ó dot ¹®ÀÚ¸¦ »ç¿ëÇØ components ¸¦ ±¸ºĞÇÏ°í method ÀÌ¸§ ¹Ù·Î Àü¿¡ ³ª¿É´Ï´Ù.
+link ë‚´ì— ì •ê·œí™”ëœ ì´ë¦„ì„ ì‚¬ìš©í•  ìˆ˜ë„ ìˆìŠµë‹ˆë‹¤. JavaDoc ê³¼ ë‹¤ë¥´ê²Œ ì •ê·œí™”ëœ ì´ë¦„ì€ í•­ìƒ dot ë¬¸ìë¥¼ ì‚¬ìš©í•´ components ë¥¼ êµ¬ë¶„í•˜ê³  method ì´ë¦„ ë°”ë¡œ ì „ì— ë‚˜ì˜µë‹ˆë‹¤.
 
 Use [kotlin.reflect.KClass.properties] to enumerate the properties of the class.
 
-link ³» ÀÌ¸§Àº document µÈ element ³»ºÎ¿¡¼­ »ç¿ëµÇ´Â °ÍÃ³·³ °°Àº ±ÔÄ¢À» »ç¿ëÇØ resolve µÉ ¼ö ÀÖ½À´Ï´Ù. Æ¯È÷ ÀÌ´Â ÇöÀç ÆÄÀÏ·Î ÀÌ¸§À» import Çß´Ù¸é KDoc comment ³»¿¡¼­ ÀÌ°ÍÀ» »ç¿ëÇØ ¿ÏÀüÈ÷ ¸í½ÃÇÒ ÇÊ¿ä°¡ ¾ø´Ù´Â °É ÀÇ¹ÌÇÕ´Ï´Ù.
+link ë‚´ ì´ë¦„ì€ document ëœ element ë‚´ë¶€ì—ì„œ ì‚¬ìš©ë˜ëŠ” ê²ƒì²˜ëŸ¼ ê°™ì€ ê·œì¹™ì„ ì‚¬ìš©í•´ resolve ë  ìˆ˜ ìˆìŠµë‹ˆë‹¤. íŠ¹íˆ ì´ëŠ” í˜„ì¬ íŒŒì¼ë¡œ ì´ë¦„ì„ import í–ˆë‹¤ë©´ KDoc comment ë‚´ì—ì„œ ì´ê²ƒì„ ì‚¬ìš©í•´ ì™„ì „íˆ ëª…ì‹œí•  í•„ìš”ê°€ ì—†ë‹¤ëŠ” ê±¸ ì˜ë¯¸í•©ë‹ˆë‹¤.
 
-KDoc Àº link ³»¿¡ overload µÈ members ¸¦ resolve ÇÏ´Â ¾î¶°ÇÑ syntax µµ °¡ÁöÁö ¾Ê´Â´Ù´Â °É ¾Ë¾ÆµÎ¼¼¿ä. kotlin documentation genration tool ÀÌ function ÀÇ ¸ğµç overloads ¿¡ ´ëÇÑ documentation À» °°Àº ÆäÀÌÁö¿¡ ÇØÁÖ±â ¶§¹®¿¡, ¸íÈ®ÇÑ overload µÈ function À» ½Äº°ÇÏ´Â °Ç link ¸¦ µ¿ÀÛ½ÃÅ°±â¿¡ ÇÊ¿ä·Î µÇÁö ¾Ê½À´Ï´Ù.
+KDoc ì€ link ë‚´ì— overload ëœ members ë¥¼ resolve í•˜ëŠ” ì–´ë– í•œ syntax ë„ ê°€ì§€ì§€ ì•ŠëŠ”ë‹¤ëŠ” ê±¸ ì•Œì•„ë‘ì„¸ìš”. kotlin documentation genration tool ì´ function ì˜ ëª¨ë“  overloads ì— ëŒ€í•œ documentation ì„ ê°™ì€ í˜ì´ì§€ì— í•´ì£¼ê¸° ë•Œë¬¸ì—, ëª…í™•í•œ overload ëœ function ì„ ì‹ë³„í•˜ëŠ” ê±´ link ë¥¼ ë™ì‘ì‹œí‚¤ê¸°ì— í•„ìš”ë¡œ ë˜ì§€ ì•ŠìŠµë‹ˆë‹¤.
 
 11.01.07. Module and Package Documentation
 
-module ÀüÃ¼¸¦ À§ÇÑ documentation Àº package ¿Í µ¿ÀÏÇÑµ¥, ºĞ¸®µÈ Markdown file ·Î Á¦°øµÇ°í, -include command line parameter ³ª Ant, Maven ±×¸®°í Gradle plugins ¿¡ ÇØ´çparameters ¸¦ »ç¿ëÇØ Dokka ¿¡ ÇØ´ç file ÀÇ °æ·Î¸¦ ³Ñ°ÜÁİ´Ï´Ù.
+module ì „ì²´ë¥¼ ìœ„í•œ documentation ì€ package ì™€ ë™ì¼í•œë°, ë¶„ë¦¬ëœ Markdown file ë¡œ ì œê³µë˜ê³ , -include command line parameter ë‚˜ Ant, Maven ê·¸ë¦¬ê³  Gradle plugins ì— í•´ë‹¹parameters ë¥¼ ì‚¬ìš©í•´ Dokka ì— í•´ë‹¹ file ì˜ ê²½ë¡œë¥¼ ë„˜ê²¨ì¤ë‹ˆë‹¤.
 
-file ³»¿¡¼­, module ÀüÃ¼¿Í °³º° packages µéÀ» À§ÇÑ documentation Àº ÇØ´çµÇ´Â first-level headings ¿¡ ¼Ò°³µË´Ï´Ù. heading ÀÇ text ´Â module ¿¡ ´ëÇØ¼± "Module <module name>" ÀÌ µÇ¾ß ÇÏ°í, package ¿¡ ´ëÇØ¼± "Package <package qulified name>" ÀÌ µÇ¾ß ÇÕ´Ï´Ù.
+file ë‚´ì—ì„œ, module ì „ì²´ì™€ ê°œë³„ packages ë“¤ì„ ìœ„í•œ documentation ì€ í•´ë‹¹ë˜ëŠ” first-level headings ì— ì†Œê°œë©ë‹ˆë‹¤. heading ì˜ text ëŠ” module ì— ëŒ€í•´ì„  "Module <module name>" ì´ ë˜ì•¼ í•˜ê³ , package ì— ëŒ€í•´ì„  "Package <package qulified name>" ì´ ë˜ì•¼ í•©ë‹ˆë‹¤.
 
-¿©±â file ÀÇ content ¿¡ ´ëÇÑ ¿¹°¡ ÀÖ½À´Ï´Ù.
+ì—¬ê¸° file ì˜ content ì— ëŒ€í•œ ì˜ˆê°€ ìˆìŠµë‹ˆë‹¤.
 
 # Module kotlin-demo
 
-±× ¸ğµâÀº Dokka syntax ¸¦ »ç¿ëÇÑ´Ù´Â °É º¸¿©Áİ´Ï´Ù.
+ê·¸ ëª¨ë“ˆì€ Dokka syntax ë¥¼ ì‚¬ìš©í•œë‹¤ëŠ” ê±¸ ë³´ì—¬ì¤ë‹ˆë‹¤.
 
 # Module kotlin-demo
 

@@ -1,120 +1,120 @@
-01. Kotlin for server Side
+ï»¿01. Kotlin for server Side
 
 01.01. Using Kotlin for Server side Development
 
-- Expressiveness: type-safe builders ¿Í delegated properties µîÀ» Áö¿øÇÏ´Â Çõ½ÅÀûÀÎ ¾ğ¾î ±â´ÉÀº °­·ÂÇÏ¸é¼­µµ »ç¿ëÇÏ±â ½¬¿î Ãß»óÈ­¸¦ ±¸ÃàÇÒ ¼ö ÀÖ°Ô ÇÔ
+- Expressiveness: type-safe builders ì™€ delegated properties ë“±ì„ ì§€ì›í•˜ëŠ” í˜ì‹ ì ì¸ ì–¸ì–´ ê¸°ëŠ¥ì€ ê°•ë ¥í•˜ë©´ì„œë„ ì‚¬ìš©í•˜ê¸° ì‰¬ìš´ ì¶”ìƒí™”ë¥¼ êµ¬ì¶•í•  ìˆ˜ ìˆê²Œ í•¨
 
-- Scalability: coroutines ¸¦ Áö¿øÇÏ¿© ÃÖ¼ÒÀÇ ÇÏµå¿ş¾î ¿ä±¸»çÇ×À¸·Î ¸¹Àº ¼öÀÇ Å¬¶óÀÌ¾ğÆ®·Î È®ÀåÇÒ ¼ö ÀÖ´Â server-side application ±¸Ãà °¡´É
+- Scalability: coroutines ë¥¼ ì§€ì›í•˜ì—¬ ìµœì†Œì˜ í•˜ë“œì›¨ì–´ ìš”êµ¬ì‚¬í•­ìœ¼ë¡œ ë§ì€ ìˆ˜ì˜ í´ë¼ì´ì–¸íŠ¸ë¡œ í™•ì¥í•  ìˆ˜ ìˆëŠ” server-side application êµ¬ì¶• ê°€ëŠ¥
 
-- Interoperability: java ±â¹İ ÇÁ·¹ÀÓ¿öÅ©¿Í ¿Ïº®È÷ È£È¯µÇ¹Ç·Î ÀÍ¼÷ÇÑ ±â¼ú ½ºÅÃÀ» À¯ÁöÇÏ¸é¼­µµ ÃÖ½Å ¾ğ¾îÀÇ ÀÌµæÀ» ÃëÇÒ ¼ö ÀÖÀ½
+- Interoperability: java ê¸°ë°˜ í”„ë ˆì„ì›Œí¬ì™€ ì™„ë²½íˆ í˜¸í™˜ë˜ë¯€ë¡œ ìµìˆ™í•œ ê¸°ìˆ  ìŠ¤íƒì„ ìœ ì§€í•˜ë©´ì„œë„ ìµœì‹  ì–¸ì–´ì˜ ì´ë“ì„ ì·¨í•  ìˆ˜ ìˆìŒ
 
-- Migration: °Å´ëÇÑ ÄÚµåº£ÀÌ½º¸¦ java ¿¡¼­ kotlin À¸·Î migration ÇÏ´Âµ¥ Á¡ÁøÀûÀÎ ¹æ¹ıÀ» Áö¿øÇÔ. java ·Î µÈ ½Ã½ºÅÛÀÇ ¿À·¡µÈ ºÎºĞÀ» À¯ÁöÇÏ¸é¼­µµ »õ·Î¿î kotlin ÄÚµå¸¦ ÀÛ¼ºÇÒ ¼ö ÀÖÀ½.
+- Migration: ê±°ëŒ€í•œ ì½”ë“œë² ì´ìŠ¤ë¥¼ java ì—ì„œ kotlin ìœ¼ë¡œ migration í•˜ëŠ”ë° ì ì§„ì ì¸ ë°©ë²•ì„ ì§€ì›í•¨. java ë¡œ ëœ ì‹œìŠ¤í…œì˜ ì˜¤ë˜ëœ ë¶€ë¶„ì„ ìœ ì§€í•˜ë©´ì„œë„ ìƒˆë¡œìš´ kotlin ì½”ë“œë¥¼ ì‘ì„±í•  ìˆ˜ ìˆìŒ.
 
-- Tooling: ÃÖ»óÀÇ IDE Áö¿ø°ú ÇÔ²² IntelliJ IDEA Ultimate À» À§ÇÑ ÇÃ·¯±×ÀÎ¿¡¼­ framework-specific tooling À» Áö¿ø
+- Tooling: ìµœìƒì˜ IDE ì§€ì›ê³¼ í•¨ê»˜ IntelliJ IDEA Ultimate ì„ ìœ„í•œ í”ŒëŸ¬ê·¸ì¸ì—ì„œ framework-specific tooling ì„ ì§€ì›
 
-- Learning Curve: Java °³¹ßÀÚ°¡ Kotlin À» ½ÃÀÛÇÏ±â ½¬¿ò. ÀÚµ¿È­µÈ Java to Kotlin Converter °¡ Kotlin Plugin ¿¡ Æ÷ÇÔµÅ ÀÖ¾î Ã³À½ ½ÃÀÛÇÏ´Â °É µµ¿ò. Kotlin Koans ´Â ÀÏ·ÃÀÇ »óÈ£Àû ¿¬½ÀÀ» ÅëÇØ ¾ğ¾îÀÇ ÁÖ¿ä Æ¯Â¡ Àü¹İÀ» ¾Ë·ÁÁÜ.
+- Learning Curve: Java ê°œë°œìê°€ Kotlin ì„ ì‹œì‘í•˜ê¸° ì‰¬ì›€. ìë™í™”ëœ Java to Kotlin Converter ê°€ Kotlin Plugin ì— í¬í•¨ë¼ ìˆì–´ ì²˜ìŒ ì‹œì‘í•˜ëŠ” ê±¸ ë„ì›€. Kotlin Koans ëŠ” ì¼ë ¨ì˜ ìƒí˜¸ì  ì—°ìŠµì„ í†µí•´ ì–¸ì–´ì˜ ì£¼ìš” íŠ¹ì§• ì „ë°˜ì„ ì•Œë ¤ì¤Œ.
 
 
 01.02. Frameworks for Server-side Develpment with Kotlin
 
-- Spring Àº version 5.0 ºÎÅÍ ´õ¿í °£´ÜÇÑ API µéÀ» »ç¿ëÇØ Kotlin ¾ğ¾îÀÇ Æ¯Â¡À» Á¦°øÇÏ°í ÀÖÀ½. Online project generator ´Â Kotlin À¸·Î »õ·Î¿î ÇÁ·ÎÁ§Æ®¸¦ ºü¸£°Ô »ı¼ºÇÏµµ·Ï ÇØÁÜ.
+- Spring ì€ version 5.0 ë¶€í„° ë”ìš± ê°„ë‹¨í•œ API ë“¤ì„ ì‚¬ìš©í•´ Kotlin ì–¸ì–´ì˜ íŠ¹ì§•ì„ ì œê³µí•˜ê³  ìˆìŒ. Online project generator ëŠ” Kotlin ìœ¼ë¡œ ìƒˆë¡œìš´ í”„ë¡œì íŠ¸ë¥¼ ë¹ ë¥´ê²Œ ìƒì„±í•˜ë„ë¡ í•´ì¤Œ.
 
-- JVM »ó¿¡¼­ ¹İÀÀÇü À¥ ¾îÇÃ¸®ÄÉÀÌ¼ÇÀ» ±¸ÃàÇÏ´Â ÇÁ·¹ÀÓ¿öÅ© Vert.x ´Â kotlin À» À§ÇÑ dedicated support ¸¦ full documentation °ú ÇÔ²² Á¦°øÇÏ°í ÀÖÀ½
+- JVM ìƒì—ì„œ ë°˜ì‘í˜• ì›¹ ì–´í”Œë¦¬ì¼€ì´ì…˜ì„ êµ¬ì¶•í•˜ëŠ” í”„ë ˆì„ì›Œí¬ Vert.x ëŠ” kotlin ì„ ìœ„í•œ dedicated support ë¥¼ full documentation ê³¼ í•¨ê»˜ ì œê³µí•˜ê³  ìˆìŒ
 
-- Ktor JetBrains À¸·Î ºôµåµÇ´Â Kotlin-native À¥ ÇÁ·¹ÀÓ¿öÅ© Ktor ´Â high scalibility ¸¦ À§ÇÑ coroutines °ú ½±°Ô »ç¿ëÇÒ ¼ö ÀÖ´Â °ü¿ëÀû API ¸¦ Á¦°øÇÔ
+- Ktor JetBrains ìœ¼ë¡œ ë¹Œë“œë˜ëŠ” Kotlin-native ì›¹ í”„ë ˆì„ì›Œí¬ Ktor ëŠ” high scalibility ë¥¼ ìœ„í•œ coroutines ê³¼ ì‰½ê²Œ ì‚¬ìš©í•  ìˆ˜ ìˆëŠ” ê´€ìš©ì  API ë¥¼ ì œê³µí•¨
 
-- kotlin.html ´Â À¥ ¾îÇÃ¸®ÄÉÀÌ¼Ç¿¡¼­ HTML À» ºôµåÇÏ±â À§ÇØ »ç¿ëµÇ´Â DSL. JSP ¿Í FreeMarker ¿Í °°Àº ±âÁ¸ templating ½Ã½ºÅÛÀ» ´ëÃ¼ÇÔ.
+- kotlin.html ëŠ” ì›¹ ì–´í”Œë¦¬ì¼€ì´ì…˜ì—ì„œ HTML ì„ ë¹Œë“œí•˜ê¸° ìœ„í•´ ì‚¬ìš©ë˜ëŠ” DSL. JSP ì™€ FreeMarker ì™€ ê°™ì€ ê¸°ì¡´ templating ì‹œìŠ¤í…œì„ ëŒ€ì²´í•¨.
 
-- JDBC access, JPA, java drivers ¸¦ ÅëÇÑ NoSQL databases »ç¿ë±îÁö Æ÷ÇÔÇÏ´Â persistence ¸¦ À§ÇÑ °¡´ÉÇÑ ¿É¼ÇµéÀ» Á¦°ø. JPA ¸¦ À§ÇØ kotlin-jpa complier plugin Àº kotlin-complied class ¸¦ framework ÀÇ ¿ä±¸»çÇ×À¸·Î Àû¿ëÇÒ ¼ö ÀÖÀ½.
+- JDBC access, JPA, java drivers ë¥¼ í†µí•œ NoSQL databases ì‚¬ìš©ê¹Œì§€ í¬í•¨í•˜ëŠ” persistence ë¥¼ ìœ„í•œ ê°€ëŠ¥í•œ ì˜µì…˜ë“¤ì„ ì œê³µ. JPA ë¥¼ ìœ„í•´ kotlin-jpa complier plugin ì€ kotlin-complied class ë¥¼ framework ì˜ ìš”êµ¬ì‚¬í•­ìœ¼ë¡œ ì ìš©í•  ìˆ˜ ìˆìŒ.
 
 01.03. Deploying Kotlin Server-side Applications
 
-Kotlin applications ´Â java web application À» Áö¿øÇÏ´Â ¾î¶°ÇÑ È£½ºÆ®¿¡µµ deploy °¡´ÉÇÔ. ÀÌ¸¦Å×¸é Amazon Web Services, Google Cloud Platform µîµî.
+Kotlin applications ëŠ” java web application ì„ ì§€ì›í•˜ëŠ” ì–´ë– í•œ í˜¸ìŠ¤íŠ¸ì—ë„ deploy ê°€ëŠ¥í•¨. ì´ë¥¼í…Œë©´ Amazon Web Services, Google Cloud Platform ë“±ë“±.
 
 01.04. Users of Kotlin on the Server Side
-Corda ´Â ÁÖ¿ä ÀºÇàµéÀÌ Áö¿øÇÏ°í ÀÖ´Â ¿ÀÇÂ ¼Ò½º ºĞ»ê ¿øÀå ÇÃ·§ÆûÀÌ¸ç kotlin À¸·Î ¿Ïº®È÷ ºôµåµÊ.
-JetBrains¿¡¼­ entire license sales, validation process À» Ã¥ÀÓÁö´Â ½Ã½ºÅÛ, JetBrains Account  ´Â 100% cotlin À¸·Î ÀÛ¼ºµÆ°í 2015³â ÀÌ·¡·Î ¾î¶°ÇÑ ÁÖ¿ä ÀÌ½´ ¾øÀÌ Á¦Ç° »ó¿¡¼­ µ¹¾Æ°¡°í ÀÖÀ½.
+Corda ëŠ” ì£¼ìš” ì€í–‰ë“¤ì´ ì§€ì›í•˜ê³  ìˆëŠ” ì˜¤í”ˆ ì†ŒìŠ¤ ë¶„ì‚° ì›ì¥ í”Œë«í¼ì´ë©° kotlin ìœ¼ë¡œ ì™„ë²½íˆ ë¹Œë“œë¨.
+JetBrainsì—ì„œ entire license sales, validation process ì„ ì±…ì„ì§€ëŠ” ì‹œìŠ¤í…œ, JetBrains Account  ëŠ” 100% cotlin ìœ¼ë¡œ ì‘ì„±ëê³  2015ë…„ ì´ë˜ë¡œ ì–´ë– í•œ ì£¼ìš” ì´ìŠˆ ì—†ì´ ì œí’ˆ ìƒì—ì„œ ëŒì•„ê°€ê³  ìˆìŒ.
 
 01.05. Next Steps
 
-- Http Serlvet À» »ç¿ëÇÑ À¥ ¾îÇÃ¸®ÄÉÀÌ¼Ç »ı¼º°ú Spring Boot ¿Í ÇÔ²² RESTful Web Service ¸¦ »ı¼ºÇÏ´Â Æ©Åä¸®¾óÀÌ ¸Å¿ì ÀÛÀº À¥ ¾îÇÃ¸®ÄÉÀÌ¼ÇÀ» Kotlin »ó¿¡¼­ ¾î¶»°Ô ºôµåÇÏ°í ½ÇÇàÇÒ ¼ö ÀÖ´ÂÁö º¸¿©ÁÙ °ÍÀÌ´Ù.
-- ¾ğ¾î¿¡ ´ëÇÑ ½ÉµµÀÖ´Â instruction À» À§ÇØ ÀÌ »çÀÌÆ®¿Í »óÀÇ reference documentation °ú Kotlin Koans ¸¦ È®ÀÎÇÏ¶ó.
+- Http Serlvet ì„ ì‚¬ìš©í•œ ì›¹ ì–´í”Œë¦¬ì¼€ì´ì…˜ ìƒì„±ê³¼ Spring Boot ì™€ í•¨ê»˜ RESTful Web Service ë¥¼ ìƒì„±í•˜ëŠ” íŠœí† ë¦¬ì–¼ì´ ë§¤ìš° ì‘ì€ ì›¹ ì–´í”Œë¦¬ì¼€ì´ì…˜ì„ Kotlin ìƒì—ì„œ ì–´ë–»ê²Œ ë¹Œë“œí•˜ê³  ì‹¤í–‰í•  ìˆ˜ ìˆëŠ”ì§€ ë³´ì—¬ì¤„ ê²ƒì´ë‹¤.
+- ì–¸ì–´ì— ëŒ€í•œ ì‹¬ë„ìˆëŠ” instruction ì„ ìœ„í•´ ì´ ì‚¬ì´íŠ¸ì™€ ìƒì˜ reference documentation ê³¼ Kotlin Koans ë¥¼ í™•ì¸í•˜ë¼.
 
 
 02. Kotlin for Android
 
 02.01. Using Kotlin for Android Development
 
-- Compatibillity: Kotlin Àº JDK6 ¿¡ ¿ÏÀüÈ÷ È£È¯µÇ¸ç Kotlin ¾îÇÃ¸®ÄÉÀÌ¼ÇÀº ÀÌÀü Android µğ¹ÙÀÌ½º¿¡ ¾î¶°ÇÑ ÀÌ½´ ¾øÀÌ µ¿ÀÛÇÕ´Ï´Ù. Kotlin tooling Àº Android Studio ¿¡¼­ ¿ÏÀüÈ÷ Áö¿øµÇ°í Android Build System ¿¡ È£È¯µË´Ï´Ù.
+- Compatibillity: Kotlin ì€ JDK6 ì— ì™„ì „íˆ í˜¸í™˜ë˜ë©° Kotlin ì–´í”Œë¦¬ì¼€ì´ì…˜ì€ ì´ì „ Android ë””ë°”ì´ìŠ¤ì— ì–´ë– í•œ ì´ìŠˆ ì—†ì´ ë™ì‘í•©ë‹ˆë‹¤. Kotlin tooling ì€ Android Studio ì—ì„œ ì™„ì „íˆ ì§€ì›ë˜ê³  Android Build System ì— í˜¸í™˜ë©ë‹ˆë‹¤.
 
-- Performence: kotlin ¾îÇÃ¸®ÄÉÀÌ¼ÇÀº bytecode ±¸Á¶¿Í ¸Å¿ì À¯»çÇÑ ´ö¿¡ java¿Í µ¿µîÇÑ ¸¸Å­ ºü¸£°Ô µ¿ÀÛÇÕ´Ï´Ù. inline function Áö¿øÀ¸·Î ÀÎÇØ lamdas ¸¦ »ç¿ëÇÑ ÄÚµå´Â java ·Î ÀÛ¼ºÇÑ °°Àº ÄÚµåº¸´Ù ´õ ºü¸£°Ô µ¿ÀÛÇÒ ¶§µµ ÀÖ½À´Ï´Ù.
+- Performence: kotlin ì–´í”Œë¦¬ì¼€ì´ì…˜ì€ bytecode êµ¬ì¡°ì™€ ë§¤ìš° ìœ ì‚¬í•œ ë•ì— javaì™€ ë™ë“±í•œ ë§Œí¼ ë¹ ë¥´ê²Œ ë™ì‘í•©ë‹ˆë‹¤. inline function ì§€ì›ìœ¼ë¡œ ì¸í•´ lamdas ë¥¼ ì‚¬ìš©í•œ ì½”ë“œëŠ” java ë¡œ ì‘ì„±í•œ ê°™ì€ ì½”ë“œë³´ë‹¤ ë” ë¹ ë¥´ê²Œ ë™ì‘í•  ë•Œë„ ìˆìŠµë‹ˆë‹¤.
 
-- Interoperability: Kotlin Àº java ¿Í ¿Ïº®È÷ »óÈ£¿î¿ëµÉ ¼ö ÀÖ°í Kotlin ¾îÇÃ¸®ÄÉÀÌ¼Ç ³»¿¡¼­ ÀÌ¹Ì Á¸ÀçÇÏ´Â Android libraries ¸¦ ¸ğµÎ »ç¿ëÇÒ ¼ö ÀÖ½À´Ï´Ù. annotation processing, databinidng, dagger work µµ ¿ª½Ã Áö¿øÇÕ´Ï´Ù.
+- Interoperability: Kotlin ì€ java ì™€ ì™„ë²½íˆ ìƒí˜¸ìš´ìš©ë  ìˆ˜ ìˆê³  Kotlin ì–´í”Œë¦¬ì¼€ì´ì…˜ ë‚´ì—ì„œ ì´ë¯¸ ì¡´ì¬í•˜ëŠ” Android libraries ë¥¼ ëª¨ë‘ ì‚¬ìš©í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤. annotation processing, databinidng, dagger work ë„ ì—­ì‹œ ì§€ì›í•©ë‹ˆë‹¤.
 
-- Footprint: Kotlin Àº ¸Å¿ì compact ÇÑ runtime library ÀÌ°í ProGuard ¸¦ »ç¿ëÇØ ´õ¿í ÁÙÀÏ ¼ö ÀÖ½À´Ï´Ù. ½ÇÁ¦ application ¿¡¼­ Kotlin runtime Àº ´ÜÁö ¼ö¹é°³ ¸Ş¼­µå¸¸À» Ãß°¡ÇÏ°í .apk ÆÄÀÏÀÇ Å©±â¸¦ 100K ¾Æ·¡·Î ÁÙÀÔ´Ï´Ù.
+- Footprint: Kotlin ì€ ë§¤ìš° compact í•œ runtime library ì´ê³  ProGuard ë¥¼ ì‚¬ìš©í•´ ë”ìš± ì¤„ì¼ ìˆ˜ ìˆìŠµë‹ˆë‹¤. ì‹¤ì œ application ì—ì„œ Kotlin runtime ì€ ë‹¨ì§€ ìˆ˜ë°±ê°œ ë©”ì„œë“œë§Œì„ ì¶”ê°€í•˜ê³  .apk íŒŒì¼ì˜ í¬ê¸°ë¥¼ 100K ì•„ë˜ë¡œ ì¤„ì…ë‹ˆë‹¤.
 
-- Compliation Time: Kotlin Àº efficient incremental compilation ¸¦ Áö¿øÇÏ¸ç clean builds ¿¡ ´ëÇØ Ãß°¡ÀûÀÎ ¿À¹öÇìµå°¡ ÀÖ´Â ¹İ¸é incremental builds ´Â ÀÏ¹İÀûÀ¸·Î java ¸¸Å­ È¤Àº ´õ ºü¸£°Ô µ¿ÀÛÇÕ´Ï´Ù.
+- Compliation Time: Kotlin ì€ efficient incremental compilation ë¥¼ ì§€ì›í•˜ë©° clean builds ì— ëŒ€í•´ ì¶”ê°€ì ì¸ ì˜¤ë²„í—¤ë“œê°€ ìˆëŠ” ë°˜ë©´ incremental builds ëŠ” ì¼ë°˜ì ìœ¼ë¡œ java ë§Œí¼ í˜¹ì€ ë” ë¹ ë¥´ê²Œ ë™ì‘í•©ë‹ˆë‹¤.
 
-- Learning Curve: Java °³¹ßÀÚ°¡ Kotlin À» ½ÃÀÛÇÏ±â ½¬¿ò. ÀÚµ¿È­µÈ Java to Kotlin Converter °¡ Kotlin Plugin ¿¡ Æ÷ÇÔµÅ ÀÖ¾î Ã³À½ ½ÃÀÛÇÏ´Â °É µµ¿ò. Kotlin Koans ´Â ÀÏ·ÃÀÇ »óÈ£Àû ¿¬½ÀÀ» ÅëÇØ ¾ğ¾îÀÇ ÁÖ¿ä Æ¯Â¡ Àü¹İÀ» ¾Ë·ÁÁÜ.
+- Learning Curve: Java ê°œë°œìê°€ Kotlin ì„ ì‹œì‘í•˜ê¸° ì‰¬ì›€. ìë™í™”ëœ Java to Kotlin Converter ê°€ Kotlin Plugin ì— í¬í•¨ë¼ ìˆì–´ ì²˜ìŒ ì‹œì‘í•˜ëŠ” ê±¸ ë„ì›€. Kotlin Koans ëŠ” ì¼ë ¨ì˜ ìƒí˜¸ì  ì—°ìŠµì„ í†µí•´ ì–¸ì–´ì˜ ì£¼ìš” íŠ¹ì§• ì „ë°˜ì„ ì•Œë ¤ì¤Œ.
 
 02.02. Kotlin for Android Case Studies
-- Pinterest ´Â  Kotlin À» ¸Å´Ş 150M »ç¶÷µéÀÌ »ç¿ëÇÏ´Â ±×µéÀÇ ¾îÇÃ¸®ÄÉÀÌ¼Ç¿¡ ¼º°øÀûÀ¸·Î µµÀÔÇß½À´Ï´Ù.
-- Basecamp ÀÇ Android ¾ÛÀº 100% Kotlin ÄÚµåÀÌ°í, ±×µéÀÌ º¸°íÇÏ±æ ÇÁ·Î±×·¡¸Ó Çàº¹¿¡¼­ °Å´ëÇÑ Â÷ÀÌ¿Í ¾÷¹« Ä÷¸®Æ¼, ½ºÇÇµå¸é¿¡¼­ ÃÖ»óÀÇ °³¼±ÀÌ ÀÖ¾ú´Ù°í ÇÕ´Ï´Ù.
+- Pinterest ëŠ”  Kotlin ì„ ë§¤ë‹¬ 150M ì‚¬ëŒë“¤ì´ ì‚¬ìš©í•˜ëŠ” ê·¸ë“¤ì˜ ì–´í”Œë¦¬ì¼€ì´ì…˜ì— ì„±ê³µì ìœ¼ë¡œ ë„ì…í–ˆìŠµë‹ˆë‹¤.
+- Basecamp ì˜ Android ì•±ì€ 100% Kotlin ì½”ë“œì´ê³ , ê·¸ë“¤ì´ ë³´ê³ í•˜ê¸¸ í”„ë¡œê·¸ë˜ë¨¸ í–‰ë³µì—ì„œ ê±°ëŒ€í•œ ì°¨ì´ì™€ ì—…ë¬´ í€„ë¦¬í‹°, ìŠ¤í”¼ë“œë©´ì—ì„œ ìµœìƒì˜ ê°œì„ ì´ ìˆì—ˆë‹¤ê³  í•©ë‹ˆë‹¤.
 
-- Keepsafe ÀÇ ¾Û Lock app Àº 100% Kotlin À¸·Î º¯È¯µÆ´Âµ¥, ¼Ò½º ¶óÀÎ ¼ö¿¡¼­ 30% °¡ °¨¼ÒÇÏ°í ¸Ş¼Òµå °³¼ö°¡ 10% °¨¼ÒµÆ½À´Ï´Ù.
+- Keepsafe ì˜ ì•± Lock app ì€ 100% Kotlin ìœ¼ë¡œ ë³€í™˜ëëŠ”ë°, ì†ŒìŠ¤ ë¼ì¸ ìˆ˜ì—ì„œ 30% ê°€ ê°ì†Œí•˜ê³  ë©”ì†Œë“œ ê°œìˆ˜ê°€ 10% ê°ì†ŒëìŠµë‹ˆë‹¤.
 
 02.03. Tools for Android Development
 
-- Kotlin Android Extensions ´Â ÄÚµå ³»ÀÇ findViewById() ÄİÀ» Á¦°ÅÇØÁÖ°í synthetic complier-generated propeties À¸·Î ´ëÃ¼ÇÒ ¼ö ÀÖ°Ô ÇØÁİ´Ï´Ù.
+- Kotlin Android Extensions ëŠ” ì½”ë“œ ë‚´ì˜ findViewById() ì½œì„ ì œê±°í•´ì£¼ê³  synthetic complier-generated propeties ìœ¼ë¡œ ëŒ€ì²´í•  ìˆ˜ ìˆê²Œ í•´ì¤ë‹ˆë‹¤.
 
-- Anko ´Â layout .xml ÆÄÀÏÀ» Kotlin ÄÚµå¸¦ »ç¿ëÇØ ´ëÃ¼ÇÒ ¼ö ÀÖµµ·Ï ÇÏ´Â DSL °ú ÇÔ²² Android APIs ¸¦ °¨½Î´Â Kotlin Ä£È­ÀûÀÎ wrappers ÀÇ set ¸¦ Á¦°øÇØÁİ´Ï´Ù.
+- Anko ëŠ” layout .xml íŒŒì¼ì„ Kotlin ì½”ë“œë¥¼ ì‚¬ìš©í•´ ëŒ€ì²´í•  ìˆ˜ ìˆë„ë¡ í•˜ëŠ” DSL ê³¼ í•¨ê»˜ Android APIs ë¥¼ ê°ì‹¸ëŠ” Kotlin ì¹œí™”ì ì¸ wrappers ì˜ set ë¥¼ ì œê³µí•´ì¤ë‹ˆë‹¤.
 
 02.04. Next Steps
 
-- Android Studio 3.0 À» ¼³Ä¡ÇØ Æ÷ÇÔµÈ Kotlin support »óÀÚ¸¦ Ç®¾îº¸¼¼¿ä
-- Getting Started with Android and Kotlin Æ©Åä¸®¾óÀ» µû¶ó Ã¹ kotlin application À» ¸¸µé¾îº¸¼¼¿ä.
-- ´õ¿í ½ÉµµÀÖ´Â introduction À» À§ÇØ ÀÌ »çÀÌÆ® ³»ÀÇ reference documentation °ú Kotlin Koans ¸¦ È®ÀÎÇÏ¼¼¿ä.
-- ¶Ç´Ù¸¥ ÈÇ¸¢ÇÑ ¸®¼Ò½º´Â Kotlin for Android Developers ÀÔ´Ï´Ù. ÀÌ Ã¥Àº ´ç½ÅÀÌ Kotlin À¸·Î ½ÇÁ¦ Android application À» »ı¼ºÇÏ´Â ÇÁ·Î¼¼½º Àü¹İÀ» step by step À¸·Î °¡ÀÌµå ÇØÁİ´Ï´Ù.
-- Google ÀÇ sample projects written in Kotlin À» È®ÀÎÇÏ¼¼¿ä.
+- Android Studio 3.0 ì„ ì„¤ì¹˜í•´ í¬í•¨ëœ Kotlin support ìƒìë¥¼ í’€ì–´ë³´ì„¸ìš”
+- Getting Started with Android and Kotlin íŠœí† ë¦¬ì–¼ì„ ë”°ë¼ ì²« kotlin application ì„ ë§Œë“¤ì–´ë³´ì„¸ìš”.
+- ë”ìš± ì‹¬ë„ìˆëŠ” introduction ì„ ìœ„í•´ ì´ ì‚¬ì´íŠ¸ ë‚´ì˜ reference documentation ê³¼ Kotlin Koans ë¥¼ í™•ì¸í•˜ì„¸ìš”.
+- ë˜ë‹¤ë¥¸ í›Œë¥­í•œ ë¦¬ì†ŒìŠ¤ëŠ” Kotlin for Android Developers ì…ë‹ˆë‹¤. ì´ ì±…ì€ ë‹¹ì‹ ì´ Kotlin ìœ¼ë¡œ ì‹¤ì œ Android application ì„ ìƒì„±í•˜ëŠ” í”„ë¡œì„¸ìŠ¤ ì „ë°˜ì„ step by step ìœ¼ë¡œ ê°€ì´ë“œ í•´ì¤ë‹ˆë‹¤.
+- Google ì˜ sample projects written in Kotlin ì„ í™•ì¸í•˜ì„¸ìš”.
 
 03. Kotlin for Javascript
 
 03.01. Kotlin Javascript Overview
-Kotlin Àº javascript À» Å¸ÄÏÀ¸·Î ÇÒ ¼ö ÀÖ´Â ±â´ÉÀ» Á¦°øÇÕ´Ï´Ù. Kotlin À» Javascript ·Î º¯È¯ÇÏ¸é µË´Ï´Ù. ÇöÀç ±¸ÇöÀº ECMAScript 5.1 À» Å¸°ÙÀ¸·Î ÇÏ°í ÀÖÁö¸¸ °á±¹ ECMAScript 2015 µµ Å¸ÄÏÀ¸·Î ÇÒ °èÈ¹ÀÌ ÀÖ½À´Ï´Ù.
+Kotlin ì€ javascript ì„ íƒ€ì¼“ìœ¼ë¡œ í•  ìˆ˜ ìˆëŠ” ê¸°ëŠ¥ì„ ì œê³µí•©ë‹ˆë‹¤. Kotlin ì„ Javascript ë¡œ ë³€í™˜í•˜ë©´ ë©ë‹ˆë‹¤. í˜„ì¬ êµ¬í˜„ì€ ECMAScript 5.1 ì„ íƒ€ê²Ÿìœ¼ë¡œ í•˜ê³  ìˆì§€ë§Œ ê²°êµ­ ECMAScript 2015 ë„ íƒ€ì¼“ìœ¼ë¡œ í•  ê³„íšì´ ìˆìŠµë‹ˆë‹¤.
 
-Javascript Å¸°ÙÀ» °ñ¶úÀ» ¶§ ÇÁ·ÎÁ§Æ®ÀÇ ºÎºĞÀÌµç Kotlin À¸·Î ½×¿©Áø standard libraryÀÌµç ¾î¶°ÇÑ Kotlin ÄÚµåµµ javasacript ·Î º¯È¯ÇÒ ¼ö ÀÖ½À´Ï´Ù. ´Ù¸¸ JDK ³ª ¾î¶² JVM, java framework, ¶óÀÌºê·¯¸®¸¦ »ç¿ëÇÑ °ÍÀ» Á¦¿ÜÇÏ°í ¸»ÀÔ´Ï´Ù. Kotlin ÀÌ ¾Æ´Ñ ¾î¶² ÆÄÀÏÀÌµç ÄÄÆÄÀÏÇÏ´Â µ¿¾È ¹«½Ã µÉ °ÍÀÔ´Ï´Ù.
+Javascript íƒ€ê²Ÿì„ ê³¨ëì„ ë•Œ í”„ë¡œì íŠ¸ì˜ ë¶€ë¶„ì´ë“  Kotlin ìœ¼ë¡œ ìŒ“ì—¬ì§„ standard libraryì´ë“  ì–´ë– í•œ Kotlin ì½”ë“œë„ javasacript ë¡œ ë³€í™˜í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤. ë‹¤ë§Œ JDK ë‚˜ ì–´ë–¤ JVM, java framework, ë¼ì´ë¸ŒëŸ¬ë¦¬ë¥¼ ì‚¬ìš©í•œ ê²ƒì„ ì œì™¸í•˜ê³  ë§ì…ë‹ˆë‹¤. Kotlin ì´ ì•„ë‹Œ ì–´ë–¤ íŒŒì¼ì´ë“  ì»´íŒŒì¼í•˜ëŠ” ë™ì•ˆ ë¬´ì‹œ ë  ê²ƒì…ë‹ˆë‹¤.
 
-Kotlin ÄÄÆÄÀÏ·¯´Â ´ÙÀ½ ¸ñÀûµéÀ» ¸¸Á·ÇÏ·Á°í ÇÕ´Ï´Ù.
-- ÃÖÀûÈ­µÈ Å©±âÀÇ output À» Á¦°ø
-- ÀĞÀ» ¼ö ÀÖ´Â Javascript ÀÎ output À» Á¦°ø
-- ÀÌ¹Ì Á¸ÀçÇÏ´Â ¸ğµâ ½Ã½ºÅÛ°ú »óÈ£ ¿î¿ëÀ» Á¦°ø
-- javascript ¸¦ Å¸°ÙÀ¸·Î ÇÏ°í ÀÖ´ÂÁö jvm À» Å¸°ÙÀ¸·Î ÇÏ°í ÀÖ´ÂÁö¿¡ µû¶ó (°¡´ÉÇÑ ÃÖ´ë·Î) standard library ¿¡¼­ µ¿ÀÏÇÑ ±â´ÉÀ» Á¦°ø
+Kotlin ì»´íŒŒì¼ëŸ¬ëŠ” ë‹¤ìŒ ëª©ì ë“¤ì„ ë§Œì¡±í•˜ë ¤ê³  í•©ë‹ˆë‹¤.
+- ìµœì í™”ëœ í¬ê¸°ì˜ output ì„ ì œê³µ
+- ì½ì„ ìˆ˜ ìˆëŠ” Javascript ì¸ output ì„ ì œê³µ
+- ì´ë¯¸ ì¡´ì¬í•˜ëŠ” ëª¨ë“ˆ ì‹œìŠ¤í…œê³¼ ìƒí˜¸ ìš´ìš©ì„ ì œê³µ
+- javascript ë¥¼ íƒ€ê²Ÿìœ¼ë¡œ í•˜ê³  ìˆëŠ”ì§€ jvm ì„ íƒ€ê²Ÿìœ¼ë¡œ í•˜ê³  ìˆëŠ”ì§€ì— ë”°ë¼ (ê°€ëŠ¥í•œ ìµœëŒ€ë¡œ) standard library ì—ì„œ ë™ì¼í•œ ê¸°ëŠ¥ì„ ì œê³µ
 
 03.02. How can it be used
-´ç½ÅÀº ´ÙÀ½ÀÇ ½Ã³ª¸®¿À´ë·Î Kotlin À» javascript ·Î ÄÄÆÄÀÏÇÏ±â ¿øÇÕ´Ï´Ù.
-- Client-side javascript ¸¦ Å¸°ÙÀ¸·Î ÇÏ´Â Kotlin ÄÚµå »ı¼º
- -> DOM elements ¿Í »óÈ£ÀÛ¿ë: Kotlin Àº Document Object Model °ú »óÈ£ÀÛ¿ëÇÏ±â À§ÇØ ÀÏ·ÃÀÇ static ÇÏ°Ô type µÈ interface ¸¦ Á¦°øÇÏ¸ç, ÀÌ¸¦ »ç¿ëÇØ DOM elements »ı¼º°ú ¾÷µ¥ÀÌÆ®¸¦ ÇÒ ¼ö ÀÖ½À´Ï´Ù.
- -> WebGL°ú °°Àº graphics ¿Í »óÈ£ÀÛ¿ë: WebGL À» »ç¿ëÇÏ´Â À¥ÆäÀÌÁö »óÀÇ graphical elements ¸¦ »ı¼ºÇÏ±â À§ÇØ kotlin À» »ç¿ëÇÒ ¼ö ÀÖ½À´Ï´Ù.
-- Server-side javascript ¸¦ Å¸°ÙÀ¸·Î ÇÏ´Â Kotlin ÄÚµå »ı¼º
- -> server-side ±â¼ú°ú ÇÔ²² ÀÛ¾÷: node.js °°Àº server-side javascript ¿Í »óÈ£ÀÛ¿ëÇÏ±â À§ÇØ Kotlin À» »ç¿ëÇÒ ¼ö ÀÖ½À´Ï´Ù.
+ë‹¹ì‹ ì€ ë‹¤ìŒì˜ ì‹œë‚˜ë¦¬ì˜¤ëŒ€ë¡œ Kotlin ì„ javascript ë¡œ ì»´íŒŒì¼í•˜ê¸° ì›í•©ë‹ˆë‹¤.
+- Client-side javascript ë¥¼ íƒ€ê²Ÿìœ¼ë¡œ í•˜ëŠ” Kotlin ì½”ë“œ ìƒì„±
+ -> DOM elements ì™€ ìƒí˜¸ì‘ìš©: Kotlin ì€ Document Object Model ê³¼ ìƒí˜¸ì‘ìš©í•˜ê¸° ìœ„í•´ ì¼ë ¨ì˜ static í•˜ê²Œ type ëœ interface ë¥¼ ì œê³µí•˜ë©°, ì´ë¥¼ ì‚¬ìš©í•´ DOM elements ìƒì„±ê³¼ ì—…ë°ì´íŠ¸ë¥¼ í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.
+ -> WebGLê³¼ ê°™ì€ graphics ì™€ ìƒí˜¸ì‘ìš©: WebGL ì„ ì‚¬ìš©í•˜ëŠ” ì›¹í˜ì´ì§€ ìƒì˜ graphical elements ë¥¼ ìƒì„±í•˜ê¸° ìœ„í•´ kotlin ì„ ì‚¬ìš©í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.
+- Server-side javascript ë¥¼ íƒ€ê²Ÿìœ¼ë¡œ í•˜ëŠ” Kotlin ì½”ë“œ ìƒì„±
+ -> server-side ê¸°ìˆ ê³¼ í•¨ê»˜ ì‘ì—…: node.js ê°™ì€ server-side javascript ì™€ ìƒí˜¸ì‘ìš©í•˜ê¸° ìœ„í•´ Kotlin ì„ ì‚¬ìš©í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.
 
-Kotlin Àº JQuery ³ª ReactJS Ã³·³ ÀÌ¹Ì Á¸ÀçÇÏ´Â third-party libraries ¿Í frameworks °ú ÇÔ²² »ç¿ëÇÒ ¼ö ÀÖ½À´Ï´Ù. third-party frameworks ¸¦ strongly-typed API ¸¦ »ç¿ëÇØ Á¢±ÙÇÏ±â À§ÇØ¼­, ts2kt tool À» »ç¿ëÇØ Definitely Type definitions repositiory repositiory ¿¡ ÀÖ´Â TypeScript definitions ¸¦ kotlin À¸·Î º¯È¯ÇÒ ¼ö ÀÖ½À´Ï´Ù. ¶Ç´Â dynamic type À» »ç¿ëÇØ strong typing ¾øÀÌ ¾î¶°ÇÑ framework ¿¡µµ Á¢±ÙÇÒ ¼ö ÀÖ½À´Ï´Ù.
+Kotlin ì€ JQuery ë‚˜ ReactJS ì²˜ëŸ¼ ì´ë¯¸ ì¡´ì¬í•˜ëŠ” third-party libraries ì™€ frameworks ê³¼ í•¨ê»˜ ì‚¬ìš©í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤. third-party frameworks ë¥¼ strongly-typed API ë¥¼ ì‚¬ìš©í•´ ì ‘ê·¼í•˜ê¸° ìœ„í•´ì„œ, ts2kt tool ì„ ì‚¬ìš©í•´ Definitely Type definitions repositiory repositiory ì— ìˆëŠ” TypeScript definitions ë¥¼ kotlin ìœ¼ë¡œ ë³€í™˜í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤. ë˜ëŠ” dynamic type ì„ ì‚¬ìš©í•´ strong typing ì—†ì´ ì–´ë– í•œ framework ì—ë„ ì ‘ê·¼í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.
 
-Kotlin Àº ´Ù¸¥ ¸ğµâ ½Ã½ºÅÛ °£ÀÇ »óÈ£ÀÛ¿ëÀ» strightforward ÇÏ°Ô ¸¸µé¾îÁÖ´Â CommonJS, AMD, UMD ¿Íµµ È£È¯ÀÌ µË´Ï´Ù.
+Kotlin ì€ ë‹¤ë¥¸ ëª¨ë“ˆ ì‹œìŠ¤í…œ ê°„ì˜ ìƒí˜¸ì‘ìš©ì„ strightforward í•˜ê²Œ ë§Œë“¤ì–´ì£¼ëŠ” CommonJS, AMD, UMD ì™€ë„ í˜¸í™˜ì´ ë©ë‹ˆë‹¤.
 
 03.03. Getting Started with Kotlin to Javascript
-javascript ¸¦ À§ÇÑ kotlin »ç¿ëÀ» ½ÃÀÛÇÏ´Â ¹æ¹ıÀ» ¾Ë±â À§ÇØ tutorials ¸¦ Âü°íÇÏ¼¼¿ä.
+javascript ë¥¼ ìœ„í•œ kotlin ì‚¬ìš©ì„ ì‹œì‘í•˜ëŠ” ë°©ë²•ì„ ì•Œê¸° ìœ„í•´ tutorials ë¥¼ ì°¸ê³ í•˜ì„¸ìš”.
 
 04. Kotlin/Native
 
 04.01. Kotlin/Native
-Kotlin/Native ´Â Kotlin À» ¾î¶°ÇÑ VM ¾øÀÌ µ¿ÀÛÇÏ´Â native binaries ·Î ÄÄÆÄÀÏ ÇÏ´Â ±â¼úÀÔ´Ï´Ù. ±×°ÍÀº Kotlin ÄÄÆÄÀÏ·¯¸¦ À§ÇÑ LLVM ±â¹İÀÇ ¹é¿£µå¿Í Ktlin runtime library ÀÇ native ±¸ÇöÀ¸·Î ±¸¼ºµË´Ï´Ù. ÃÖÃÊ¿¡ Kotlin/Native ´Â virtual machine ÀÌ ¹Ù¶÷Á÷ÇÏÁö ¾Ê°Å³ª °¡´ÉÇÏÁö ¾Ê´Â ÇÃ·§Æû (¿¹¸¦ µé¾î iOS Ã³·³ embeded target) ¶Ç´Â Ãß°¡ÀûÀÎ ·±Å¸ÀÓÀ» ¿ä±¸ÇÏÁö ¾Ê´Â ÇÕ¸®ÀûÀÎ »çÀÌÁîÀÇ ÀÚÃ¼ ³»Àå ÇÁ·Î±×·¥À» Á¦ÀÛÇÏ±æ ¿øÇÏ´Â °³¹ßÀÚµéÀÌ ÀÖ´Â ÇÃ·§ÆûÀ» À§ÇØ ÄÄÆÄÀÏ ÇÒ ¼ö ÀÖµµ·Ï ¼³°èµÆ½À´Ï´Ù.
-Kotlin/Native ´Â native code ¿Í ÇÔ²² »óÈ£¿î¿ë¼ºÀ» Á¦°øÇÕ´Ï´Ù. ÇÃ·§Æû libraries ÀÇ °æ¿ì ÇØ´ç interop libraries ¸¦ ¹Ù·Î »ç¿ëÇÒ ¼ö ÀÖ½À´Ï´Ù. ´Ù¸¥ libraries ÀÇ °æ¿ì, ¸ğµç C ¾ğ¾î features ¿¡ ´ëÇØ ¿ÏÀüÇÑ Áö¿øÀ» ÇÔÀ¸·Î½á C header file ·ÎºÎÅÍ interop library ¸¦ »ı¼ºÇÏ´Â ÅøÀ» Á¦°øÇÕ´Ï´Ù. macOS ¿Í iOS ¿¡¼­ Objective/C ¿ÍÀÇ »óÈ£¿î¿ë¼º ¶ÇÇÑ Áö¿øµË´Ï´Ù.
-Kotlin/Native ´Â °³¹ß Áß¿¡ ÀÖ½À´Ï´Ù. preview releases ¸¦ »ç¿ëÇØº¼ ¼ö ÀÖ½À´Ï´Ù. Kotlin/Native¸¦ Á¦°øÇÏ´Â IDE ´Â CLion À» À§ÇÑ plugins ·Î¼­ °¡´ÉÇÕ´Ï´Ù.
+Kotlin/Native ëŠ” Kotlin ì„ ì–´ë– í•œ VM ì—†ì´ ë™ì‘í•˜ëŠ” native binaries ë¡œ ì»´íŒŒì¼ í•˜ëŠ” ê¸°ìˆ ì…ë‹ˆë‹¤. ê·¸ê²ƒì€ Kotlin ì»´íŒŒì¼ëŸ¬ë¥¼ ìœ„í•œ LLVM ê¸°ë°˜ì˜ ë°±ì—”ë“œì™€ Ktlin runtime library ì˜ native êµ¬í˜„ìœ¼ë¡œ êµ¬ì„±ë©ë‹ˆë‹¤. ìµœì´ˆì— Kotlin/Native ëŠ” virtual machine ì´ ë°”ëŒì§í•˜ì§€ ì•Šê±°ë‚˜ ê°€ëŠ¥í•˜ì§€ ì•ŠëŠ” í”Œë«í¼ (ì˜ˆë¥¼ ë“¤ì–´ iOS ì²˜ëŸ¼ embeded target) ë˜ëŠ” ì¶”ê°€ì ì¸ ëŸ°íƒ€ì„ì„ ìš”êµ¬í•˜ì§€ ì•ŠëŠ” í•©ë¦¬ì ì¸ ì‚¬ì´ì¦ˆì˜ ìì²´ ë‚´ì¥ í”„ë¡œê·¸ë¨ì„ ì œì‘í•˜ê¸¸ ì›í•˜ëŠ” ê°œë°œìë“¤ì´ ìˆëŠ” í”Œë«í¼ì„ ìœ„í•´ ì»´íŒŒì¼ í•  ìˆ˜ ìˆë„ë¡ ì„¤ê³„ëìŠµë‹ˆë‹¤.
+Kotlin/Native ëŠ” native code ì™€ í•¨ê»˜ ìƒí˜¸ìš´ìš©ì„±ì„ ì œê³µí•©ë‹ˆë‹¤. í”Œë«í¼ libraries ì˜ ê²½ìš° í•´ë‹¹ interop libraries ë¥¼ ë°”ë¡œ ì‚¬ìš©í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤. ë‹¤ë¥¸ libraries ì˜ ê²½ìš°, ëª¨ë“  C ì–¸ì–´ features ì— ëŒ€í•´ ì™„ì „í•œ ì§€ì›ì„ í•¨ìœ¼ë¡œì¨ C header file ë¡œë¶€í„° interop library ë¥¼ ìƒì„±í•˜ëŠ” íˆ´ì„ ì œê³µí•©ë‹ˆë‹¤. macOS ì™€ iOS ì—ì„œ Objective/C ì™€ì˜ ìƒí˜¸ìš´ìš©ì„± ë˜í•œ ì§€ì›ë©ë‹ˆë‹¤.
+Kotlin/Native ëŠ” ê°œë°œ ì¤‘ì— ìˆìŠµë‹ˆë‹¤. preview releases ë¥¼ ì‚¬ìš©í•´ë³¼ ìˆ˜ ìˆìŠµë‹ˆë‹¤. Kotlin/Nativeë¥¼ ì œê³µí•˜ëŠ” IDE ëŠ” CLion ì„ ìœ„í•œ plugins ë¡œì„œ ê°€ëŠ¥í•©ë‹ˆë‹¤.
 
 04.02. Target Platforms
-Kotlin/Native ´Â ÇöÀç ´ÙÀ½ ÇÃ·§ÆûµéÀ» Áö¿øÇÕ´Ï´Ù.
-- Windows(x86_64 ¸¸)
+Kotlin/Native ëŠ” í˜„ì¬ ë‹¤ìŒ í”Œë«í¼ë“¤ì„ ì§€ì›í•©ë‹ˆë‹¤.
+- Windows(x86_64 ë§Œ)
 - Linux(x86_64, arm32, MIPS, MIPS little endian)
 - MacOS(x86_64)
 - iOS(arm64 only)
@@ -122,4 +122,4 @@ Kotlin/Native ´Â ÇöÀç ´ÙÀ½ ÇÃ·§ÆûµéÀ» Áö¿øÇÕ´Ï´Ù.
 - WebAssembly(wasm32 only)
 
 04.03. Sample Projects
-... »ı·«
+... ìƒëµ

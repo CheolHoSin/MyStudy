@@ -1,8 +1,134 @@
+ï»¿06.01. Destructuring Declarations
+
+06.01.01. Destructuring Declarations
+
+ë•Œë•Œë¡œ object ë¥¼ ëª‡ ê°œì˜ variables ë¡œ destructure í•˜ëŠ” ê²ƒì€ í¸ë¦¬í•©ë‹ˆë‹¤. ì˜ˆë¥¼ ë“¤ë©´ ì´ë ‡ìŠµë‹ˆë‹¤.
+
+---
+val (name, age) = person
+---
+
+ì´ syntax ëŠ” destructing declaration ë¼ ë¶ˆë¦½ë‹ˆë‹¤. destructuring declaration ì€ í•œ ë²ˆì— ì—¬ëŸ¬ variables ë¥¼ ìƒì„±í•©ë‹ˆë‹¤. ë‘ ê°œì˜ ìƒˆë¡œìš´ variables ë¥¼ ì„ ì–¸í–ˆìŠµë‹ˆë‹¤: name ê³¼ age ê·¸ë¦¬ê³  ê·¸ë“¤ì€ ë…ë¦½ì ìœ¼ë¡œ ì‚¬ìš©í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.
+
+---
+println(name)
+println(age)
+---
+
+destructuring declaration ì€ ë‹¤ìŒ code ë¡œ compile ë©ë‹ˆë‹¤.
+
+---
+val name = person.component1()
+val age = person.component2()
+---
+
+component1() ê³¼ component2() functions ëŠ” kotlin ì—ì„œ ë„“ê²Œ ì‚¬ìš©ë˜ëŠ” principle of conventions ì˜ ë˜ë‹¤ë¥¸ ì˜ˆì…ë‹ˆë‹¤. (+ ì™€ * ì™€ ê°™ì€ operators, for-loops ë“±ì„ ë³´ì„¸ìš”) call ë˜ëŠ” component functions ì˜ ìˆ˜ë¥¼ ë§Œì¡±í•˜ëŠ” í•œ destructuring declaration ì˜ ì˜¤ë¥¸í¸ì—ëŠ” ì–´ë–¤ ê²ƒì´ë“  ì˜¬ ìˆ˜ ìˆìŠµë‹ˆë‹¤. ê·¸ë¦¬ê³  ë¬¼ë¡  component3() ì™€ component4() ê·¸ ì´ìƒë„ ê°€ëŠ¥í•©ë‹ˆë‹¤.
+
+componentN() functions ëŠ” operator keyword ë¡œ í‘œì‹œí•´ì„œ destructuring declaration ë‚´ì— ê·¸ê²ƒë“¤ì„ ì‚¬ìš©í•  ìˆ˜ ìˆë„ë¡ í—ˆìš©í•  í•„ìš”ê°€ ìˆë‹¤ëŠ” ê±¸ ì•Œì•„ë‘ì„¸ìš”.
+
+Destructuring declarations ëŠ” for-loops ë‚´ì—ì„œë„ ë™ì‘í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤. ì´ë•ŒëŠ” ì´ë ‡ê²Œ ë§í•˜ì„¸ìš”:
+
+---
+for ((a, b) in collection) { ... }
+---
+
+Variables a ì™€ b ëŠ” collection ì˜ elements ì— ëŒ€í•´ call ëœ component1() ê³¼ component2() ì— ì˜í•´ return ëœ values ë¥¼ ì–»ìŠµë‹ˆë‹¤.
+
+06.01.02. Example: Returning Two Values from a Function
+
+function ìœ¼ë¡œë¶€í„° ë‘ ê°€ì§€ë¥¼ return í•  í•„ìš”ê°€ ìˆë‹¤ê³  í•©ì‹œë‹¤. ì˜ˆë¥¼ ë“¤ì–´ result object ì™€ ì–´ë–¤ sort ì˜ ìƒíƒœë¥¼ ë§ì´ì£ . kotlin ì—ì„œ ì´ë¥¼ ìˆ˜í–‰í•˜ëŠ” compact í•œ ë°©ë²•ì€ data class ë¥¼ ì„ ì–¸í•´ì„œ ê·¸ instance ë¥¼ return í•˜ëŠ” ê²ƒì…ë‹ˆë‹¤,
+
+---
+data class Result(val result: Int, val status: Status)
+
+fun function(...) Result {
+    // computations
+
+    return Result(result, status)
+}
+
+// Now, to use this function:
+val (result, status) = function(...)
+---
+
+data classes ëŠ” ìë™ìœ¼ë¡œ componentN() functions ë¥¼ ì„ ì–¸í•˜ê¸° ë•Œë¬¸ì— destructuring declarations ê°€ ì—¬ê¸°ì„œ ë™ì‘í•©ë‹ˆë‹¤.
+
+NOTE: standard class Pair ë¥¼ ì‚¬ìš©í•  ìˆ˜ë„ ìˆê³  function() ì´ Pair<Int, Status> ë¥¼ return í•˜ê²Œ í•  ìˆ˜ë„ ìˆì§€ë§Œ ìì£¼, ì •í™•íˆ ëª…ëª…ëœ data ë¥¼ ê°€ì§€ëŠ” í¸ì´ ë” ë‚«ìŠµë‹ˆë‹¤.
+
+06.01.03. Example: Destructuring Declarations and Maps
+
+ì•„ë§ˆë„ map ì„ traverse í•˜ëŠ” ê°€ì¥ ì¢‹ì€ ë°©ë²•ì€ ì´ê²ë‹ˆë‹¤.
+
+---
+for ((key, value) in map) {
+    // do something with the key and the value
+}
+---
+
+ì´ë¥¼ ë™ì‘í•˜ê²Œ í•˜ê¸° ìœ„í•´ ìš°ë¦¬ëŠ” ë‹¤ìŒì„ í•´ì•¼ í•©ë‹ˆë‹¤.
+
+- iterator() functions ë¥¼ ì œê³µí•¨ìœ¼ë¡œì„œ map ì„ values ì˜ ìˆœì—´ë¡œ í‘œí˜„í•´ì•¼ í•©ë‹ˆë‹¤.
+- functions component1() ê³¼ component2() ì„ ì œê³µí•¨ìœ¼ë¡œì„œ ê·¸ elements ì˜ ê°ê°ì„ pair ë¡œ í‘œí˜„í•´ì•¼ í•©ë‹ˆë‹¤.
+
+ì‹¤ì œë¡œ standard library ëŠ” ê·¸ëŸ¬í•œ extensions ë¥¼ ì œê³µí•©ë‹ˆë‹¤.
+
+---
+operator fun <K, V> Map<K, V>.iterator():
+Iterator<Map.Entry<K, V>> = entrySet().iterator()
+operator fun <K, V> Map.Entry<K, V>.component1() = getKey()
+operator fun <K, V> Map.Entry<K, V>.component2() = getValue()
+---
+
+ê·¸ëŸ¬ë¯€ë¡œ for-loops ì—ì„œ maps ì„ ì‚¬ìš©í•  ë•Œ ììœ ë¡­ê²Œ destructuring declarations ë¥¼ ì‚¬ìš©í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤. ( ë˜í•œ data class instances ë“±ì˜ collections ë„ ê·¸ë ‡ìŠµë‹ˆë‹¤ )
+
+06.01.04. Underscore for unused variables (since 1.1)
+
+destructuring declaration ì—ì„œ ì–´ë–¤ variable ì„ í•„ìš”ë¡œ í•˜ì§€ ì•ŠëŠ”ë‹¤ë©´ underscore ë¥¼ ì´ë¦„ ëŒ€ì‹  ì‚¬ìš©í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.
+
+---
+val (_, status) = getResult()
+---
+
+componentN() operator functions ëŠ” ì´ ë°©ë²•ìœ¼ë¡œ skip ëœ components ë¥¼ ìœ„í•´ call ë˜ì§€ ì•ŠìŠµë‹ˆë‹¤.
+
+06.01.05. Destructuring in Lamdas (since 1.1)
+
+lamda parameters ë¥¼ ìœ„í•´ destructuring delcarations syntax ë¥¼ ì‚¬ìš©í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤. lamda ê°€ Pair type(ë˜ëŠ” Map.Entry ë‚˜ ì ì ˆí•œ componentN functions ë¥¼ ê°€ì§€ê³  ìˆëŠ” ì–´ë–¤ ë‹¤ë¥¸ type) ì˜ parameter ë¥¼ ê°€ì§€ê³  ìˆë‹¤ë©´ ê´„í˜¸ ì•ˆì— ê·¸ë“¤ì„ ë†“ìŒìœ¼ë¡œì„œ í•˜ë‚˜ ëŒ€ì‹  ìƒˆë¡œìš´ ëª‡ ê°œì˜ new parameters ë¥¼ ì „ë‹¬í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.
+
+---
+map.mapValues { entry -> "${entry.value}!" }
+map.mapValues { (key, value) -> "$value!" }
+---
+
+ë‘ ê°œ parameters ë¥¼ ì„ ì–¸í•˜ëŠ” ê²ƒê³¼ parameter ëŒ€ì‹  destructuring pair ë¥¼ ì„ ì–¸í•˜ëŠ” ê²ƒì˜ ì°¨ì´ëŠ” ë‹¤ìŒê³¼ ê°™ìŒì„ ì•Œì•„ë‘ì„¸ìš”.
+
+---
+{ a -> ... } // one parameter
+{ a, b -> ... } // two parameter
+{ (a, b) -> ... } // a destructured pair
+{ (a, b), c -> ... } // a destructured pair and another parameter
+---
+
+destructured parameter ì˜ component ê°€ ì‚¬ìš©ë˜ì§€ ì•Šìœ¼ë©´ underscore ë¡œ ëŒ€ì²´í•˜ì—¬ ì´ë¦„ì„ ê³ ì•ˆí•˜ëŠ” ê±¸ í”¼í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.
+
+---
+map.mapValues { (_, value) -> "$value!" }
+---
+
+ì „ì²´ destructured parameter ë‚˜ íŠ¹ì •í•œ component ë¥¼ ìœ„í•´ ë³„ë„ì˜ type ì„ ê¸°ìˆ í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.
+
+---
+map.mapValues { (_, value): Map.Entry<Int, String> -> "$value!" }
+
+map.mapValues { (_, value: String) -> "$value!" }
+---
+
+
 06.03. Ranges
 
 06.03.01. Ranges
 
-range expression Àº rangeTo functions ·Î Çü¼ºµÅ ÀÖÀ¸¸ç  .. operator ÇüÅÂ¸¦ ÃëÇÏ°í in °ú !in À¸·Î º¸¿ÏÇÕ´Ï´Ù. range ´Â ¾î¶² ºñ±³°¡´ÉÇÑ type À» À§ÇØ Á¤ÀÇµÇÁö¸¸ integral primitive types ¿¡ ÃÖÀûÈ­µÈ ±¸ÇöÀ» °®Ãß°í ÀÖ½À´Ï´Ù. ¿©±â ranges ¸¦ »ç¿ëÇÑ ¸î °¡Áö ¿¹µéÀÌ ÀÖ½À´Ï´Ù.
+range expression ì€ rangeTo functions ë¡œ í˜•ì„±ë¼ ìˆìœ¼ë©°  .. operator í˜•íƒœë¥¼ ì·¨í•˜ê³  in ê³¼ !in ìœ¼ë¡œ ë³´ì™„í•©ë‹ˆë‹¤. range ëŠ” ì–´ë–¤ ë¹„êµê°€ëŠ¥í•œ type ì„ ìœ„í•´ ì •ì˜ë˜ì§€ë§Œ integral primitive types ì— ìµœì í™”ëœ êµ¬í˜„ì„ ê°–ì¶”ê³  ìˆìŠµë‹ˆë‹¤. ì—¬ê¸° ranges ë¥¼ ì‚¬ìš©í•œ ëª‡ ê°€ì§€ ì˜ˆë“¤ì´ ìˆìŠµë‹ˆë‹¤.
 
 ---
 if (i in 1..10) { // equivalent of 1 <= i && i <= 10
@@ -10,7 +136,7 @@ if (i in 1..10) { // equivalent of 1 <= i && i <= 10
 }
 ---
 
-integral type ranges (IntRange, LongRange, CharRange) ´Â Ãß°¡ÀûÀÎ Æ¯Â¡À» °¡Áı´Ï´Ù. ±×µéÀº iterate µÉ ¼ö ÀÖ½À´Ï´Ù. compiler ´Â ÀÌ°ÍÀ» java ÀÇ indexed for-loop ¿Í À¯»çÇÏ°Ô º¯°æÇÏµÇ Ãß°¡ÀûÀÎ overhead ¸¦ ¹ß»ı½ÃÅ°Áö ¾Ê½À´Ï´Ù.
+integral type ranges (IntRange, LongRange, CharRange) ëŠ” ì¶”ê°€ì ì¸ íŠ¹ì§•ì„ ê°€ì§‘ë‹ˆë‹¤. ê·¸ë“¤ì€ iterate ë  ìˆ˜ ìˆìŠµë‹ˆë‹¤. compiler ëŠ” ì´ê²ƒì„ java ì˜ indexed for-loop ì™€ ìœ ì‚¬í•˜ê²Œ ë³€ê²½í•˜ë˜ ì¶”ê°€ì ì¸ overhead ë¥¼ ë°œìƒì‹œí‚¤ì§€ ì•ŠìŠµë‹ˆë‹¤.
 
 ---
 for (i in 1..4) print(i) // prints "1234"
@@ -18,13 +144,13 @@ for (i in 1..4) print(i) // prints "1234"
 for (i in 4..1) print(i) // prints nothing
 ---
 
-numbers ¸¦ ¿ª¼øÀ¸·Î iterate ÇÏ°í ½Í´Ù¸é ¾î¶»°Ô ÇÒ±î¿ä? °£´ÜÇÕ´Ï´Ù. standard library ¿¡ Á¤ÀÇµÈ downTo() function À» »ç¿ëÇÏ¸é µË´Ï´Ù.
+numbers ë¥¼ ì—­ìˆœìœ¼ë¡œ iterate í•˜ê³  ì‹¶ë‹¤ë©´ ì–´ë–»ê²Œ í• ê¹Œìš”? ê°„ë‹¨í•©ë‹ˆë‹¤. standard library ì— ì •ì˜ëœ downTo() function ì„ ì‚¬ìš©í•˜ë©´ ë©ë‹ˆë‹¤.
 
 ---
 for (i in 4 downTo 1) print(i)  // prints "4321"
 ---
 
-numbers ¸¦ 1ÀÌ ¾Æ´Ñ ÀÓÀÇÀÇ step À¸·Î iterate ÇÒ ¼ö ÀÖÀ»±î¿ä? ¹°·ĞÀÔ´Ï´Ù. step() function ÀÌ µµ¿ÍÁÙ °Å¿¡¿ä.
+numbers ë¥¼ 1ì´ ì•„ë‹Œ ì„ì˜ì˜ step ìœ¼ë¡œ iterate í•  ìˆ˜ ìˆì„ê¹Œìš”? ë¬¼ë¡ ì…ë‹ˆë‹¤. step() function ì´ ë„ì™€ì¤„ ê±°ì—ìš”.
 
 ---
 for (i in 1...4 step 2) print(i)  // prints "13"
@@ -32,7 +158,7 @@ for (i in 1...4 step 2) print(i)  // prints "13"
 for (i in 4 downTo 1 step 2) print(i)  // prints "42"
 ---
 
-¸¶Áö¸· element ¸¦ Æ÷ÇÔÇÏÁö¾Ê´Â range ¸¦ »ı¼ºÇÏ°í ½Í´Ù¸é until function À» »ç¿ëÇÏ¼¼¿ä.
+ë§ˆì§€ë§‰ element ë¥¼ í¬í•¨í•˜ì§€ì•ŠëŠ” range ë¥¼ ìƒì„±í•˜ê³  ì‹¶ë‹¤ë©´ until function ì„ ì‚¬ìš©í•˜ì„¸ìš”.
 
 ---
 for (i in 1 until 10) {  // i in [1, 10), 10 is excluded
@@ -42,13 +168,13 @@ for (i in 1 until 10) {  // i in [1, 10), 10 is excluded
 
 06.03.02. How it works
 
-Ranges ´Â library ¿¡ ÀÖ´Â ÀÏ¹İ interface ÀÎ CloseRange<T> ¸¦ ±¸ÇöÇÕ´Ï´Ù.
+Ranges ëŠ” library ì— ìˆëŠ” ì¼ë°˜ interface ì¸ CloseRange<T> ë¥¼ êµ¬í˜„í•©ë‹ˆë‹¤.
 
-CloseRange<T> ´Â ¼öÇĞÀûÀ¸·Î ´İÈù °£°İÀ» ³ªÅ¸³»°í ºñ±³°¡´ÉÇÑ types ¿¡ ´ëÇØ Á¤ÀÇµÅ ÀÖ½À´Ï´Ù. µÎ °³ÀÇ endpoints ¸¦ °®´Âµ¥, range ¿¡ Æ÷ÇÔµÇ´Â start ¿Í endInclusive ÀÔ´Ï´Ù. ÁÖ¿ä operation Àº contains °¡ ÀÖ°í ÀÏ¹İÀûÀ¸·Î in/!in operators ÀÇ ÇüÅÂ·Î »ç¿ëµË´Ï´Ù.
+CloseRange<T> ëŠ” ìˆ˜í•™ì ìœ¼ë¡œ ë‹«íŒ ê°„ê²©ì„ ë‚˜íƒ€ë‚´ê³  ë¹„êµê°€ëŠ¥í•œ types ì— ëŒ€í•´ ì •ì˜ë¼ ìˆìŠµë‹ˆë‹¤. ë‘ ê°œì˜ endpoints ë¥¼ ê°–ëŠ”ë°, range ì— í¬í•¨ë˜ëŠ” start ì™€ endInclusive ì…ë‹ˆë‹¤. ì£¼ìš” operation ì€ contains ê°€ ìˆê³  ì¼ë°˜ì ìœ¼ë¡œ in/!in operators ì˜ í˜•íƒœë¡œ ì‚¬ìš©ë©ë‹ˆë‹¤.
 
-integral type progressions (IntProgression, LongProgression, CharProgression) Àº ´ë¼öÀû progression À» ³ªÅ¸³À´Ï´Ù. Progressions ´Â first element, last element, ±×¸®°í 0 ÀÌ ¾Æ´Ñ step À¸·Î Á¤ÀÇµË´Ï´Ù. Ã¹¹øÂ° element ´Â first ÀÌ°í ÀÌ¾îÁö´Â elements ´Â ÀÌÀü element ¿¡ step À» ´õÇÕ´Ï´Ù. last element ´Â progression ÀÌ ºñ¾îÀÖÁö ¾ÊÀ¸¸é iteration ¿¡ ÀÇÇØ Ç×»ó hit µË´Ï´Ù.
+integral type progressions (IntProgression, LongProgression, CharProgression) ì€ ëŒ€ìˆ˜ì  progression ì„ ë‚˜íƒ€ëƒ…ë‹ˆë‹¤. Progressions ëŠ” first element, last element, ê·¸ë¦¬ê³  0 ì´ ì•„ë‹Œ step ìœ¼ë¡œ ì •ì˜ë©ë‹ˆë‹¤. ì²«ë²ˆì§¸ element ëŠ” first ì´ê³  ì´ì–´ì§€ëŠ” elements ëŠ” ì´ì „ element ì— step ì„ ë”í•©ë‹ˆë‹¤. last element ëŠ” progression ì´ ë¹„ì–´ìˆì§€ ì•Šìœ¼ë©´ iteration ì— ì˜í•´ í•­ìƒ hit ë©ë‹ˆë‹¤.
 
-progresssion Àº Iterable<N> ÀÇ subtype ÀÎµ¥, ¿©±â¼­ N Àº Int ³ª Long, Char °¢°¢ÀÌ °¡´ÉÇÕ´Ï´Ù. µû¶ó¼­ for-loops ¿Í, map, fileter µî°ú °°Àº functions ¿¡¼­ »ç¿ëÇÒ ¼ö ÀÖ½À´Ï´Ù. Progression ¿¡ ´ëÇÑ iteration Àº java/javascript ÀÇ indexed for-loop ¿Í µ¿µîÇÕ´Ï´Ù.
+progresssion ì€ Iterable<N> ì˜ subtype ì¸ë°, ì—¬ê¸°ì„œ N ì€ Int ë‚˜ Long, Char ê°ê°ì´ ê°€ëŠ¥í•©ë‹ˆë‹¤. ë”°ë¼ì„œ for-loops ì™€, map, fileter ë“±ê³¼ ê°™ì€ functions ì—ì„œ ì‚¬ìš©í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤. Progression ì— ëŒ€í•œ iteration ì€ java/javascript ì˜ indexed for-loop ì™€ ë™ë“±í•©ë‹ˆë‹¤.
 
 ---
 for (int i = first; i != last; i += step) {
@@ -56,21 +182,21 @@ for (int i = first; i != last; i += step) {
 }
 ---
 
-integral types ¸¦ À§ÇØ .. operator ´Â CloseRange<T> ¿Í *Progression µÑ ´Ù¸¦ ±¸ÇöÇÏ´Â object ¸¦ »ı¼ºÇÕ´Ï´Ù. ¿¹¸¦ µé¾î, IntRange ´Â CloseRange<Int> ¸¦ ±¸ÇöÇÏ°í IntProgression À» È®ÀåÇÏ±â ¶§¹®¿¡ IntProgression ¿¡ Á¤ÀÇµÈ ¸ğµç operations °¡ IntRange ¿¡¼­µµ ¿ª½Ã »ç¿ë °¡´ÉÇÕ´Ï´Ù. downTo() ¿Í step() function ÀÇ °á°ú´Â Ç×»ó *Progression ÀÔ´Ï´Ù.
+integral types ë¥¼ ìœ„í•´ .. operator ëŠ” CloseRange<T> ì™€ *Progression ë‘˜ ë‹¤ë¥¼ êµ¬í˜„í•˜ëŠ” object ë¥¼ ìƒì„±í•©ë‹ˆë‹¤. ì˜ˆë¥¼ ë“¤ì–´, IntRange ëŠ” CloseRange<Int> ë¥¼ êµ¬í˜„í•˜ê³  IntProgression ì„ í™•ì¥í•˜ê¸° ë•Œë¬¸ì— IntProgression ì— ì •ì˜ëœ ëª¨ë“  operations ê°€ IntRange ì—ì„œë„ ì—­ì‹œ ì‚¬ìš© ê°€ëŠ¥í•©ë‹ˆë‹¤. downTo() ì™€ step() function ì˜ ê²°ê³¼ëŠ” í•­ìƒ *Progression ì…ë‹ˆë‹¤.
 
-Progressions ´Â ±×µéÀÇ companion object ¿¡ Á¤ÀÇµÈ fromClosedRange function À¸·Î ±¸¼ºµÅ ÀÖ½À´Ï´Ù.
+Progressions ëŠ” ê·¸ë“¤ì˜ companion object ì— ì •ì˜ëœ fromClosedRange function ìœ¼ë¡œ êµ¬ì„±ë¼ ìˆìŠµë‹ˆë‹¤.
 
 ---
 IntProgression.fromClosedRange(start, end, step)
 ---
 
-progression ÀÇ last element ´Â ¾çÀÇ step ¿¡ ´ëÇØ¼± end value º¸´Ù Å©Áö ¾ÊÀº ÃÖ´ñ°ªÀ» Ã£°í, À½ÀÇ step ¿¡ ´ëÇØ¼± end value º¸´Ù ÀÛÁö ¾ÊÀº ÃÖ¼Ú°ªÀ» Ã£µµ·Ï °è»êÇÕ´Ï´Ù. ±× °è»ê °á°ú´Â (last - first ) % step == 0 ¸¦ ¸¸Á·ÇÕ´Ï´Ù.
+progression ì˜ last element ëŠ” ì–‘ì˜ step ì— ëŒ€í•´ì„  end value ë³´ë‹¤ í¬ì§€ ì•Šì€ ìµœëŒ“ê°’ì„ ì°¾ê³ , ìŒì˜ step ì— ëŒ€í•´ì„  end value ë³´ë‹¤ ì‘ì§€ ì•Šì€ ìµœì†Ÿê°’ì„ ì°¾ë„ë¡ ê³„ì‚°í•©ë‹ˆë‹¤. ê·¸ ê³„ì‚° ê²°ê³¼ëŠ” (last - first ) % step == 0 ë¥¼ ë§Œì¡±í•©ë‹ˆë‹¤.
 
 06.03.03. Utility Functions
 
 - rangeTo()
 
-integral types ¿¡¼­ rangeTo() operators ´Â °£´ÜÈ÷ *Range classes ÀÇ constructor ¸¦ call ÇÕ´Ï´Ù. ¿¹¸¦ µé¸é ÀÌ·¸½À´Ï´Ù.
+integral types ì—ì„œ rangeTo() operators ëŠ” ê°„ë‹¨íˆ *Range classes ì˜ constructor ë¥¼ call í•©ë‹ˆë‹¤. ì˜ˆë¥¼ ë“¤ë©´ ì´ë ‡ìŠµë‹ˆë‹¤.
 
 ---
 class Int {
@@ -82,17 +208,17 @@ class Int {
 }
 ---
 
-floating point numbers (Double, Float) Àº rangeTo operator ¸¦ Á¤ÀÇÇÏÁö ¾Ê°í generic Comparable type À» À§ÇÑ standard library ¿¡ ÀÇÇØ Á¦°øµÇ´Â °ÍÀ» ´ë½Å »ç¿ëÇÕ´Ï´Ù.
+floating point numbers (Double, Float) ì€ rangeTo operator ë¥¼ ì •ì˜í•˜ì§€ ì•Šê³  generic Comparable type ì„ ìœ„í•œ standard library ì— ì˜í•´ ì œê³µë˜ëŠ” ê²ƒì„ ëŒ€ì‹  ì‚¬ìš©í•©ë‹ˆë‹¤.
 
 ---
 public operator fun <T: Comparable<T>> T.rangeTo(that: T): ClosedRange<T>
 ---
 
-ÀÌ function ¿¡ ÀÇÇØ return µÇ´Â range ´Â iteration À» À§ÇØ »ç¿ëµÉ ¼ö ¾ø½À´Ï´Ù.
+ì´ function ì— ì˜í•´ return ë˜ëŠ” range ëŠ” iteration ì„ ìœ„í•´ ì‚¬ìš©ë  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.
 
 - downTo
 
-downTo() extension function Àº integral types ÀÇ ¾î¶² pair ·Î Á¤ÀÇµÅ ÀÖ´Âµ¥, ¿©±â µÎ°¡Áö ¿¹°¡ ÀÖ½À´Ï´Ù.
+downTo() extension function ì€ integral types ì˜ ì–´ë–¤ pair ë¡œ ì •ì˜ë¼ ìˆëŠ”ë°, ì—¬ê¸° ë‘ê°€ì§€ ì˜ˆê°€ ìˆìŠµë‹ˆë‹¤.
 
 ---
 fun Long.downTo(other: Int): LongProgression {
@@ -106,7 +232,7 @@ fun Byte.downTo(other: Int): IntProgression {
 
 - reversed()
 
-reversed() extension functions ´Â °¢ *Progression classes ¸¦ À§ÇØ Á¤ÀÇµÅ ÀÖ°í ±×µé ¸ğµÎ´Â ¿ª¼øÀÇ progression À» return ÇÕ´Ï´Ù.
+reversed() extension functions ëŠ” ê° *Progression classes ë¥¼ ìœ„í•´ ì •ì˜ë¼ ìˆê³  ê·¸ë“¤ ëª¨ë‘ëŠ” ì—­ìˆœì˜ progression ì„ return í•©ë‹ˆë‹¤.
 
 ---
 fun IntProgression.reversed(): IntProgression {
@@ -116,7 +242,7 @@ fun IntProgression.reversed(): IntProgression {
 
 - step()
 
-step() extension functions Àº *Progression classes ·Î Á¤ÀÇ°¡ µÅ ÀÖ°í, ±×µé ¸ğµÎ´Â ¼öÁ¤µÈ step values (function parameter) ·Î progressions ¸¦ return ÇÕ´Ï´Ù. step value ´Â Ç×»ó ¾çÀÇ °ªÀ» ¿ä±¸ÇÏ¹Ç·Î ÀÌ function Àº iteration ÀÇ ¹æÇâÀ» ¹Ù²Ü ¼ö ¾ø½À´Ï´Ù.
+step() extension functions ì€ *Progression classes ë¡œ ì •ì˜ê°€ ë¼ ìˆê³ , ê·¸ë“¤ ëª¨ë‘ëŠ” ìˆ˜ì •ëœ step values (function parameter) ë¡œ progressions ë¥¼ return í•©ë‹ˆë‹¤. step value ëŠ” í•­ìƒ ì–‘ì˜ ê°’ì„ ìš”êµ¬í•˜ë¯€ë¡œ ì´ function ì€ iteration ì˜ ë°©í–¥ì„ ë°”ê¿€ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.
 
 ---
 fun IntProgression.step(step: Int): IntProgression {
@@ -130,7 +256,7 @@ fun CharProgression.step(step: Int): CharProgression {
 }
 ---
 
-(last-first) % step == 0 ¸¦ ¹«Á¶°Ç À¯ÁöÇÏ±â ¶§¹®¿¡ return µÈ progression ÀÇ last value ´Â original progression ÀÇ last value ¿Í ´Ù¸¦ ¼ö ÀÖ´Ù´Â °É ¾Ë¾ÆµÎ¼¼¿ä. ¿©±â ±× ¿¹°¡ ÀÖ½À´Ï´Ù.
+(last-first) % step == 0 ë¥¼ ë¬´ì¡°ê±´ ìœ ì§€í•˜ê¸° ë•Œë¬¸ì— return ëœ progression ì˜ last value ëŠ” original progression ì˜ last value ì™€ ë‹¤ë¥¼ ìˆ˜ ìˆë‹¤ëŠ” ê±¸ ì•Œì•„ë‘ì„¸ìš”. ì—¬ê¸° ê·¸ ì˜ˆê°€ ìˆìŠµë‹ˆë‹¤.
 
 ---
 (1..12 step 2).last == 11 // progression with values [1, 3, 5, 7, 9, 11]
@@ -142,7 +268,7 @@ fun CharProgression.step(step: Int): CharProgression {
 
 06.04.01. is and !is Operators
 
-object °¡ runtime ¶§ ÁÖ¾îÁø type À¸·Î º¯ÇüÇÒ ¼ö ÀÖ´ÂÁö´Â is operator ¸¦ »ç¿ëÇØ check ÇÒ ¼ö ÀÖ°í ±× ¹İ´ë´Â !is ÀÔ´Ï´Ù.
+object ê°€ runtime ë•Œ ì£¼ì–´ì§„ type ìœ¼ë¡œ ë³€í˜•í•  ìˆ˜ ìˆëŠ”ì§€ëŠ” is operator ë¥¼ ì‚¬ìš©í•´ check í•  ìˆ˜ ìˆê³  ê·¸ ë°˜ëŒ€ëŠ” !is ì…ë‹ˆë‹¤.
 
 ---
 if (obj is String) {
@@ -159,7 +285,7 @@ else {
 
 06.04.02. Smart Casts
 
-¸¹Àº °æ¿ì, kotlin ¿¡¼­´Â ¸í½ÃÀûÀ¸·Î cast operators ¸¦ »ç¿ëÇÒ ÇÊ¿ä°¡ ¾ø´Âµ¥, ¿Ö³ÄÇÏ¸é compiler °¡ immuatble values ¿¡ ´ëÇÑ is-checks ¿Í ¸í½ÃÀû casts ¸¦ ÃßÀûÇÏ¿© ÇÊ¿äÇÒ ¶§ ÀÚµ¿ÀûÀ¸·Î (safe) casts ¸¦ »ğÀÔÇÏ±â ¶§¹®ÀÔ´Ï´Ù.
+ë§ì€ ê²½ìš°, kotlin ì—ì„œëŠ” ëª…ì‹œì ìœ¼ë¡œ cast operators ë¥¼ ì‚¬ìš©í•  í•„ìš”ê°€ ì—†ëŠ”ë°, ì™œëƒí•˜ë©´ compiler ê°€ immuatble values ì— ëŒ€í•œ is-checks ì™€ ëª…ì‹œì  casts ë¥¼ ì¶”ì í•˜ì—¬ í•„ìš”í•  ë•Œ ìë™ì ìœ¼ë¡œ (safe) casts ë¥¼ ì‚½ì…í•˜ê¸° ë•Œë¬¸ì…ë‹ˆë‹¤.
 
 ---
 fun demo(x: Any) {
@@ -169,14 +295,14 @@ fun demo(x: Any) {
 }
 ---
 
-compiler ´Â negative check °¡ return ÇÏ´õ¶óµµ cast °¡ ¾ÈÀüÇÑÁö ÃæºĞÈ÷ ¾Ë ¼ö ÀÖ½À´Ï´Ù.
+compiler ëŠ” negative check ê°€ return í•˜ë”ë¼ë„ cast ê°€ ì•ˆì „í•œì§€ ì¶©ë¶„íˆ ì•Œ ìˆ˜ ìˆìŠµë‹ˆë‹¤.
 
 ---
     if (x !is String) return
     print(x.length)  // x is automatically cast to String
 ---
 
-¶Ç´Â && ¿Í || ¿À¸¥Æí¿¡ ÀÖ¾îµµ °¡´ÉÇÕ´Ï´Ù.
+ë˜ëŠ” && ì™€ || ì˜¤ë¥¸í¸ì— ìˆì–´ë„ ê°€ëŠ¥í•©ë‹ˆë‹¤.
 
 ---
     // x is automatically cast to string on the right-hand side of '||'
@@ -188,7 +314,7 @@ compiler ´Â negative check °¡ return ÇÏ´õ¶óµµ cast °¡ ¾ÈÀüÇÑÁö ÃæºĞÈ÷ ¾Ë ¼ö ÀÖ½À
     }
 ---
 
-ÀÌ·¯ÇÑ smart casts ´Â when-expressions ¿Í while-loops ¿¡¼­µµ µ¿ÀÛÇÕ´Ï´Ù.
+ì´ëŸ¬í•œ smart casts ëŠ” when-expressions ì™€ while-loops ì—ì„œë„ ë™ì‘í•©ë‹ˆë‹¤.
 
 ---
 when (x) {
@@ -198,22 +324,22 @@ when (x) {
 }
 ---
 
-compiler ´Â variable ÀÌ check ¿Í »ç¿ë »çÀÌ¿¡¼­ º¯ÇÒ ¼ö ¾ø´Ù´Â °É º¸ÀåÇÏÁö ¸øÇÒ ¶§ µ¿ÀÛÇÏÁö ¾Ê½À´Ï´Ù. Á» ´õ »ó¼¼È÷ ¸»ÇÏÀÚ¸é, smart casts ´Â ´ÙÀ½ ±ÔÄ¢¿¡ µû¶ó¼­¸¸ Àû¿ëÇÒ ¼ö ÀÖ½À´Ï´Ù.
+compiler ëŠ” variable ì´ check ì™€ ì‚¬ìš© ì‚¬ì´ì—ì„œ ë³€í•  ìˆ˜ ì—†ë‹¤ëŠ” ê±¸ ë³´ì¥í•˜ì§€ ëª»í•  ë•Œ ë™ì‘í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤. ì¢€ ë” ìƒì„¸íˆ ë§í•˜ìë©´, smart casts ëŠ” ë‹¤ìŒ ê·œì¹™ì— ë”°ë¼ì„œë§Œ ì ìš©í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.
 
-- val local variables - Ç×»ó
-- val property - property °¡ private ¶Ç´Â internal ÀÌ°Å³ª check °¡ property °¡ ¼±¾ğµÈ °°Àº ¸ğµâ ³»¿¡¼­ ¼öÇàµÉ ¶§¸¸. smart cast ´Â open properties ³ª custom getters ¸¦ °¡Áø properties ¿¡ ´ëÇØ¼­´Â Àû¿ëÇÒ ¼ö ¾ø½À´Ï´Ù.
-- var local variable - variable ÀÌ check ¿Í »ç¿ë »çÀÌ¿¡ º¯°æÀÌ µÇÁö ¾Ê°í ±×°ÍÀ» º¯°æÇÏ´Â lamda ³»¿¡¼­ capture µÇÁö ¾ÊÀº °æ¿ì¿¡¸¸.
-- var properties - Àı´ë ºÒ°¡ (¿Ö³ÄÇÏ¸é variable Àº ´Ù¸¥ ÄÚµå¿¡¼­ ¾ğÁ¦µçÁö ¹Ù²ğ ¼ö°¡ ÀÖ±â ¶§¹®ÀÔ´Ï´Ù.)
+- val local variables - í•­ìƒ
+- val property - property ê°€ private ë˜ëŠ” internal ì´ê±°ë‚˜ check ê°€ property ê°€ ì„ ì–¸ëœ ê°™ì€ ëª¨ë“ˆ ë‚´ì—ì„œ ìˆ˜í–‰ë  ë•Œë§Œ. smart cast ëŠ” open properties ë‚˜ custom getters ë¥¼ ê°€ì§„ properties ì— ëŒ€í•´ì„œëŠ” ì ìš©í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.
+- var local variable - variable ì´ check ì™€ ì‚¬ìš© ì‚¬ì´ì— ë³€ê²½ì´ ë˜ì§€ ì•Šê³  ê·¸ê²ƒì„ ë³€ê²½í•˜ëŠ” lamda ë‚´ì—ì„œ capture ë˜ì§€ ì•Šì€ ê²½ìš°ì—ë§Œ.
+- var properties - ì ˆëŒ€ ë¶ˆê°€ (ì™œëƒí•˜ë©´ variable ì€ ë‹¤ë¥¸ ì½”ë“œì—ì„œ ì–¸ì œë“ ì§€ ë°”ë€” ìˆ˜ê°€ ìˆê¸° ë•Œë¬¸ì…ë‹ˆë‹¤.)
 
 06.04.03. "Unsafe" cast operator
-ÀÏ¹İÀûÀ¸·Î, cast operator ´Â cast °¡ °¡´ÉÇÏÁö ¾ÊÀ¸¸é exception À» ´øÁı´Ï´Ù. ±×°É unsafe ¶ó°í ºÎ¸¨´Ï´Ù. kotlin ³»¿¡¼­ unsafe cast ´Â infix operator ÀÎ as ·Î °¡´ÉÇÕ´Ï´Ù. (operator 
-precedence ¸¦ º¸¼¼¿ä)
+ì¼ë°˜ì ìœ¼ë¡œ, cast operator ëŠ” cast ê°€ ê°€ëŠ¥í•˜ì§€ ì•Šìœ¼ë©´ exception ì„ ë˜ì§‘ë‹ˆë‹¤. ê·¸ê±¸ unsafe ë¼ê³  ë¶€ë¦…ë‹ˆë‹¤. kotlin ë‚´ì—ì„œ unsafe cast ëŠ” infix operator ì¸ as ë¡œ ê°€ëŠ¥í•©ë‹ˆë‹¤. (operator 
+precedence ë¥¼ ë³´ì„¸ìš”)
 
 ---
 val x: String = y as String
 ---
 
-null Àº ÀÌ Å¸ÀÔÀÌ nullable ÀÌ ¾Æ´Ò ¶§ String À¸·Î cast µÉ ¼ö ¾ø´Ù´Â °É ¾Ë¾ÆµÎ¼¼¿ä, Áï y °¡ null ÀÌ¸é À§ÀÇ ÄÚµå´Â exception À» ¹ß»ı½ÃÅµ´Ï´Ù. java cast semantics ¿¡ ¸ÂÃß±â À§ÇØ ÀÌÃ³·³ cast ¿À¸¥ÂÊ¿¡ nullable type À» °¡Á®¾ß ÇÕ´Ï´Ù.
+null ì€ ì´ íƒ€ì…ì´ nullable ì´ ì•„ë‹ ë•Œ String ìœ¼ë¡œ cast ë  ìˆ˜ ì—†ë‹¤ëŠ” ê±¸ ì•Œì•„ë‘ì„¸ìš”, ì¦‰ y ê°€ null ì´ë©´ ìœ„ì˜ ì½”ë“œëŠ” exception ì„ ë°œìƒì‹œí‚µë‹ˆë‹¤. java cast semantics ì— ë§ì¶”ê¸° ìœ„í•´ ì´ì²˜ëŸ¼ cast ì˜¤ë¥¸ìª½ì— nullable type ì„ ê°€ì ¸ì•¼ í•©ë‹ˆë‹¤.
 
 ---
 val x: String? = y as String?
@@ -221,66 +347,106 @@ val x: String? = y as String?
 
 06.04.04. "Safe" (nullable) cast operator
 
-exception ÀÌ ¹ß»ıÇÏ´Â °É ÇÇÇÏ±â À§ÇØ, safe cast operator ·Î as? ¸¦ »ç¿ëÇÒ ¼ö ÀÖ´Âµ¥, ÀÌ´Â ½ÇÆĞÇßÀ» ¶§ null À» return ÇÕ´Ï´Ù.
+exception ì´ ë°œìƒí•˜ëŠ” ê±¸ í”¼í•˜ê¸° ìœ„í•´, safe cast operator ë¡œ as? ë¥¼ ì‚¬ìš©í•  ìˆ˜ ìˆëŠ”ë°, ì´ëŠ” ì‹¤íŒ¨í–ˆì„ ë•Œ null ì„ return í•©ë‹ˆë‹¤.
 
 ---
 val x: String? = y as? String
 ---
 
-as? ¿À¸¥ÆíÀÌ non-null type String ÀÌ¶ó´Â »ç½Ç¿¡µµ ºÒ±¸ÇÏ°í cast °á°ú´Â nullable ÀÔ´Ï´Ù.
+as? ì˜¤ë¥¸í¸ì´ non-null type String ì´ë¼ëŠ” ì‚¬ì‹¤ì—ë„ ë¶ˆêµ¬í•˜ê³  cast ê²°ê³¼ëŠ” nullable ì…ë‹ˆë‹¤.
+
+06.05. This Expressions
+
+06.05.01. This Expression
+
+í˜„ì¬ receiver ë¥¼ ì˜ë¯¸í•˜ê¸° ìœ„í•´ this expression ì„ ì‚¬ìš©í•©ë‹ˆë‹¤.
+
+- class ì˜ member ì—ì„œ this ëŠ” í•´ë‹¹ class ì˜ í˜„ì¬ object ë¥¼ ê°€ë¦¬í‚µë‹ˆë‹¤.
+- extension function ë‚˜ function literal with receiver ì—ì„œ this ëŠ” dot ì˜ ì™¼í¸ì— ë„˜ê²¨ì§€ëŠ” receiver parameter ë¥¼ ì˜ë¯¸í•©ë‹ˆë‹¤.
+
+this ê°€ qualifiers ë¥¼ ê°€ì§€ì§€ ì•ŠëŠ”ë‹¤ë©´ ê·¸ê²ƒì€ innermost enclosing scope ë¥¼ ì°¸ì¡°í•©ë‹ˆë‹¤. ë‹¤ë¥¸ scopes ì— ìˆëŠ” this ë¥¼ ì°¸ì¡°í•˜ë ¤ë©´ label qualifiers ë¥¼ ì‚¬ìš©í•©ë‹ˆë‹¤.
+
+06.05.02. Qualified this
+
+outer scope (class ë‚˜ extension function ì´ë‚˜ label ë¶™ì—¬ì§„ function literal with receiver) ë¡œë¶€í„° this ì— ì ‘ê·¼í•˜ë ¤ë©´ this ê°€ ì–´ëŠ scope ì—ì„œ ì™”ëŠ”ì§€ ì˜ë¯¸í•˜ëŠ” label ë¡œì„œ @label ì„ ì‚¬ìš©í•´ this@label ì´ë¼ ì”ë‹ˆë‹¤.
+
+---
+class A {  // implicit label @A
+    inner class B {  // implicit label @B
+        fun Int.foo() {    // implicit label @foo
+            val a = this@A   // A's this
+            val b = this@B   // B's this
+
+            val c = this  // foo()'s receiver, an Int
+            val c1 = this@foo  // foo()'s receiver, an Int
+
+            val funLit = lamda@ fun String.() {
+                val d = this // funLit's receiver
+            }
+
+            val funLit2 = { s: String ->
+                // foo()'s receiver, since enclosing lamda expression
+                // doesn't any receiver
+
+               val d1 = this
+            }
+        }
+    }
+}
+---
 
 06.08. Null Safety
 
 06.08.01. Nullable types and Non-Null Types
 
-Kotlin ÀÇ type system Àº code ºÎÅÍ null ÂüÁ¶ÀÇ À§ÇùÀ» ¾ø¾Ö´Â °ÍÀ» ¸ñÇ¥·Î ÇÏ°í ÀÖ´Âµ¥ ÀÌ´Â The Billion Dollar Mistake ·Î ¾Ë·ÁÁ® ÀÖ½À´Ï´Ù.
+Kotlin ì˜ type system ì€ code ë¶€í„° null ì°¸ì¡°ì˜ ìœ„í˜‘ì„ ì—†ì• ëŠ” ê²ƒì„ ëª©í‘œë¡œ í•˜ê³  ìˆëŠ”ë° ì´ëŠ” The Billion Dollar Mistake ë¡œ ì•Œë ¤ì ¸ ìˆìŠµë‹ˆë‹¤.
 
-java ¸¦ Æ÷ÇÔÇÑ ¸¹Àº ÇÁ·Î±×·¡¹Ö ¾ğ¾î¿¡¼­ °¡Àå ÀÏ¹İÀûÀÎ ÇÔÁ¤ Áß ÇÏ³ª°¡ null ÂüÁ¶¸¦ ÇÏ´Â member ¿¡ Á¢±ÙÇÔÀ¸·Î¼­ null reference exception À» ÀÏÀ¸Å°´Â °Ì´Ï´Ù. java ¿¡¼­ ÀÌ°ÍÀº NullPointerException ÀÌ³ª Ãà¾àÇØ¼­ NPE ¿Í µ¿µîÇÒ °Ì´Ï´Ù.
+java ë¥¼ í¬í•¨í•œ ë§ì€ í”„ë¡œê·¸ë˜ë° ì–¸ì–´ì—ì„œ ê°€ì¥ ì¼ë°˜ì ì¸ í•¨ì • ì¤‘ í•˜ë‚˜ê°€ null ì°¸ì¡°ë¥¼ í•˜ëŠ” member ì— ì ‘ê·¼í•¨ìœ¼ë¡œì„œ null reference exception ì„ ì¼ìœ¼í‚¤ëŠ” ê²ë‹ˆë‹¤. java ì—ì„œ ì´ê²ƒì€ NullPointerException ì´ë‚˜ ì¶•ì•½í•´ì„œ NPE ì™€ ë™ë“±í•  ê²ë‹ˆë‹¤.
 
-Kotlin ÀÇ type system ´Â ÄÚµå¿¡¼­ NullPointerException ÀÌ °®´Â °ÍµéÀ» Á¦°ÅÇÏ´Â °Ì´Ï´Ù. NPE °¡ °¡Áø °ÍµéÀ» ¹ß»ı½ÃÅ³ ¼ö ÀÖ´Â À¯ÀÏÇÑ °ÍµéÀº ´ÙÀ½°ú °°½À´Ï´Ù.
+Kotlin ì˜ type system ëŠ” ì½”ë“œì—ì„œ NullPointerException ì´ ê°–ëŠ” ê²ƒë“¤ì„ ì œê±°í•˜ëŠ” ê²ë‹ˆë‹¤. NPE ê°€ ê°€ì§„ ê²ƒë“¤ì„ ë°œìƒì‹œí‚¬ ìˆ˜ ìˆëŠ” ìœ ì¼í•œ ê²ƒë“¤ì€ ë‹¤ìŒê³¼ ê°™ìŠµë‹ˆë‹¤.
 
-- throw NullPointerException() ¿¡ ´ëÇÑ ¸í½ÃÀû call
-- ¾Æ·¡¿¡¼­ ¼³¸íÇÏ´Â !! operator ÀÇ »ç¿ë
-- ¿ÜºÎ java code °¡ NPE À» ¹ß»ı½ÃÅ°´Â °æ¿ì
-- ÃÊ±âÈ­¿Í °ü·ÃÇØ ¾î¶² µ¥ÀÌÅÍ ºÒÀÏÄ¡°¡ Á¸ÀçÇÏ´Â °æ¿ì (constructor ³»¿¡¼­ »ç¿ë°¡´ÉÇÑ ÃÊ±âÈ­µÇÁö ¾ÊÀº this °¡ ¾îµğ¼±°¡ »ç¿ëµÉ ¶§)
+- throw NullPointerException() ì— ëŒ€í•œ ëª…ì‹œì  call
+- ì•„ë˜ì—ì„œ ì„¤ëª…í•˜ëŠ” !! operator ì˜ ì‚¬ìš©
+- ì™¸ë¶€ java code ê°€ NPE ì„ ë°œìƒì‹œí‚¤ëŠ” ê²½ìš°
+- ì´ˆê¸°í™”ì™€ ê´€ë ¨í•´ ì–´ë–¤ ë°ì´í„° ë¶ˆì¼ì¹˜ê°€ ì¡´ì¬í•˜ëŠ” ê²½ìš° (constructor ë‚´ì—ì„œ ì‚¬ìš©ê°€ëŠ¥í•œ ì´ˆê¸°í™”ë˜ì§€ ì•Šì€ this ê°€ ì–´ë””ì„ ê°€ ì‚¬ìš©ë  ë•Œ)
 
-kotlin ¿¡¼­ type system Àº null À» °¡Áú ¼ö ÀÖ´Â ÂüÁ¶ (nullable references) ¿Í ±×·¯Áö ¸øÇÏ´Â °Í (non-null references) ¸¦ ±¸ºĞÇÕ´Ï´Ù. ¿¹¸¦ µé¾î, String type ÀÇ Á¤±Ô variable Àº null À» °¡ÁöÁö ¸øÇÕ´Ï´Ù.
+kotlin ì—ì„œ type system ì€ null ì„ ê°€ì§ˆ ìˆ˜ ìˆëŠ” ì°¸ì¡° (nullable references) ì™€ ê·¸ëŸ¬ì§€ ëª»í•˜ëŠ” ê²ƒ (non-null references) ë¥¼ êµ¬ë¶„í•©ë‹ˆë‹¤. ì˜ˆë¥¼ ë“¤ì–´, String type ì˜ ì •ê·œ variable ì€ null ì„ ê°€ì§€ì§€ ëª»í•©ë‹ˆë‹¤.
 
 ---
 var a: String = "abc"
 a = null // compliation error
 ---
 
-nulls ¸¦ Çã¿ëÇÏ±â À§ÇØ, String? À¸·Î ½á¼­ nullable string À¸·Î¼­ variable À» ¼±¾ğÇÕ´Ï´Ù.
+nulls ë¥¼ í—ˆìš©í•˜ê¸° ìœ„í•´, String? ìœ¼ë¡œ ì¨ì„œ nullable string ìœ¼ë¡œì„œ variable ì„ ì„ ì–¸í•©ë‹ˆë‹¤.
 
 ---
 var b: String? = "abc"
 b = null // ok
 ---
 
-ÀÌÁ¦, method ¸¦ ºÎ¸£°Å³ª a ¿¡ ´ëÇÑ property ¿¡ Á¢±ÙÇÏ·Á¸é NPE ¸¦ ¹ß»ı½ÃÅ°Áö ¾Ê´Â´Ù´Â°Ô º¸ÀåµÇ¹Ç·Î ¾ÈÀüÇÏ°Ô ¸»ÇÒ ¼ö ÀÖ½À´Ï´Ù.
+ì´ì œ, method ë¥¼ ë¶€ë¥´ê±°ë‚˜ a ì— ëŒ€í•œ property ì— ì ‘ê·¼í•˜ë ¤ë©´ NPE ë¥¼ ë°œìƒì‹œí‚¤ì§€ ì•ŠëŠ”ë‹¤ëŠ”ê²Œ ë³´ì¥ë˜ë¯€ë¡œ ì•ˆì „í•˜ê²Œ ë§í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.
 
 ---
 val l = a.length
 ---
 
-ÇÏÁö¸¸ b ¿Í °°Àº property Á¢±ÙÇÏ·Á¸é, ¾ÈÀüÇÏÁö ¾ÊÀ» ¼ö ÀÖ°í compiler ´Â error À» º¸°íÇÕ´Ï´Ù.
+í•˜ì§€ë§Œ b ì™€ ê°™ì€ property ì ‘ê·¼í•˜ë ¤ë©´, ì•ˆì „í•˜ì§€ ì•Šì„ ìˆ˜ ìˆê³  compiler ëŠ” error ì„ ë³´ê³ í•©ë‹ˆë‹¤.
 
 ---
 val l = b.length
 ---
 
-±×·¸´ÙÇØµµ ¿©ÀüÈ÷ ÇØ´ç property ¿¡ Á¢±ÙÇÒ ÇÊ¿ä°¡ ÀÖ½À´Ï´Ù, ±×·¸ÁÒ? ±×°É ÇÒ ¼ö ÀÖ´Â ¸î °¡Áö ¹æ¹ıÀÌ ÀÖ½À´Ï´Ù.
+ê·¸ë ‡ë‹¤í•´ë„ ì—¬ì „íˆ í•´ë‹¹ property ì— ì ‘ê·¼í•  í•„ìš”ê°€ ìˆìŠµë‹ˆë‹¤, ê·¸ë ‡ì£ ? ê·¸ê±¸ í•  ìˆ˜ ìˆëŠ” ëª‡ ê°€ì§€ ë°©ë²•ì´ ìˆìŠµë‹ˆë‹¤.
 
 05.08.02. Checking for null in conditions
 
-¸ÕÀú, b ÀÌ null ÀÎÁö ¸í½ÃÀûÀ¸·Î check °í µÎ°¡Áö options ¸¦ ºĞ¸®ÇØ¼­ ´Ù·ê ¼ö ÀÖ½À´Ï´Ù.
+ë¨¼ì €, b ì´ null ì¸ì§€ ëª…ì‹œì ìœ¼ë¡œ check ê³  ë‘ê°€ì§€ options ë¥¼ ë¶„ë¦¬í•´ì„œ ë‹¤ë£° ìˆ˜ ìˆìŠµë‹ˆë‹¤.
 
 ---
 val l = if (b != null) b.length else -1
 ---
 
-compiler ´Â ½ÇÇàÇÑ check ¿¡ ´ëÇÑ Á¤º¸¸¦ ÃßÀûÇØ¼­ if ³»¿¡ length ¸¦ ºÎ¸¦ ¼ö ÀÖµµ·Ï ÇÕ´Ï´Ù. ´õ º¹ÀâÇÑ conditions ¶ÇÇÑ Áö¿øÇÕ´Ï´Ù.
+compiler ëŠ” ì‹¤í–‰í•œ check ì— ëŒ€í•œ ì •ë³´ë¥¼ ì¶”ì í•´ì„œ if ë‚´ì— length ë¥¼ ë¶€ë¥¼ ìˆ˜ ìˆë„ë¡ í•©ë‹ˆë‹¤. ë” ë³µì¡í•œ conditions ë˜í•œ ì§€ì›í•©ë‹ˆë‹¤.
 
 ---
 if (b != null && b.length > 0) {
@@ -289,27 +455,27 @@ if (b != null && b.length > 0) {
     print("Empty string")
 }
 
-ÀÌ´Â ¿ÀÁ÷ b °¡ immutable (Áï check ¿Í »ç¿ë »çÀÌ¿¡ º¯°æÀÌ µÇÁö ¾Ê´Â local variable ¶Ç´Â backing field ¸¦ °¡Áö°í override ÇÒ ¼ö ¾ø´Â member val) ÇÑ °÷¿¡¼­ µ¿ÀÛÇÏ´Âµ¥ ±×·¸Áö ¾ÊÀ¸¸é b°¡ check ÀÌ ÈÄ null ·Î ¹Ù²î±â ¶§¹®ÀÌ¶ó´Â °É ¾Ë¾ÆµÎ¼¼¿ä.
+ì´ëŠ” ì˜¤ì§ b ê°€ immutable (ì¦‰ check ì™€ ì‚¬ìš© ì‚¬ì´ì— ë³€ê²½ì´ ë˜ì§€ ì•ŠëŠ” local variable ë˜ëŠ” backing field ë¥¼ ê°€ì§€ê³  override í•  ìˆ˜ ì—†ëŠ” member val) í•œ ê³³ì—ì„œ ë™ì‘í•˜ëŠ”ë° ê·¸ë ‡ì§€ ì•Šìœ¼ë©´ bê°€ check ì´ í›„ null ë¡œ ë°”ë€Œê¸° ë•Œë¬¸ì´ë¼ëŠ” ê±¸ ì•Œì•„ë‘ì„¸ìš”.
 
 05.08.03. Safe Calls
 
-µÎ¹øÂ° option Àº ? ·Î ¾²¿©Áö´Â safe call opertator ÀÔ´Ï´Ù.
+ë‘ë²ˆì§¸ option ì€ ? ë¡œ ì“°ì—¬ì§€ëŠ” safe call opertator ì…ë‹ˆë‹¤.
 
 ---
 b?.length
 ---
 
-ÀÌ´Â b °¡ null ÀÌ ¾Æ´Ï¸é b.length ¸¦ return ÇÏ°í ±×·¸Áö ¾ÊÀ¸¸é null À» return ÇÕ´Ï´Ù. ÀÌ expression ÀÇ type Àº Int? ÀÔ´Ï´Ù.
+ì´ëŠ” b ê°€ null ì´ ì•„ë‹ˆë©´ b.length ë¥¼ return í•˜ê³  ê·¸ë ‡ì§€ ì•Šìœ¼ë©´ null ì„ return í•©ë‹ˆë‹¤. ì´ expression ì˜ type ì€ Int? ì…ë‹ˆë‹¤.
 
-safe calls Àº chains ¿¡¼­ À¯¿ëÇÕ´Ï´Ù. ¿¹¸¦ µé¾î, Á÷¿øÀÎ Bob ÀÌ ÇÑ ºÎ¼­ ¿¡ ¹èÁ¤µÉ ¼ö ÀÖ°í (È¤Àº ±×·¸Áö ¾ÊÀ» ¼ö ÀÖ°í) Â÷·Ê·Î ¶Ç ´Ù¸¥ Á÷¿øÀÌ ºÎÀåÀ¸·Î ÀÖÀ» ÀÖ°í, ÀÌ ¶§ Bob ÀÇ ºÎÀåÀÇ ÀÌ¸§ (ÀÖ´Â °æ¿ì) À» ¾ò´Â °Ç ´ÙÀ½°ú °°ÀÌ ¾µ ¼ö ÀÖ½À´Ï´Ù.
+safe calls ì€ chains ì—ì„œ ìœ ìš©í•©ë‹ˆë‹¤. ì˜ˆë¥¼ ë“¤ì–´, ì§ì›ì¸ Bob ì´ í•œ ë¶€ì„œ ì— ë°°ì •ë  ìˆ˜ ìˆê³  (í˜¹ì€ ê·¸ë ‡ì§€ ì•Šì„ ìˆ˜ ìˆê³ ) ì°¨ë¡€ë¡œ ë˜ ë‹¤ë¥¸ ì§ì›ì´ ë¶€ì¥ìœ¼ë¡œ ìˆì„ ìˆê³ , ì´ ë•Œ Bob ì˜ ë¶€ì¥ì˜ ì´ë¦„ (ìˆëŠ” ê²½ìš°) ì„ ì–»ëŠ” ê±´ ë‹¤ìŒê³¼ ê°™ì´ ì“¸ ìˆ˜ ìˆìŠµë‹ˆë‹¤.
 
 ---
 bob?.department?.head?.name
 ---
 
-ÀÌµé properies Áß ¾î´À°Í ÇÏ³ª¶óµµ null ÀÌ¸é ±× chain Àº null À» return ÇÕ´Ï´Ù.
+ì´ë“¤ properies ì¤‘ ì–´ëŠê²ƒ í•˜ë‚˜ë¼ë„ null ì´ë©´ ê·¸ chain ì€ null ì„ return í•©ë‹ˆë‹¤.
 
-¿ÀÁ÷ non-null values ¿¡ ´ëÇÑ Æ¯Á¤ operation ¸¸À» ¼öÇàÇÏ±â À§ÇØ¼­ safe call operator ¸¦ let °ú ÇÔ²² ¾µ ¼ö ÀÖ½À´Ï´Ù.
+ì˜¤ì§ non-null values ì— ëŒ€í•œ íŠ¹ì • operation ë§Œì„ ìˆ˜í–‰í•˜ê¸° ìœ„í•´ì„œ safe call operator ë¥¼ let ê³¼ í•¨ê»˜ ì“¸ ìˆ˜ ìˆìŠµë‹ˆë‹¤.
 
 ---
 val listWithNulls: List<String?> = listOf("A", null)
@@ -320,21 +486,21 @@ for (item in listWithNulls) {
 
 05.08.04. Elvis Operator
 
-nullable reference r À» °¡Á³À» ¶§, r ÀÌ null ÀÌ ¾Æ´Ï¸é »ç¿ëÇÏ°í ±×·¸Áö ¾ÊÀ¸¸é non-null value ÀÎ x ¸¦ »ç¿ëÇÏ°Ú´Ù°í ¸»ÇÒ ¼ö ÀÖ½À´Ï´Ù.
+nullable reference r ì„ ê°€ì¡Œì„ ë•Œ, r ì´ null ì´ ì•„ë‹ˆë©´ ì‚¬ìš©í•˜ê³  ê·¸ë ‡ì§€ ì•Šìœ¼ë©´ non-null value ì¸ x ë¥¼ ì‚¬ìš©í•˜ê² ë‹¤ê³  ë§í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.
 
 ---
 val l: Int = if (b != null) b.length else -1
 ---
 
-¿ÏÀüÇÑ if-expression ¿¡ µû¶ó ÀÌ´Â ?: ·Î ¾²¿©Áø Elvis Operator ¿Í ÇÔ²² Ç¥ÇöµÉ ¼ö ÀÖ½À´Ï´Ù.
+ì™„ì „í•œ if-expression ì— ë”°ë¼ ì´ëŠ” ?: ë¡œ ì“°ì—¬ì§„ Elvis Operator ì™€ í•¨ê»˜ í‘œí˜„ë  ìˆ˜ ìˆìŠµë‹ˆë‹¤.
 
 ---
 val l = b?.length ?: -1
 ---
 
-?: ¿ŞÂÊ¿¡ expression ¿¡ ÀÖ´Â expression ÀÌ null ÀÌ ¾Æ´Ï¸é elvis operator ´Â ±×°ÍÀ» return ÇÏ°í ±×·¸Áö ¾ÊÀ¸¸é ¿À¸¥ÂÊ¿¡ ÀÖ´Â expression À» return ÇÕ´Ï´Ù. ¿À¸¥Æí¿¡ ÀÖ´Â expression Àº ¿ÀÁ÷ ¿ŞÂÊÆíÀÌ null ÀÏ ¶§¸¸ evaluate µÈ´Ù´Â °É ¾Ë¾ÆµÎ¼¼¿ä.
+?: ì™¼ìª½ì— expression ì— ìˆëŠ” expression ì´ null ì´ ì•„ë‹ˆë©´ elvis operator ëŠ” ê·¸ê²ƒì„ return í•˜ê³  ê·¸ë ‡ì§€ ì•Šìœ¼ë©´ ì˜¤ë¥¸ìª½ì— ìˆëŠ” expression ì„ return í•©ë‹ˆë‹¤. ì˜¤ë¥¸í¸ì— ìˆëŠ” expression ì€ ì˜¤ì§ ì™¼ìª½í¸ì´ null ì¼ ë•Œë§Œ evaluate ëœë‹¤ëŠ” ê±¸ ì•Œì•„ë‘ì„¸ìš”.
 
-throw ¿Í return ÀÌ kotlin ¿¡¼­´Â expression ÀÌ±â ¶§¹®¿¡ elvis operator ¿À¸¥Æí¿¡¼­ ¿ª½Ã »ç¿ëµÉ ¼ö ÀÖ´Ù´Â °É ¾Ë¾ÆµÎ¼¼¿ä. ÀÌ´Â ¸Å¿ì À¯¿ëÇÒ ¼ö ÀÖ´Âµ¥ ¿¹¸¦ µé¾î checking function arguments  ¿¡¼­ ±×·¸½À´Ï´Ù.
+throw ì™€ return ì´ kotlin ì—ì„œëŠ” expression ì´ê¸° ë•Œë¬¸ì— elvis operator ì˜¤ë¥¸í¸ì—ì„œ ì—­ì‹œ ì‚¬ìš©ë  ìˆ˜ ìˆë‹¤ëŠ” ê±¸ ì•Œì•„ë‘ì„¸ìš”. ì´ëŠ” ë§¤ìš° ìœ ìš©í•  ìˆ˜ ìˆëŠ”ë° ì˜ˆë¥¼ ë“¤ì–´ checking function arguments  ì—ì„œ ê·¸ë ‡ìŠµë‹ˆë‹¤.
 
 ---
 fun foo(node: Node): String? {
@@ -346,17 +512,17 @@ fun foo(node: Node): String? {
 
 05.08.05. The !! Operator
 
-NPE¸¦ ÁÁ¾ÆÇÏ´Â »ç¶÷µéÀ» À§ÇÑ ¼¼¹øÂ° option ÀÔ´Ï´Ù. b!! ¸¦ ¾µ ¼ö ÀÖ°í ÀÌ´Â b ÀÇ non-null value ¸¦ return ÇÏ°Å³ª (Áï, ¿¹½ÃÀÇ String), b °¡ null ÀÌ¸é NPE ¸¦ ¹ß»ı½ÃÅµ´Ï´Ù.
+NPEë¥¼ ì¢‹ì•„í•˜ëŠ” ì‚¬ëŒë“¤ì„ ìœ„í•œ ì„¸ë²ˆì§¸ option ì…ë‹ˆë‹¤. b!! ë¥¼ ì“¸ ìˆ˜ ìˆê³  ì´ëŠ” b ì˜ non-null value ë¥¼ return í•˜ê±°ë‚˜ (ì¦‰, ì˜ˆì‹œì˜ String), b ê°€ null ì´ë©´ NPE ë¥¼ ë°œìƒì‹œí‚µë‹ˆë‹¤.
 
 ---
 val l = b!!.length
 ---
 
-±×·¯¹Ç·Î NPE ¸¦ ¿øÇÏ¸é ±×°ÍÀ» »ç¿ëÇÒ ¼ø ÀÖÁö¸¸ ±×°ÍÀ» ¸í½ÃÀûÀ¸·Î ¿äÃ»ÇØ¾ß ÇÏ¹Ç·Î °©ÀÚ±â Æ¢¾î³ª¿ÀÁö ¾Ê½À´Ï´Ù.
+ê·¸ëŸ¬ë¯€ë¡œ NPE ë¥¼ ì›í•˜ë©´ ê·¸ê²ƒì„ ì‚¬ìš©í•  ìˆœ ìˆì§€ë§Œ ê·¸ê²ƒì„ ëª…ì‹œì ìœ¼ë¡œ ìš”ì²­í•´ì•¼ í•˜ë¯€ë¡œ ê°‘ìê¸° íŠ€ì–´ë‚˜ì˜¤ì§€ ì•ŠìŠµë‹ˆë‹¤.
 
 05.08.06. Safe Casts
 
-Á¤±Ô casts ´Â object °¡ target type ÀÌ ¾Æ´Ò ¶§ ClassCastException À» ¹ß»ı½ÃÅµ´Ï´Ù. ¶Ç´Ù¸¥ option Àº ½Ãµµ°¡ ¼º°øÀûÀÌÁö ¾ÊÀ» ¶§ null À» return ÇÏ°Ô ÇÏ´Â safe casts ¸¦ »ç¿ëÇÏ´Â °Ì´Ï´Ù.
+ì •ê·œ casts ëŠ” object ê°€ target type ì´ ì•„ë‹ ë•Œ ClassCastException ì„ ë°œìƒì‹œí‚µë‹ˆë‹¤. ë˜ë‹¤ë¥¸ option ì€ ì‹œë„ê°€ ì„±ê³µì ì´ì§€ ì•Šì„ ë•Œ null ì„ return í•˜ê²Œ í•˜ëŠ” safe casts ë¥¼ ì‚¬ìš©í•˜ëŠ” ê²ë‹ˆë‹¤.
 
 ---
 val aInt: Int? = a as? Int
@@ -364,9 +530,47 @@ val aInt: Int? = a as? Int
 
 05.08.07. Collections of Nullable Type
 
-nullable type ÀÇ element ·Î ÀÌ·ç¾îÁø collection À» °¡Áö°í ÀÖ°í non-null elements ¸¸ filter ÇÏ±æ ¿øÇÏ´Ù¸é filterNotNull À» »ç¿ëÇØ ÇÒ ¼ö ÀÖ½À´Ï´Ù.
+nullable type ì˜ element ë¡œ ì´ë£¨ì–´ì§„ collection ì„ ê°€ì§€ê³  ìˆê³  non-null elements ë§Œ filter í•˜ê¸¸ ì›í•˜ë‹¤ë©´ filterNotNull ì„ ì‚¬ìš©í•´ í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.
 
 ---
 val nullableList: List<Int?> = listOf(1, 2, null, 4)
 val intList: List<Int> = nullableList.filterNotNull()
 ---
+
+05.09. Exceptions
+
+05.09.01. The Nothing type
+
+throw ëŠ” Kotlin ì—ì„œ expression ì…ë‹ˆë‹¤. ë”°ë¼ì„œ ì˜ˆë¥¼ ë“¤ìë©´ Elvis expression ì˜ ë¶€ë¶„ìœ¼ë¡œ ì‚¬ìš©í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.
+
+---
+val s = person.name ?: throw
+IllegalArgumentException("Name required")
+---
+
+throw expression ì˜ type ì€ Nothing ì´ë¼ê³  í•˜ëŠ” íŠ¹ë³„í•œ type ì…ë‹ˆë‹¤. ê·¸ type ì€ ì–´ë– í•œ value ë¡œ ê°€ì§€ì§€ ì•Šìœ¼ë©° ì ˆëŒ€ ë„ë‹¬í•˜ì§€ ì•Šì„ ìˆ˜ë„ ìˆëŠ” code ìœ„ì¹˜ë¥¼ í‘œì‹œí•˜ëŠ”ë° ì‚¬ìš©ë  ìˆ˜ë„ ìˆìŠµë‹ˆë‹¤. ì½”ë“œ ë‚´ì—ì„œ Nothing ì€ ì ˆëŒ€ return í•˜ì§€ ì•ŠëŠ” function ì„ í‘œì‹œí•˜ëŠ”ë° ì“¸ ìˆ˜ ìˆìŠµë‹ˆë‹¤.
+
+---
+fun fail(message: String): Nothing {
+    throw IllegalArgumentException(message)
+}
+---
+
+ì´ function ì„ call í•  ë•Œ compiler ëŠ” call ë„ˆë¨¸ì— ì‹¤í–‰ì´ ê³„ì†ë˜ì§€ ì•ŠëŠ”ë‹¤ëŠ” ê±¸ ì•Œê²ë‹ˆë‹¤.
+
+---
+val s = person.name ?: fail("Name required")
+println(s)    // 's' is known to be initialized at this point
+---
+
+ì´ type ì„ ë§ˆì£¼í•˜ëŠ” ë˜ë‹¤ë¥¸ case ëŠ” type ì¶”ë¡  ì…ë‹ˆë‹¤. ì´ type ì˜ nullable ë³€í˜•ì¸ Nothing? ì€ ì •í™•íˆ null value í•˜ë‚˜ë§Œì„ ê°€ì§ˆ ìˆ˜ ìˆìŠµë‹ˆë‹¤. null ì„ ì¶”ë¡  type ì˜ value ë¥¼ ì´ˆê¸°í™”í•˜ëŠ”ë° ì‚¬ìš©í•˜ê³  ë” íŠ¹ì •í•œ type ì„ ê²°ì •í•˜ëŠ”ë° ì‚¬ìš©í•  ìˆ˜ ìˆëŠ” ì–´ë–¤ ë‹¤ë¥¸ ì •ë³´ë„ ì—†ë‹¤ë©´ compiler ëŠ” Nothing? type ìœ¼ë¡œ ì¶”ë¡ í•  ê²ë‹ˆë‹¤.
+
+---
+val x = null         // 'x' has type 'Nothing?'
+val l = listOf(null) // 'l' has type 'List<Nothing?>'
+---
+
+05.09.02. Java Interoperability
+
+java ìƒí˜¸ìš´ìš©ì„±ì— ëŒ€í•œ ì •ë³´ëŠ” java interoperability section ì— ìˆëŠ” exceptions ì— ëŒ€í•œ section ì„ ë³´ì„¸ìš”.
+

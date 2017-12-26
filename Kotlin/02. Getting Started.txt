@@ -1,4 +1,4 @@
-02.01. Basic Syntax
+ï»¿02.01. Basic Syntax
 
 02.01.01. Defining packages
 
@@ -7,11 +7,11 @@ import java.util.*
 
 //...
 
-µğ·ºÅä¸®¿Í ÆĞÅ°Áö¿¡ ¸ÅÄ¡µÉ ÇÊ¿ä´Â ¾ø½À´Ï´Ù. ¼Ò½º ÆÄÀÏÀº ÆÄÀÏ ½Ã½ºÅÛ ³» ÀÓÀÇ¿¡ À§Ä¡ÇØ ÀÖ¾îµµ µË´Ï´Ù.
+ë””ë ‰í† ë¦¬ì™€ íŒ¨í‚¤ì§€ì— ë§¤ì¹˜ë  í•„ìš”ëŠ” ì—†ìŠµë‹ˆë‹¤. ì†ŒìŠ¤ íŒŒì¼ì€ íŒŒì¼ ì‹œìŠ¤í…œ ë‚´ ì„ì˜ì— ìœ„ì¹˜í•´ ìˆì–´ë„ ë©ë‹ˆë‹¤.
 
 02.01.02. Defining functions
 
-Int parameters ¿Í Int return type À» °¡Áø ÇÔ¼öÀÔ´Ï´Ù.
+Int parameters ì™€ Int return type ì„ ê°€ì§„ í•¨ìˆ˜ì…ë‹ˆë‹¤.
 
 ---
 fun sum(a: Int, b:Int): Int {
@@ -19,19 +19,19 @@ fun sum(a: Int, b:Int): Int {
 }
 ---
 
-expression body ¿Í À¯ÃßµÇ´Â return type À» °¡Áø ÇÔ¼öÀÔ´Ï´Ù:
+expression body ì™€ ìœ ì¶”ë˜ëŠ” return type ì„ ê°€ì§„ í•¨ìˆ˜ì…ë‹ˆë‹¤:
 ---
 fun sum(a: Int, b:Int) = a + b
 ---
 
-¾î¶² ÀÇ¹ÌÀÖ´Â value µµ return ÇÏÁö ¾Ê´Â ÇÔ¼öÀÔ´Ï´Ù:
+ì–´ë–¤ ì˜ë¯¸ìˆëŠ” value ë„ return í•˜ì§€ ì•ŠëŠ” í•¨ìˆ˜ì…ë‹ˆë‹¤:
 ---
 fun printSum(a: Int, b:Int): Unit {
 	println("sum of $a and $b is ${a + b}")
 }
 ---
 
-Unit return type Àº »ı·« °¡´ÉÇÕ´Ï´Ù.
+Unit return type ì€ ìƒëµ ê°€ëŠ¥í•©ë‹ˆë‹¤.
 ---
 fun printSum(a: Int, b:Int) {
 	println("sum of $a and $b is ${a + b}")
@@ -69,7 +69,7 @@ fun incrementX() {
 
 02.01.04. Comments
 
-java ¿Í javascript ¿Í °°ÀÌ, kotlin Àº end-of-line °ú block comments ¸¦ Áö¿øÇÕ´Ï´Ù.
+java ì™€ javascript ì™€ ê°™ì´, kotlin ì€ end-of-line ê³¼ block comments ë¥¼ ì§€ì›í•©ë‹ˆë‹¤.
 
 ---
 // This is an end-of-line comment
@@ -78,9 +78,9 @@ java ¿Í javascript ¿Í °°ÀÌ, kotlin Àº end-of-line °ú block comments ¸¦ Áö¿øÇÕ´Ï´
    on multiple lines */
 ---
 
-java ¿Í ´Ş¸® kotlin ¿¡¼­ block comments ´Â nested µÉ ¼ö ÀÖ½À´Ï´Ù.
+java ì™€ ë‹¬ë¦¬ kotlin ì—ì„œ block comments ëŠ” nested ë  ìˆ˜ ìˆìŠµë‹ˆë‹¤.
 
-doucmentation comment syntax ¿¡ ´ëÇÑ Á¤º¸´Â Documenting Kotlin Code ¸¦ º¸¼¼¿ä.
+doucmentation comment syntax ì— ëŒ€í•œ ì •ë³´ëŠ” Documenting Kotlin Code ë¥¼ ë³´ì„¸ìš”.
 
 02.01.05. Using string templates
 
@@ -94,7 +94,7 @@ a = 2
 val s2 = "${s1.replace("is", "was")}, but now is $a"
 ---
 
-String templates ¸¦ º¸¼¼¿ä.
+String templates ë¥¼ ë³´ì„¸ìš”.
 
 02.01.06. Using conditional expressions
 
@@ -108,19 +108,19 @@ fun maxOf(a: Int, b: Int) : Int {
 }
 ---
 
-if ¸¦ expression À¸·Î »ç¿ëÇÒ ¼ö ÀÖ½À´Ï´Ù.
+if ë¥¼ expression ìœ¼ë¡œ ì‚¬ìš©í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.
 
 ---
 fun maxOf(a: Int, b: Int) = if (a > b) a else b
 ---
 
-if-expressions ¸¦ º¸¼¼¿ä.
+if-expressions ë¥¼ ë³´ì„¸ìš”.
 
 02.01.06. Using nullable values and checking for null
 
-ÂüÁ¶ÀÚ´Â null value °¡ °¡´ÉÇÒ ¶§  nullable ·Î ¸í½ÃÀûÀ¸·Î Ç¥±âµÇ¾ß ÇÕ´Ï´Ù.
+ì°¸ì¡°ìëŠ” null value ê°€ ê°€ëŠ¥í•  ë•Œ  nullable ë¡œ ëª…ì‹œì ìœ¼ë¡œ í‘œê¸°ë˜ì•¼ í•©ë‹ˆë‹¤.
 
-str ÀÌ integer ¸¦ °¡ÁöÁö ¸øÇÏ¸é null À» return ÇÕ´Ï´Ù.
+str ì´ integer ë¥¼ ê°€ì§€ì§€ ëª»í•˜ë©´ null ì„ return í•©ë‹ˆë‹¤.
 
 ---
 fun parseInt(str: String): Int? {
@@ -128,7 +128,7 @@ fun parseInt(str: String): Int? {
 }
 ---
 
-nullable value ¸¦ return ÇÏ´Â function ¸¦ »ç¿ëÇÕ´Ï´Ù.
+nullable value ë¥¼ return í•˜ëŠ” function ë¥¼ ì‚¬ìš©í•©ë‹ˆë‹¤.
 
 ---
 fun printProduct(arg1: String, arg2: String) {
@@ -146,7 +146,7 @@ fun printProduct(arg1: String, arg2: String) {
 }
 ---
 
-¶Ç´Â
+ë˜ëŠ”
 
 ---
 
@@ -166,7 +166,7 @@ println(x * y)
 
 02.01.07. Using type checks and automatic casts
 
-is operator ´Â expression ÀÌ type ÀÇ instance ÀÎÁö¸¦ check ÇÕ´Ï´Ù. immutable local variable ÀÌ³ª property ´Â ±â¼úµÈ type ¿¡ ´ëÇØ check µÈ´Ù¸é ±×°ÍÀ» ¸í½ÃÀûÀ¸·Î cast ÇÒ ÇÊ¿ä°¡ ¾ø½À´Ï´Ù.
+is operator ëŠ” expression ì´ type ì˜ instance ì¸ì§€ë¥¼ check í•©ë‹ˆë‹¤. immutable local variable ì´ë‚˜ property ëŠ” ê¸°ìˆ ëœ type ì— ëŒ€í•´ check ëœë‹¤ë©´ ê·¸ê²ƒì„ ëª…ì‹œì ìœ¼ë¡œ cast í•  í•„ìš”ê°€ ì—†ìŠµë‹ˆë‹¤.
 
 ---
 fun getStringLength(obj: Any): Int? {
@@ -179,7 +179,7 @@ fun getStringLength(obj: Any): Int? {
 }
 ---
 
-¶Ç´Â ÀÌ·¸°Ôµµ ¾µ ¼ö ÀÖ°í
+ë˜ëŠ” ì´ë ‡ê²Œë„ ì“¸ ìˆ˜ ìˆê³ 
 
 ---
 fun getStringLength(obj: Any): Int? {
@@ -191,7 +191,7 @@ fun getStringLength(obj: Any): Int? {
 }
 ---
 
-½ÉÁö¾î´Â ÀÌ·¸°Ôµµ ¾µ ¼ö ÀÖ½À´Ï´Ù.
+ì‹¬ì§€ì–´ëŠ” ì´ë ‡ê²Œë„ ì“¸ ìˆ˜ ìˆìŠµë‹ˆë‹¤.
 
 ---
 fun getStringLength(obj: Any): Int? {
@@ -204,7 +204,7 @@ fun getStringLength(obj: Any): Int? {
 }
 ---
 
-classes ¿Í Type casts ¸¦ º¸¼¼¿ä.
+classes ì™€ Type casts ë¥¼ ë³´ì„¸ìš”.
 
 02.01.08. Using for loop
 
@@ -215,7 +215,7 @@ for (item in items) {
 }
 ---
 
-ÀÌ°Å³ª
+ì´ê±°ë‚˜
 
 ---
 val items = listOf("apple", "banana", "kiwi")
@@ -223,7 +223,7 @@ for (index in items.indices) {
     println("item at $index is ${items[index]}")
 }
 
-for loop ¸¦ º¸¼¼¿ä.
+for loop ë¥¼ ë³´ì„¸ìš”.
 
 
 
@@ -238,7 +238,7 @@ while (index < items.size) {
 }
 ---
 
-while loop ¸¦ º¸¼¼¿ä.
+while loop ë¥¼ ë³´ì„¸ìš”.
 
 02.01.10. Using when expression
 
@@ -253,11 +253,11 @@ when(obj) {
 }
 ---
 
-when expression À» º¸¼¼¿ä
+when expression ì„ ë³´ì„¸ìš”
 
 02.01.11. Using ranges
 
-number °¡ range ³»¿¡ ÀÖ´ÂÁö È®ÀÎÇÏ±â À§ÇØ in operator ¸¦ »ç¿ëÇÏ¼¼¿ä
+number ê°€ range ë‚´ì— ìˆëŠ”ì§€ í™•ì¸í•˜ê¸° ìœ„í•´ in operator ë¥¼ ì‚¬ìš©í•˜ì„¸ìš”
 
 ---
 val x = 10
@@ -267,7 +267,7 @@ if (x in 1..y+1) {
 }
 ---
 
-number °¡ range ¿Ü¿¡ ÀÖ´ÂÁö È®ÀÎÇÏ¼¼¿ä.
+number ê°€ range ì™¸ì— ìˆëŠ”ì§€ í™•ì¸í•˜ì„¸ìš”.
 
 ---
 val list = listOf("a", "b", "c")
@@ -280,7 +280,7 @@ if (list.size !in list.indices) {
 }
 ---
 
-range ¿¡ ´ëÇØ iterate ÇÏ¼¼¿ä
+range ì— ëŒ€í•´ iterate í•˜ì„¸ìš”
 
 ---
 for (x in 1..5) {
@@ -288,7 +288,7 @@ for (x in 1..5) {
 }
 ---
 
-È¤Àº progression ¿¡ ´ëÇØ¼­ iterate ÇÏ¼¼¿ä.
+í˜¹ì€ progression ì— ëŒ€í•´ì„œ iterate í•˜ì„¸ìš”.
 
 ---
 for (x in 1..10 step 2) {
@@ -299,11 +299,11 @@ for (x in 9 downTo 0 step 3) {
 }
 ---
 
-ranges ¸¦ º¸¼¼¿ä.
+ranges ë¥¼ ë³´ì„¸ìš”.
 
 02.01.12. Using Collections
 
-collection ¿¡ ´ëÇÑ iteration
+collection ì— ëŒ€í•œ iteration
 
 ---
 for (item in items) {
@@ -311,7 +311,7 @@ for (item in items) {
 }
 ---
 
-collection ÀÌ object ¸¦ Æ÷ÇÔÇÏ´ÂÁö È®ÀÎÇÏ±â À§ÇØ in operator ¸¦ »ç¿ëÇÏ¼¼¿ä.
+collection ì´ object ë¥¼ í¬í•¨í•˜ëŠ”ì§€ í™•ì¸í•˜ê¸° ìœ„í•´ in operator ë¥¼ ì‚¬ìš©í•˜ì„¸ìš”.
 
 ---
 when {
@@ -320,7 +320,7 @@ when {
 }
 ---
 
-collections ¸¦ filter ÇÏ°í map ÇÏ±â À§ÇØ lamda expression À» »ç¿ëÇÏ¼¼¿ä.
+collections ë¥¼ filter í•˜ê³  map í•˜ê¸° ìœ„í•´ lamda expression ì„ ì‚¬ìš©í•˜ì„¸ìš”.
 
 ---
 fruits
@@ -330,7 +330,7 @@ fruits
 .forEach { println(it) }
 ---
 
-Higher-order functions and lamdas ¸¦ º¸¼¼¿ä.
+Higher-order functions and lamdas ë¥¼ ë³´ì„¸ìš”.
 
 02.01.13. Creating basic classes and thier instances
 
@@ -339,4 +339,4 @@ val rectangle = Rectangle(5.0, 2.0) // no 'new' keyword required
 val triangle = Triangle(3.0, 4.0, 5.0)
 ---
 
-classes ¿Í objects and instances ¸¦ º¸¼¼¿ä.
+classes ì™€ objects and instances ë¥¼ ë³´ì„¸ìš”.

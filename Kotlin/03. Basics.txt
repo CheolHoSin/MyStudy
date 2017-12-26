@@ -1,22 +1,22 @@
-03.01. Basic Types
+ï»¿03.01. Basic Types
 
 03.01.12. String Templates
 
-String Àº template expressions ¸¦ Æ÷ÇÔÇÏ´Âµ¥, Áï evaluated µÈ code ÀÇ ºÎºĞ°ú ±× °á°ú°¡ string À¸·Î concatenate µË´Ï´Ù. template expression Àº dollar sign ($) À¸·Î ½ÃÀÛÇÏ°í °£´ÜÇÑ ÀÌ¸§À» Æ÷ÇÔÇÕ´Ï´Ù.
+String ì€ template expressions ë¥¼ í¬í•¨í•˜ëŠ”ë°, ì¦‰ evaluated ëœ code ì˜ ë¶€ë¶„ê³¼ ê·¸ ê²°ê³¼ê°€ string ìœ¼ë¡œ concatenate ë©ë‹ˆë‹¤. template expression ì€ dollar sign ($) ìœ¼ë¡œ ì‹œì‘í•˜ê³  ê°„ë‹¨í•œ ì´ë¦„ì„ í¬í•¨í•©ë‹ˆë‹¤.
 
 ---
 val i = 10
 val s = "i = $i" // evaluates to "i = 10"
 ---
 
-¶Ç´Â curly braces ³»¿¡ ÀÓÀÇÀÇ Ç¥ÇöÀÌ Æ÷ÇÔµÉ ¼ö ÀÖ½À´Ï´Ù.
+ë˜ëŠ” curly braces ë‚´ì— ì„ì˜ì˜ í‘œí˜„ì´ í¬í•¨ë  ìˆ˜ ìˆìŠµë‹ˆë‹¤.
 
 ---
 val s = "abc"
 val str = "$s.length is ${s.length}" // evaluates to "abc.length is 3"
 ---
 
-Tempates Àº raw strings ³»¿Í escaped string ³»¿¡¼­ ¸ğµÎ Áö¿øµË´Ï´Ù. $ ¹®ÀÚ¸¦ ±ÛÀÚ ±×´ë·Î raw string (backslash escaping À» Áö¿øÇÏÁö ¾Ê´Â) ³»¿¡ Ç¥ÇöÇÏ°í ½Í´Ù¸é ´ÙÀ½ syntax ¸¦ »ç¿ëÇÏ¼¼¿ä.
+Tempates ì€ raw strings ë‚´ì™€ escaped string ë‚´ì—ì„œ ëª¨ë‘ ì§€ì›ë©ë‹ˆë‹¤. $ ë¬¸ìë¥¼ ê¸€ì ê·¸ëŒ€ë¡œ raw string (backslash escaping ì„ ì§€ì›í•˜ì§€ ì•ŠëŠ”) ë‚´ì— í‘œí˜„í•˜ê³  ì‹¶ë‹¤ë©´ ë‹¤ìŒ syntax ë¥¼ ì‚¬ìš©í•˜ì„¸ìš”.
 
 ---
 val price = """
@@ -28,7 +28,7 @@ ${'$'}9.99
 
 03.02.01. Packages
 
-¼Ò½º ÆÄÀÏÀº package Á¤ÀÇ¿Í ÇÔ²² ½ÃÀÛÇÕ´Ï´Ù.
+ì†ŒìŠ¤ íŒŒì¼ì€ package ì •ì˜ì™€ í•¨ê»˜ ì‹œì‘í•©ë‹ˆë‹¤.
 
 ---
 package foo.bar
@@ -40,22 +40,22 @@ class Goo {}
 //...
 ---
 
-¼Ò½º ÆÄÀÏÀÇ ¸ğµç ÄÁÅÙÃ÷(Å¬·¡½º¿Í ÇÔ¼öµé°ú °°ÀÌ)Àº package Á¤ÀÇ¿¡ ÀÇÇØ Æ÷ÇÔµË´Ï´Ù. À§ÀÇ ¿¹¿¡¼­ baz() ÀÇ fullname Àº foo.bar.baz ÀÌ°í Goo ÀÇ fullname Àº foo.bar.Goo ÀÔ´Ï´Ù.
-package °¡ ¸í½ÃµÇÁö ¾ÊÀ¸¸é ±× ÆÄÀÏÀÇ ÄÁÅÙÃ÷´Â ÀÌ¸§ ¾ø´Â default package ¿¡ ¼ÓÇÏ°Ô µË´Ï´Ù.
+ì†ŒìŠ¤ íŒŒì¼ì˜ ëª¨ë“  ì»¨í…ì¸ (í´ë˜ìŠ¤ì™€ í•¨ìˆ˜ë“¤ê³¼ ê°™ì´)ì€ package ì •ì˜ì— ì˜í•´ í¬í•¨ë©ë‹ˆë‹¤. ìœ„ì˜ ì˜ˆì—ì„œ baz() ì˜ fullname ì€ foo.bar.baz ì´ê³  Goo ì˜ fullname ì€ foo.bar.Goo ì…ë‹ˆë‹¤.
+package ê°€ ëª…ì‹œë˜ì§€ ì•Šìœ¼ë©´ ê·¸ íŒŒì¼ì˜ ì»¨í…ì¸ ëŠ” ì´ë¦„ ì—†ëŠ” default package ì— ì†í•˜ê²Œ ë©ë‹ˆë‹¤.
 
 03.02.02. Default Imports
-¸¹Àº packages ÀÌ kotlin file ¿¡ ±âº»ÀûÀ¸·Î import µË´Ï´Ù.
+ë§ì€ packages ì´ kotlin file ì— ê¸°ë³¸ì ìœ¼ë¡œ import ë©ë‹ˆë‹¤.
 
 - kotlin.*
 - kotlin.annotation.*
 - kotlin.collections.*
-- kotlin.comparisons.* (1.1 ¹öÀü ºÎÅÍ)
+- kotlin.comparisons.* (1.1 ë²„ì „ ë¶€í„°)
 - kotlin.io.*
 - kotlin.ranges.*
 - kotlin.sequences.*
 - kotlin.text.*
 
-Ãß°¡ÀûÀÎ ÆĞÅ°ÁöµéÀº Å¸°Ù ÇÃ·§Æû¿¡ µû¶ó import µË´Ï´Ù.
+ì¶”ê°€ì ì¸ íŒ¨í‚¤ì§€ë“¤ì€ íƒ€ê²Ÿ í”Œë«í¼ì— ë”°ë¼ import ë©ë‹ˆë‹¤.
 
 - JVM:
  - java.lang.*
@@ -66,7 +66,7 @@ package °¡ ¸í½ÃµÇÁö ¾ÊÀ¸¸é ±× ÆÄÀÏÀÇ ÄÁÅÙÃ÷´Â ÀÌ¸§ ¾ø´Â default package ¿¡ ¼ÓÇÏ°
 
 03.02.03. Imports
 
-±âº»ÀûÀÎ import ¿Í º°°³·Î °¢°¢ ÆÄÀÏÀº ÀÚ±â ÀÚ½Å¸¸ÀÇ import Áö½ÃÀÚ¸¦ Æ÷ÇÔÇÒ ¼ö ÀÖ½À´Ï´Ù. import ¸¦ À§ÇÑ ¹®¹ıÀº grammer ¿¡ ¼³¸íµÅ ÀÖ½À´Ï´Ù.
+ê¸°ë³¸ì ì¸ import ì™€ ë³„ê°œë¡œ ê°ê° íŒŒì¼ì€ ìê¸° ìì‹ ë§Œì˜ import ì§€ì‹œìë¥¼ í¬í•¨í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤. import ë¥¼ ìœ„í•œ ë¬¸ë²•ì€ grammer ì— ì„¤ëª…ë¼ ìˆìŠµë‹ˆë‹¤.
 
 ---
 import
@@ -75,38 +75,38 @@ import
   ;
 ---
 
-¿¹¸¦ µé¾î single name À¸·Î °¡Á®¿Ã ¼ö ÀÖ½À´Ï´Ù.
+ì˜ˆë¥¼ ë“¤ì–´ single name ìœ¼ë¡œ ê°€ì ¸ì˜¬ ìˆ˜ ìˆìŠµë‹ˆë‹¤.
 
 ---
 import foo.bar // Bar is now accessible without qulification
 ---
 
-¶Ç´Â ÇÑ scope ÀÇ ¸ğµç Á¢±Ù °¡´ÉÇÑ ÄÁÅÙÃ÷(package, class, object µî)À» °¡Á®¿Ã ¼ö ÀÖ½À´Ï´Ù.
+ë˜ëŠ” í•œ scope ì˜ ëª¨ë“  ì ‘ê·¼ ê°€ëŠ¥í•œ ì»¨í…ì¸ (package, class, object ë“±)ì„ ê°€ì ¸ì˜¬ ìˆ˜ ìˆìŠµë‹ˆë‹¤.
 
 ---
 import foo.* // everything in 'foo' becomes accessible
 ----
 
-ÀÌ¸§ Ãæµ¹ÀÌ ÀÖ´Ù¸é as Å°¿öµå¸¦ »ç¿ëÇØ Ãæµ¹³­ ´ë»óÀ» Áö¿ªÀûÀ¸·Î Àç¸í¸íÇÏ¿© disambiguate ÇÒ ¼ö ÀÖ½À´Ï´Ù.
+ì´ë¦„ ì¶©ëŒì´ ìˆë‹¤ë©´ as í‚¤ì›Œë“œë¥¼ ì‚¬ìš©í•´ ì¶©ëŒë‚œ ëŒ€ìƒì„ ì§€ì—­ì ìœ¼ë¡œ ì¬ëª…ëª…í•˜ì—¬ disambiguate í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.
 
 ---
 import foo.Bar // Bar is accessible
 import bar.Bar as bBar // bBar stands for 'bar.Bar'
 ---
 
-import Å°¿öµå´Â import ÇÏ´Â Å¬·¡½º¿¡ Á¦ÇÑµÇÁö ¾Ê½À´Ï´Ù. ´Ù¸¥ Á¤ÀÇµéÀ» import ÇÏ´Âµ¥µµ »ç¿ëÇÒ ¼ö ÀÖ½À´Ï´Ù.
-- top-level ÇÔ¼ö¿Í properties
-- object declarations ³» Á¤ÀÇµÅ ÀÖ´Â ÇÔ¼ö¿Í properties
+import í‚¤ì›Œë“œëŠ” import í•˜ëŠ” í´ë˜ìŠ¤ì— ì œí•œë˜ì§€ ì•ŠìŠµë‹ˆë‹¤. ë‹¤ë¥¸ ì •ì˜ë“¤ì„ import í•˜ëŠ”ë°ë„ ì‚¬ìš©í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.
+- top-level í•¨ìˆ˜ì™€ properties
+- object declarations ë‚´ ì •ì˜ë¼ ìˆëŠ” í•¨ìˆ˜ì™€ properties
 - enum constants
 
 03.02.04. Visibility of Top-level Declarations
-top-level declaration ÀÌ private ·Î ÁöÁ¤µÅ ÀÖÀ¸¸é ±×°ÍÀÌ Á¤ÀÇµÈ ÆÄÀÏ ³»¿¡¼­ private ÀÔ´Ï´Ù.
+top-level declaration ì´ private ë¡œ ì§€ì •ë¼ ìˆìœ¼ë©´ ê·¸ê²ƒì´ ì •ì˜ëœ íŒŒì¼ ë‚´ì—ì„œ private ì…ë‹ˆë‹¤.
 
 03.03. Control Flow: if, when, for, while
 
 03.03.01. if Expression
 
-Kotlin ¿¡¼­ if ´Â expression ÀÔ´Ï´Ù. Áï value ¸¦ return ÇÕ´Ï´Ù. ±×·¯¹Ç·Î ternary operator (condition?then:else) °¡ ¾ø°í º¸Åë if °¡ ÀÌ ¿ªÇÒÀ» Àß ¼öÇàÇÕ´Ï´Ù.
+Kotlin ì—ì„œ if ëŠ” expression ì…ë‹ˆë‹¤. ì¦‰ value ë¥¼ return í•©ë‹ˆë‹¤. ê·¸ëŸ¬ë¯€ë¡œ ternary operator (condition?then:else) ê°€ ì—†ê³  ë³´í†µ if ê°€ ì´ ì—­í• ì„ ì˜ ìˆ˜í–‰í•©ë‹ˆë‹¤.
 
 ---
 // Traditional usage
@@ -125,7 +125,7 @@ if (a > b) {
 val max = if (a > b) a else b
 ---
 
-if braches ´Â blocks °¡ µÉ ¼ö ÀÖ°í, ¸¶Áö¸· expression Àº ÀÌ block ÀÇ value °¡ µË´Ï´Ù.
+if braches ëŠ” blocks ê°€ ë  ìˆ˜ ìˆê³ , ë§ˆì§€ë§‰ expression ì€ ì´ block ì˜ value ê°€ ë©ë‹ˆë‹¤.
 
 ---
 val max = if (a > b) {
@@ -137,13 +137,13 @@ val max = if (a > b) {
 }
 ---
 
-if ¸¦ statement ·Î »ç¿ëÇÏ±â º¸´Ù expression À¸·Î »ç¿ëÇÑ´Ù¸é (¿¹¸¦ µé¾î, ±×°ÍÀÇ value ¸¦ return ÇÏ°Å³ª variable ·Î ±×°ÍÀ» assign ÇÏ´Â °Í), expression Àº else branch ¸¦ °¡Áú ÇÊ¿ä°¡ ÀÖ½À´Ï´Ù.
+if ë¥¼ statement ë¡œ ì‚¬ìš©í•˜ê¸° ë³´ë‹¤ expression ìœ¼ë¡œ ì‚¬ìš©í•œë‹¤ë©´ (ì˜ˆë¥¼ ë“¤ì–´, ê·¸ê²ƒì˜ value ë¥¼ return í•˜ê±°ë‚˜ variable ë¡œ ê·¸ê²ƒì„ assign í•˜ëŠ” ê²ƒ), expression ì€ else branch ë¥¼ ê°€ì§ˆ í•„ìš”ê°€ ìˆìŠµë‹ˆë‹¤.
 
-grammar for if ¸¦ º¸¼¼¿ä.
+grammar for if ë¥¼ ë³´ì„¸ìš”.
 
 03.03.02. When Expression
 
-when Àº C¿Í °°Àº ¾ğ¾îÀÇ switch operator ¸¦ ´ëÃ¼ÇÕ´Ï´Ù. °¡Àå °£´ÜÇÑ ÇüÅÂ·Î´Â ÀÌ¿Í °°ÀÌ »ı°å½À´Ï´Ù.
+when ì€ Cì™€ ê°™ì€ ì–¸ì–´ì˜ switch operator ë¥¼ ëŒ€ì²´í•©ë‹ˆë‹¤. ê°€ì¥ ê°„ë‹¨í•œ í˜•íƒœë¡œëŠ” ì´ì™€ ê°™ì´ ìƒê²¼ìŠµë‹ˆë‹¤.
 
 ---
 when (x) {
@@ -155,11 +155,11 @@ when (x) {
 }
 ---
 
-when Àº ¾î¶² branch condion À» ¸¸Á·ÇÒ ¶§±îÁö ¼ø¼­´ë·Î ¸ğµç branches ¿¡ ´ëÇØ argument ¸¦ match ÇÕ´Ï´Ù. when Àº expression ÀÌ³ª statement µÑ ´Ù·Î ¾²ÀÏ ¼ö ÀÖ½À´Ï´Ù. expression À¸·Î¼­ »ç¿ëµÈ´Ù¸é ¹İÁ·µÈ branch ÀÇ value ´Â ÀüÃ¼ expression ÀÇ value °¡ µË´Ï´Ù. statement ·Î »ç¿ëÇÒ ¶§´Â °³º° branches ÀÇ value °¡ ¹«½ÃµË´Ï´Ù. (if ¿Í °°ÀÌ, branch ´Â block ÀÌ µÉ ¼ö ÀÖ°í ±×°ÍÀÇ value ´Â block ¿¡ ÀÖ´Â ¸¶Áö¸· expression ÀÇ value ÀÔ´Ï´Ù.)
+when ì€ ì–´ë–¤ branch condion ì„ ë§Œì¡±í•  ë•Œê¹Œì§€ ìˆœì„œëŒ€ë¡œ ëª¨ë“  branches ì— ëŒ€í•´ argument ë¥¼ match í•©ë‹ˆë‹¤. when ì€ expression ì´ë‚˜ statement ë‘˜ ë‹¤ë¡œ ì“°ì¼ ìˆ˜ ìˆìŠµë‹ˆë‹¤. expression ìœ¼ë¡œì„œ ì‚¬ìš©ëœë‹¤ë©´ ë°˜ì¡±ëœ branch ì˜ value ëŠ” ì „ì²´ expression ì˜ value ê°€ ë©ë‹ˆë‹¤. statement ë¡œ ì‚¬ìš©í•  ë•ŒëŠ” ê°œë³„ branches ì˜ value ê°€ ë¬´ì‹œë©ë‹ˆë‹¤. (if ì™€ ê°™ì´, branch ëŠ” block ì´ ë  ìˆ˜ ìˆê³  ê·¸ê²ƒì˜ value ëŠ” block ì— ìˆëŠ” ë§ˆì§€ë§‰ expression ì˜ value ì…ë‹ˆë‹¤.)
 
-else branch ´Â ¾î¶² ´Ù¸¥ branch conditions µµ ¸¸Á·ÇÏÁö ¾ÊÀ» ¶§ evaluate µË´Ï´Ù. when ÀÌ expression À¸·Î »ç¿ëµÉ ¶§, else branch ´Â ÀÇ¹«ÀûÀÔ´Ï´Ù. ±×·¸Áö ¾ÊÀ¸¸é compiler ´Â ¸ğµç °¡´ÉÇÑ cases °¡ branch conditions ·Î cover µÈ´Ù´Â °É Áõ¸íÇÒ ¼ö ÀÖ¾î¾ß ÇÕ´Ï´Ù.
+else branch ëŠ” ì–´ë–¤ ë‹¤ë¥¸ branch conditions ë„ ë§Œì¡±í•˜ì§€ ì•Šì„ ë•Œ evaluate ë©ë‹ˆë‹¤. when ì´ expression ìœ¼ë¡œ ì‚¬ìš©ë  ë•Œ, else branch ëŠ” ì˜ë¬´ì ì…ë‹ˆë‹¤. ê·¸ë ‡ì§€ ì•Šìœ¼ë©´ compiler ëŠ” ëª¨ë“  ê°€ëŠ¥í•œ cases ê°€ branch conditions ë¡œ cover ëœë‹¤ëŠ” ê±¸ ì¦ëª…í•  ìˆ˜ ìˆì–´ì•¼ í•©ë‹ˆë‹¤.
 
-¸¹Àº cases °¡ °°Àº ¹æ¹ıÀ¸·Î ´Ù·ïÁ®¾ß ÇÑ´Ù¸é branch conditions ´Â comma ·Î °áÇÕµÉ ¼ö ÀÖ½À´Ï´Ù.
+ë§ì€ cases ê°€ ê°™ì€ ë°©ë²•ìœ¼ë¡œ ë‹¤ë¤„ì ¸ì•¼ í•œë‹¤ë©´ branch conditions ëŠ” comma ë¡œ ê²°í•©ë  ìˆ˜ ìˆìŠµë‹ˆë‹¤.
 
 ---
 when (x) {
@@ -168,7 +168,7 @@ when (x) {
 }
 ---
 
-ÀÓÀÇÀÇ expressions (constants ¸¸ÀÌ ¾Æ´Ñ) ¸¦ branch conditions ·Î »ç¿ëÇÒ ¼ö ÀÖ½À´Ï´Ù.
+ì„ì˜ì˜ expressions (constants ë§Œì´ ì•„ë‹Œ) ë¥¼ branch conditions ë¡œ ì‚¬ìš©í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.
 
 ---
 when (x) {
@@ -177,7 +177,7 @@ when (x) {
 }
 ---
 
-range ³ª collection À» °¡Áö°í in ÀÌ³ª !in »ç¿ëÇØ value ¸¦ check ÇÒ ¼öµµ ÀÖ½À´Ï´Ù.
+range ë‚˜ collection ì„ ê°€ì§€ê³  in ì´ë‚˜ !in ì‚¬ìš©í•´ value ë¥¼ check í•  ìˆ˜ë„ ìˆìŠµë‹ˆë‹¤.
 
 ---
 when (x) {
@@ -188,7 +188,7 @@ when (x) {
 }
 ---
 
-value ¸¦ check ÇÏ´Â ¶Ç´Ù¸¥ ¹æ¹ıÀº Æ¯Á¤ÇÑ Å¸ÀÔÀÎÁö¸¦ ¾Ë±âÀ§ÇØ is ³ª !is ¸¦ »ç¿ëÇÏ´Â °ÍÀÔ´Ï´Ù. ¾Ë¾ÆµÖ¾ß ÇÒ °ÍÀº, smart casts ¶§¹®¿¡ ¾î¶² Ãß°¡ÀûÀÎ checks ¾øÀÌ type ÀÇ methods ¿Í properties ¿¡ Á¢±ÙÇÒ ¼ö ÀÖ´Ù´Â °Ì´Ï´Ù.
+value ë¥¼ check í•˜ëŠ” ë˜ë‹¤ë¥¸ ë°©ë²•ì€ íŠ¹ì •í•œ íƒ€ì…ì¸ì§€ë¥¼ ì•Œê¸°ìœ„í•´ is ë‚˜ !is ë¥¼ ì‚¬ìš©í•˜ëŠ” ê²ƒì…ë‹ˆë‹¤. ì•Œì•„ë‘¬ì•¼ í•  ê²ƒì€, smart casts ë•Œë¬¸ì— ì–´ë–¤ ì¶”ê°€ì ì¸ checks ì—†ì´ type ì˜ methods ì™€ properties ì— ì ‘ê·¼í•  ìˆ˜ ìˆë‹¤ëŠ” ê²ë‹ˆë‹¤.
 
 ---
 fun hasPrefix(x: Any) = when(x) {
@@ -197,7 +197,7 @@ fun hasPrefix(x: Any) = when(x) {
 }
 ---
 
-when À» if-else if chain ¸¦ ´ëÃ¼ÇÏ´Âµ¥ »ç¿ëÇÒ ¼ö ÀÖ½À´Ï´Ù. ¾î¶² argument µµ Áö¿øµÇÁö ¾Ê´Â´Ù¸é branch conditions ´Â ´Ü¼øÈ÷ boolean expression °¡ µÇ°í branch ´Â ±× condition ÀÌ true ÀÏ ¶§ µ¿ÀÛÇÕ´Ï´Ù.
+when ì„ if-else if chain ë¥¼ ëŒ€ì²´í•˜ëŠ”ë° ì‚¬ìš©í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤. ì–´ë–¤ argument ë„ ì§€ì›ë˜ì§€ ì•ŠëŠ”ë‹¤ë©´ branch conditions ëŠ” ë‹¨ìˆœíˆ boolean expression ê°€ ë˜ê³  branch ëŠ” ê·¸ condition ì´ true ì¼ ë•Œ ë™ì‘í•©ë‹ˆë‹¤.
 
 ---
 when {
@@ -207,18 +207,18 @@ when {
 }
 ---
 
-grammar for when À» º¸¼¼¿ä.
+grammar for when ì„ ë³´ì„¸ìš”.
 
 
 03.03.03. For Loops
 
-for loop ´Â iterator ¸¦ Á¦°øÇÏ´Â ¾î¶² °ÍÀÌµç iterate ÇÕ´Ï´Ù. ÀÌ´Â C# °ú °°Àº language ¿¡ ÀÖ´Â foreach loop ¿Í µ¿µîÇÕ´Ï´Ù. syntax ´Â ´ÙÀ½°ú °°½À´Ï´Ù.
+for loop ëŠ” iterator ë¥¼ ì œê³µí•˜ëŠ” ì–´ë–¤ ê²ƒì´ë“  iterate í•©ë‹ˆë‹¤. ì´ëŠ” C# ê³¼ ê°™ì€ language ì— ìˆëŠ” foreach loop ì™€ ë™ë“±í•©ë‹ˆë‹¤. syntax ëŠ” ë‹¤ìŒê³¼ ê°™ìŠµë‹ˆë‹¤.
 
 ---
 for (item in collection) print(item)
 ---
 
-body ´Â block µÉ ¼ö ÀÖ½À´Ï´Ù.
+body ëŠ” block ë  ìˆ˜ ìˆìŠµë‹ˆë‹¤.
 
 ---
 for (item: Int in ints) {
@@ -226,17 +226,17 @@ for (item: Int in ints) {
 }
 ---
 
-Àü¿¡ ¾ğ±ŞÇßµí, for Àº iterator ¸¦ Á¦°øÇÏ´Â ¾î´À °ÍÀÌµç iterate ÇÕ´Ï´Ù. Áï,
+ì „ì— ì–¸ê¸‰í–ˆë“¯, for ì€ iterator ë¥¼ ì œê³µí•˜ëŠ” ì–´ëŠ ê²ƒì´ë“  iterate í•©ë‹ˆë‹¤. ì¦‰,
 
-- member-function ÀÌ³ª extension function iterator() ¸¦ °¡Áö°í ÀÖ°í return type ÀÌ
-    - member-function ÀÌ³ª extension-function next() ¸¦ °¡Áö°í ÀÖ°í
-    - member-function ÀÌ³ª extension-function hasNext() °¡ Boolean À» return ÇÏ´Â °æ¿ì
+- member-function ì´ë‚˜ extension function iterator() ë¥¼ ê°€ì§€ê³  ìˆê³  return type ì´
+    - member-function ì´ë‚˜ extension-function next() ë¥¼ ê°€ì§€ê³  ìˆê³ 
+    - member-function ì´ë‚˜ extension-function hasNext() ê°€ Boolean ì„ return í•˜ëŠ” ê²½ìš°
 
-ÀÌ·¯ÇÑ ¼¼ functions ´Â ¸ğµÎ operator ·Î Ç¥±â°¡ µÇ¾ß ÇÕ´Ï´Ù.
+ì´ëŸ¬í•œ ì„¸ functions ëŠ” ëª¨ë‘ operator ë¡œ í‘œê¸°ê°€ ë˜ì•¼ í•©ë‹ˆë‹¤.
 
-array ¿¡ ´ëÇÑ for loop ´Â index-based loop ·Î complie µÇ°í, iterator object ´Â »ı¼ºÇÏÁö ¾Ê½À´Ï´Ù.
+array ì— ëŒ€í•œ for loop ëŠ” index-based loop ë¡œ complie ë˜ê³ , iterator object ëŠ” ìƒì„±í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.
 
-array ³ª list ¸¦ index ·Î iterate  ÇÏ±â ¿øÇÑ´Ù¸é ÀÌ ¹æ¹ıÀ» »ç¿ëÇÒ ¼ö ÀÖ½À´Ï´Ù.
+array ë‚˜ list ë¥¼ index ë¡œ iterate  í•˜ê¸° ì›í•œë‹¤ë©´ ì´ ë°©ë²•ì„ ì‚¬ìš©í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.
 
 ---
 for (i in array.indices) {
@@ -244,9 +244,9 @@ for (i in array.indices) {
 }
 ---
 
-range ¿¡ ´ëÇÑ iteration Àº ¾î¶°ÇÑ Ãß°¡ÀûÀÎ object ¸¦ »ı¼ºÇÏÁö ¾Ê´Â ÃÖÀûÈ­µÈ ±¸ÇöÀ¸·Î complie µÈ´Ù´Â °É ¾Ë¾ÆµÎ¼¼¿ä.
+range ì— ëŒ€í•œ iteration ì€ ì–´ë– í•œ ì¶”ê°€ì ì¸ object ë¥¼ ìƒì„±í•˜ì§€ ì•ŠëŠ” ìµœì í™”ëœ êµ¬í˜„ìœ¼ë¡œ complie ëœë‹¤ëŠ” ê±¸ ì•Œì•„ë‘ì„¸ìš”.
 
-¶Ç´Â withIndex library function À» »ç¿ëÇÒ ¼öµµ ÀÖ½À´Ï´Ù.
+ë˜ëŠ” withIndex library function ì„ ì‚¬ìš©í•  ìˆ˜ë„ ìˆìŠµë‹ˆë‹¤.
 
 ---
 for ((index, value) in array.withIndex()) {
@@ -254,11 +254,11 @@ for ((index, value) in array.withIndex()) {
 }
 ---
 
-grammar for for À» º¸¼¼¿ä.
+grammar for for ì„ ë³´ì„¸ìš”.
 
 03.03.04. While Loops
 
-while °ú do..while Àº Æò»ó½ÃÃ³·³ µ¿ÀÛÇÕ´Ï´Ù.
+while ê³¼ do..while ì€ í‰ìƒì‹œì²˜ëŸ¼ ë™ì‘í•©ë‹ˆë‹¤.
 
 ---
 while (x > 0) {
@@ -270,8 +270,27 @@ do {
 } while (y != null)  // y is visible here!
 ---
 
-grammar for while À» º¸¼¼¿ä.
+grammar for while ì„ ë³´ì„¸ìš”.
 
 03.03.05. Break and continue in loops
 
-Kotlin Àº ÀüÅëÀûÀÎ break ¿Í continue operators ¸¦ loops ³»¿¡¼­ Áö¿øÇÕ´Ï´Ù. returns and jumps ¸¦ º¸¼¼¿ä.
+Kotlin ì€ ì „í†µì ì¸ break ì™€ continue operators ë¥¼ loops ë‚´ì—ì„œ ì§€ì›í•©ë‹ˆë‹¤. returns and jumps ë¥¼ ë³´ì„¸ìš”.
+
+03.04. Returns and Jumps
+
+03.04.01. Returns and Jumps
+
+Kotlin ì€ ì„¸ ê°œì˜ structural jump expression ì„ ê°€ì§€ê³  ìˆìŠµë‹ˆë‹¤.
+
+- return. ê¸°ë³¸ì ìœ¼ë¡œ ê°€ì¥ ê°€ê¹Œì´ì— ê°ì‹¸ê³  ìˆëŠ” function ì´ë‚˜ anonymous function ìœ¼ë¡œë¶€í„° return í•©ë‹ˆë‹¤.
+
+- break. ê°€ì¥ ê°€ê¹Œì´ ê°ì‹¸ê³  ìˆëŠ” loop ë¥¼ ëëƒ…ë‹ˆë‹¤.
+
+- continue. ê°€ì¥ ê°€ê¹Œì´ ê°ì‹¸ê³  ìˆëŠ” loop ì˜ ë‹¤ìŒ step ì„ ì§„í–‰í•©ë‹ˆë‹¤.
+
+ì´ëŸ¬í•œ expressions ì „ë¶€ ë” í° expression ì˜ ë¶€ë¶„ìœ¼ë¡œ ì‚¬ìš©ë  ìˆ˜ ìˆìŠµë‹ˆë‹¤.
+
+---
+val s = person.name ?: return
+
+ì´ëŸ¬í•œ expression ì˜ type ì€ Nothing type ì…ë‹ˆë‹¤.

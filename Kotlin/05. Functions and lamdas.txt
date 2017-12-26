@@ -1,8 +1,8 @@
-05.01. Functions
+ï»¿05.01. Functions
 
 05.01.01. Function Declarations
 
-Kotlin ¿¡¼­ functions ´Â fun Å°¿öµå¸¦ »ç¿ëÇØ Á¤ÀÇÇÕ´Ï´Ù.
+Kotlin ì—ì„œ functions ëŠ” fun í‚¤ì›Œë“œë¥¼ ì‚¬ìš©í•´ ì •ì˜í•©ë‹ˆë‹¤.
 
 ---
 fun double(x: Int): Int {
@@ -12,20 +12,20 @@ fun double(x: Int): Int {
 
 05.01.02. Function Usage
 
-functions À» call ÇÏ´Â °ÍÀº ÀüÅëÀûÀÎ Á¢±ÙÀ» »ç¿ëÇÕ´Ï´Ù.
+functions ì„ call í•˜ëŠ” ê²ƒì€ ì „í†µì ì¸ ì ‘ê·¼ì„ ì‚¬ìš©í•©ë‹ˆë‹¤.
 
 ---
 val result = double(2)
 ---
 
 
-member functions ¸¦ call ÇÏ´Â °ÍÀº dot notation (.) À» »ç¿ëÇÕ´Ï´Ù.
+member functions ë¥¼ call í•˜ëŠ” ê²ƒì€ dot notation (.) ì„ ì‚¬ìš©í•©ë‹ˆë‹¤.
 ---
 Sample().foo() // create instance of class Sample and call foo
 ---
 
 05.01.03. Parameters
-function parameters ´Â Pascal notation À» »ç¿ëÇØ Á¤ÀÇµË´Ï´Ù. Áï name:type. Parameters ´Â commas(,) ¸¦ »ç¿ëÇØ ±¸ºĞµË´Ï´Ù. °¢ parameters ´Â ¸í½ÃÀûÀ¸·Î type µÇ¾î¾ß ÇÕ´Ï´Ù.
+function parameters ëŠ” Pascal notation ì„ ì‚¬ìš©í•´ ì •ì˜ë©ë‹ˆë‹¤. ì¦‰ name:type. Parameters ëŠ” commas(,) ë¥¼ ì‚¬ìš©í•´ êµ¬ë¶„ë©ë‹ˆë‹¤. ê° parameters ëŠ” ëª…ì‹œì ìœ¼ë¡œ type ë˜ì–´ì•¼ í•©ë‹ˆë‹¤.
 
 ---
 fun powerOf(number: Int, exponent: Int) {
@@ -34,7 +34,7 @@ fun powerOf(number: Int, exponent: Int) {
 ---
 
 05.01.04. Default Arguments
-function parameters ´Â default values ¸¦ °¡Áú ¼ö ÀÖ°í, ÀÌ´Â ÇØ´ç argument ¸¦ »ı·«ÇßÀ» ¶§ »ç¿ëµË´Ï´Ù. ÀÌ ¹æ¹ıÀ» ÅëÇØ ´Ù¸¥ ¾ğ¾î¿¡ ºñÇØ overloads ¼ö¸¦ ÁÙÀÏ ¼ö ÀÖµµ·Ï ÇÕ´Ï´Ù.
+function parameters ëŠ” default values ë¥¼ ê°€ì§ˆ ìˆ˜ ìˆê³ , ì´ëŠ” í•´ë‹¹ argument ë¥¼ ìƒëµí–ˆì„ ë•Œ ì‚¬ìš©ë©ë‹ˆë‹¤. ì´ ë°©ë²•ì„ í†µí•´ ë‹¤ë¥¸ ì–¸ì–´ì— ë¹„í•´ overloads ìˆ˜ë¥¼ ì¤„ì¼ ìˆ˜ ìˆë„ë¡ í•©ë‹ˆë‹¤.
 
 ---
 fun read(b: Array<Byte>, off: Int = 0, len: Int = b.size) {
@@ -42,9 +42,9 @@ fun read(b: Array<Byte>, off: Int = 0, len: Int = b.size) {
 }
 ---
 
-default values ´Â value ¿Í ÇÔ²² ¾²ÀÎ type µÚ¿¡ = À» »ç¿ëÇØ Á¤ÀÇÇÕ´Ï´Ù.
+default values ëŠ” value ì™€ í•¨ê»˜ ì“°ì¸ type ë’¤ì— = ì„ ì‚¬ìš©í•´ ì •ì˜í•©ë‹ˆë‹¤.
 
-overriding methods ´Â Ç×»ó base method ¿Í °°Àº defauolt parameter values ¸¦ »ç¿ëÇÕ´Ï´Ù. default parameters values ¸¦ °¡Áø method ¸¦ overiding ÇÒ ¶§, default parameter values ´Â ±â¼ú¿¡¼­ ¹İµå½Ã »ı·«ÇØ¾ß ÇÕ´Ï´Ù.
+overriding methods ëŠ” í•­ìƒ base method ì™€ ê°™ì€ defauolt parameter values ë¥¼ ì‚¬ìš©í•©ë‹ˆë‹¤. default parameters values ë¥¼ ê°€ì§„ method ë¥¼ overiding í•  ë•Œ, default parameter values ëŠ” ê¸°ìˆ ì—ì„œ ë°˜ë“œì‹œ ìƒëµí•´ì•¼ í•©ë‹ˆë‹¤.
 
 ---
 open class A {
@@ -55,14 +55,14 @@ class B: A() {
     override fun foo(i: Int) { ... } // no default value allowed
 }
 
-default parameters °¡ ¾î¶°ÇÑ default value µµ °¡ÁöÁö ¾ÊÀº parameters ¸¦ ¼±ÇàÇÑ´Ù¸é, default value ´Â ¿ÀÁ÷ ¸í¸íµÈ arguments ¸¦ »ç¿ëÇÏ¿© ÇÔ¼ö È£ÃâÇÏ´Â °ÍÀ¸·Î¸¸ »ç¿ëÇÒ ¼ö ÀÖ½À´Ï´Ù.
+default parameters ê°€ ì–´ë– í•œ default value ë„ ê°€ì§€ì§€ ì•Šì€ parameters ë¥¼ ì„ í–‰í•œë‹¤ë©´, default value ëŠ” ì˜¤ì§ ëª…ëª…ëœ arguments ë¥¼ ì‚¬ìš©í•˜ì—¬ í•¨ìˆ˜ í˜¸ì¶œí•˜ëŠ” ê²ƒìœ¼ë¡œë§Œ ì‚¬ìš©í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.
 
 ---
 fun foo(bar: Int = 0, baz: Int) { /* ... */ }
 foo(baz = 1) // The default value bar = 0 is used
 ---
 
-°ıÈ£ ¹Û¿¡¼­ ¸¶Áö¸· argumentÀÎ lamda °¡ function call ·Î Àü´ŞµÆ´Ù¸é, default parameters ·Î ¾î¶°ÇÑ value µµ Àü´ŞÇÏÁö ¾Ê´Â °ÍÀ» Çã¿ëÇÕ´Ï´Ù.
+ê´„í˜¸ ë°–ì—ì„œ ë§ˆì§€ë§‰ argumentì¸ lamda ê°€ function call ë¡œ ì „ë‹¬ëë‹¤ë©´, default parameters ë¡œ ì–´ë– í•œ value ë„ ì „ë‹¬í•˜ì§€ ì•ŠëŠ” ê²ƒì„ í—ˆìš©í•©ë‹ˆë‹¤.
 
 ---
 fun foo(bar: Int = 0, baz: Int = 1, qux: () -> Unit)
@@ -74,9 +74,9 @@ foo { println("hello") } // Uses both default values bar = 0 and baz = 1
 
 05.01.05. Named Arguments
 
-function parameters ´Â functions À» call ÇÒ ¶§ ¸í¸íÇÒ ¼ö ÀÖ½À´Ï´Ù. function ÀÌ ¸Å¿ì ¸¹Àº ¼ö ÀÇ parameters ³ª default parameters ¸¦ °¡Áö°í ÀÖÀ» ¶§ ¸Å¿ì Æí¸®ÇÕ´Ï´Ù.
+function parameters ëŠ” functions ì„ call í•  ë•Œ ëª…ëª…í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤. function ì´ ë§¤ìš° ë§ì€ ìˆ˜ ì˜ parameters ë‚˜ default parameters ë¥¼ ê°€ì§€ê³  ìˆì„ ë•Œ ë§¤ìš° í¸ë¦¬í•©ë‹ˆë‹¤.
 
-ÁÖ¾îÁø ÇÔ¼ö°¡ ´ÙÀ½°ú °°´Ù¸é,
+ì£¼ì–´ì§„ í•¨ìˆ˜ê°€ ë‹¤ìŒê³¼ ê°™ë‹¤ë©´,
 ---
 fun reformat(str: String,
              normalizeCase: Boolean = true,
@@ -87,18 +87,18 @@ fun reformat(str: String,
 }
 ---
 
-default arguments ¸¦ »ç¿ëÇØ ÀÌ function À» call ÇÒ ¼ö ÀÖ½À´Ï´Ù.
+default arguments ë¥¼ ì‚¬ìš©í•´ ì´ function ì„ call í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.
 ---
 reformat(str)
 ---
 
-±×·¯³ª non-default ¸¦ °¡Áö°í callÇÒ ¶§, call Àº ´ÙÀ½°ú °°À» °ÍÀÔ´Ï´Ù.
+ê·¸ëŸ¬ë‚˜ non-default ë¥¼ ê°€ì§€ê³  callí•  ë•Œ, call ì€ ë‹¤ìŒê³¼ ê°™ì„ ê²ƒì…ë‹ˆë‹¤.
 
 ---
 reformat(str, true, true, false, '_')
 ---
 
-named arguments ¸¦ »ç¿ëÇÏ¸é ÄÚµå¸¦ ÈÎ¾À ´õ ÀĞ±â ÁÁ°Ô ¸¸µé ¼ö ÀÖ½À´Ï´Ù.
+named arguments ë¥¼ ì‚¬ìš©í•˜ë©´ ì½”ë“œë¥¼ í›¨ì”¬ ë” ì½ê¸° ì¢‹ê²Œ ë§Œë“¤ ìˆ˜ ìˆìŠµë‹ˆë‹¤.
 
 ---
 reformat(str,
@@ -109,15 +109,15 @@ reformat(str,
 )
 ---
 
-¸ğµç arguments ¸¦ ÇÊ¿ä·Î ÇÏÁö ¾Ê´Â´Ù¸é ÀÌ·¸°Ô ¾µ ¼öµµ ÀÖ½À´Ï´Ù.
+ëª¨ë“  arguments ë¥¼ í•„ìš”ë¡œ í•˜ì§€ ì•ŠëŠ”ë‹¤ë©´ ì´ë ‡ê²Œ ì“¸ ìˆ˜ë„ ìˆìŠµë‹ˆë‹¤.
 
 ---
 reformat(str, wordSeparator = '_')
 ---
 
-function ÀÌ positional ÇÏ°í named arguments µÑ ´Ù »ç¿ëÇØ call µÉ ¶§, ¸ğµç positional arguments ´Â ÃÖÃÊ named argument Àü¿¡ À§Ä¡ÇØ¾ß ÇÕ´Ï´Ù. ¿¹¸¦ µé¾î f(1, y = 2) ¸¦ call ÇÏ´Â °Ç °¡´ÉÇÏÁö¸¸ f(x = 1, 2) ´Â ¾ÈµË´Ï´Ù.
+function ì´ positional í•˜ê³  named arguments ë‘˜ ë‹¤ ì‚¬ìš©í•´ call ë  ë•Œ, ëª¨ë“  positional arguments ëŠ” ìµœì´ˆ named argument ì „ì— ìœ„ì¹˜í•´ì•¼ í•©ë‹ˆë‹¤. ì˜ˆë¥¼ ë“¤ì–´ f(1, y = 2) ë¥¼ call í•˜ëŠ” ê±´ ê°€ëŠ¥í•˜ì§€ë§Œ f(x = 1, 2) ëŠ” ì•ˆë©ë‹ˆë‹¤.
 
-Variable number of arguments(vararg) ´Â spread operator ¸¦ »ç¿ëÇØ named form À¸·Î Àü´ŞµÉ ¼ö ÀÖ½À´Ï´Ù.
+Variable number of arguments(vararg) ëŠ” spread operator ë¥¼ ì‚¬ìš©í•´ named form ìœ¼ë¡œ ì „ë‹¬ë  ìˆ˜ ìˆìŠµë‹ˆë‹¤.
 
 ---
 fun foo(vararg strings: String) { /* ... */ }
@@ -126,10 +126,10 @@ foo(strings = *arrayOf("a", "b", "c"))
 foo(strings = "A") // Not required for a single value
 ---
 
-named argument ¹®¹ıÀº java functions ¸¦ È£ÃâÇÒ ¶© »ç¿ëÇÒ ¼ö ¾ø´Ù´Â °É ¸í½ÉÇÏ¼¼¿ä. ¿Ö³ÄÇÏ¸é java bytecode ´Â Ç×»ó function parameters ÀÇ ÀÌ¸§À» À¯ÁöÇÏÁö ¾Ê±â ¶§¹®ÀÔ´Ï´Ù.
+named argument ë¬¸ë²•ì€ java functions ë¥¼ í˜¸ì¶œí•  ë• ì‚¬ìš©í•  ìˆ˜ ì—†ë‹¤ëŠ” ê±¸ ëª…ì‹¬í•˜ì„¸ìš”. ì™œëƒí•˜ë©´ java bytecode ëŠ” í•­ìƒ function parameters ì˜ ì´ë¦„ì„ ìœ ì§€í•˜ì§€ ì•Šê¸° ë•Œë¬¸ì…ë‹ˆë‹¤.
 
 05.01.06. Unit-returning functions
-function ÀÌ ¾î¶² À¯¿ëÇÑ value µµ return ÇÏÁö ¾Ê´Â´Ù¸é, ±×°ÍÀÇ return type Àº Unit ÀÔ´Ï´Ù. Unit Àº ¿ÀÁ÷ ÇÏ³ªÀÇ value - Unit À¸·Î¸¸ ÀÌ·ç¾îÁø type ÀÔ´Ï´Ù. ÀÌ value ´Â ¸í½ÃÀûÀ¸·Î return ÇÒ ÇÊ¿ä ¾ø½À´Ï´Ù.
+function ì´ ì–´ë–¤ ìœ ìš©í•œ value ë„ return í•˜ì§€ ì•ŠëŠ”ë‹¤ë©´, ê·¸ê²ƒì˜ return type ì€ Unit ì…ë‹ˆë‹¤. Unit ì€ ì˜¤ì§ í•˜ë‚˜ì˜ value - Unit ìœ¼ë¡œë§Œ ì´ë£¨ì–´ì§„ type ì…ë‹ˆë‹¤. ì´ value ëŠ” ëª…ì‹œì ìœ¼ë¡œ return í•  í•„ìš” ì—†ìŠµë‹ˆë‹¤.
 
 ---
 fun printHello(name: String?): Unit {
@@ -142,13 +142,13 @@ fun printHello(name: String?): Unit {
 ---
 
 05.01.07. Single-Expression functions
-functions ÀÌ single expression À» return ÇÏ´Â °æ¿ì, curly braces ´Â »ı·«ÇÒ ¼ö ÀÖ°í body ´Â a = symbol µÚ¿¡ ¸í½ÃÇÕ´Ï´Ù.
+functions ì´ single expression ì„ return í•˜ëŠ” ê²½ìš°, curly braces ëŠ” ìƒëµí•  ìˆ˜ ìˆê³  body ëŠ” a = symbol ë’¤ì— ëª…ì‹œí•©ë‹ˆë‹¤.
 
 ---
 fun double(x: Int): Int = x * 2
 ---
 
-return type ÀÌ compiler ¿¡ ÀÇÇØ À¯ÃßµÉ ¼ö ÀÖ±â ¶§¹®¿¡ ¸í½ÃÀûÀ¸·Î return type À» Á¤ÀÇÇÏ´Â °Ç ¼±ÅÃÀûÀÔ´Ï´Ù.
+return type ì´ compiler ì— ì˜í•´ ìœ ì¶”ë  ìˆ˜ ìˆê¸° ë•Œë¬¸ì— ëª…ì‹œì ìœ¼ë¡œ return type ì„ ì •ì˜í•˜ëŠ” ê±´ ì„ íƒì ì…ë‹ˆë‹¤.
 
 ---
 fun double(x: Int) = x * 2
@@ -156,10 +156,10 @@ fun double(x: Int) = x * 2
 
 05.01.08. Explicit return types
 
-block body ¸¦ °¡Áø functons Àº Unit À» return ÇÏ·Á´Â °Ô ¾Æ´Ñ ÀÌ»ó, Ç×»ó ¸í½ÃÀûÀ¸·Î return type À» ±â¼úÇØ¾ß ÇÕ´Ï´Ù. Kotlin Àº block bodies °¡ ÀÖ´Â function ÀÇ return type À» À¯ÃßÇÏÁö ¸øÇÏ´Âµ¥, ¿Ö³ÄÇÏ¸é ±×·¯ÇÑ functions Àº body ³»¿¡ º¹ÀâÇÑ ÄÁÆ®·Ñ flow ¸¦ °¡Áú ¼ö ÀÖ°í return type ÀÌ ÀĞ´Â »ç¶÷(¶§¶§·Î´Â ÄÄÆÄÀÏ·¯¿¡°Ô ±îÁö) ºÒ¸íÈ®ÇØÁö±â ¶§¹®ÀÔ´Ï´Ù.
+block body ë¥¼ ê°€ì§„ functons ì€ Unit ì„ return í•˜ë ¤ëŠ” ê²Œ ì•„ë‹Œ ì´ìƒ, í•­ìƒ ëª…ì‹œì ìœ¼ë¡œ return type ì„ ê¸°ìˆ í•´ì•¼ í•©ë‹ˆë‹¤. Kotlin ì€ block bodies ê°€ ìˆëŠ” function ì˜ return type ì„ ìœ ì¶”í•˜ì§€ ëª»í•˜ëŠ”ë°, ì™œëƒí•˜ë©´ ê·¸ëŸ¬í•œ functions ì€ body ë‚´ì— ë³µì¡í•œ ì»¨íŠ¸ë¡¤ flow ë¥¼ ê°€ì§ˆ ìˆ˜ ìˆê³  return type ì´ ì½ëŠ” ì‚¬ëŒ(ë•Œë•Œë¡œëŠ” ì»´íŒŒì¼ëŸ¬ì—ê²Œ ê¹Œì§€) ë¶ˆëª…í™•í•´ì§€ê¸° ë•Œë¬¸ì…ë‹ˆë‹¤.
 
 05.01.09. Variable number of arguments (Varargs)
-function ÀÇ parameter ÇÏ³ª´Â (ÀÏ¹İÀûÀ¸·Î ¸¶Áö¸· parameter) vararg modifier ·Î Ç¥½ÃÇÒ ¼ö ÀÖ½À´Ï´Ù.
+function ì˜ parameter í•˜ë‚˜ëŠ” (ì¼ë°˜ì ìœ¼ë¡œ ë§ˆì§€ë§‰ parameter) vararg modifier ë¡œ í‘œì‹œí•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.
 
 ---
 func <T> asList(varargs ts: T): List<T> {
@@ -170,16 +170,16 @@ func <T> asList(varargs ts: T): List<T> {
 }
 ---
 
-arguments ÀÇ variable ÇÑ ¼ıÀÚ¸¦ function ¿¡ Àü´ŞÇÒ ¼ö ÀÖ½À´Ï´Ù.
+arguments ì˜ variable í•œ ìˆ«ìë¥¼ function ì— ì „ë‹¬í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.
 ---
 val list = asList(1, 2, 3)
 ---
 
-function ³»¿¡¼­ T type ÀÇ vararg-parameter ´Â T ÀÇ array ·Î º¸ÀÔ´Ï´Ù, Áï À§ÀÇ ¿¹¿¡¼­ ts variable Àº Array<out T> ¸¦ °¡Áı´Ï´Ù.
+function ë‚´ì—ì„œ T type ì˜ vararg-parameter ëŠ” T ì˜ array ë¡œ ë³´ì…ë‹ˆë‹¤, ì¦‰ ìœ„ì˜ ì˜ˆì—ì„œ ts variable ì€ Array<out T> ë¥¼ ê°€ì§‘ë‹ˆë‹¤.
 
-¿ÀÁ÷ ÇÏ³ªÀÇ parameter ¸¸ vararg ·Î Ç¥½ÃÇÒ ¼ö ÀÖ½À´Ï´Ù. vararg parameter °¡ ¸®½ºÆ® ³»¿¡ ¸¶Áö¸·¿¡ ¿ÀÁö ¾ÊÀ¸¸é ÀÌ¾îÁö´Â parameters ÀÇ values ´Â ¹®¹ıÀûÀ¸·Î ¸í¸íµÈ argument ¸¦ »ç¿ëÇØ Àü´ŞÇÒ ¼ö ÀÖ°í, ¸¸ÀÏ parameter °¡ function type À» °®´Â´Ù¸é °ıÈ£ ¹Û lamda ¸¦ Àü´ŞÇÔÀ¸·Î¼­ ÀÌ¾îÁö´Â parameter ¸¦ Àü´ŞÇÒ ¼ö ÀÖ½À´Ï´Ù.
+ì˜¤ì§ í•˜ë‚˜ì˜ parameter ë§Œ vararg ë¡œ í‘œì‹œí•  ìˆ˜ ìˆìŠµë‹ˆë‹¤. vararg parameter ê°€ ë¦¬ìŠ¤íŠ¸ ë‚´ì— ë§ˆì§€ë§‰ì— ì˜¤ì§€ ì•Šìœ¼ë©´ ì´ì–´ì§€ëŠ” parameters ì˜ values ëŠ” ë¬¸ë²•ì ìœ¼ë¡œ ëª…ëª…ëœ argument ë¥¼ ì‚¬ìš©í•´ ì „ë‹¬í•  ìˆ˜ ìˆê³ , ë§Œì¼ parameter ê°€ function type ì„ ê°–ëŠ”ë‹¤ë©´ ê´„í˜¸ ë°– lamda ë¥¼ ì „ë‹¬í•¨ìœ¼ë¡œì„œ ì´ì–´ì§€ëŠ” parameter ë¥¼ ì „ë‹¬í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.
 
-vararg-function ¸¦ call ÇÒ ¶§, ¿¹¸¦ µé¾î asList(1, 2, 3) Ã³·³ ÇÏ³ª ÇÏ³ª arguments ¸¦ Àü´ŞÇÒ ¼öµµ ÀÖ½À´Ï´Ù.¸¸ÀÏ ÀÌ¹Ì array ¸¦ °¡Áö°í ÀÖ°í ±× ³»¿ëÀ» function À¸·Î Àü´ŞÇÏ°í ½Í´Ù¸é spread operator ¸¦ »ç¿ëÇÒ ¼ö ÀÖ½À´Ï´Ù, (array ¸¦ *¿Í ÇÔ²² »ç¿ë)
+vararg-function ë¥¼ call í•  ë•Œ, ì˜ˆë¥¼ ë“¤ì–´ asList(1, 2, 3) ì²˜ëŸ¼ í•˜ë‚˜ í•˜ë‚˜ arguments ë¥¼ ì „ë‹¬í•  ìˆ˜ë„ ìˆìŠµë‹ˆë‹¤.ë§Œì¼ ì´ë¯¸ array ë¥¼ ê°€ì§€ê³  ìˆê³  ê·¸ ë‚´ìš©ì„ function ìœ¼ë¡œ ì „ë‹¬í•˜ê³  ì‹¶ë‹¤ë©´ spread operator ë¥¼ ì‚¬ìš©í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤, (array ë¥¼ *ì™€ í•¨ê»˜ ì‚¬ìš©)
 
 ---
 val a = arrayOf(1, 2, 3)
@@ -187,11 +187,11 @@ val list = asList(-1, 0, *a, 4)
 ---
 
 05.01.10. Infix notation
-inifx notations ¸¦ »ç¿ëÇØ function ¸¦ call ÇÏ´Â °æ¿ì´Â ´ÙÀ½°ú °°½À´Ï´Ù.
+inifx notations ë¥¼ ì‚¬ìš©í•´ function ë¥¼ call í•˜ëŠ” ê²½ìš°ëŠ” ë‹¤ìŒê³¼ ê°™ìŠµë‹ˆë‹¤.
 
-- member functions ³ª extension functions ÀÏ ¶§
-- single parameter ¸¦ °¡Áö°í ÀÖÀ» ¶§
-- infix keyword ¸¦ Ç¥½ÃÇßÀ» ¶§
+- member functions ë‚˜ extension functions ì¼ ë•Œ
+- single parameter ë¥¼ ê°€ì§€ê³  ìˆì„ ë•Œ
+- infix keyword ë¥¼ í‘œì‹œí–ˆì„ ë•Œ
 
 ---
 // Define extension to Int
@@ -209,7 +209,7 @@ infix fun Int.shl(x: Int): Int {
 ---
 
 05.01.11. Local Functions
-Kotlin Àº local functions, Áï ´Ù¸¥ function ³»¿¡ ÀÖ´Â function À» Áö¿øÇÕ´Ï´Ù.
+Kotlin ì€ local functions, ì¦‰ ë‹¤ë¥¸ function ë‚´ì— ìˆëŠ” function ì„ ì§€ì›í•©ë‹ˆë‹¤.
 
 ---
 fun dfs(graph: Graph) {
@@ -223,7 +223,7 @@ fun dfs(graph: Graph) {
 }
 ---
 
-Local function ´Â ¹Ù±ù functions ÀÇ local variables ¿¡ Á¢±ÙÇÒ ¼ö ÀÖ½À´Ï´Ù. À§ÀÇ °æ¿ì¶ó¸é visited ´Â local varialbe ÀÌ µÉ ¼ö ÀÖ½À´Ï´Ù.
+Local function ëŠ” ë°”ê¹¥ functions ì˜ local variables ì— ì ‘ê·¼í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤. ìœ„ì˜ ê²½ìš°ë¼ë©´ visited ëŠ” local varialbe ì´ ë  ìˆ˜ ìˆìŠµë‹ˆë‹¤.
 
 ---
 fun dfs(graph: Graph) {
@@ -239,7 +239,7 @@ fun dfs(graph: Graph) {
 ---
 
 05.01.12. Member Functions
-member function Àº class ³ª object ³»¿¡ Á¤ÀÇµÈ function ÀÔ´Ï´Ù.
+member function ì€ class ë‚˜ object ë‚´ì— ì •ì˜ëœ function ì…ë‹ˆë‹¤.
 
 ---
 class Sample() {
@@ -247,14 +247,14 @@ class Sample() {
 }
 ---
 
-Member functions ´Â dot notation À¸·Î call ÇÒ ¼ö ÀÖ½À´Ï´Ù.
+Member functions ëŠ” dot notation ìœ¼ë¡œ call í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.
 
 ---
 Sample().foo() // creates instance of class Sample and calls foo
 ---
 
 05.01.13. Generic Functions
-functions ´Â function ÀÌ¸§ Àü¿¡ angle brackets(< >) À» »ç¿ëÇØ ±â¼úµÈ generic parameters ¸¦ °¡Áı´Ï´Ù.
+functions ëŠ” function ì´ë¦„ ì „ì— angle brackets(< >) ì„ ì‚¬ìš©í•´ ê¸°ìˆ ëœ generic parameters ë¥¼ ê°€ì§‘ë‹ˆë‹¤.
 
 ---
 fun <T> singletonList(item: T): List<T> {
@@ -269,7 +269,7 @@ fun <T> singletonList(item: T): List<T> {
 05.01.16. Higher-Order Functions and Lamdas
 
 05.01.17. Tail recursive functions
-Kotlin Àº tail recursion À¸·Î ¾Ë·ÁÁø functional programming ±â¹ıÀ» Áö¿øÇÕ´Ï´Ù. ÀÌ°ÍÀº ¾î¶² ¾Ë°í¸®ÁòµéÀ» loops ¸¦ »ç¿ëÇØ ÀÛ¼ºÇÏ´Â ´ë½Å recursive function ·Î »ç¿ëÇØ ÀÛ¼ºÇÏµµ·Ï °¡´ÉÇÏ°Ô ÇÏ¸é¼­ stack overflow ÀÇ À§Çè¾øÀÌ »ç¿ë °¡´ÉÇÏ°Ô ÇÕ´Ï´Ù. function À» tailrec modifier ·Î Ç¥½ÃÇÏ°í ¿ä±¸µÇ´Â form À» ¸¸Á·½ÃÅ°¸é recursion À» ÃÖÀûÈ­ÇÏ¿© ´ë½Å ºü¸£°í È¿À²ÀûÀ¸·Î ·çÇÁ ±â¹İ ¹öÀüÀ» ³²±é´Ï´Ù.
+Kotlin ì€ tail recursion ìœ¼ë¡œ ì•Œë ¤ì§„ functional programming ê¸°ë²•ì„ ì§€ì›í•©ë‹ˆë‹¤. ì´ê²ƒì€ ì–´ë–¤ ì•Œê³ ë¦¬ì¦˜ë“¤ì„ loops ë¥¼ ì‚¬ìš©í•´ ì‘ì„±í•˜ëŠ” ëŒ€ì‹  recursive function ë¡œ ì‚¬ìš©í•´ ì‘ì„±í•˜ë„ë¡ ê°€ëŠ¥í•˜ê²Œ í•˜ë©´ì„œ stack overflow ì˜ ìœ„í—˜ì—†ì´ ì‚¬ìš© ê°€ëŠ¥í•˜ê²Œ í•©ë‹ˆë‹¤. function ì„ tailrec modifier ë¡œ í‘œì‹œí•˜ê³  ìš”êµ¬ë˜ëŠ” form ì„ ë§Œì¡±ì‹œí‚¤ë©´ recursion ì„ ìµœì í™”í•˜ì—¬ ëŒ€ì‹  ë¹ ë¥´ê³  íš¨ìœ¨ì ìœ¼ë¡œ ë£¨í”„ ê¸°ë°˜ ë²„ì „ì„ ë‚¨ê¹ë‹ˆë‹¤.
 
 ---
 tailrec fun findFixPoint(x: Double = 1.0): Double
@@ -277,7 +277,7 @@ tailrec fun findFixPoint(x: Double = 1.0): Double
 findFixPoint(Math.cos(x))
 ----
 
-ÀÌ ÄÚµå´Â ¼öÇĞÀû »ó¼öÀÎ cosine ÀÇ fixpoint ¸¦ °è»êÇÕ´Ï´Ù. ´Ü¼øÈ÷ 1.0 ¿¡¼­ ½ÃÀÛÇØ ´õ ÀÌ»ó °á°ú°¡ ¹Ù²îÁö ¾ÊÀ» ¶§±îÁö Math.cos ¸¦ call ÇÏ°í, °á°úÀûÀ¸·Î 0.7390851332151607 ÀÌ µË´Ï´Ù. °á°ú ÄÚµå´Â ´õ ÀüÅëÀûÀÎ ½ºÅ¸ÀÏÀÇ ÀÌ ÄÚµå¿Í µ¿µîÇÕ´Ï´Ù.
+ì´ ì½”ë“œëŠ” ìˆ˜í•™ì  ìƒìˆ˜ì¸ cosine ì˜ fixpoint ë¥¼ ê³„ì‚°í•©ë‹ˆë‹¤. ë‹¨ìˆœíˆ 1.0 ì—ì„œ ì‹œì‘í•´ ë” ì´ìƒ ê²°ê³¼ê°€ ë°”ë€Œì§€ ì•Šì„ ë•Œê¹Œì§€ Math.cos ë¥¼ call í•˜ê³ , ê²°ê³¼ì ìœ¼ë¡œ 0.7390851332151607 ì´ ë©ë‹ˆë‹¤. ê²°ê³¼ ì½”ë“œëŠ” ë” ì „í†µì ì¸ ìŠ¤íƒ€ì¼ì˜ ì´ ì½”ë“œì™€ ë™ë“±í•©ë‹ˆë‹¤.
 
 ---
 private fun findFixPoint(): Double {
@@ -290,14 +290,14 @@ private fun findFixPoint(): Double {
 }
 ---
 
-tailrec modifier ¸¦ ¹Ş±â À§ÇØ¼­ function Àº ½ÇÇàÇÏ´Â ¸¶Áö¸· operation À¸·Î ±× ÀÚ½ÅÀ» call ÇØ¾ß ÇÕ´Ï´Ù. recursive call ÀÌÈÄ ´õ ¸¹Àº ÄÚµå°¡ ÀÖÀ» °æ¿ì¿¡´Â tail recursion À» ¾²Áö ¸»¾Æ¾ß ÇÏ°í, try/catch/finally blocks °ú ÇÔ²² »ç¿ëÇÒ ¼ö ¾ø½À´Ï´Ù. ÇöÀç tail recursion Àº ¿ÀÁ÷ JVM backend ¿¡¼­¸¸ Áö¿øµË´Ï´Ù.
+tailrec modifier ë¥¼ ë°›ê¸° ìœ„í•´ì„œ function ì€ ì‹¤í–‰í•˜ëŠ” ë§ˆì§€ë§‰ operation ìœ¼ë¡œ ê·¸ ìì‹ ì„ call í•´ì•¼ í•©ë‹ˆë‹¤. recursive call ì´í›„ ë” ë§ì€ ì½”ë“œê°€ ìˆì„ ê²½ìš°ì—ëŠ” tail recursion ì„ ì“°ì§€ ë§ì•„ì•¼ í•˜ê³ , try/catch/finally blocks ê³¼ í•¨ê»˜ ì‚¬ìš©í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤. í˜„ì¬ tail recursion ì€ ì˜¤ì§ JVM backend ì—ì„œë§Œ ì§€ì›ë©ë‹ˆë‹¤.
 
 
 05.02. Lamdas
 
 05.02.01. Higher-Order Functions
 
-high-order functions Àº parameters ·Î¼­ functions À» ¹Ş¾Æ function À» return ÇÏ´Â function ÀÔ´Ï´Ù. ±×·¯ÇÑ function ÀÇ ÁÁÀº ¿¹·Î lock() ÀÌ ÀÖ½À´Ï´Ù. ÀÌ ÇÔ¼ö´Â lock object ¿Í function À» ¹Ş¾Æ lock À» ÃëµæÇÏ¿© function ¸¦ ½ÇÇàÇÏ°í lock À» ÇØÁ¦ÇÕ´Ï´Ù.
+high-order functions ì€ parameters ë¡œì„œ functions ì„ ë°›ì•„ function ì„ return í•˜ëŠ” function ì…ë‹ˆë‹¤. ê·¸ëŸ¬í•œ function ì˜ ì¢‹ì€ ì˜ˆë¡œ lock() ì´ ìˆìŠµë‹ˆë‹¤. ì´ í•¨ìˆ˜ëŠ” lock object ì™€ function ì„ ë°›ì•„ lock ì„ ì·¨ë“í•˜ì—¬ function ë¥¼ ì‹¤í–‰í•˜ê³  lock ì„ í•´ì œí•©ë‹ˆë‹¤.
 
 ---
 fun <T> lock(lock: Lock, body: () -> T): T {
@@ -311,9 +311,9 @@ fun <T> lock(lock: Lock, body: () -> T): T {
 }
 ---
 
-À§ÀÇ ÄÚµå¸¦ ºĞ¼®ÇØº¾½Ã´Ù. body ´Â function type () -> T ¸¦ °¡Áö°í ÀÖ°í, ÀÌ°ÍÀº ¾Æ¹«·± parameter µµ ¹ŞÁö ¾Ê°í type T ÀÇ value ¸¦ return ÇÏ´Â function ÀÌ¶ó °¡Á¤ÇÕ´Ï´Ù. ±×°ÍÀº try-block ³»¿¡¼­ ½ÇÇàµÇ°í ±×µ¿¾È lock ¿¡ ÀÇÇØ º¸È£µË´Ï´Ù. ±×¸®°í ±× °á°ú´Â lock() function ¿¡ ÀÇÇØ return µË´Ï´Ù.
+ìœ„ì˜ ì½”ë“œë¥¼ ë¶„ì„í•´ë´…ì‹œë‹¤. body ëŠ” function type () -> T ë¥¼ ê°€ì§€ê³  ìˆê³ , ì´ê²ƒì€ ì•„ë¬´ëŸ° parameter ë„ ë°›ì§€ ì•Šê³  type T ì˜ value ë¥¼ return í•˜ëŠ” function ì´ë¼ ê°€ì •í•©ë‹ˆë‹¤. ê·¸ê²ƒì€ try-block ë‚´ì—ì„œ ì‹¤í–‰ë˜ê³  ê·¸ë™ì•ˆ lock ì— ì˜í•´ ë³´í˜¸ë©ë‹ˆë‹¤. ê·¸ë¦¬ê³  ê·¸ ê²°ê³¼ëŠ” lock() function ì— ì˜í•´ return ë©ë‹ˆë‹¤.
 
-lock À» call ÇÏ°í ½Í´Ù¸é ¶Ç´Ù¸¥ function À» argument ·Î ³Ñ°ÜÁÙ ¼ö ÀÖ½À´Ï´Ù.
+lock ì„ call í•˜ê³  ì‹¶ë‹¤ë©´ ë˜ë‹¤ë¥¸ function ì„ argument ë¡œ ë„˜ê²¨ì¤„ ìˆ˜ ìˆìŠµë‹ˆë‹¤.
 
 ---
 fun toBeSynchronized() = sharedResource.operation()
@@ -321,19 +321,19 @@ fun toBeSynchronized() = sharedResource.operation()
 val result = lock(lock, ::toBeSynchronized)
 ---
 
-¶Ç lamda expression À» ³Ñ±â±â À§ÇÑ ÈÎ¾À ´õ ÆíÇÑ ¹æ¹ıÀÌ ÀÖ½À´Ï´Ù.
+ë˜ lamda expression ì„ ë„˜ê¸°ê¸° ìœ„í•œ í›¨ì”¬ ë” í¸í•œ ë°©ë²•ì´ ìˆìŠµë‹ˆë‹¤.
 
 ---
 val result = lock(lock, { sharedResource.operation()})
 ---
 
-Lamda expressions ´Â ¾Æ·¡ »ó¼¼ ³»¿ë¿¡ ¼³¸íµÅ ÀÖ½À´Ï´Ù¸¸ ÀÌ section À» °è¼ÓÇÒ ¸ñÀûÀÌ¶ó¸é ¿ä¾àµÈ ³»¿ë¸¸ º¸¼¼¿ä.
+Lamda expressions ëŠ” ì•„ë˜ ìƒì„¸ ë‚´ìš©ì— ì„¤ëª…ë¼ ìˆìŠµë‹ˆë‹¤ë§Œ ì´ section ì„ ê³„ì†í•  ëª©ì ì´ë¼ë©´ ìš”ì•½ëœ ë‚´ìš©ë§Œ ë³´ì„¸ìš”.
 
-- lamda expression Àº Ç×»ó curly braces ·Î °¨½ÎÁı´Ï´Ù.
-- ±×°ÍÀÇ parameters ´Â -> Àü¿¡ Á¤ÀÇµË´Ï´Ù. (parameter types Àº »ı·«ÇØµµ µË´Ï´Ù)
-- body ´Â -> µÚ¿¡ ¿É´Ï´Ù.
+- lamda expression ì€ í•­ìƒ curly braces ë¡œ ê°ì‹¸ì§‘ë‹ˆë‹¤.
+- ê·¸ê²ƒì˜ parameters ëŠ” -> ì „ì— ì •ì˜ë©ë‹ˆë‹¤. (parameter types ì€ ìƒëµí•´ë„ ë©ë‹ˆë‹¤)
+- body ëŠ” -> ë’¤ì— ì˜µë‹ˆë‹¤.
 
-Kotlin ¿¡¼­ function ¿¡ Àü´ŞµÇ´Â ¸¶Áö¸· parameter °¡ function ÀÌ°í lamda expression À» ÇØ´çÇÏ´Â argument ·Î Àü´ŞÇÏ°íÀÚ ÇÑ´Ù¸é Æí¸®ÇÑ ¹æ¹ıÀÌ ÀÖ´Âµ¥, ±×°ÍÀ» °ıÈ£ ¹Ù±ù¿¡ ±â¼úÇÏ´Â °ÍÀÔ´Ï´Ù.
+Kotlin ì—ì„œ function ì— ì „ë‹¬ë˜ëŠ” ë§ˆì§€ë§‰ parameter ê°€ function ì´ê³  lamda expression ì„ í•´ë‹¹í•˜ëŠ” argument ë¡œ ì „ë‹¬í•˜ê³ ì í•œë‹¤ë©´ í¸ë¦¬í•œ ë°©ë²•ì´ ìˆëŠ”ë°, ê·¸ê²ƒì„ ê´„í˜¸ ë°”ê¹¥ì— ê¸°ìˆ í•˜ëŠ” ê²ƒì…ë‹ˆë‹¤.
 
 ---
 lock(lock) {
@@ -341,7 +341,7 @@ lock(lock) {
 }
 ---
 
-high-order function ÀÇ ¶Ç ´Ù¸¥ ¿¹´Â map() ÀÌ µÉ °Ì´Ï´Ù.
+high-order function ì˜ ë˜ ë‹¤ë¥¸ ì˜ˆëŠ” map() ì´ ë  ê²ë‹ˆë‹¤.
 
 ---
 fun <T, R> List<T>.map(transform: (T) -> R): List<R>
@@ -353,23 +353,23 @@ fun <T, R> List<T>.map(transform: (T) -> R): List<R>
 }
 ---
 
-ÀÌ function Àº ´ÙÀ½°ú °°ÀÌ call ÇÕ´Ï´Ù.
+ì´ function ì€ ë‹¤ìŒê³¼ ê°™ì´ call í•©ë‹ˆë‹¤.
 
 ---
 val doubled = ints.map { value -> value * 2 }
 ---
 
-lamda°¡ ÇØ´ç call ÀÇ À¯ÀÏÇÑ argument ¶ó¸é call ¾ÈÀÇ °ıÈ£°¡ ÀüÃ¼ÀûÀ¸·Î »ı·«µÉ ¼ö ÀÖ´Ù´Â °É ¾Ë¾ÆµÎ¼¼¿ä.
+lamdaê°€ í•´ë‹¹ call ì˜ ìœ ì¼í•œ argument ë¼ë©´ call ì•ˆì˜ ê´„í˜¸ê°€ ì „ì²´ì ìœ¼ë¡œ ìƒëµë  ìˆ˜ ìˆë‹¤ëŠ” ê±¸ ì•Œì•„ë‘ì„¸ìš”.
 
 05.02.02. it: implicit name of a single parameter
 
-¶Ç´Ù¸¥ À¯¿ëÇÑ ¾à¼ÓÀº function ¸®ÅÍ·²ÀÌ ¿ÀÁ÷ ÇÏ³ªÀÇ parameter ¸¦ °¡Áú ¶§, ±×°ÍÀÇ ¼±¾ğÀÌ »ı·«µÉ ¼ö ÀÖ°í(-> °ú ÇÔ²²) ±× ÀÌ¸§ÀÌ it °¡ µÉ °ÍÀÌ¶ó´Â °Ì´Ï´Ù.
+ë˜ë‹¤ë¥¸ ìœ ìš©í•œ ì•½ì†ì€ function ë¦¬í„°ëŸ´ì´ ì˜¤ì§ í•˜ë‚˜ì˜ parameter ë¥¼ ê°€ì§ˆ ë•Œ, ê·¸ê²ƒì˜ ì„ ì–¸ì´ ìƒëµë  ìˆ˜ ìˆê³ (-> ê³¼ í•¨ê»˜) ê·¸ ì´ë¦„ì´ it ê°€ ë  ê²ƒì´ë¼ëŠ” ê²ë‹ˆë‹¤.
 
 ---
 ints.map { it * 2 }
 ---
 
-ÀÌ ¾à¼ÓÀº LINQ-style ÄÚµå¸¦ ÀÛ¼ºÇÒ ¼ö ÀÖ°Ô ÇÕ´Ï´Ù.
+ì´ ì•½ì†ì€ LINQ-style ì½”ë“œë¥¼ ì‘ì„±í•  ìˆ˜ ìˆê²Œ í•©ë‹ˆë‹¤.
 
 ---
 strings.filter { it.length == 5 }.sortedBy { it }.map { it.toUpperCase() }
@@ -377,7 +377,7 @@ strings.filter { it.length == 5 }.sortedBy { it }.map { it.toUpperCase() }
 
 05.02.03. Underscore for unused variables (since 1.1)
 
-lamda parameter °¡ »ç¿ëµÇÁö ¾Ê´Â´Ù¸é, ÀÌ¸§ ´ë½Å underscore ¸¦ À§Ä¡½ÃÅ³ ¼ö ÀÖ½À´Ï´Ù.
+lamda parameter ê°€ ì‚¬ìš©ë˜ì§€ ì•ŠëŠ”ë‹¤ë©´, ì´ë¦„ ëŒ€ì‹  underscore ë¥¼ ìœ„ì¹˜ì‹œí‚¬ ìˆ˜ ìˆìŠµë‹ˆë‹¤.
 
 ---
 map.forEach { _, value -> println("$value!") }
@@ -389,13 +389,13 @@ map.forEach { _, value -> println("$value!") }
 
 05.02.06 Lamda Expressions and Anonymous Functions
 
-lamda expression ÀÌ³ª anonymous function Àº function literal ÀÔ´Ï´Ù. Áï ¼±¾ğÇÏÁö ¾Ê¾ÒÁö¸¸ expression À¸·Î¼­ Áï½Ã ³Ñ±æ ¼ö ÀÖ´Â function ÀÔ´Ï´Ù. ´ÙÀ½ÀÇ ¿¹¸¦ »ı°¢ÇØº¸¼¼¿ä.
+lamda expression ì´ë‚˜ anonymous function ì€ function literal ì…ë‹ˆë‹¤. ì¦‰ ì„ ì–¸í•˜ì§€ ì•Šì•˜ì§€ë§Œ expression ìœ¼ë¡œì„œ ì¦‰ì‹œ ë„˜ê¸¸ ìˆ˜ ìˆëŠ” function ì…ë‹ˆë‹¤. ë‹¤ìŒì˜ ì˜ˆë¥¼ ìƒê°í•´ë³´ì„¸ìš”.
 
 ---
 max(strings, { a, b -> a.length < b.length })
 ---
 
-Function max ´Â higher-order function ÀÔ´Ï´Ù. Áï function value ¸¦ µÎ¹øÂ° argument ·Î ¹Ş½À´Ï´Ù. µÎ¹øÂ° argument ´Â ½º½º·Î function ÀÌ µÇ´Â expression, Áï function literal ÀÔ´Ï´Ù. function À¸·Î¼­ ´ÙÀ½°ú µ¿ÀÏÇÕ´Ï´Ù.
+Function max ëŠ” higher-order function ì…ë‹ˆë‹¤. ì¦‰ function value ë¥¼ ë‘ë²ˆì§¸ argument ë¡œ ë°›ìŠµë‹ˆë‹¤. ë‘ë²ˆì§¸ argument ëŠ” ìŠ¤ìŠ¤ë¡œ function ì´ ë˜ëŠ” expression, ì¦‰ function literal ì…ë‹ˆë‹¤. function ìœ¼ë¡œì„œ ë‹¤ìŒê³¼ ë™ì¼í•©ë‹ˆë‹¤.
 
 ---
 fun compare(a: String, b: String): Boolean =
@@ -404,7 +404,7 @@ a.length < b.length
 
 05.02.07. Function Types
 
-¶Ç´Ù¸¥ function À» parameter ·Î Çã¿ëÇÏ´Â function ÀÇ °æ¿ì, ÇØ´ç parameter ¸¦ À§ÇÑ function type À» ±â¼úÇØ¾ß ÇÕ´Ï´Ù. ¿¹¸¦ µé¾î À§¿¡ ¾ğ±ŞÇÑ function max ´Â ´ÙÀ½°ú °°ÀÌ Á¤ÀÇÇÕ´Ï´Ù.
+ë˜ë‹¤ë¥¸ function ì„ parameter ë¡œ í—ˆìš©í•˜ëŠ” function ì˜ ê²½ìš°, í•´ë‹¹ parameter ë¥¼ ìœ„í•œ function type ì„ ê¸°ìˆ í•´ì•¼ í•©ë‹ˆë‹¤. ì˜ˆë¥¼ ë“¤ì–´ ìœ„ì— ì–¸ê¸‰í•œ function max ëŠ” ë‹¤ìŒê³¼ ê°™ì´ ì •ì˜í•©ë‹ˆë‹¤.
 
 ---
 fun <T> max(collection: Collection<T>, less: (T, T) -> Boolean): T? {
@@ -416,17 +416,17 @@ fun <T> max(collection: Collection<T>, less: (T, T) -> Boolean): T? {
 }
 ---
 
-parameter less ÀÇ Å¸ÀÔÀº (T, T) -> Boolean ÀÔ´Ï´Ù. Áï function Àº T type parameter µÎ °³¸¦ ¹Ş¾Æ Boolean ÇÏ³ª¸¦ return ÇÕ´Ï´Ù. Ã¹¹øÂ° parameter °¡ µÎ¹øÂ° parameter º¸´Ù ÀÛÀ¸¸é true ÀÔ´Ï´Ù.
+parameter less ì˜ íƒ€ì…ì€ (T, T) -> Boolean ì…ë‹ˆë‹¤. ì¦‰ function ì€ T type parameter ë‘ ê°œë¥¼ ë°›ì•„ Boolean í•˜ë‚˜ë¥¼ return í•©ë‹ˆë‹¤. ì²«ë²ˆì§¸ parameter ê°€ ë‘ë²ˆì§¸ parameter ë³´ë‹¤ ì‘ìœ¼ë©´ true ì…ë‹ˆë‹¤.
 
-body ³» 4¹øÂ° ÁÙÀÇ less ´Â function À¸·Î »ç¿ëµË´Ï´Ù. T type argument µÎ °³¸¦ ³Ñ°Ü call ÇÕ´Ï´Ù.
+body ë‚´ 4ë²ˆì§¸ ì¤„ì˜ less ëŠ” function ìœ¼ë¡œ ì‚¬ìš©ë©ë‹ˆë‹¤. T type argument ë‘ ê°œë¥¼ ë„˜ê²¨ call í•©ë‹ˆë‹¤.
 
-function type Àº À§¿¡ ¾²°Å³ª °¢ parameter ÀÇ ÀÇ¹Ì¸¦ ±â·ÏÇÏ±æ ¿øÇÑ´Ù¸é ¸í¸íµÈ parameters ¸¦ °¡Áú ¼ö ÀÖ½À´Ï´Ù.
+function type ì€ ìœ„ì— ì“°ê±°ë‚˜ ê° parameter ì˜ ì˜ë¯¸ë¥¼ ê¸°ë¡í•˜ê¸¸ ì›í•œë‹¤ë©´ ëª…ëª…ëœ parameters ë¥¼ ê°€ì§ˆ ìˆ˜ ìˆìŠµë‹ˆë‹¤.
 
 ---
 val compare: (x: T, y: T) -> Int = ...
 ---
 
-function type À» nullable variable ·Î ¼±¾ğÇÏ±â À§ÇØ ÀüÃ¼ function type À» °ıÈ£·Î °¨½Î°í µÚ¿¡ ¹°À½Ç¥¸¦ ³õÀ¸¼¼¿ä
+function type ì„ nullable variable ë¡œ ì„ ì–¸í•˜ê¸° ìœ„í•´ ì „ì²´ function type ì„ ê´„í˜¸ë¡œ ê°ì‹¸ê³  ë’¤ì— ë¬¼ìŒí‘œë¥¼ ë†“ìœ¼ì„¸ìš”
 
 ---
 var sum: ((Int, Int) -> Int)? = null
@@ -434,28 +434,28 @@ var sum: ((Int, Int) -> Int)? = null
 
 05.02.08. Lamda Expression Syntax
 
-lamda expressions ÀÇ ¿ÏÀüÇÑ syntatic form, Áï function type ÀÇ literals Àº ´ÙÀ½°ú °°½À´Ï´Ù.
+lamda expressions ì˜ ì™„ì „í•œ syntatic form, ì¦‰ function type ì˜ literals ì€ ë‹¤ìŒê³¼ ê°™ìŠµë‹ˆë‹¤.
 
 ---
 val sum = { x: Int, y: Int -> x + y }
 ---
 
-lamda expression Àº Ç×»ó curly braces ·Î µÑ·¯½Î¿© ÀÖÀ¸¸ç ¿ÏÀüÇÑ syntatic form ¿¡¼­ parameter ¼±¾ğÀº curly braes ¾È¿¡ ¿À°í ¼±ÅÃÀû type annotations ¸¦ °¡Áı´Ï´Ù. body ´Â -> Ç¥½Ã µÚ¿¡ ¿É´Ï´Ù. lamda ÀÇ À¯ÃßµÇ´Â return Å¸ÀÔÀÌ Unit ÀÌ ¾Æ´Ï¶ó¸é, lamda body ¾È¿¡ ÀÖ´Â ¸¶Áö¸·(È¤Àº single ÀÏ ¼öµµ ÀÖÀ½) expression ÀÌ return value ·Î Ãë±ŞµÈ´Ù.
+lamda expression ì€ í•­ìƒ curly braces ë¡œ ë‘˜ëŸ¬ì‹¸ì—¬ ìˆìœ¼ë©° ì™„ì „í•œ syntatic form ì—ì„œ parameter ì„ ì–¸ì€ curly braes ì•ˆì— ì˜¤ê³  ì„ íƒì  type annotations ë¥¼ ê°€ì§‘ë‹ˆë‹¤. body ëŠ” -> í‘œì‹œ ë’¤ì— ì˜µë‹ˆë‹¤. lamda ì˜ ìœ ì¶”ë˜ëŠ” return íƒ€ì…ì´ Unit ì´ ì•„ë‹ˆë¼ë©´, lamda body ì•ˆì— ìˆëŠ” ë§ˆì§€ë§‰(í˜¹ì€ single ì¼ ìˆ˜ë„ ìˆìŒ) expression ì´ return value ë¡œ ì·¨ê¸‰ëœë‹¤.
 
-¸ğµç optional annotations À» »©¹ö¸®¸é, ³²´Â °Ç ÀÌ¿Í °°À» °ÍÀÔ´Ï´Ù.
+ëª¨ë“  optional annotations ì„ ë¹¼ë²„ë¦¬ë©´, ë‚¨ëŠ” ê±´ ì´ì™€ ê°™ì„ ê²ƒì…ë‹ˆë‹¤.
 
 ---
 val sum: (Int, Int) -> Int = { x, y -> x + y }
 ---
 
-ÀÏ¹İÀûÀ¸·Î lamda expression Àº À¯ÀÏÇÑ parameter ¸¦ °¡Áı´Ï´Ù. kotlin ÀÌ ±× signature À» ½º½º·Î ¾Ë¾Æ³¾ ¼ö ÀÖ´Ù¸é, À¯ÀÏÇÑ parameter ¸¦ ¼±¾ğÇÒ ÇÊ¿ä°¡ ¾ø°í it ¶ó´Â ÀÌ¸§À¸·Î ¾Ï½ÃÀûÀ¸·Î ¼±¾ğµÉ °Ì´Ï´Ù.
+ì¼ë°˜ì ìœ¼ë¡œ lamda expression ì€ ìœ ì¼í•œ parameter ë¥¼ ê°€ì§‘ë‹ˆë‹¤. kotlin ì´ ê·¸ signature ì„ ìŠ¤ìŠ¤ë¡œ ì•Œì•„ë‚¼ ìˆ˜ ìˆë‹¤ë©´, ìœ ì¼í•œ parameter ë¥¼ ì„ ì–¸í•  í•„ìš”ê°€ ì—†ê³  it ë¼ëŠ” ì´ë¦„ìœ¼ë¡œ ì•”ì‹œì ìœ¼ë¡œ ì„ ì–¸ë  ê²ë‹ˆë‹¤.
 
 ---
 ints.filter { it > 0 } // this literal is of type
 '(it: Int) -> Boolean'
 ---
 
-qualified return syntax ¸¦ »ç¿ëÇØ lamada ·ÎºÎÅÍ value ¸¦ ¸í½ÃÀûÀ¸·Î return ÇÒ ¼ö ÀÖ½À´Ï´Ù. ±×·¸Áö ¾ÊÀ¸¸é ¸¶Áö¸· expression ÀÇ value ´Â ¾Ï½ÃÀûÀ¸·Î return µË´Ï´Ù. ±×·¯¹Ç·Î ´ÙÀ½ÀÇ µÎ snippets ´Â µ¿ÀÏÇÕ´Ï´Ù.
+qualified return syntax ë¥¼ ì‚¬ìš©í•´ lamada ë¡œë¶€í„° value ë¥¼ ëª…ì‹œì ìœ¼ë¡œ return í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤. ê·¸ë ‡ì§€ ì•Šìœ¼ë©´ ë§ˆì§€ë§‰ expression ì˜ value ëŠ” ì•”ì‹œì ìœ¼ë¡œ return ë©ë‹ˆë‹¤. ê·¸ëŸ¬ë¯€ë¡œ ë‹¤ìŒì˜ ë‘ snippets ëŠ” ë™ì¼í•©ë‹ˆë‹¤.
 
 ---
 ints.filter {
@@ -468,17 +468,17 @@ ints.filter {
     return@filter shouldFilter
 }
 
-function ÀÌ last parameter ·Î ¶Ç ´Ù¸¥ function À» ¹Ş´Â´Ù¸é lamda expression argument °¡ °ıÈ£ ÃÄÁø argument list ¹Ù±ù¿¡ ¿Ã ¼ö ÀÖ´Ù´Â °É ¾Ë¾ÆµÎ¼¼¿ä.
+function ì´ last parameter ë¡œ ë˜ ë‹¤ë¥¸ function ì„ ë°›ëŠ”ë‹¤ë©´ lamda expression argument ê°€ ê´„í˜¸ ì³ì§„ argument list ë°”ê¹¥ì— ì˜¬ ìˆ˜ ìˆë‹¤ëŠ” ê±¸ ì•Œì•„ë‘ì„¸ìš”.
 
 05.02.09. Anonymous Functions
 
-À§¿¡ ÀÖ´Â lamda expression syntax ¿¡ ºü¶ß¸° ÇÑ °¡Áö´Â function ÀÇ return type À» ±â¼úÇÏ´Â ´É·ÂÀÔ´Ï´Ù. ´ëºÎºĞ return type ÀÌ ÀÚµ¿À¸·Î À¯ÃßµÇ±â ¶§¹®¿¡ ÇÊ¿ä¾ø½À´Ï´Ù. ÇÏÁö¸¸ ¸í½ÃÀûÀ¸·Î ±â¼úÇÏ±æ ¿øÇÑ´Ù¸é anonymous function À¸·Î ´ëÃ¼ÇÏ½Ê½Ã¿À.
+ìœ„ì— ìˆëŠ” lamda expression syntax ì— ë¹ ëœ¨ë¦° í•œ ê°€ì§€ëŠ” function ì˜ return type ì„ ê¸°ìˆ í•˜ëŠ” ëŠ¥ë ¥ì…ë‹ˆë‹¤. ëŒ€ë¶€ë¶„ return type ì´ ìë™ìœ¼ë¡œ ìœ ì¶”ë˜ê¸° ë•Œë¬¸ì— í•„ìš”ì—†ìŠµë‹ˆë‹¤. í•˜ì§€ë§Œ ëª…ì‹œì ìœ¼ë¡œ ê¸°ìˆ í•˜ê¸¸ ì›í•œë‹¤ë©´ anonymous function ìœ¼ë¡œ ëŒ€ì²´í•˜ì‹­ì‹œì˜¤.
 
 ---
 fun(x: Int, y: Int): Int = x + y
 ---
 
-anonymous function Àº ¸¶Ä¡ ÀÌ¸§À» »ı·«ÇÑ Á¤±Ô function ¼±¾ğÃ³·³ º¸ÀÔ´Ï´Ù. body ´Â expression ÀÌ³ª block ÀÌ ¸ğµÎ °¡´ÉÇÕ´Ï´Ù.
+anonymous function ì€ ë§ˆì¹˜ ì´ë¦„ì„ ìƒëµí•œ ì •ê·œ function ì„ ì–¸ì²˜ëŸ¼ ë³´ì…ë‹ˆë‹¤. body ëŠ” expression ì´ë‚˜ block ì´ ëª¨ë‘ ê°€ëŠ¥í•©ë‹ˆë‹¤.
 
 ---
 fun(x: Int, y: Int): Int {
@@ -486,20 +486,20 @@ fun(x: Int, y: Int): Int {
 }
 ---
 
-parameter ¿Í return type Àº context ·ÎºÎÅÍ À¯ÃßµÉ ¼ö ÀÖ´Â °æ¿ì¿¡ parameter type À» »ı·«ÇÒ ¼ö ÀÖ´Ù´Â °Í¸¸ »©°í Á¤±Ô functions ÀÇ °æ¿ì¿Í µ¿ÀÏÇÑ ¹æ¹ıÀ¸·Î ±â¼úµË´Ï´Ù.
+parameter ì™€ return type ì€ context ë¡œë¶€í„° ìœ ì¶”ë  ìˆ˜ ìˆëŠ” ê²½ìš°ì— parameter type ì„ ìƒëµí•  ìˆ˜ ìˆë‹¤ëŠ” ê²ƒë§Œ ë¹¼ê³  ì •ê·œ functions ì˜ ê²½ìš°ì™€ ë™ì¼í•œ ë°©ë²•ìœ¼ë¡œ ê¸°ìˆ ë©ë‹ˆë‹¤.
 
 ---
 ints.filter(fun(item) = item>0)
 ---
 
-anonymous functions ¸¦ À§ÇÑ return type À¯Ãß´Â normal functions °æ¿ì¿Í µ¿ÀÏÇÏ°Ô ÀÛµ¿ÇÑ´Ù. return type Àº expression body ¸¦ °¡Áø anonymous functions ÀÇ °æ¿ì ÀÚµ¿À¸·Î À¯ÃßµÇ°í, block body ¸¦ °¡Áø anonymous functions ÀÇ °æ¿ì ¸í½ÃÀûÀ¸·Î ±â¼ú µÇ¾î¾ß ÇÑ´Ù.
+anonymous functions ë¥¼ ìœ„í•œ return type ìœ ì¶”ëŠ” normal functions ê²½ìš°ì™€ ë™ì¼í•˜ê²Œ ì‘ë™í•œë‹¤. return type ì€ expression body ë¥¼ ê°€ì§„ anonymous functions ì˜ ê²½ìš° ìë™ìœ¼ë¡œ ìœ ì¶”ë˜ê³ , block body ë¥¼ ê°€ì§„ anonymous functions ì˜ ê²½ìš° ëª…ì‹œì ìœ¼ë¡œ ê¸°ìˆ  ë˜ì–´ì•¼ í•œë‹¤.
 
-anonymous functions parameters ´Â Ç×»ó °ıÈ£ ¾È¿¡ ³Ñ°ÜÁø´Ù. ¿äÄÁ´ë function À» °ıÈ£ ¹ÛÀ¸·Î µÎ´Â syntax ´Â ¿ÀÁ÷ lamda expressions ¿¡¼­¸¸ µ¿ÀÛÇÕ´Ï´Ù.
+anonymous functions parameters ëŠ” í•­ìƒ ê´„í˜¸ ì•ˆì— ë„˜ê²¨ì§„ë‹¤. ìš”ì»¨ëŒ€ function ì„ ê´„í˜¸ ë°–ìœ¼ë¡œ ë‘ëŠ” syntax ëŠ” ì˜¤ì§ lamda expressions ì—ì„œë§Œ ë™ì‘í•©ë‹ˆë‹¤.
 
-lamda expressions ¿Í anonymous functions ÀÇ ¶Ç ´Ù¸¥ Â÷ÀÌÁ¡Àº non-local returns ÀÇ µ¿ÀÛÀÔ´Ï´Ù. label ÀÌ ¾ø´Â return statement ´Â Ç×»ó fun keyword ·Î ¼±¾ğµÈ function À¸·ÎºÎÅÍ return ÇÕ´Ï´Ù. ÀÌ°ÍÀº lamda expression ³»ÀÇ return ÀÌ eclosing function À¸·ÎºÎÅÍ return ÀÌ µÉ °ÍÀÌ°í, ¹İ¸é anonymous function Àº anonymous function ±× ÀÚ½ÅÀ¸·ÎºÎÅÍ return µÉ °ÍÀÌ¶ó´Â °É ÀÇ¹ÌÇÕ´Ï´Ù.
+lamda expressions ì™€ anonymous functions ì˜ ë˜ ë‹¤ë¥¸ ì°¨ì´ì ì€ non-local returns ì˜ ë™ì‘ì…ë‹ˆë‹¤. label ì´ ì—†ëŠ” return statement ëŠ” í•­ìƒ fun keyword ë¡œ ì„ ì–¸ëœ function ìœ¼ë¡œë¶€í„° return í•©ë‹ˆë‹¤. ì´ê²ƒì€ lamda expression ë‚´ì˜ return ì´ eclosing function ìœ¼ë¡œë¶€í„° return ì´ ë  ê²ƒì´ê³ , ë°˜ë©´ anonymous function ì€ anonymous function ê·¸ ìì‹ ìœ¼ë¡œë¶€í„° return ë  ê²ƒì´ë¼ëŠ” ê±¸ ì˜ë¯¸í•©ë‹ˆë‹¤.
 
 05.02.10. Closure
-lamda expression ÀÌ³ª anonymous function Àº ( local function °ú object expression ÀÇ °æ¿ìµµ ¸¶Âù°¡Áö·Î) ±×°ÍÀÇ closure, Áï ¹Ù±ù scope ¿¡¼­ ¼±¾ğµÈ variables ¿¡ Á¢±ÙÇÒ ¼ö ÀÖ½À´Ï´Ù. java ¿Í ´Ş¸® closure ¿¡ capture µÈ varaibles ´Â ¼öÁ¤µÉ ¼ö ÀÖ½À´Ï´Ù.
+lamda expression ì´ë‚˜ anonymous function ì€ ( local function ê³¼ object expression ì˜ ê²½ìš°ë„ ë§ˆì°¬ê°€ì§€ë¡œ) ê·¸ê²ƒì˜ closure, ì¦‰ ë°”ê¹¥ scope ì—ì„œ ì„ ì–¸ëœ variables ì— ì ‘ê·¼í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤. java ì™€ ë‹¬ë¦¬ closure ì— capture ëœ varaibles ëŠ” ìˆ˜ì •ë  ìˆ˜ ìˆìŠµë‹ˆë‹¤.
 
 ---
 var sum = 0
@@ -511,27 +511,27 @@ print(sum)
 
 05.02.11. Function Literals with Receiver
 
-Kotlin Àº function literal À» receiver object ¸¦ ±â¼úÇÏ¸é¼­ call ÇÒ ¼ö ÀÖ´Â ¹æ¹ıÀ» Á¦°øÇÕ´Ï´Ù. function literal body ³»¿¡¼­ Ãß°¡ÀûÀÎ ÇÑÁ¤ÀÚ ¾øÀÌ receiver object ¿¡ ÀÖ´Â method ¸¦ È£ÃâÇÒ ¼ö ÀÖ½À´Ï´Ù. ÀÌ°ÍÀº extension functions ¿Í ºñ½ÁÇÑµ¥, function body ³»¿¡ ÀÖ´Â receiver object ÀÇ members ¿¡ Á¢±ÙÇÒ ¼ö ÀÖµµ·Ï ÇÕ´Ï´Ù. ÀÌ·¯ÇÑ »ç¿ëÀÇ °¡Àå ÇÙ½ÉÀûÀÎ ¿¹°¡ Type-safe Groovy-style builders ÀÔ´Ï´Ù.
+Kotlin ì€ function literal ì„ receiver object ë¥¼ ê¸°ìˆ í•˜ë©´ì„œ call í•  ìˆ˜ ìˆëŠ” ë°©ë²•ì„ ì œê³µí•©ë‹ˆë‹¤. function literal body ë‚´ì—ì„œ ì¶”ê°€ì ì¸ í•œì •ì ì—†ì´ receiver object ì— ìˆëŠ” method ë¥¼ í˜¸ì¶œí•  ìˆ˜ ìˆìŠµë‹ˆë‹¤. ì´ê²ƒì€ extension functions ì™€ ë¹„ìŠ·í•œë°, function body ë‚´ì— ìˆëŠ” receiver object ì˜ members ì— ì ‘ê·¼í•  ìˆ˜ ìˆë„ë¡ í•©ë‹ˆë‹¤. ì´ëŸ¬í•œ ì‚¬ìš©ì˜ ê°€ì¥ í•µì‹¬ì ì¸ ì˜ˆê°€ Type-safe Groovy-style builders ì…ë‹ˆë‹¤.
 
-ÀÌ·¯ÇÑ function literal ÀÇ type Àº receiver ¿Í ÇÔ²² ÇÏ´Â function type ÀÔ´Ï´Ù.
+ì´ëŸ¬í•œ function literal ì˜ type ì€ receiver ì™€ í•¨ê»˜ í•˜ëŠ” function type ì…ë‹ˆë‹¤.
 
 ---
 sum: Int.(other: Int) -> Int
 ---
 
-funtion literal Àº receiver object ¿¡ ÀÖ´Â ¸Ş¼­µåÀÎ °ÍÃ³·³ call ÇÒ ¼ö ÀÖ½À´Ï´Ù.
+funtion literal ì€ receiver object ì— ìˆëŠ” ë©”ì„œë“œì¸ ê²ƒì²˜ëŸ¼ call í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.
 
 ---
 1.sum(2)
 ---
 
-anonymous function syntax ´Â receiver type function literal À» Á÷Á¢ ±â¼úÇÏ´Â °É Çã¿ëÇÕ´Ï´Ù. ÀÌ´Â receiver ¸¦ °¡Áø function type ÀÇ variable À» ¼±¾ğÇÏ°í ±×°ÍÀ» ³ªÁß¿¡ »ç¿ëÇÒ ÇÊ¿ä°¡ ÀÖÀ» ¶§ À¯¿ëÇÕ´Ï´Ù.
+anonymous function syntax ëŠ” receiver type function literal ì„ ì§ì ‘ ê¸°ìˆ í•˜ëŠ” ê±¸ í—ˆìš©í•©ë‹ˆë‹¤. ì´ëŠ” receiver ë¥¼ ê°€ì§„ function type ì˜ variable ì„ ì„ ì–¸í•˜ê³  ê·¸ê²ƒì„ ë‚˜ì¤‘ì— ì‚¬ìš©í•  í•„ìš”ê°€ ìˆì„ ë•Œ ìœ ìš©í•©ë‹ˆë‹¤.
 
 ---
 val sum = fun Int.(other: Int): Int = this + other
 ---
 
-function-with-receiver type ÀÇ non-literal value ¸¦ argument ·Î ¹èÁ¤ÇÏ°Å³ª ³Ñ±æ ¼öµµ ÀÖ°í, ±× ¹İ´ëÀÇ °æ¿ì receiver type ÀÇ Ãß°¡ÀûÀÎ Ã¹¹øÂ° parameter ¸¦ °¡Áú °ÍÀ¸·Î ¿¹»óµÇ´Â ÀÏ¹İ function À» argument ·Î ¹èÁ¤ÇÏ°Å³ª ³Ñ±æ ¼ö ÀÖ½À´Ï´Ù. ¿¹¸¦ µé¾î, String.(Int) -> Boolean °ú (String, Int) -> Boolean types ´Â È£È¯µË´Ï´Ù.
+function-with-receiver type ì˜ non-literal value ë¥¼ argument ë¡œ ë°°ì •í•˜ê±°ë‚˜ ë„˜ê¸¸ ìˆ˜ë„ ìˆê³ , ê·¸ ë°˜ëŒ€ì˜ ê²½ìš° receiver type ì˜ ì¶”ê°€ì ì¸ ì²«ë²ˆì§¸ parameter ë¥¼ ê°€ì§ˆ ê²ƒìœ¼ë¡œ ì˜ˆìƒë˜ëŠ” ì¼ë°˜ function ì„ argument ë¡œ ë°°ì •í•˜ê±°ë‚˜ ë„˜ê¸¸ ìˆ˜ ìˆìŠµë‹ˆë‹¤. ì˜ˆë¥¼ ë“¤ì–´, String.(Int) -> Boolean ê³¼ (String, Int) -> Boolean types ëŠ” í˜¸í™˜ë©ë‹ˆë‹¤.
 
 ---
 val represents: String.(Int) -> Boolean = { other -> toIntOrNull() == other }
@@ -543,7 +543,7 @@ fun testOperation(op: (String, Int) -> Boolean, a: String, b: Int, c: Boolean) =
 testOperation(represents, "100", 100, true) // ok
 ---
 
-Lamda expressions ´Â receiver type ÀÌ context ·ÎºÎÅÍ À¯Ãß °¡´ÉÇÒ ¶§ receiver ¿Í ÇÔ²² function literals ·Î »ç¿ëµÉ ¼ö ÀÖ½À´Ï´Ù.
+Lamda expressions ëŠ” receiver type ì´ context ë¡œë¶€í„° ìœ ì¶” ê°€ëŠ¥í•  ë•Œ receiver ì™€ í•¨ê»˜ function literals ë¡œ ì‚¬ìš©ë  ìˆ˜ ìˆìŠµë‹ˆë‹¤.
 
 ---
 class HTML {
@@ -564,15 +564,15 @@ html {        // lamda with receiver begins here
 
 05.03.01. Inline Functions
 
-Hight-order functions ¸¦ »ç¿ëÇÏ¸é Æ¯Á¤ runtime ÆĞ³ÎÆ¼°¡ ºÎ°úµÇ´Âµ¥, °¢ function Àº object ÀÌ°í closure, Áï function ÀÇ body ¿¡¼­ Á¢±ÙÇÒ ¼ö ÀÖ´Â variables ÀÎ closure ¸¦ captures ÇÕ´Ï´Ù. Memory ÇÒ´ç(function objecs ¿Í classes µÑ ´Ù¸¦ À§ÇÑ) °ú virtual calls ´Â runtime overhead ¸¦ ¾ß±âÇÕ´Ï´Ù.
+Hight-order functions ë¥¼ ì‚¬ìš©í•˜ë©´ íŠ¹ì • runtime íŒ¨ë„í‹°ê°€ ë¶€ê³¼ë˜ëŠ”ë°, ê° function ì€ object ì´ê³  closure, ì¦‰ function ì˜ body ì—ì„œ ì ‘ê·¼í•  ìˆ˜ ìˆëŠ” variables ì¸ closure ë¥¼ captures í•©ë‹ˆë‹¤. Memory í• ë‹¹(function objecs ì™€ classes ë‘˜ ë‹¤ë¥¼ ìœ„í•œ) ê³¼ virtual calls ëŠ” runtime overhead ë¥¼ ì•¼ê¸°í•©ë‹ˆë‹¤.
 
-±×·¯³ª ¸¹Àº °æ¿ì¿¡¼­ ´ëºÎºĞÀÇ overhead ´Â lamda expression À» inlining ÇÔÀ¸·Î¼­ Á¦°ÅÇÒ ¼ö ÀÖ½À´Ï´Ù. ¾Æ·¡ÀÇ functions Àº ÀÌ »óÈ²ÀÇ ÁÁÀº ¿¹ÀÔ´Ï´Ù. Áï lock function Àº call À§Ä¡¿¡¼­ ½±°Ô inline ÇÒ ¼ö ÀÖ½À´Ï´Ù. ´ÙÀ½ÀÇ °æ¿ì¸¦ »ìÆìº¸¼¼¿ä.
+ê·¸ëŸ¬ë‚˜ ë§ì€ ê²½ìš°ì—ì„œ ëŒ€ë¶€ë¶„ì˜ overhead ëŠ” lamda expression ì„ inlining í•¨ìœ¼ë¡œì„œ ì œê±°í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤. ì•„ë˜ì˜ functions ì€ ì´ ìƒí™©ì˜ ì¢‹ì€ ì˜ˆì…ë‹ˆë‹¤. ì¦‰ lock function ì€ call ìœ„ì¹˜ì—ì„œ ì‰½ê²Œ inline í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤. ë‹¤ìŒì˜ ê²½ìš°ë¥¼ ì‚´í´ë³´ì„¸ìš”.
 
 ---
 lock(1) { foo() }
 ---
 
-parameter ¸¦ À§ÇÑ function object »ı¼º°ú call »ı¼º ´ë½Å ÄÄÆÄÀÏ·¯´Â ´ÙÀ½ÀÇ ÄÚµå¸¦ ¹ñ¾î³À´Ï´Ù.
+parameter ë¥¼ ìœ„í•œ function object ìƒì„±ê³¼ call ìƒì„± ëŒ€ì‹  ì»´íŒŒì¼ëŸ¬ëŠ” ë‹¤ìŒì˜ ì½”ë“œë¥¼ ë±‰ì–´ëƒ…ë‹ˆë‹¤.
 
 ---
 l.lock()
@@ -584,9 +584,9 @@ finally {
 }
 ---
 
-¿ì¸®°¡ Ã³À½ºÎÅÍ ¿øÇÑ °ÍÀÌ ¾Æ´Ñ°¡¿ä?
+ìš°ë¦¬ê°€ ì²˜ìŒë¶€í„° ì›í•œ ê²ƒì´ ì•„ë‹Œê°€ìš”?
 
-ÄÄÆÄÀÏ·¯°¡ ÀÌ·¸°Ô ÇÏµµ·Ï ¿ì¸®´Â lock() function ¿¡ inline modifier ¸¦ Ç¥½ÃÇÕ´Ï´Ù.
+ì»´íŒŒì¼ëŸ¬ê°€ ì´ë ‡ê²Œ í•˜ë„ë¡ ìš°ë¦¬ëŠ” lock() function ì— inline modifier ë¥¼ í‘œì‹œí•©ë‹ˆë‹¤.
 
 ---
 inline fun <T> lock(lock: Lock, body: () -> T): T {
@@ -594,13 +594,13 @@ inline fun <T> lock(lock: Lock, body: () -> T): T {
 }
 ---
 
-inline modifier ´Â function ±× ÀÚÃ¼¿Í lamda µÑ ´Ù¸¦ ±×°÷¿¡ Àü´ŞÇÏ°Ô ÇÕ´Ï´Ù. ¸ğµç ³»¿ëÀÌ call site ¾È¿¡ inline µË´Ï´Ù.
+inline modifier ëŠ” function ê·¸ ìì²´ì™€ lamda ë‘˜ ë‹¤ë¥¼ ê·¸ê³³ì— ì „ë‹¬í•˜ê²Œ í•©ë‹ˆë‹¤. ëª¨ë“  ë‚´ìš©ì´ call site ì•ˆì— inline ë©ë‹ˆë‹¤.
 
-inline ÇÏ´Â °ÍÀº ÄÚµå°¡ ´Ã¾î³ª°Ô ¸¸µé ¼ö ÀÖ½À´Ï´Ù. ±×·¯³ª ¿ì¸®°¡ ÀûÀıÇÑ ¹æ¹ıÀ¸·Î ±×°ÍÀ» »ç¿ëÇÑ´Ù¸é(Áï °Å´ëÇÑ ÇÔ¼ö¸¦ inline ÇÏ´Â °É ÇÇÇÏ´Â °Í), ¼º´É¿¡¼­ ±×¸¸Å­ È¿°ú¸¦ º¼ °Ì´Ï´Ù. loops ³»ÀÇ megamorphic call-site ¿¡¼­¶ó¸é Æ¯È÷¿ä.
+inline í•˜ëŠ” ê²ƒì€ ì½”ë“œê°€ ëŠ˜ì–´ë‚˜ê²Œ ë§Œë“¤ ìˆ˜ ìˆìŠµë‹ˆë‹¤. ê·¸ëŸ¬ë‚˜ ìš°ë¦¬ê°€ ì ì ˆí•œ ë°©ë²•ìœ¼ë¡œ ê·¸ê²ƒì„ ì‚¬ìš©í•œë‹¤ë©´(ì¦‰ ê±°ëŒ€í•œ í•¨ìˆ˜ë¥¼ inline í•˜ëŠ” ê±¸ í”¼í•˜ëŠ” ê²ƒ), ì„±ëŠ¥ì—ì„œ ê·¸ë§Œí¼ íš¨ê³¼ë¥¼ ë³¼ ê²ë‹ˆë‹¤. loops ë‚´ì˜ megamorphic call-site ì—ì„œë¼ë©´ íŠ¹íˆìš”.
 
 05.03.02. noinline
 
-inline function À¸·Î Àü´ŞµÇ´Â lamdas ÀÇ ÀÏºÎ¸¸ inline µÇ±æ ¿øÇÏ´Â °æ¿ì, function parameter ¿¡ noinline modifier ¸¦ Ç¥½ÃÇÏ¼¼¿ä.
+inline function ìœ¼ë¡œ ì „ë‹¬ë˜ëŠ” lamdas ì˜ ì¼ë¶€ë§Œ inline ë˜ê¸¸ ì›í•˜ëŠ” ê²½ìš°, function parameter ì— noinline modifier ë¥¼ í‘œì‹œí•˜ì„¸ìš”.
 
 ---
 inline fun foo(inlined: () -> Unit, noinline notInlined: () -> Unit) {
@@ -608,13 +608,13 @@ inline fun foo(inlined: () -> Unit, noinline notInlined: () -> Unit) {
 }
 ---
 
-inline °¡´ÉÇÑ lamda ´Â ¿ÀÁ÷ inline function ¾È¿¡¼­ call ÇÏ°Å³ª inlinable arguments ·Î Àü´ŞÇÏ´Â °Ô °¡´ÉÇÕ´Ï´Ù¸¸, noinline ÇÑ °ÍµéÀº ¿ì¸®°¡ ¿øÇÏ´Â ¾î¶² ¹æ½ÄÀ¸·Îµç Á¶ÀÛÇÒ ¼ö ÀÖ½À´Ï´Ù. fields ¿¡ ÀúÀåµÇ°Å³ª ÁÖº¯À¸·Î ³Ñ°ÜÁö´Â °Íµé µî.
+inline ê°€ëŠ¥í•œ lamda ëŠ” ì˜¤ì§ inline function ì•ˆì—ì„œ call í•˜ê±°ë‚˜ inlinable arguments ë¡œ ì „ë‹¬í•˜ëŠ” ê²Œ ê°€ëŠ¥í•©ë‹ˆë‹¤ë§Œ, noinline í•œ ê²ƒë“¤ì€ ìš°ë¦¬ê°€ ì›í•˜ëŠ” ì–´ë–¤ ë°©ì‹ìœ¼ë¡œë“  ì¡°ì‘í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤. fields ì— ì €ì¥ë˜ê±°ë‚˜ ì£¼ë³€ìœ¼ë¡œ ë„˜ê²¨ì§€ëŠ” ê²ƒë“¤ ë“±.
 
-inline function ÀÌ ¾î¶°ÇÑ inlineable function parameters ¿Í reified type parameters µµ °®Áö ¾Ê´Â´Ù¸é ÄÄÆÄÀÏ·¯°¡ °æ°í¸¦ Ç¥½ÃÇÒ °Å¶ó´Â °á ¾Ë¾ÆµÎ¼¼¿ä. ±×·¯ÇÑ functions ¸¦ inline ÇÏ´Â °ÍÀº  ÀÌµæÀÌ µÇÁö ¾ÊÀ» °¡´É¼ºÀÌ ³ô±â ¶§¹®ÀÔ´Ï´Ù. ( inline ÀÌ ²À ÇÊ¿äÇÏ´Ù »ı°¢µÇ¸é annotation @Suppress("NOTHING_TO_INLINE") À» »ç¿ëÇØ¼­ °Ü°í¸¦ ¹«½ÃÇÒ ¼ö ÀÖ½À´Ï´Ù. )
+inline function ì´ ì–´ë– í•œ inlineable function parameters ì™€ reified type parameters ë„ ê°–ì§€ ì•ŠëŠ”ë‹¤ë©´ ì»´íŒŒì¼ëŸ¬ê°€ ê²½ê³ ë¥¼ í‘œì‹œí•  ê±°ë¼ëŠ” ê²° ì•Œì•„ë‘ì„¸ìš”. ê·¸ëŸ¬í•œ functions ë¥¼ inline í•˜ëŠ” ê²ƒì€  ì´ë“ì´ ë˜ì§€ ì•Šì„ ê°€ëŠ¥ì„±ì´ ë†’ê¸° ë•Œë¬¸ì…ë‹ˆë‹¤. ( inline ì´ ê¼­ í•„ìš”í•˜ë‹¤ ìƒê°ë˜ë©´ annotation @Suppress("NOTHING_TO_INLINE") ì„ ì‚¬ìš©í•´ì„œ ê²¨ê³ ë¥¼ ë¬´ì‹œí•  ìˆ˜ ìˆìŠµë‹ˆë‹¤. )
 
 05.03.03. Non-local returns
 
-kotlin ¿¡¼­ º¸Åë, ¸í½ÃµÇÁö ¾ÊÀº return Àº ¿ÀÁ÷ ¸í¸íµÈ function ÀÌ³ª anonymous function À» ºüÁ®³ª¿Ã ¶§ »ç¿ëÇÒ ¼ö ÀÖ½À´Ï´Ù. ÀÌ¸»ÀÎÁï, lamda ¸¦ ºüÁ®³ª¿À±â À§ÇØ¼± label À» »ç¿ëÇØ¾ßÇÑ´Ù´Â °Ì´Ï´Ù. lamda ´Â µÑ·¯½Î°í ÀÖ´Â function ÀÌ return µÇ°Ô ÇÒ ¼ö ¾ø±â ¶§¹®¿¡ lamda ³»¿¡¼­ ¼ø¼ö return ÀÌ ±İÁöµË´Ï´Ù.
+kotlin ì—ì„œ ë³´í†µ, ëª…ì‹œë˜ì§€ ì•Šì€ return ì€ ì˜¤ì§ ëª…ëª…ëœ function ì´ë‚˜ anonymous function ì„ ë¹ ì ¸ë‚˜ì˜¬ ë•Œ ì‚¬ìš©í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤. ì´ë§ì¸ì¦‰, lamda ë¥¼ ë¹ ì ¸ë‚˜ì˜¤ê¸° ìœ„í•´ì„  label ì„ ì‚¬ìš©í•´ì•¼í•œë‹¤ëŠ” ê²ë‹ˆë‹¤. lamda ëŠ” ë‘˜ëŸ¬ì‹¸ê³  ìˆëŠ” function ì´ return ë˜ê²Œ í•  ìˆ˜ ì—†ê¸° ë•Œë¬¸ì— lamda ë‚´ì—ì„œ ìˆœìˆ˜ return ì´ ê¸ˆì§€ë©ë‹ˆë‹¤.
 
 ---
 fun foo() {
@@ -624,7 +624,7 @@ fun foo() {
 }
 ---
 
-lamda ¸¦ Àü´ŞÇÑ function ÀÌ inline µÇ¸é ±× return ¿ª½Ã inline µÉ ¼ö ÀÖ°í, ±×°ÍÀÌ Çã¿ëµË´Ï´Ù.
+lamda ë¥¼ ì „ë‹¬í•œ function ì´ inline ë˜ë©´ ê·¸ return ì—­ì‹œ inline ë  ìˆ˜ ìˆê³ , ê·¸ê²ƒì´ í—ˆìš©ë©ë‹ˆë‹¤.
 
 ---
 fun foo() {
@@ -634,7 +634,7 @@ fun foo() {
 }
 ---
 
-±×·¯ÇÑ returns ¸¦ (lamda ¿¡ À§Ä¡ÇßÁö¸¸ µÑ·¯½ÎÀÎ function ¿¡ Á¸ÀçÇÏ´Â °æ¿ì) non-local returns ¶ó ÇÕ´Ï´Ù. Á¾Á¾ inline functions °¡ µÑ·¯½Î´Â ÀÌ·¯ÇÑ Á¾·ùÀÇ loop ³» ±¸Á¶¿¡ ÀÍ¼÷ÇÕ´Ï´Ù.
+ê·¸ëŸ¬í•œ returns ë¥¼ (lamda ì— ìœ„ì¹˜í–ˆì§€ë§Œ ë‘˜ëŸ¬ì‹¸ì¸ function ì— ì¡´ì¬í•˜ëŠ” ê²½ìš°) non-local returns ë¼ í•©ë‹ˆë‹¤. ì¢…ì¢… inline functions ê°€ ë‘˜ëŸ¬ì‹¸ëŠ” ì´ëŸ¬í•œ ì¢…ë¥˜ì˜ loop ë‚´ êµ¬ì¡°ì— ìµìˆ™í•©ë‹ˆë‹¤.
 
 ---
 fun hasZeros(ints: List<Int>): Boolean {
@@ -645,7 +645,7 @@ fun hasZeros(ints: List<Int>): Boolean {
 }
 ---
 
-¸î¸î inline functions ´Â lamdas ÀÌ parameters ·Î¼­ function body ¿¡ Á÷Á¢ Àü´ŞµÇ´Â°Ô ¾Æ´Ï¶ó local object ³ª nested function °ú °°ÀÌ ¶Ç ´Ù¸¥ execution context ¿¡ Àü´ŞµÉ ¼öµµ ÀÖ´Ù´Â °É ¾Ë¾ÆµÎ¼¼¿ä. ÀÌ·¯ÇÑ °æ¿ì non-local control flow ´Â ¶ÇÇÑ lamdas ¿¡¼­ Çã¿ëµÇÁö ¾Ê½À´Ï´Ù. ÀÌ¸¦ ¸í½ÃÇÏ·Á¸é lamda parameter ´Â crossinline modifier ·Î Ç¥½ÃµÇ¾ß ÇÕ´Ï´Ù.
+ëª‡ëª‡ inline functions ëŠ” lamdas ì´ parameters ë¡œì„œ function body ì— ì§ì ‘ ì „ë‹¬ë˜ëŠ”ê²Œ ì•„ë‹ˆë¼ local object ë‚˜ nested function ê³¼ ê°™ì´ ë˜ ë‹¤ë¥¸ execution context ì— ì „ë‹¬ë  ìˆ˜ë„ ìˆë‹¤ëŠ” ê±¸ ì•Œì•„ë‘ì„¸ìš”. ì´ëŸ¬í•œ ê²½ìš° non-local control flow ëŠ” ë˜í•œ lamdas ì—ì„œ í—ˆìš©ë˜ì§€ ì•ŠìŠµë‹ˆë‹¤. ì´ë¥¼ ëª…ì‹œí•˜ë ¤ë©´ lamda parameter ëŠ” crossinline modifier ë¡œ í‘œì‹œë˜ì•¼ í•©ë‹ˆë‹¤.
 
 ---
 inline fun f(crossinline body: () -> Unit) {
@@ -656,11 +656,11 @@ inline fun f(crossinline body: () -> Unit) {
 }
 ---
 
-break ¿Í continue ´Â ¾ÆÁ÷ inline lamdas ¿¡¼­ »ç¿ëÇÒ ¼ö ¾øÁö¸¸, ¾ÕÀ¸·Î Áö¿øÇÒ °èÈ¹ÀÔ´Ï´Ù.
+break ì™€ continue ëŠ” ì•„ì§ inline lamdas ì—ì„œ ì‚¬ìš©í•  ìˆ˜ ì—†ì§€ë§Œ, ì•ìœ¼ë¡œ ì§€ì›í•  ê³„íšì…ë‹ˆë‹¤.
 
 05.03.04. Reified type parameters
 
-¶§¶§·Î Àü´ŞµÇ´Â type À» parameter ·Î Á¢±ÙÇÒ ÇÊ¿ä°¡ ÀÖ½À´Ï´Ù.
+ë•Œë•Œë¡œ ì „ë‹¬ë˜ëŠ” type ì„ parameter ë¡œ ì ‘ê·¼í•  í•„ìš”ê°€ ìˆìŠµë‹ˆë‹¤.
 
 ---
 fun <T> TreeNode.findParentOfType(clazz: Class<T>):
@@ -674,19 +674,19 @@ T? {
 }
 ---
 
-¿©±â¼­ ¿ì¸®´Â tree ¸¦ ¼øÈ¸ÇÏ¿© noe °¡ Æ¯Á¤ type ÀÎÁö ¾Æ´ÑÁö check ÇÏ´Â reflection À» »ç¿ëÇÕ´Ï´Ù.
+ì—¬ê¸°ì„œ ìš°ë¦¬ëŠ” tree ë¥¼ ìˆœíšŒí•˜ì—¬ noe ê°€ íŠ¹ì • type ì¸ì§€ ì•„ë‹Œì§€ check í•˜ëŠ” reflection ì„ ì‚¬ìš©í•©ë‹ˆë‹¤.
 
 ---
 treeNode.findParentOfType(MyTreeNode::class.java)
 ---
 
-¿ì¸®°¡ ½ÇÁ¦·Î ¿øÇÏ´Â °Ç ÀÌ function À¸·Î ´Ü¼øÈ÷ type À» Àü´ŞÇÏ°í °ÍÀÔ´Ï´Ù. Áï, ÀÌ¿Í °°ÀÌ È£ÃâÇÏ±æ ¿øÇÕ´Ï´Ù.
+ìš°ë¦¬ê°€ ì‹¤ì œë¡œ ì›í•˜ëŠ” ê±´ ì´ function ìœ¼ë¡œ ë‹¨ìˆœíˆ type ì„ ì „ë‹¬í•˜ê³  ê²ƒì…ë‹ˆë‹¤. ì¦‰, ì´ì™€ ê°™ì´ í˜¸ì¶œí•˜ê¸¸ ì›í•©ë‹ˆë‹¤.
 
 ---
 treeNode.findParentOfType<MyTreeNode>()
 ---
 
-ÀÌ·¸°Ô ÇÏ±â À§ÇØ, inline functions Àº reified type parameters ¸¦ Áö¿øÇÏ°í ÀÖ½À´Ï´Ù. ¿ì¸®´Â ÀÌ¿Í °°ÀÌ ¾µ ¼ö ÀÖ½À´Ï´Ù.
+ì´ë ‡ê²Œ í•˜ê¸° ìœ„í•´, inline functions ì€ reified type parameters ë¥¼ ì§€ì›í•˜ê³  ìˆìŠµë‹ˆë‹¤. ìš°ë¦¬ëŠ” ì´ì™€ ê°™ì´ ì“¸ ìˆ˜ ìˆìŠµë‹ˆë‹¤.
 
 ---
 inline fun <reified T> TreeNode.findParentOfType():
@@ -699,9 +699,9 @@ T? {
 }
 ---
 
-reified modifier ·Î type parameter ¸¦ ¸í½ÃÇß°í, ÀÌÁ¦ function ³»¿¡¼­ °ÅÀÇ ÀÏ¹İÀûÀÎ class ÀÎ °ÍÃ³·³ Á¢±ÙÇÒ ¼ö ÀÖ½À´Ï´Ù. function ÀÌ inline µÆ±â ¶§¹®¿¡ ¾î¶°¶õ reflection µµ ÇÊ¿ä·Î ÇÏÁö ¾Ê°í !is ¿Í as ¿Í °°Àº operators °¡ ÀÌÁ¦ µ¿ÀÛÇÕ´Ï´Ù. ¶ÇÇÑ À§¿¡ ¾ğ±ŞÇÑ ¹Ù¿Í °°ÀÌ myTree.findParentOfType<MyTreeNodeType>() ·Î call ÇÒ ¼ö ÀÖ½À´Ï´Ù.
+reified modifier ë¡œ type parameter ë¥¼ ëª…ì‹œí–ˆê³ , ì´ì œ function ë‚´ì—ì„œ ê±°ì˜ ì¼ë°˜ì ì¸ class ì¸ ê²ƒì²˜ëŸ¼ ì ‘ê·¼í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤. function ì´ inline ëê¸° ë•Œë¬¸ì— ì–´ë– ë€ reflection ë„ í•„ìš”ë¡œ í•˜ì§€ ì•Šê³  !is ì™€ as ì™€ ê°™ì€ operators ê°€ ì´ì œ ë™ì‘í•©ë‹ˆë‹¤. ë˜í•œ ìœ„ì— ì–¸ê¸‰í•œ ë°”ì™€ ê°™ì´ myTree.findParentOfType<MyTreeNodeType>() ë¡œ call í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.
 
-reflection ÀÌ ¸¹Àº °æ¿ì ÇÊ¿ä·Î µÇÁö ¾ÊÀ½¿¡µµ ºÒ±¸ÇÏ°í ¿©ÀüÈ÷ refied type parameter °ú ÇÔ²² reflection À» ¾µ ¼ö ÀÖ½À´Ï´Ù.
+reflection ì´ ë§ì€ ê²½ìš° í•„ìš”ë¡œ ë˜ì§€ ì•ŠìŒì—ë„ ë¶ˆêµ¬í•˜ê³  ì—¬ì „íˆ refied type parameter ê³¼ í•¨ê»˜ reflection ì„ ì“¸ ìˆ˜ ìˆìŠµë‹ˆë‹¤.
 
 ---
 inline fun <reified T> membersOf() = T::class.members
@@ -711,13 +711,13 @@ fun main(s: Array<String>) {
 }
 ---
 
-ÀÏ¹İÀûÀÎ functions (inline À¸·Î Ç¥½ÃµÇÁö ¾ÊÀº) reified parameters ¸¦ °¡Áú ¼ö ¾ø½À´Ï´Ù. run-time representation (¿¹¸¦ µé¾î non-reified type parameter ³ª Nothing °°Àº fictious type) ¸¦ °¡ÁöÁö ¾ÊÀº type Àº reified type parameter ¸¦ À§ÇÑ argument ·Î »ç¿ëµÉ ¼ö ¾ø½À´Ï´Ù.
+ì¼ë°˜ì ì¸ functions (inline ìœ¼ë¡œ í‘œì‹œë˜ì§€ ì•Šì€) reified parameters ë¥¼ ê°€ì§ˆ ìˆ˜ ì—†ìŠµë‹ˆë‹¤. run-time representation (ì˜ˆë¥¼ ë“¤ì–´ non-reified type parameter ë‚˜ Nothing ê°™ì€ fictious type) ë¥¼ ê°€ì§€ì§€ ì•Šì€ type ì€ reified type parameter ë¥¼ ìœ„í•œ argument ë¡œ ì‚¬ìš©ë  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.
 
-low-level ¼³¸íÀº spec document ¿¡¼­ º¼ ¼ö ÀÖ½À´Ï´Ù.
+low-level ì„¤ëª…ì€ spec document ì—ì„œ ë³¼ ìˆ˜ ìˆìŠµë‹ˆë‹¤.
 
 05.03.05. Inline properties (since 1.1)
 
-inline modifier ´Â backing field ¸¦ °¡ÁöÁö ¾ÊÀº properties ÀÇ Á¢±ÙÀÚ·Î »ç¿ëµÉ ¼ö ÀÖ½À´Ï´Ù. °³º° property accessors ¿¡ annotate ÇÒ ¼ö ÀÖ½À´Ï´Ù.
+inline modifier ëŠ” backing field ë¥¼ ê°€ì§€ì§€ ì•Šì€ properties ì˜ ì ‘ê·¼ìë¡œ ì‚¬ìš©ë  ìˆ˜ ìˆìŠµë‹ˆë‹¤. ê°œë³„ property accessors ì— annotate í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.
 
 ---
 val foo: Foo
@@ -728,7 +728,7 @@ var bar: Bar
     inline set(v) { ... }
 ---
 
-µÎ accessors ·Î¼­ inline À» Ç¥½ÃÇÏ¸é ÀüÃ¼ property ¸¦ anotate ÇÒ ¼öµµ ÀÖ½À´Ï´Ù. 
+ë‘ accessors ë¡œì„œ inline ì„ í‘œì‹œí•˜ë©´ ì „ì²´ property ë¥¼ anotate í•  ìˆ˜ë„ ìˆìŠµë‹ˆë‹¤. 
 
 ---
 inline var bar: Bar
@@ -736,37 +736,37 @@ inline var bar: Bar
     set(v) { ... }
 ---
 
-call site ¿¡¼­ inline accessors ´Â Á¤±Ô inline functions Ã³·³ inline µË´Ï´Ù.
+call site ì—ì„œ inline accessors ëŠ” ì •ê·œ inline functions ì²˜ëŸ¼ inline ë©ë‹ˆë‹¤.
 
 05.03.06. Restrictions for public API inline functions
 
-inline function ÀÌ public ÀÌ°Å³ª protected ÀÌ°í private ³ª internal ¼±¾ğÀÇ ºÎºĞÀÌ ¾Æ´Ò ¶§, ¸ğµâÀÇ public API ·Î °£ÁÖµË´Ï´Ù. ´Ù¸¥ ¸ğµâ¿¡¼­ ºÒ·ÁÁú ¼ö ÀÖ°í ÀÌ·¯ÇÑ call site ¿¡¼­µµ ¿ª½Ã inline µÉ ¼ö ÀÖ½À´Ï´Ù.
+inline function ì´ public ì´ê±°ë‚˜ protected ì´ê³  private ë‚˜ internal ì„ ì–¸ì˜ ë¶€ë¶„ì´ ì•„ë‹ ë•Œ, ëª¨ë“ˆì˜ public API ë¡œ ê°„ì£¼ë©ë‹ˆë‹¤. ë‹¤ë¥¸ ëª¨ë“ˆì—ì„œ ë¶ˆë ¤ì§ˆ ìˆ˜ ìˆê³  ì´ëŸ¬í•œ call site ì—ì„œë„ ì—­ì‹œ inline ë  ìˆ˜ ìˆìŠµë‹ˆë‹¤.
 
-ÀÌ°ÍÀº inline function À» ¼±¾ğÇÏ´Â ¸ğµâ º¯°æ µÚ re-compiled ÇÏÁö ¾Ê°í ¸ğµâÀ» call ÇÏ´Â °æ¿ì ¸ğµâ º¯°æ¿¡ ÀÇÇØ binary ºñÈ£È¯¼ºÀÇ Æ¯Á¤ À§ÇèÀ» ºÎ°úÇÕ´Ï´Ù.
+ì´ê²ƒì€ inline function ì„ ì„ ì–¸í•˜ëŠ” ëª¨ë“ˆ ë³€ê²½ ë’¤ re-compiled í•˜ì§€ ì•Šê³  ëª¨ë“ˆì„ call í•˜ëŠ” ê²½ìš° ëª¨ë“ˆ ë³€ê²½ì— ì˜í•´ binary ë¹„í˜¸í™˜ì„±ì˜ íŠ¹ì • ìœ„í—˜ì„ ë¶€ê³¼í•©ë‹ˆë‹¤.
 
-¸ğµâÀÇ non-public API ³» º¯°æÀ¸·Î ÀÎÇØ À¯µµµÇ´Â ±×·¯ÇÑ ºñÈ£È¯¼ºÀÇ À§ÇèÀ» Á¦°ÅÇÏ±â À§ÇØ¼­, public API inline functions ´Â non-public API ¼±¾ğ, Áï, ±×µé ³»ºÎ¿¡¼­ private °ú internal ¼±¾ğ ¹× ±×µéÀÇ ºÎºĞ »ç¿ëÀ» ±İÁöÇØ¾ß ÇÕ´Ï´Ù.
+ëª¨ë“ˆì˜ non-public API ë‚´ ë³€ê²½ìœ¼ë¡œ ì¸í•´ ìœ ë„ë˜ëŠ” ê·¸ëŸ¬í•œ ë¹„í˜¸í™˜ì„±ì˜ ìœ„í—˜ì„ ì œê±°í•˜ê¸° ìœ„í•´ì„œ, public API inline functions ëŠ” non-public API ì„ ì–¸, ì¦‰, ê·¸ë“¤ ë‚´ë¶€ì—ì„œ private ê³¼ internal ì„ ì–¸ ë° ê·¸ë“¤ì˜ ë¶€ë¶„ ì‚¬ìš©ì„ ê¸ˆì§€í•´ì•¼ í•©ë‹ˆë‹¤.
 
-public API inline functions ¸¦ Çã¿ëÇÏ±â À§ÇØ interanl ¼±¾ğÀº @PublishedApi ·Î annotate ÇØ¾ß ÇÑ´Ù. inernal inline function ÀÌ @PublishedApi ·Î Ç¥½ÃµÇ¸é ±× ¸öÃ¼ ¿ª½Ã public ÀÎ °ÍÃ³·³ Ã¼Å©µÈ´Ù.
+public API inline functions ë¥¼ í—ˆìš©í•˜ê¸° ìœ„í•´ interanl ì„ ì–¸ì€ @PublishedApi ë¡œ annotate í•´ì•¼ í•œë‹¤. inernal inline function ì´ @PublishedApi ë¡œ í‘œì‹œë˜ë©´ ê·¸ ëª¸ì²´ ì—­ì‹œ public ì¸ ê²ƒì²˜ëŸ¼ ì²´í¬ëœë‹¤.
 
 05.04.01. Coroutines
 
-¾î¶² APIs ´Â long-running operations ·Î ½ÃÀÛÇÏ°í (network IO, file IO, CPU- or GPU-intensive work µî) ±×°Ô ³¡³¯ ¶§±îÁö caller ¸¦ block ÇÒ ÇÊ¿ä°¡ ÀÖ½À´Ï´Ù. Coroutines ´Â thread ¸¦ blocking ÇÏ´Â °ÍÀ» ÇÇÇÏ°í ´õ cheaper ÇÏ°í ´õ Á¶Á¾ °¡´ÉÇÑ operation À¸·Î ±³Ã¼ÇÒ ¹æ¹ıÀ» Á¦°øÇÕ´Ï´Ù. ¹Ù·Î coroutine ÀÇ suspension ÀÔ´Ï´Ù.
+ì–´ë–¤ APIs ëŠ” long-running operations ë¡œ ì‹œì‘í•˜ê³  (network IO, file IO, CPU- or GPU-intensive work ë“±) ê·¸ê²Œ ëë‚  ë•Œê¹Œì§€ caller ë¥¼ block í•  í•„ìš”ê°€ ìˆìŠµë‹ˆë‹¤. Coroutines ëŠ” thread ë¥¼ blocking í•˜ëŠ” ê²ƒì„ í”¼í•˜ê³  ë” cheaper í•˜ê³  ë” ì¡°ì¢… ê°€ëŠ¥í•œ operation ìœ¼ë¡œ êµì²´í•  ë°©ë²•ì„ ì œê³µí•©ë‹ˆë‹¤. ë°”ë¡œ coroutine ì˜ suspension ì…ë‹ˆë‹¤.
 
-Coroutines ´Â libraries ¿¡ complications ¸¦ ³Ö¾î ºñµ¿±â ÇÁ·Î±×·¡¹ÖÀ» ´Ü¼øÈ­ÇÕ´Ï´Ù. ÇÁ·Î±×·¥ÀÇ ·ÎÁ÷Àº coroutine ¿¡¼­ ¼ø¼­´ë·Î(sequentially) Ç¥ÇöµÉ ¼ö ÀÖ°í, ÇÏÀ§ library °¡ ºñµ¿±â¼ºÀ» ¾Ë¾Æ³¾ °ÍÀÔ´Ï´Ù. library ´Â »ç¿ëÀÚ ÄÚµåÀÇ °ü·Ã ºÎºĞÀ» callback À¸·Î °¨½Î°í, °ü·Ã ÀÌº¥Æ®¸¦ subscribe ÇÏ°í, ´Ù¸¥ threads(½ÉÁö¾î´Â ´Ù¸¥ ÀåÄ¡) ¿¡¼­ ½ÇÇàÀ» schedule ÇÒ ¼ö ÀÖÀ¸¸ç ÄÚµå´Â ¼ø¼­´ë·Î µ¿ÀÛÇÏ´Â °ÍÃ³·³ ´Ü¼øÇÏ°Ô ³²´Â´Ù.
+Coroutines ëŠ” libraries ì— complications ë¥¼ ë„£ì–´ ë¹„ë™ê¸° í”„ë¡œê·¸ë˜ë°ì„ ë‹¨ìˆœí™”í•©ë‹ˆë‹¤. í”„ë¡œê·¸ë¨ì˜ ë¡œì§ì€ coroutine ì—ì„œ ìˆœì„œëŒ€ë¡œ(sequentially) í‘œí˜„ë  ìˆ˜ ìˆê³ , í•˜ìœ„ library ê°€ ë¹„ë™ê¸°ì„±ì„ ì•Œì•„ë‚¼ ê²ƒì…ë‹ˆë‹¤. library ëŠ” ì‚¬ìš©ì ì½”ë“œì˜ ê´€ë ¨ ë¶€ë¶„ì„ callback ìœ¼ë¡œ ê°ì‹¸ê³ , ê´€ë ¨ ì´ë²¤íŠ¸ë¥¼ subscribe í•˜ê³ , ë‹¤ë¥¸ threads(ì‹¬ì§€ì–´ëŠ” ë‹¤ë¥¸ ì¥ì¹˜) ì—ì„œ ì‹¤í–‰ì„ schedule í•  ìˆ˜ ìˆìœ¼ë©° ì½”ë“œëŠ” ìˆœì„œëŒ€ë¡œ ë™ì‘í•˜ëŠ” ê²ƒì²˜ëŸ¼ ë‹¨ìˆœí•˜ê²Œ ë‚¨ëŠ”ë‹¤.
 
-´Ù¸¥ ¾ğ¾î¿¡¼­ °¡´ÉÇÑ ¸¹Àº ºñµ¿±â ¸ŞÄ¿´ÏÁòÀº Kotlin coroutines ¸¦ »ç¿ëÇÏ¿© libraries ·Î ±¸ÇöÇÒ ¼ö ÀÖ½À´Ï´Ù. ÀÌ°ÍÀº C# °ú ECMAScript ÀÇ async/await, Go ÀÇ channels ¿Í select, C# °ú Python ÀÇ generators/yield ¸¦ Æ÷ÇÔÇÕ´Ï´Ù. ±×·¯ÇÑ ±¸Á¶¸¦ Á¦°øÇÏ´Â libraries ¿¡ ´ëÇØ¼± ¾Æ·¡ description À» ÀĞ¾îº¸¼¼¿ä.
+ë‹¤ë¥¸ ì–¸ì–´ì—ì„œ ê°€ëŠ¥í•œ ë§ì€ ë¹„ë™ê¸° ë©”ì»¤ë‹ˆì¦˜ì€ Kotlin coroutines ë¥¼ ì‚¬ìš©í•˜ì—¬ libraries ë¡œ êµ¬í˜„í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤. ì´ê²ƒì€ C# ê³¼ ECMAScript ì˜ async/await, Go ì˜ channels ì™€ select, C# ê³¼ Python ì˜ generators/yield ë¥¼ í¬í•¨í•©ë‹ˆë‹¤. ê·¸ëŸ¬í•œ êµ¬ì¡°ë¥¼ ì œê³µí•˜ëŠ” libraries ì— ëŒ€í•´ì„  ì•„ë˜ description ì„ ì½ì–´ë³´ì„¸ìš”.
 
 05.04.02. Blocking vs Suspending
 
-ÀÏ¹İÀûÀ¸·Î Coroutines ´Â thread À» blocking ÇÏÁö ¾Ê°í supended µÉ ¼ö ÀÖ´Â computations ÀÔ´Ï´Ù. Blocking threads ´Â Á¾Á¾ expensive ÇÑµ¥, Æ¯È÷ high load ÇÏ¿¡¼­´Â ¿ÀÁ÷ »ó´ëÀûÀ¸·Î ÀûÀº ¼öÀÇ threads ¸¸À» À¯ÁöÇÒ ¼ö ÀÖ±â ¶§¹®¿¡ ±×µé Áß ÇÏ³ª¸¦ blocking ÇÏ´Â °Ç ´Ù¸¥ Áß¿äÇÑ ÀÛ¾÷µéÀÌ delayed µÇ´Â °á°ú¸¦ ÃÊ·¡ÇÕ´Ï´Ù.
+ì¼ë°˜ì ìœ¼ë¡œ Coroutines ëŠ” thread ì„ blocking í•˜ì§€ ì•Šê³  supended ë  ìˆ˜ ìˆëŠ” computations ì…ë‹ˆë‹¤. Blocking threads ëŠ” ì¢…ì¢… expensive í•œë°, íŠ¹íˆ high load í•˜ì—ì„œëŠ” ì˜¤ì§ ìƒëŒ€ì ìœ¼ë¡œ ì ì€ ìˆ˜ì˜ threads ë§Œì„ ìœ ì§€í•  ìˆ˜ ìˆê¸° ë•Œë¬¸ì— ê·¸ë“¤ ì¤‘ í•˜ë‚˜ë¥¼ blocking í•˜ëŠ” ê±´ ë‹¤ë¥¸ ì¤‘ìš”í•œ ì‘ì—…ë“¤ì´ delayed ë˜ëŠ” ê²°ê³¼ë¥¼ ì´ˆë˜í•©ë‹ˆë‹¤.
 
-¹İ¸é Coroutine suspension Àº °ÅÀÇ free ÇÕ´Ï´Ù. ¾î¶°ÇÑ context switch ³ª ¾î¶² ´Ù¸¥ OS ¿¬°üµµ ÇÊ¿ä·Î µÇÁö ¾Ê½À´Ï´Ù. ±×¸®°í ±×°ÍÀ» ±â¹İÀ¸·Î suspension À» user library ¿¡ ÀÇÇØ ³ôÀº ¼öÁØÀ¸·Î Á¦¾îÇÒ ¼ö ÀÖ½À´Ï´Ù. library ÀúÀÚ·Î¼­ suspension ¿¡¼­ ÀÏ¾î³ª´Â ÀÏÀ» °áÁ¤ÇÒ ¼ö ÀÖ°í ÇÊ¿ä¿¡ µû¶ó optimize/log/intercept °¡ °¡´ÉÇÕ´Ï´Ù.
+ë°˜ë©´ Coroutine suspension ì€ ê±°ì˜ free í•©ë‹ˆë‹¤. ì–´ë– í•œ context switch ë‚˜ ì–´ë–¤ ë‹¤ë¥¸ OS ì—°ê´€ë„ í•„ìš”ë¡œ ë˜ì§€ ì•ŠìŠµë‹ˆë‹¤. ê·¸ë¦¬ê³  ê·¸ê²ƒì„ ê¸°ë°˜ìœ¼ë¡œ suspension ì„ user library ì— ì˜í•´ ë†’ì€ ìˆ˜ì¤€ìœ¼ë¡œ ì œì–´í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤. library ì €ìë¡œì„œ suspension ì—ì„œ ì¼ì–´ë‚˜ëŠ” ì¼ì„ ê²°ì •í•  ìˆ˜ ìˆê³  í•„ìš”ì— ë”°ë¼ optimize/log/intercept ê°€ ê°€ëŠ¥í•©ë‹ˆë‹¤.
 
-¶Ç´Ù¸¥ Â÷ÀÌ´Â coroutines °¡ ÀÓÀÇÀÇ instructions ¿¡¼­ suspend µÉ ¼ö ¾øÀ¸¸ç, Æ¯º°È÷ Ç¥½ÃµÈ functions ¸¦ calls ÇÏ´Â ¼ÒÀ§ suspension points ¶ó ºÒ¸®´Â °÷¿¡¼­¸¸ °¡´ÉÇÏ´Ù´Â °Ì´Ï´Ù.
+ë˜ë‹¤ë¥¸ ì°¨ì´ëŠ” coroutines ê°€ ì„ì˜ì˜ instructions ì—ì„œ suspend ë  ìˆ˜ ì—†ìœ¼ë©°, íŠ¹ë³„íˆ í‘œì‹œëœ functions ë¥¼ calls í•˜ëŠ” ì†Œìœ„ suspension points ë¼ ë¶ˆë¦¬ëŠ” ê³³ì—ì„œë§Œ ê°€ëŠ¥í•˜ë‹¤ëŠ” ê²ë‹ˆë‹¤.
 
 05.04.03. Suspending functions
 
-suspension Àº Æ¯º°ÇÑ modifier, Áï suspend ·Î Ç¥½ÃµÈ function À» È£ÃâÇÒ ¶§ ¹ß»ıÇÕ´Ï´Ù.
+suspension ì€ íŠ¹ë³„í•œ modifier, ì¦‰ suspend ë¡œ í‘œì‹œëœ function ì„ í˜¸ì¶œí•  ë•Œ ë°œìƒí•©ë‹ˆë‹¤.
 
 ---
 suspend fun doSomething(foo: Foo): Bar {
@@ -774,13 +774,13 @@ suspend fun doSomething(foo: Foo): Bar {
 }
 ---
 
-ÀÌ·¯ÇÑ functions ¸¦ suspending functions ¶ó ºÎ¸£´Âµ¥, ±×°ÍµéÀ» calls ÇÏ¸é coroutine À» suspend ÇÒ ¼ö ÀÖ±â ¶§¹®ÀÔ´Ï´Ù. (quesition ¿¡¼­ call À» À§ÇÑ result °¡ ÀÌ¹Ì °¡´ÉÇÏ´Ù¸é library ´Â suspension ¾øÀÌ ÁøÇàÇÏµµ·Ï °áÁ¤ÇÒ ¼ö ÀÖ½À´Ï´Ù.) suspending function Àº ÀÏ¹İ functions ¿Í µ¿ÀÏÇÑ ¹æ¹ıÀ¸·Î parameters ¿Í return valeus ¸¦ °¡Áú ¼ö ÀÖ½À´Ï´Ù¸¸, ¿ÀÁ÷ coroutines ³ª ´Ù¸¥ suspending functions ¿¡¼­¸¸ call ÇÒ ¼ö ÀÖ½À´Ï´Ù. »ç½Ç coroutine À» ½ÃÀÛÇÏ±â À§ÇØ Àû¾îµµ ÇÏ³ª ÀÌ»óÀÇ suspending function ÀÌ ÇÊ¿ä·Î µÇ°í ±×°ÍÀº ÀÏ¹İÀûÀ¸·Î anonymous ÀÔ´Ï´Ù. (Áï suspending lamda). ±× ¿¹·Î °£·«È­ÇÑ async() function ( from kolinx.coroutines library ) ¸¦ º¸¼¼¿ä.
+ì´ëŸ¬í•œ functions ë¥¼ suspending functions ë¼ ë¶€ë¥´ëŠ”ë°, ê·¸ê²ƒë“¤ì„ calls í•˜ë©´ coroutine ì„ suspend í•  ìˆ˜ ìˆê¸° ë•Œë¬¸ì…ë‹ˆë‹¤. (quesition ì—ì„œ call ì„ ìœ„í•œ result ê°€ ì´ë¯¸ ê°€ëŠ¥í•˜ë‹¤ë©´ library ëŠ” suspension ì—†ì´ ì§„í–‰í•˜ë„ë¡ ê²°ì •í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.) suspending function ì€ ì¼ë°˜ functions ì™€ ë™ì¼í•œ ë°©ë²•ìœ¼ë¡œ parameters ì™€ return valeus ë¥¼ ê°€ì§ˆ ìˆ˜ ìˆìŠµë‹ˆë‹¤ë§Œ, ì˜¤ì§ coroutines ë‚˜ ë‹¤ë¥¸ suspending functions ì—ì„œë§Œ call í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤. ì‚¬ì‹¤ coroutine ì„ ì‹œì‘í•˜ê¸° ìœ„í•´ ì ì–´ë„ í•˜ë‚˜ ì´ìƒì˜ suspending function ì´ í•„ìš”ë¡œ ë˜ê³  ê·¸ê²ƒì€ ì¼ë°˜ì ìœ¼ë¡œ anonymous ì…ë‹ˆë‹¤. (ì¦‰ suspending lamda). ê·¸ ì˜ˆë¡œ ê°„ëµí™”í•œ async() function ( from kolinx.coroutines library ) ë¥¼ ë³´ì„¸ìš”.
 
 ---
 fun <T> async(block: suspend () -> T)
 ---
 
-¿©±â¼­ async() ´Â ÀÏ¹İ function ( suspending function ÀÌ ¾Æ´Ï¶ó ) ÀÔ´Ï´Ù¸¸ block parameter ´Â suspend modifier ¸¦ °¡Áø ÇÔ¼ö, suspend () -> T ¸¦ °¡Áı´Ï´Ù. µû¶ó¼­ lamda ¸¦ async() ·Î ³Ñ±æ ¶§ ±×°ÍÀº suspending lamda ÀÌ°í ±×·ÎºÎÅÍ suspending function À» È£ÃâÇÒ ¼ö ÀÖ½À´Ï´Ù.
+ì—¬ê¸°ì„œ async() ëŠ” ì¼ë°˜ function ( suspending function ì´ ì•„ë‹ˆë¼ ) ì…ë‹ˆë‹¤ë§Œ block parameter ëŠ” suspend modifier ë¥¼ ê°€ì§„ í•¨ìˆ˜, suspend () -> T ë¥¼ ê°€ì§‘ë‹ˆë‹¤. ë”°ë¼ì„œ lamda ë¥¼ async() ë¡œ ë„˜ê¸¸ ë•Œ ê·¸ê²ƒì€ suspending lamda ì´ê³  ê·¸ë¡œë¶€í„° suspending function ì„ í˜¸ì¶œí•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.
 
 ---
 async {
@@ -789,9 +789,9 @@ async {
 }
 ---
 
-Note: ÃÖ±Ù suspending function types ´Â supertypes ·Î »ç¿ëµÉ ¼ö ¾ø°í anonymous suspending functions ´Â ÇöÀç Áö¿øµÇÁö ¾Ê½À´Ï´Ù.
+Note: ìµœê·¼ suspending function types ëŠ” supertypes ë¡œ ì‚¬ìš©ë  ìˆ˜ ì—†ê³  anonymous suspending functions ëŠ” í˜„ì¬ ì§€ì›ë˜ì§€ ì•ŠìŠµë‹ˆë‹¤.
 
-°è¼Ó ºñÀ¯ÇÏÀÚ¸é, await() ´Â ¾î¶² computation ÀÌ ³¡³ª°í °á°ú¸¦ return ÇÒ ¶§±îÁö coroutine À» suspend ÇÏ´Â suspending function ÀÌ µÉ ¼ö ÀÖ½À´Ï´Ù (±×·¯¹Ç·Î async {} block ³»·ÎºÎÅÍ call µµ °¡´ÉÇÕ´Ï´Ù).
+ê³„ì† ë¹„ìœ í•˜ìë©´, await() ëŠ” ì–´ë–¤ computation ì´ ëë‚˜ê³  ê²°ê³¼ë¥¼ return í•  ë•Œê¹Œì§€ coroutine ì„ suspend í•˜ëŠ” suspending function ì´ ë  ìˆ˜ ìˆìŠµë‹ˆë‹¤ (ê·¸ëŸ¬ë¯€ë¡œ async {} block ë‚´ë¡œë¶€í„° call ë„ ê°€ëŠ¥í•©ë‹ˆë‹¤).
 
 ---
 async {
@@ -800,9 +800,9 @@ async {
     ...
 }
 
-async/await functions °¡ kotlinx.coroutines ¿¡¼­ ¾î¶»°Ô µ¿ÀÛÇÏ´ÂÁö¿¡ ´ëÇÑ ´õ ¸¹Àº Á¤º¸´Â here ¿¡¼­ Ã£À» ¼ö ÀÖ½À´Ï´Ù.
+async/await functions ê°€ kotlinx.coroutines ì—ì„œ ì–´ë–»ê²Œ ë™ì‘í•˜ëŠ”ì§€ì— ëŒ€í•œ ë” ë§ì€ ì •ë³´ëŠ” here ì—ì„œ ì°¾ì„ ìˆ˜ ìˆìŠµë‹ˆë‹¤.
 
-suspending functions ÀÎ await() ¿Í doSomething() ÀÌ main() °ú °°Àº ÀÏ¹İ function ¿¡¼­ È£ÃâµÉ ¼ö ¾ø´Ù´Â °É ¾Ë¾ÆµÎ¼¼¿ä.
+suspending functions ì¸ await() ì™€ doSomething() ì´ main() ê³¼ ê°™ì€ ì¼ë°˜ function ì—ì„œ í˜¸ì¶œë  ìˆ˜ ì—†ë‹¤ëŠ” ê±¸ ì•Œì•„ë‘ì„¸ìš”.
 
 ---
 fun main(args: Array<String>) {
@@ -810,7 +810,7 @@ fun main(args: Array<String>) {
 }
 ---
 
-¶Ç suspending functions ´Â virtual ÀÌ µÉ ¼ö ÀÖ°í, ÀÌ¸¦ overriding ÇÒ ¶§¿£ suspend modifier °¡ ±â¼úµÇ¾î¾ß ÇÑ´Ù´Â °É ¾Ë¾ÆµÎ¼¼¿ä.
+ë˜ suspending functions ëŠ” virtual ì´ ë  ìˆ˜ ìˆê³ , ì´ë¥¼ overriding í•  ë•Œì—” suspend modifier ê°€ ê¸°ìˆ ë˜ì–´ì•¼ í•œë‹¤ëŠ” ê±¸ ì•Œì•„ë‘ì„¸ìš”.
 
 ---
 interface Base {
@@ -824,11 +824,11 @@ class Derieved: Base {
 
 05.04.04. @RestrictsSuspension annotation
 
-Extension functions (¿Í ¶÷´Ù) ¶ÇÇÑ ÀÏ¹İ function Ã³·³ suspend ·Î Ç¥½ÃµÉ ¼ö ÀÖ½À´Ï´Ù. ÀÌ°ÍÀº »ç¿ëÀÚ°¡ extend ÇÑ DSLs ¿Í ´Ù¸¥ APIs ÀÇ »ı¼ºÀ» °¡´ÉÄÉ ÇÕ´Ï´Ù. ¾î¶² °æ¿ì library ÀúÀÚ´Â coroutine À» suspending ÇÏ´Â »õ·Î¿î ¹æ¹ıÀ» Ãß°¡ÇÏÁö ¸øÇÏ°Ô ÇÒ ÇÊ¿ä°¡ ÀÖ½À´Ï´Ù.
+Extension functions (ì™€ ëŒë‹¤) ë˜í•œ ì¼ë°˜ function ì²˜ëŸ¼ suspend ë¡œ í‘œì‹œë  ìˆ˜ ìˆìŠµë‹ˆë‹¤. ì´ê²ƒì€ ì‚¬ìš©ìê°€ extend í•œ DSLs ì™€ ë‹¤ë¥¸ APIs ì˜ ìƒì„±ì„ ê°€ëŠ¥ì¼€ í•©ë‹ˆë‹¤. ì–´ë–¤ ê²½ìš° library ì €ìëŠ” coroutine ì„ suspending í•˜ëŠ” ìƒˆë¡œìš´ ë°©ë²•ì„ ì¶”ê°€í•˜ì§€ ëª»í•˜ê²Œ í•  í•„ìš”ê°€ ìˆìŠµë‹ˆë‹¤.
 
-ÀÌ¸¦ ´Ş¼ºÇÏ±â À§ÇØ, @RestrictsSuspension annotation ¸¦ »ç¿ëÇÒ ¼ö ÀÖ½À´Ï´Ù. receiver class ³ª interface R À» @RestrictsSuspension À¸·Î annotate ÇÒ ¶§, ¸ğµç suspending extensions ´Â R ÀÇ members ´Â ¹°·Ğ ±×°Í¿¡ ´ëÇÑ ´Ù¸¥ extensions ·Î À§ÀÓÇÒ ÇÊ¿ä°¡ ÀÖ½À´Ï´Ù. (ÇÁ·Î±×·¥ÀÌ ³¡³ªÁö ¾Ê´Â´Ù¸é) extensions Àº °¢°¢ ´Ù¸¥ °ÍÀ¸·Î ¹«ÇÑÈ÷ À§ÀÓÇÒ ¼ö ¾ø±â ¶§¹®¿¡, ÀÌ°ÍÀº ¸ğµç suspensions °¡ libarary ÀúÀÚ°¡ ¿Ïº®È÷ Á¦¾îÇÒ ¼ö ÀÖ´Â R ÀÇ member ¸¦ call ÇÔÀ¸·Î¼­ ¹ß»ıÇÑ´Ù´Â °ÍÀ» º¸ÀåÇÕ´Ï´Ù.
+ì´ë¥¼ ë‹¬ì„±í•˜ê¸° ìœ„í•´, @RestrictsSuspension annotation ë¥¼ ì‚¬ìš©í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤. receiver class ë‚˜ interface R ì„ @RestrictsSuspension ìœ¼ë¡œ annotate í•  ë•Œ, ëª¨ë“  suspending extensions ëŠ” R ì˜ members ëŠ” ë¬¼ë¡  ê·¸ê²ƒì— ëŒ€í•œ ë‹¤ë¥¸ extensions ë¡œ ìœ„ì„í•  í•„ìš”ê°€ ìˆìŠµë‹ˆë‹¤. (í”„ë¡œê·¸ë¨ì´ ëë‚˜ì§€ ì•ŠëŠ”ë‹¤ë©´) extensions ì€ ê°ê° ë‹¤ë¥¸ ê²ƒìœ¼ë¡œ ë¬´í•œíˆ ìœ„ì„í•  ìˆ˜ ì—†ê¸° ë•Œë¬¸ì—, ì´ê²ƒì€ ëª¨ë“  suspensions ê°€ libarary ì €ìê°€ ì™„ë²½íˆ ì œì–´í•  ìˆ˜ ìˆëŠ” R ì˜ member ë¥¼ call í•¨ìœ¼ë¡œì„œ ë°œìƒí•œë‹¤ëŠ” ê²ƒì„ ë³´ì¥í•©ë‹ˆë‹¤.
 
-ÀÌ°ÍÀº ¸ğµç suspension ÀÌ library ³»¿¡¼­ Æ¯º°ÇÑ ¹æ¹ıÀ¸·Î handle ÇÒ ¼ö ÀÖ´Â rare ÄÉÀÌ½º¿¡ °ü·ÃµÈ °ÍÀÔ´Ï´Ù. ¿¹¸¦ µé¾î ¾Æ·¡¿¡ ¼³¸íµÈ buildSequence() function ¿¡ µû¶ó generators ¸¦ ±¸ÇöÇÒ ¶§, coroutines ¿¡¼­ ¾î´À suspending call ¶óµµ ¾î¶° ´Ù¸¥ function ÀÌ ¾Æ´Ñ yield() ³ª yieldAll() ¿¡¼­ call ÇÏ´Â °ÍÀ» ³¡¸Î¾î¾ß ÇÒ ÇÊ¿ä°¡ ÀÖ½À´Ï´Ù. ÀÌ°ÍÀÌ SequenceBuilder ¸¦ @RestrictsSuspension À¸·Î annotate ÇÑ ÀÌÀ¯ÀÔ´Ï´Ù.
+ì´ê²ƒì€ ëª¨ë“  suspension ì´ library ë‚´ì—ì„œ íŠ¹ë³„í•œ ë°©ë²•ìœ¼ë¡œ handle í•  ìˆ˜ ìˆëŠ” rare ì¼€ì´ìŠ¤ì— ê´€ë ¨ëœ ê²ƒì…ë‹ˆë‹¤. ì˜ˆë¥¼ ë“¤ì–´ ì•„ë˜ì— ì„¤ëª…ëœ buildSequence() function ì— ë”°ë¼ generators ë¥¼ êµ¬í˜„í•  ë•Œ, coroutines ì—ì„œ ì–´ëŠ suspending call ë¼ë„ ì–´ë–  ë‹¤ë¥¸ function ì´ ì•„ë‹Œ yield() ë‚˜ yieldAll() ì—ì„œ call í•˜ëŠ” ê²ƒì„ ëë§ºì–´ì•¼ í•  í•„ìš”ê°€ ìˆìŠµë‹ˆë‹¤. ì´ê²ƒì´ SequenceBuilder ë¥¼ @RestrictsSuspension ìœ¼ë¡œ annotate í•œ ì´ìœ ì…ë‹ˆë‹¤.
 
 ---
 @RestrictsSuspension
@@ -837,60 +837,60 @@ public abstract class SequenceBuilder<in T> {
 }
 ---
 
-Github ¿¡ ÀÖ´Â ¼Ò½º¸¦ º¸¼¼¿ä.
+Github ì— ìˆëŠ” ì†ŒìŠ¤ë¥¼ ë³´ì„¸ìš”.
 
 05.04.05. The inner working of coroutines
 
-¿©±â¼­ ³»ºÎÀûÀ¸·Î coroutine ¾î¶»°Ô µ¿ÀÛÇÏ´ÂÁö¿¡ ´ëÇØ ¿Ïº®È÷ ¼³¸íÇÏÁø ¾Ê°Ú½À´Ï´Ù¸¸ ¹«½¼ ÀÏÀÌ ÀÏ¾î³ª°í ÀÖ´ÂÁö¿¡ ´ëÇÑ ´ë°­ÀÇ °¨Àº Áß¿äÇÕ´Ï´Ù.
+ì—¬ê¸°ì„œ ë‚´ë¶€ì ìœ¼ë¡œ coroutine ì–´ë–»ê²Œ ë™ì‘í•˜ëŠ”ì§€ì— ëŒ€í•´ ì™„ë²½íˆ ì„¤ëª…í•˜ì§„ ì•Šê² ìŠµë‹ˆë‹¤ë§Œ ë¬´ìŠ¨ ì¼ì´ ì¼ì–´ë‚˜ê³  ìˆëŠ”ì§€ì— ëŒ€í•œ ëŒ€ê°•ì˜ ê°ì€ ì¤‘ìš”í•©ë‹ˆë‹¤.
 
-Coroutines ´Â compliation ±â¹ı (VM ÀÌ³ª OS ÆíÀ¸·ÎºÎÅÍ Áö¿øÀÌ ÀüÇô ÇÊ¿ä ¾ø´Â) À» ÅëÇØ ¿ÏÀüÈ÷ ±¸ÇöµÆ°í suspension Àº code transformation À» ÅëÇØ µ¿ÀÛÇÕ´Ï´Ù. ÀÏ¹İÀûÀ¸·Î ¸ğµç suspending function (optimizations °¡ Àû¿ëµÉ ¼ö ÀÖÁö¸¸ ¿©±â¼­ ´Ù·çÁö ¾Ê°Ú½À´Ï´Ù) Àº suspending calls ¿¡ ¿¬°üµÇ´Â states °¡ ÀÖ´Â states machine À¸·Î transform µË´Ï´Ù. suspension ¹Ù·Î Àü¿¡, ´ÙÀ½ state ´Â ¿¬°üµÈ local variables µî°ú ÇÔ²² compiler-generated class ÀÇ ÇÊµå¿¡ ÀúÀåµË´Ï´Ù. ÇØ´ç coroutine À» Àç°³ÇÒ ¶§, local variables ´Â º¹¿øµÇ°í state machine Àº suspension ¹Ù·Î ´ÙÀ½ state ºÎÅÍ µ¿ÀÛÇÑ´Ù.
+Coroutines ëŠ” compliation ê¸°ë²• (VM ì´ë‚˜ OS í¸ìœ¼ë¡œë¶€í„° ì§€ì›ì´ ì „í˜€ í•„ìš” ì—†ëŠ”) ì„ í†µí•´ ì™„ì „íˆ êµ¬í˜„ëê³  suspension ì€ code transformation ì„ í†µí•´ ë™ì‘í•©ë‹ˆë‹¤. ì¼ë°˜ì ìœ¼ë¡œ ëª¨ë“  suspending function (optimizations ê°€ ì ìš©ë  ìˆ˜ ìˆì§€ë§Œ ì—¬ê¸°ì„œ ë‹¤ë£¨ì§€ ì•Šê² ìŠµë‹ˆë‹¤) ì€ suspending calls ì— ì—°ê´€ë˜ëŠ” states ê°€ ìˆëŠ” states machine ìœ¼ë¡œ transform ë©ë‹ˆë‹¤. suspension ë°”ë¡œ ì „ì—, ë‹¤ìŒ state ëŠ” ì—°ê´€ëœ local variables ë“±ê³¼ í•¨ê»˜ compiler-generated class ì˜ í•„ë“œì— ì €ì¥ë©ë‹ˆë‹¤. í•´ë‹¹ coroutine ì„ ì¬ê°œí•  ë•Œ, local variables ëŠ” ë³µì›ë˜ê³  state machine ì€ suspension ë°”ë¡œ ë‹¤ìŒ state ë¶€í„° ë™ì‘í•œë‹¤.
 
-suspend µÈ coruotine Àº suspend »óÅÂ¿Í locals º¸°üÇÏ´Â object ·Î¼­ ÀúÀåµÇ°í ³Ñ°ÜÁı´Ï´Ù. ±×·¯ÇÑ object ÀÇ type Àº Continuation ÀÌ°í, ¿©±â¼­ ¼³¸íµÈ ÀüÃ¼ÀûÀÎ ÄÚµå transformation Àº ÀüÅëÀûÀÎ Continuation-passing style ¿¡ ÇØ´çÇÕ´Ï´Ù. µû¶ó¼­ suspending functions ´Â ³»ºÎÀûÀ¸·Î Continuation type ÀÇ ¿©ºĞ parameter ¸¦ °¡Áı´Ï´Ù.
+suspend ëœ coruotine ì€ suspend ìƒíƒœì™€ locals ë³´ê´€í•˜ëŠ” object ë¡œì„œ ì €ì¥ë˜ê³  ë„˜ê²¨ì§‘ë‹ˆë‹¤. ê·¸ëŸ¬í•œ object ì˜ type ì€ Continuation ì´ê³ , ì—¬ê¸°ì„œ ì„¤ëª…ëœ ì „ì²´ì ì¸ ì½”ë“œ transformation ì€ ì „í†µì ì¸ Continuation-passing style ì— í•´ë‹¹í•©ë‹ˆë‹¤. ë”°ë¼ì„œ suspending functions ëŠ” ë‚´ë¶€ì ìœ¼ë¡œ Continuation type ì˜ ì—¬ë¶„ parameter ë¥¼ ê°€ì§‘ë‹ˆë‹¤.
 
-coroutines °¡ ¾î¶»°Ô µ¿ÀÛÇÏ´ÂÁö¿¡ °üÇÑ ´õ ¸¹Àº »ó¼¼´Â this design document ¿¡¼­ Ã£À» ¼ö ÀÖ½À´Ï´Ù. ´Ù¸¥ ¾ğ¾î (C# ÀÌ³ª ECMAScript 2016) ¿¡¼­ async/await ÀÇ À¯»çÇÑ ¼³¸íÀº ¿©±â¿¡ ¿¬°üµÅ ÀÖ½À´Ï´Ù. ±×µéÀÌ ±¸ÇöÇÏ´Â language features °¡ kotlin coroutines ¸¸Å­ ÀÏ¹İÀûÀÌÁö ¾ÊÀ½¿¡µµ ºÒ±¸ÇÏ°í ¸»ÀÔ´Ï´Ù.
+coroutines ê°€ ì–´ë–»ê²Œ ë™ì‘í•˜ëŠ”ì§€ì— ê´€í•œ ë” ë§ì€ ìƒì„¸ëŠ” this design document ì—ì„œ ì°¾ì„ ìˆ˜ ìˆìŠµë‹ˆë‹¤. ë‹¤ë¥¸ ì–¸ì–´ (C# ì´ë‚˜ ECMAScript 2016) ì—ì„œ async/await ì˜ ìœ ì‚¬í•œ ì„¤ëª…ì€ ì—¬ê¸°ì— ì—°ê´€ë¼ ìˆìŠµë‹ˆë‹¤. ê·¸ë“¤ì´ êµ¬í˜„í•˜ëŠ” language features ê°€ kotlin coroutines ë§Œí¼ ì¼ë°˜ì ì´ì§€ ì•ŠìŒì—ë„ ë¶ˆêµ¬í•˜ê³  ë§ì…ë‹ˆë‹¤.
 
 05.04.06. Experimental status of coroutines
 
-coroutines ÀÇ ¼³°è´Â ½ÇÇèÀûÀÎµ¥, ÀÌ¸»ÀÎÁï ¾ÕÀ¸·ÎÀÇ releases ¿¡¼­ ¹Ù²ğ ¼ö ÀÖ´Ù´Â °Ì´Ï´Ù. kotlin 1.1 ¿¡¼­ coroutines ¸¦ compile ÇÒ ¶§ ±âº»ÀûÀ¸·Î °æ°í¸¦ º¸°íÇÕ´Ï´Ù: The feature "coroutines" is experimental. ÀÌ °æ°í¸¦ Á¦°ÅÇÏ±â À§ÇØ¼± opt-in flag ¸¦ ±â¼úÇÒ ÇÊ¿ä°¡ ÀÖ½À´Ï´Ù.
+coroutines ì˜ ì„¤ê³„ëŠ” ì‹¤í—˜ì ì¸ë°, ì´ë§ì¸ì¦‰ ì•ìœ¼ë¡œì˜ releases ì—ì„œ ë°”ë€” ìˆ˜ ìˆë‹¤ëŠ” ê²ë‹ˆë‹¤. kotlin 1.1 ì—ì„œ coroutines ë¥¼ compile í•  ë•Œ ê¸°ë³¸ì ìœ¼ë¡œ ê²½ê³ ë¥¼ ë³´ê³ í•©ë‹ˆë‹¤: The feature "coroutines" is experimental. ì´ ê²½ê³ ë¥¼ ì œê±°í•˜ê¸° ìœ„í•´ì„  opt-in flag ë¥¼ ê¸°ìˆ í•  í•„ìš”ê°€ ìˆìŠµë‹ˆë‹¤.
 
-½ÇÇèÀûÀÎ »óÅÂ ¶§¹®¿¡ standard library ¿¡¼­ coroutine-related API ´Â kotlin.coroutines.experimental package ÇÏ¿¡ ÀÖ½À´Ï´Ù. ¼³°è°¡ ³¡³ª°í ½ÇÇèÀûÀÎ »óÅÂ°¡ ²ø¾î¿Ã·ÁÁú ¶§ ÃÖÁ¾ API ´Â kotlin.coroutines À¸·Î ¿Å°ÜÁú °ÍÀÌ¸ç experimental package ´Â ÀÌÀü°úÀÇ È£È¯¼ºÀ» À§ÇØ (°¡´ÉÇÑ ºĞ¸®µÈ artifact ¿¡¼­) À¯ÁöµÉ °ÍÀÔ´Ï´Ù.
+ì‹¤í—˜ì ì¸ ìƒíƒœ ë•Œë¬¸ì— standard library ì—ì„œ coroutine-related API ëŠ” kotlin.coroutines.experimental package í•˜ì— ìˆìŠµë‹ˆë‹¤. ì„¤ê³„ê°€ ëë‚˜ê³  ì‹¤í—˜ì ì¸ ìƒíƒœê°€ ëŒì–´ì˜¬ë ¤ì§ˆ ë•Œ ìµœì¢… API ëŠ” kotlin.coroutines ìœ¼ë¡œ ì˜®ê²¨ì§ˆ ê²ƒì´ë©° experimental package ëŠ” ì´ì „ê³¼ì˜ í˜¸í™˜ì„±ì„ ìœ„í•´ (ê°€ëŠ¥í•œ ë¶„ë¦¬ëœ artifact ì—ì„œ) ìœ ì§€ë  ê²ƒì…ë‹ˆë‹¤.
 
-IMPORTANT NOTE: library authors ´Â ÀÌ °°Àº ¾à¼ÓÀ» µû¸£±æ ±ÇÀåÇÕ´Ï´Ù. coroutine-based APIs ¸¦ ³ëÃâÇÏ´Â packages ¿¡ experimetal (¿¹¸¦ µé¾î co.example.experimental) suffix ¸¦ Ãß°¡ÇÏ¼¼¿ä. ÀÌ°ÍÀ¸·Î library ´Â binary compatible À» À¯ÁöÇÕ´Ï´Ù. final API °¡ released µÇ¸é, ´ÙÀ½ steps À» µû¸£¼¼¿ä.
+IMPORTANT NOTE: library authors ëŠ” ì´ ê°™ì€ ì•½ì†ì„ ë”°ë¥´ê¸¸ ê¶Œì¥í•©ë‹ˆë‹¤. coroutine-based APIs ë¥¼ ë…¸ì¶œí•˜ëŠ” packages ì— experimetal (ì˜ˆë¥¼ ë“¤ì–´ co.example.experimental) suffix ë¥¼ ì¶”ê°€í•˜ì„¸ìš”. ì´ê²ƒìœ¼ë¡œ library ëŠ” binary compatible ì„ ìœ ì§€í•©ë‹ˆë‹¤. final API ê°€ released ë˜ë©´, ë‹¤ìŒ steps ì„ ë”°ë¥´ì„¸ìš”.
 
-- ¸ğµç APIs ¸¦ com.example (experimental suffix À» »«) ·Î º¹»çÇÏ¼¼¿ä
-- backward È£È¯¼ºÀ» À¯ÁöÇÏ±â À§ÇØ experimental package ´Â ³²°ÜµÎ¼¼¿ä
+- ëª¨ë“  APIs ë¥¼ com.example (experimental suffix ì„ ëº€) ë¡œ ë³µì‚¬í•˜ì„¸ìš”
+- backward í˜¸í™˜ì„±ì„ ìœ ì§€í•˜ê¸° ìœ„í•´ experimental package ëŠ” ë‚¨ê²¨ë‘ì„¸ìš”
 
-ÀÌ°ÍÀº ´ç½ÅÀÇ »ç¿ëÀÚµé¿¡°Ô migration issues ¸¦ ÃÖ¼ÒÈ­ ÇÒ °Ì´Ï´Ù.
+ì´ê²ƒì€ ë‹¹ì‹ ì˜ ì‚¬ìš©ìë“¤ì—ê²Œ migration issues ë¥¼ ìµœì†Œí™” í•  ê²ë‹ˆë‹¤.
 
 05.04.07. Stanard APIs
 
-Coroutines ´Â ¼¼ °¡Áö ÁÖ¿ä ¿ä¼Ò·Î ÀÌ·ç¾îÁı´Ï´Ù.
+Coroutines ëŠ” ì„¸ ê°€ì§€ ì£¼ìš” ìš”ì†Œë¡œ ì´ë£¨ì–´ì§‘ë‹ˆë‹¤.
 
-- language support ( À§¿¡¼­ ¼³¸íÇßµí, suspending functions )
+- language support ( ìœ„ì—ì„œ ì„¤ëª…í–ˆë“¯, suspending functions )
 - low-level core API in the Kotlin Standard Library
 - high-level APIs that can be sued directly in the user code
 
 05.04.08. Low-level API: kotlin.coroutines
 
-Low-level API ´Â »ó´ëÀûÀ¸·Î ÀÛÀ¸¸ç higher-level libraries ¸¦ »ı¼ºÇÏ±â À§ÇÑ ¿ëµµ ¿Ü¿¡ »ç¿ëÇØ¼± ¾ÈµË´Ï´Ù. µÎ °¡Áö main packages ·Î ±¸¼ºµÅ ÀÖ½À´Ï´Ù.
+Low-level API ëŠ” ìƒëŒ€ì ìœ¼ë¡œ ì‘ìœ¼ë©° higher-level libraries ë¥¼ ìƒì„±í•˜ê¸° ìœ„í•œ ìš©ë„ ì™¸ì— ì‚¬ìš©í•´ì„  ì•ˆë©ë‹ˆë‹¤. ë‘ ê°€ì§€ main packages ë¡œ êµ¬ì„±ë¼ ìˆìŠµë‹ˆë‹¤.
 
-- ´ÙÀ½°ú °°Àº main types ¿Í primitives ·Î ÀÌ·ç¾îÁø kotlin.coroutines.experimental
+- ë‹¤ìŒê³¼ ê°™ì€ main types ì™€ primitives ë¡œ ì´ë£¨ì–´ì§„ kotlin.coroutines.experimental
     - createCoroutine(),
     - startCoroutine(),
     - suspendCoroutine();
 
-- suspendedCoroutineOrReturn Ã³·³ ÈÎ¾À lower-level ÀÎ ³»Àå ÇÔ¼ö¸¦ °¡Áø kotlin.coroutines.experimental.intrinsics.
+- suspendedCoroutineOrReturn ì²˜ëŸ¼ í›¨ì”¬ lower-level ì¸ ë‚´ì¥ í•¨ìˆ˜ë¥¼ ê°€ì§„ kotlin.coroutines.experimental.intrinsics.
 
-ÀÌ·¯ÇÑ APIs ÀÇ »ç¿ë¿¡ ´ëÇØ ´õ ÀÚ¼¼ÇÑ ³»¿ëÀº here ¿¡¼­ Ã£À» ¼ö ÀÖ½À´Ï´Ù.
+ì´ëŸ¬í•œ APIs ì˜ ì‚¬ìš©ì— ëŒ€í•´ ë” ìì„¸í•œ ë‚´ìš©ì€ here ì—ì„œ ì°¾ì„ ìˆ˜ ìˆìŠµë‹ˆë‹¤.
 
 05.04.09. Generators API in kotlin.coroutines
 
-kotlin.coroutines.experimental ¿¡ ÀÖ´Â application-level functions Àº ÀÌ°Í¹Û¿¡ ¾ø½À´Ï´Ù.
+kotlin.coroutines.experimental ì— ìˆëŠ” application-level functions ì€ ì´ê²ƒë°–ì— ì—†ìŠµë‹ˆë‹¤.
 
 - buildSequence()
 - buildIterator()
 
-ÀÌ°ÍµéÀº kotlin-stdlib ¿¡ ship µÅ ÀÖ´Âµ¥, ¿Ö³ÄÇÏ¸é sequences ¿Í ¿¬°üµÇ±â ¶§¹®ÀÔ´Ï´Ù. »ç½Ç ÀÌ ÇÔ¼öµé (±×¸®°í ¿©±â¼­ buildSequence() ¸¸ Á¦ÇÑÇÒ ¼ö ÀÖ½À´Ï´Ù) Àº generators ¸¦ ±¸ÇöÇÏ´Âµ¥, Áï  lazy sequence ¸¦ cheap ÇÏ°Ô build ÇÒ ¼ö ÀÖ´Â ¹æ¹ıÀ» Á¦°øÇÕ´Ï´Ù.
+ì´ê²ƒë“¤ì€ kotlin-stdlib ì— ship ë¼ ìˆëŠ”ë°, ì™œëƒí•˜ë©´ sequences ì™€ ì—°ê´€ë˜ê¸° ë•Œë¬¸ì…ë‹ˆë‹¤. ì‚¬ì‹¤ ì´ í•¨ìˆ˜ë“¤ (ê·¸ë¦¬ê³  ì—¬ê¸°ì„œ buildSequence() ë§Œ ì œí•œí•  ìˆ˜ ìˆìŠµë‹ˆë‹¤) ì€ generators ë¥¼ êµ¬í˜„í•˜ëŠ”ë°, ì¦‰  lazy sequence ë¥¼ cheap í•˜ê²Œ build í•  ìˆ˜ ìˆëŠ” ë°©ë²•ì„ ì œê³µí•©ë‹ˆë‹¤.
 
 ---
 val fibonacciSeq = buildSequence {
@@ -909,9 +909,9 @@ val fibonacciSeq = buildSequence {
 }
 ---
 
-ÀÌ°ÍÀº yield() function À» È£ÃâÇÔÀ¸·Î¼­ ¿¬¼ÓÀûÀÎ Fibonacci ¼ıÀÚ¸¦ »êÃâÇÏ´Â coroutine À» »ı¼ºÇÔÀ¸·Î¼­ lazy ÇÏ°í ÀáÀçÀûÀ¸·Î ¹«ÇÑÇÑ Fibonacci ¼ö¿­À» »ı¼ºÇÕ´Ï´Ù. ±×·¯ÇÑ sequence °¡ ÀüºÎ iterating µÉ ¶§, iterator ÀÇ ¸ğµç step Àº ´ÙÀ½ number ¸¦ »ı¼ºÇÏ´Â coroutine ÀÇ ¶Ç ´Ù¸¥ ºÎºĞÀ» ½ÇÇà½ÃÅµ´Ï´Ù. ±×·¡¼­ ÀÌ·¯ÇÑ ¼ö¿­ ¹Ù±ù¿¡ ÀÖ´Â ¾î¶² ¿Ï¼ºµÈ ¼ıÀÚµéÀÇ ¸®½ºÆ®¸¦ °¡Á®°¥ ¼ö ÀÖ½À´Ï´Ù. ¿¹¸¦ µé¾î fibonacciSeq.take(8).toList() ´Â [1, 1, 2, 3, 5, 8, 13, 21] ÀÌ¶ó´Â °á°ú°¡ ³ª¿É´Ï´Ù. ±×¸®°í coroutines ´Â ÀÌ°ÍÀ» ½Ç¿ëÇÏ±â¿¡ ÃæºĞÈ÷ cheap ÇÕ´Ï´Ù.
+ì´ê²ƒì€ yield() function ì„ í˜¸ì¶œí•¨ìœ¼ë¡œì„œ ì—°ì†ì ì¸ Fibonacci ìˆ«ìë¥¼ ì‚°ì¶œí•˜ëŠ” coroutine ì„ ìƒì„±í•¨ìœ¼ë¡œì„œ lazy í•˜ê³  ì ì¬ì ìœ¼ë¡œ ë¬´í•œí•œ Fibonacci ìˆ˜ì—´ì„ ìƒì„±í•©ë‹ˆë‹¤. ê·¸ëŸ¬í•œ sequence ê°€ ì „ë¶€ iterating ë  ë•Œ, iterator ì˜ ëª¨ë“  step ì€ ë‹¤ìŒ number ë¥¼ ìƒì„±í•˜ëŠ” coroutine ì˜ ë˜ ë‹¤ë¥¸ ë¶€ë¶„ì„ ì‹¤í–‰ì‹œí‚µë‹ˆë‹¤. ê·¸ë˜ì„œ ì´ëŸ¬í•œ ìˆ˜ì—´ ë°”ê¹¥ì— ìˆëŠ” ì–´ë–¤ ì™„ì„±ëœ ìˆ«ìë“¤ì˜ ë¦¬ìŠ¤íŠ¸ë¥¼ ê°€ì ¸ê°ˆ ìˆ˜ ìˆìŠµë‹ˆë‹¤. ì˜ˆë¥¼ ë“¤ì–´ fibonacciSeq.take(8).toList() ëŠ” [1, 1, 2, 3, 5, 8, 13, 21] ì´ë¼ëŠ” ê²°ê³¼ê°€ ë‚˜ì˜µë‹ˆë‹¤. ê·¸ë¦¬ê³  coroutines ëŠ” ì´ê²ƒì„ ì‹¤ìš©í•˜ê¸°ì— ì¶©ë¶„íˆ cheap í•©ë‹ˆë‹¤.
 
-±×·¯ÇÑ sequence ÀÇ ½ÇÁ¦ laziness ¸¦ ½Ã¿¬ÇÏ±â À§ÇØ, buildSequence() call ¾È¿¡¼­ ¾î¶² debug output À» print ÇØº¾½Ã´Ù.
+ê·¸ëŸ¬í•œ sequence ì˜ ì‹¤ì œ laziness ë¥¼ ì‹œì—°í•˜ê¸° ìœ„í•´, buildSequence() call ì•ˆì—ì„œ ì–´ë–¤ debug output ì„ print í•´ë´…ì‹œë‹¤.
 
 ---
 val lazySeq = buildSequence {
@@ -928,9 +928,9 @@ val lazySeq = buildSequence {
 lazySeq.take(3).forEach { print("$it ") }
 ---
 
-À§ÀÇ ÄÚµå¸¦ µ¹·Áº¸¸é Ã³À½¿¡´Â ¼¼ °³ÀÇ ¿ä¼Ò¸¦ Ãâ·ÂÇÕ´Ï´Ù. ¼ıÀÚµéÀº »ı¼ºµÇ´Â loop ¿¡¼­ STEPs ¿Í ÇÔ²² interleved µË´Ï´Ù. ÀÌ´Â ±× computation ÀÌ ½ÇÁ¦·Î lazy ÇÏ´Ù´Â °É ÀÇ¹ÌÇÕ´Ï´Ù. 1 À» Ãâ·ÂÇÏ±â À§ÇØ Ã¹ yield(i) ±îÁö ½ÇÇàÇÏ°í ±× ¹æ¹ıÀ» µû¶ó START ¸¦ Ãâ·Â ÇÕ´Ï´Ù. ±×¸®°í ³ª¼­ 2 ¸¦ Ãâ·ÂÇÏ±â À§ÇØ ´ÙÀ½ yield(i) ¸¦ ½ÇÇà½ÃÅ³ ÇÊ¿ä°¡ ÀÖ°í ÀÌ°ÍÀº STEP À» Ãâ·ÂÇÕ´Ï´Ù. 3 µµ ¶È°°½À´Ï´Ù. ±×¸®°í ´ÙÀ½ STEP Àº Ãâ·ÂµÇÁö ¾Ê´Âµ¥ (END ¿Í ÇÔ²²) ¿Ö³ÄÇÏ¸é ¼ö¿­ÀÇ ¿ä¼Ò¸¦ ´õ ¿äÃ»ÇÏÁö ¾Ê¾Ò±â ¶§¹®ÀÔ´Ï´Ù.
+ìœ„ì˜ ì½”ë“œë¥¼ ëŒë ¤ë³´ë©´ ì²˜ìŒì—ëŠ” ì„¸ ê°œì˜ ìš”ì†Œë¥¼ ì¶œë ¥í•©ë‹ˆë‹¤. ìˆ«ìë“¤ì€ ìƒì„±ë˜ëŠ” loop ì—ì„œ STEPs ì™€ í•¨ê»˜ interleved ë©ë‹ˆë‹¤. ì´ëŠ” ê·¸ computation ì´ ì‹¤ì œë¡œ lazy í•˜ë‹¤ëŠ” ê±¸ ì˜ë¯¸í•©ë‹ˆë‹¤. 1 ì„ ì¶œë ¥í•˜ê¸° ìœ„í•´ ì²« yield(i) ê¹Œì§€ ì‹¤í–‰í•˜ê³  ê·¸ ë°©ë²•ì„ ë”°ë¼ START ë¥¼ ì¶œë ¥ í•©ë‹ˆë‹¤. ê·¸ë¦¬ê³  ë‚˜ì„œ 2 ë¥¼ ì¶œë ¥í•˜ê¸° ìœ„í•´ ë‹¤ìŒ yield(i) ë¥¼ ì‹¤í–‰ì‹œí‚¬ í•„ìš”ê°€ ìˆê³  ì´ê²ƒì€ STEP ì„ ì¶œë ¥í•©ë‹ˆë‹¤. 3 ë„ ë˜‘ê°™ìŠµë‹ˆë‹¤. ê·¸ë¦¬ê³  ë‹¤ìŒ STEP ì€ ì¶œë ¥ë˜ì§€ ì•ŠëŠ”ë° (END ì™€ í•¨ê»˜) ì™œëƒí•˜ë©´ ìˆ˜ì—´ì˜ ìš”ì†Œë¥¼ ë” ìš”ì²­í•˜ì§€ ì•Šì•˜ê¸° ë•Œë¬¸ì…ë‹ˆë‹¤.
 
-ÇÑ ¹ø¿¡ collection ( ¶Ç´Â ¼ö¿­ ) °ªÀ» yield ÇÏ±â À§ÇØ¼­´Â yieldAll() function ÀÌ °¡´ÉÇÕ´Ï´Ù.
+í•œ ë²ˆì— collection ( ë˜ëŠ” ìˆ˜ì—´ ) ê°’ì„ yield í•˜ê¸° ìœ„í•´ì„œëŠ” yieldAll() function ì´ ê°€ëŠ¥í•©ë‹ˆë‹¤.
 
 ---
 val lazySeq = buildSequence {
@@ -941,9 +941,9 @@ val lazySeq = buildSequence {
 lazySeq.forEach { print("$it ") }
 ---
 
-buildIterator() ´Â buildSequence() ¿Í À¯»çÇÏ°Ô µ¿ÀÛÇÕ´Ï´Ù¸¸ lazy iterator ¸¦ return ÇÕ´Ï´Ù.
+buildIterator() ëŠ” buildSequence() ì™€ ìœ ì‚¬í•˜ê²Œ ë™ì‘í•©ë‹ˆë‹¤ë§Œ lazy iterator ë¥¼ return í•©ë‹ˆë‹¤.
 
-SequenceBuilder class(À§¿¡ ¼³¸íÇÑ @RestrictsSuspension annotation À» Áö´Ñ) ¿¡ suspending extensions ¸¦ ÀÛ¼ºÇÔÀ¸·Î½á buildSequence() ¿¡ ´ëÇØ custom yielding logic À» Ãß°¡ÇÒ ¼ö ÀÖ½À´Ï´Ù.
+SequenceBuilder class(ìœ„ì— ì„¤ëª…í•œ @RestrictsSuspension annotation ì„ ì§€ë‹Œ) ì— suspending extensions ë¥¼ ì‘ì„±í•¨ìœ¼ë¡œì¨ buildSequence() ì— ëŒ€í•´ custom yielding logic ì„ ì¶”ê°€í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.
 
 ---
 suspend fun SequenceBuilder<Int>.yieldIfOdd(x: Int) {
@@ -957,17 +957,17 @@ val lazySeq = buildSequence {
 
 05.04.10. Other high-level APIs: kotlinx.coroutines
 
-coroutines ¿¡ ¿¬°üµÈ ÇÙ½É APIs ¸¸ÀÌ kotlin standard Library ·ÎºÎÅÍ °¡´ÉÇÕ´Ï´Ù. ÀÌ°Ç °ÅÀÇ ÇÙ½É primitives ¿Í interface ·Î ±¸¼ºµÅ ÀÖ°í ¸ğµç coroutine-based libraries °¡ »ç¿ëÇÒ ¼ö ÀÖ°Ô²û µÅ ÀÖ½À´Ï´Ù.
+coroutines ì— ì—°ê´€ëœ í•µì‹¬ APIs ë§Œì´ kotlin standard Library ë¡œë¶€í„° ê°€ëŠ¥í•©ë‹ˆë‹¤. ì´ê±´ ê±°ì˜ í•µì‹¬ primitives ì™€ interface ë¡œ êµ¬ì„±ë¼ ìˆê³  ëª¨ë“  coroutine-based libraries ê°€ ì‚¬ìš©í•  ìˆ˜ ìˆê²Œë” ë¼ ìˆìŠµë‹ˆë‹¤.
 
-coroutines ¿¡ ±â¹İÇÑ ´ëºÎºĞÀÇ application-level ÀÇ APIs Àº ºĞ¸®µÈ library ·Î release µÅ ÀÖ½À´Ï´Ù. kotlinx.coroutines °¡ ±×°ÍÀÔ´Ï´Ù. ÀÌ library ´Â ´ÙÀ½À» Æ÷°ıÇÕ´Ï´Ù.
+coroutines ì— ê¸°ë°˜í•œ ëŒ€ë¶€ë¶„ì˜ application-level ì˜ APIs ì€ ë¶„ë¦¬ëœ library ë¡œ release ë¼ ìˆìŠµë‹ˆë‹¤. kotlinx.coroutines ê°€ ê·¸ê²ƒì…ë‹ˆë‹¤. ì´ library ëŠ” ë‹¤ìŒì„ í¬ê´„í•©ë‹ˆë‹¤.
 
-- kotlinx-coroutines-core ¿Í ÇÔ²² Platform-agnostic ÇÑ ºñµ¿±â ÇÁ·Î±×·¡¹Ö
-    - ÀÌ ¸ğµâÀº select ¿Í ´Ù¸¥ Æí¸®ÇÑ primitives ¸¦ Á¦°øÇÏ´Â Go ¿Í °°Àº channels ¸¦ Æ÷ÇÔÇÕ´Ï´Ù.
-    - ÀÌ library ¿¡ ´ëÇÑ Æ÷°ıÀûÀÎ guide ´Â here ¿¡¼­ °¡´ÉÇÕ´Ï´Ù.
+- kotlinx-coroutines-core ì™€ í•¨ê»˜ Platform-agnostic í•œ ë¹„ë™ê¸° í”„ë¡œê·¸ë˜ë°
+    - ì´ ëª¨ë“ˆì€ select ì™€ ë‹¤ë¥¸ í¸ë¦¬í•œ primitives ë¥¼ ì œê³µí•˜ëŠ” Go ì™€ ê°™ì€ channels ë¥¼ í¬í•¨í•©ë‹ˆë‹¤.
+    - ì´ library ì— ëŒ€í•œ í¬ê´„ì ì¸ guide ëŠ” here ì—ì„œ ê°€ëŠ¥í•©ë‹ˆë‹¤.
 
-- JDK 8 ÀÇ CompletableFuture ¿¡ ±â¹İÇÑ APIs: kotlinx-coroutines-jdk8
-- JDK 7 ÀÌ»óÀÇ APIs ¿¡ ±â¹İÇÑ Non-blocking IO (NIO)
-- Swing(kotlinx-coroutines-swing) °ú javaFx(kotlin-coroutines-javafx) ¸¦ À§ÇÑ Áö¿ø
-- RxJava ¸¦ À§ÇÑ Áö¿ø: ktlinx-coroutines-rx
+- JDK 8 ì˜ CompletableFuture ì— ê¸°ë°˜í•œ APIs: kotlinx-coroutines-jdk8
+- JDK 7 ì´ìƒì˜ APIs ì— ê¸°ë°˜í•œ Non-blocking IO (NIO)
+- Swing(kotlinx-coroutines-swing) ê³¼ javaFx(kotlin-coroutines-javafx) ë¥¼ ìœ„í•œ ì§€ì›
+- RxJava ë¥¼ ìœ„í•œ ì§€ì›: ktlinx-coroutines-rx
 
-ÀÌ libraries ´Â ÀÏ¹İÀûÀÎ ÀÛ¾÷À» ½±°Ô¸¸µé¾îÁÖ´Â Æí¸®ÇÑ APIs ¿Í coroutine-based libraries ¸¦ ¾î¶»°Ô ºôµåÇØ¾ß ÇÏ´ÂÁö¿¡ ´ëÇÑ end-to-end ¿¹½Ãµé µÑ ´Ù¸¦ Á¦°øÇÕ´Ï´Ù.
+ì´ libraries ëŠ” ì¼ë°˜ì ì¸ ì‘ì—…ì„ ì‰½ê²Œë§Œë“¤ì–´ì£¼ëŠ” í¸ë¦¬í•œ APIs ì™€ coroutine-based libraries ë¥¼ ì–´ë–»ê²Œ ë¹Œë“œí•´ì•¼ í•˜ëŠ”ì§€ì— ëŒ€í•œ end-to-end ì˜ˆì‹œë“¤ ë‘˜ ë‹¤ë¥¼ ì œê³µí•©ë‹ˆë‹¤.

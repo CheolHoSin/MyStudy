@@ -1,7 +1,185 @@
-05.01. Classes
+﻿04.01. Classes
 
-05.01.08. Overriding Properties
-properties �� override �ϴ� ���� method �� override �ϴ� ����� �����ϰ� �����մϴ�. superclass �� ����� properties �� derived class �� �缱��Ǵµ� override �� ���� �;� �ϰ�, ������ type �� ������ �մϴ�. �� ����� property �� initializer �� getter method �� �Բ� override �� �� �ֽ��ϴ�.
+04.01.01. Classes
+
+Kotlin 에서 Classes 는 class keyword 를 사용해 선언합니다.
+
+---
+class Invoice {
+}
+---
+
+class 선언은 class 이름, class header ( 그것의 type parameters 와 primary constructor 등을 기술하는 ), 그리고 curly braces 로 감싸진 class body 로 구성됩니다. header 와 body 는 선택적입니다. body 가 없다면 curly braces 는 생략할 수 있습니다.
+
+---
+class Empty
+---
+
+04.01.02. Constructor
+
+Kotlin 에서 class 는 primary constructor 와 한 개 이상의 secondary constructors 를 가질 수 있습니다. primary constructor 는 class header 의 부분입니다. 그것은 class 이름 (과 optinal type parameter) 뒤에 옵니다.
+
+---
+class Person constructor(firstName: String) {
+}
+---
+
+primary constructor 이 어떤 annotations 나 visibility modifiers 도 가지지 않는다면 constructor keyword 는 생략할 수 있습니다.
+
+---
+class Person(firstName: String) {
+}
+---
+
+primary constructor 는 어떤 코드를 포함할 수 없습니다. 초기화 코드는 initializer blocks 내에 위치할 수 있고, init keyword 로 prefix 됩니다.
+
+---
+class Customer(name: String) {
+    init {
+        logger.info("Customer initialize with value ${name}")
+    }
+}
+---
+
+primary constructor 의 parameters 는 initializer block 내에서 사용될 수 있습니다. class body 내에 선언된 property initialzers 에서 사용될 수 있습니다.
+
+---
+class Customer(name: String) {
+    val customerKey = name.toUpperCase()
+}
+---
+
+사실 properties 를 선언하고 primary constructor 로부터 그것들을 initialize 하기 위해 kotlin 은 간결한 syntax 를 가집니다.
+
+---
+class Person(val firstName: String, val lastName: String, var age: Int) {
+   // ...
+}
+---
+
+정규 properties 와 거의 같은 방법으, primary constructor 에 선언된 properties 는 mutable(var) 하거나 read-only(val) 할 수 있습니다.
+
+constructor 가 annotation 이나 visibility modifiers 를 가지고 있으면 constructor keyword 가 요구되고 modifiers 는 그 전에 옵니다.
+
+---
+class Customer public @Inject constructor(name: String) { ... }
+---
+
+더 많은 상세사항을 위해 visibility modifiers 를 보세요.
+
+04.01.03. Secondary Constructors
+
+class 는 secondary constructors 를 선언할 수 있고, constructor 와 함께 prefix 됩니다.
+
+---
+class Person {
+    constructor(parent: Person) {
+        parent.children.add(this)
+    }
+}
+---
+
+class 가 primary constructor 를 가진다면 각 secondary custructor 는 또다른 secondary constructors 를 통해 직접적으로든 간접적으로든 primary constructor 에 위임해야합니다. 같은 class 의 또 다른 consturctor 에 위임하는 것은 this keyword 를 사용해 이루어집니다.
+
+---
+class Person(val name: String) {
+    constructor(name: String, parent: Person) : this(name) {
+     parent.children.add(this)
+    }
+}
+---
+
+non-abstract class 가 어떤 다른 constructors (primary 나 secondary) 를 선언하지 않는다면, 어떤 arguments 도 갖지 않는 primary constructor 를 생성할 겁니다. constructor 의 visbility 는 public 할 겁니다. class 가 public constructor 를 가지길 원하지 않으면 non-default visibility 를 갖는 빈 primary constructor 를 선언할 필요가 있습니다.
+
+---
+class DontCreateMe private constructor () {
+}
+---
+
+Note: JVM 상에서 primvary constructor 의 모든 parameter 가 default values 를 가진다면 compiler 는 기본 value 를 사용하고 추가적인 parameter 가 없는 constructor 를 생성할 겁니다. 이것은 jackson 이나 JPA 처럼 parameter 없는 constructors 를 통해 class instances 를 생성하는 libraries 와 함께 kotlin 을 사용하기 쉽게 합니다.
+
+04.01.04. Creating instances of classes
+
+class 의 instance 를 생성하기 위해 regular function 인 것처럼 constructor 를 call 할 수 있습니다.
+
+---
+val invoice = Invoice()
+val customer = Customer("Joe Smith")
+---
+
+Kotlin 은 new keyword 를 가지지 않는다는 걸 알아두세요
+
+nested, inner, anonymous inner clases 의 instances 를 생성하는 것은 Nested Classes 에 설명돼 있습니다.
+
+04.01.05. Class Members
+
+class 는 다음을 포함합니다.
+
+- Constructors and initilizer blocks
+- Functions
+- Properties
+- Nested and Inner Classes
+- Object Declarations
+
+04.01.06. Inheritance
+
+Kotlin 에서 모든 classes 는 일반 superclass 인 Any 를 가지며 이는 어떠한 supertypes 가 선언되지 않은 class 를 위한 기본 super 입니다.
+
+--
+class Example    // Implicitly Inherits from Any
+---
+
+Any 는 java.lang.Object 가 아닙니다. 특히 equals(), hasCode() 그리고 toString() 외에 어떤 다른 members 도 가지지 않습니다. java interoperability section 에서 더 많은 정보를 찾아보세요.
+
+명시적 supertype 을 선언하기 위해 class header 에서 colon 뒤에 type 을 놓으세요.
+
+---
+open class Base(p: Int)
+
+class Derived(p: Int) : Base(p)
+---
+
+class 가 primary constructor 를 가지고 있다면, base type 은 primary constructor 의 parameters 를 사용해 그 자리에서 바로 초기화 될 수 있고 또 초기화되야 합니다.
+
+class 가 primary constructor 를 가진다면 각 secondary constructor 는 super keyword 를 사용해서 base type 을 초기화하거나 그 일을 하는 다른 custoructor 에게 위임해야 합니다. 이 case 에서 다른 secondary constructors 는 base type 의 다른 constructors 를 call 할 수 있습니다.
+
+---
+class MyView: View {
+    constructor(ctx: Context) : super(ctx)
+
+    constructor(ctx: Context, attrs: AttributeSet) : super(ctx, attrs)
+}
+---
+
+class 에 있는 open annotation 은 java 의 final 과 반대입니다. 다른 class 가 이 class 를 inherit 하는 것을 허용합니다. 기본적으로 kotlin 의 모든 classes 는 final 이며, Effective Java 의 Item 18: Design and document for inheritance or else prohibit it 에 해당합니다.
+
+04.01.07. Overriding Methods
+
+전에 언급했듯 kotlin 에서는 하는 일을 명시적으로 하는데 매달립니다. java 와 다르게 Kotlin 은 overridable members 를 위한 annotation (open 이라 부릅니다) 과 overrides 를 위한 annotations 를 필요로 합니다.
+
+---
+open class Base {
+    open fun v() {}
+    fun nv() {}
+}
+class Derived() : Base() {
+    override fun v() {}
+}
+---
+
+override annotation 은 Derived.v() 를 위해 필요합니다. 이걸 빠뜨리면 compiler 는 불평합니다. Base.nv() 처럼 function 상에 open annotation 이 붙어 있지 않으면 subclass 에 override 를 붙이든 붙이지 않든 같은 signature 로 method 를 선언하는게 허용되지 않습니다. final class (예를 들면 open annotation 을 전혀 가지지 않은 class) 에서 open members 는 금지됩니다.
+
+override 가 표시된 member 는 그 자신을 open 합니다. 즉 subclass 에서 override 될 수 있습니다. re-overriding 을 막으려면 final 을 사용하세요.
+
+---
+open class AnotherDerived() : Base() {
+    final override fun v() {}
+}
+---
+
+ 
+04.01.08. Overriding Properties
+properties 를 override 하는 것은 method 를 override 하는 방법과 유사하게 동작합니다. superclass 에 선언된 properties 는 derived class 에 재선언되는데 override 가 먼저 와야 하고, 동일한 type 을 가저야 합니다. 각 선언된 property 는 initializer 나 getter method 와 함께 override 할 수 있습니다.
 
 ---
 open class Foo {
@@ -12,9 +190,9 @@ class Bar1 : Foo() {
     override val x: Int = ...
 }
 
-val property �� var property �� override �� ���� ������ �ݴ�� �ȵ˴ϴ�. �̴� val property �� getter method �� �⺻������ �����ϰ� �װ��� var �� override �ϴ� ���� derived class �ؼ� setter method �� �߰������� �����ϱ� ������ ���˴ϴ�.
+val property 를 var property 로 override 할 수도 있지만 반대는 안됩니다. 이는 val property 가 getter method 를 기본적으로 선언하고 그것을 var 로 override 하는 것은 derived class 해서 setter method 를 추가적으로 선언하기 때문에 허용됩니다.
 
-primary constructor ���� override Ű���带 property ������ �κ����� ����� �� �ִٴ� �� �˾Ƶμ���.
+primary constructor 에서 override 키워드를 property 선언의 부분으로 사용할 수 있다는 걸 알아두세요.
 
 ---
 interfae Foo {
@@ -28,12 +206,99 @@ class Bar2 : Foo {
 }
 ---
 
+04.01.09. Calling the superclass implementation
 
-05.02. Properties and Fields
+derived class 내의 코드는 super keyword 를 사용해 super class functions 와 property accessors implementations 를 call 할 수 있습니다.
 
-05.02.01/ Declaring Properties
+---
+open class Foo {
+    open fun f() { println("Foo.f()") }
+    open val x: Int get() = 1
+}
 
-Kotlin �� classes �� properties �� ������ �ֽ��ϴ�. �̰͵��� var keyword �� ����ؼ� mutable �ϰ� ����ǰų�, val keyword �� ����ؼ� read-only �ϰ� ����� �� �ֽ��ϴ�.
+class Bar : Foo() {
+    override fun f() {
+        super.f()
+        println("Bar.f()")
+    }
+
+    override val x: Int get() = super.x + 1
+}
+---
+
+inner class 내에서, outer class 의 superclass 를 접근하는 것은 outer class name 에 qualified 된 super keyword, super@Outer 로 가능합니다.
+
+---
+class Bar : Foo() {
+    override fun f() { /* ... */ }
+    override val x: Int get() = 0
+
+    inner class Baz {
+        fun g() {
+            super@Bar.f()  // Calls Foo's implementation of f()
+            println(super@Bar.x) // Uses Foo's Implementation of x's getter
+        }
+    }
+}
+---
+
+04.01.10. Overriding Rules
+
+Kotlin 에서 inheritance 구현은 다음 규칙에 따라 규정됩니다. class 가 직접 superclass 로부터 같은 member 들의 많은 구현을 inherit 한다면 이 member 를 override 하고 자체 구현 (아마도 inherit 된 것 중 하나를 사용해서) 을 제공해야 합니다.
+
+inherit 된 implemntation 을 취하는 supertype 을 나타내기 위해, angle brackets 안에 supertype 가 qualify 된 super 를 사용합니다. 예를 들어 super<Base> 처럼 말이죠.
+
+---
+open class A {
+    open fun f() { print("A") }
+    fun a() { print("a") }
+}
+
+interface B {
+    fun f() { print("B") }  // interface members are 'open' by default
+    fun b() { print("b") }
+}
+
+class C() : A(), B {
+    // The compiler requires f() to be overridden:
+    override fun f() {
+        super<A>.f()    // call to A.f()
+        super<B>.f()    // call to B.f()
+    }
+}
+---
+
+A 와 B 둘 다로부터 inherit 해도 괜찮은데 C 가 이들의 functions 인 a() 와 b() 중 어느 하나의 implementation 만 inherit 하기 때문에 문제가 발생하지 않습니다. 하지만 f() 의 경우 C 에서 inherit 된 두 개의 implementations 를 가지고 있으므로 C 에서 f() 를 override 하고 모호성을 없애는 자체 구현을 제공해야합니다.
+
+04.01.11. Abstract Classes
+
+class 와 members 의 일부는 abstract 로 선언될 수 있습니다. abstract member 는 class 내에서 implmentation 을 가지지 않습니다. abstract class 나 function 은 open 으로 annotate 할 필요가 없다는 걸 알아두세요. 말하지 않아도 알아서 됩니다.
+
+non-abstract open member 를 abstract 로 override 할 수 있습니다.
+
+---
+open class Base {
+    open fun f() {}
+}
+
+abstract class Derived : Base() {
+    override abstract fun f()
+}
+---
+
+04.01.12. Companion Object
+
+Kotlin 에서는 java 나 c# 가 달리 class 가 static methods 를 가질 수 없습니다. 대부분의 경우 단순히 package-level functions 를 대신 사용하길 추천합니다.
+
+class instance 를 가지지 않고 call 할 수 있는 function 을 작성하고 싶지만 class 의 internals 에 접근할 필요도 있다면 (예를 들어 factory method), object declaration 의 member 로 해당 클래스 내부에 작성할 수 있습니다.
+
+더 구체적으로는 class 내부에 companion object 를 선언한다면 java/c# 에 있는 static methods 를 call 하는 syntax 와 똑같이 class name 만을 qualifier 로 사용해 member 를 호출할 수 있을 겁니다.
+
+04.02. Properties and Fields
+
+04.02.01. Declaring Properties
+
+Kotlin 내 classes 는 properties 를 가지고 있습니다. 이것들은 var keyword 를 사용해서 mutable 하게 선언되거나, val keyword 를 사용해서 read-only 하게 선언될 수 있습니다.
 
 ---
 class Address {
@@ -45,7 +310,7 @@ class Address {
 }
 ---
 
-property �� ����ϱ� ����, java ���� �ִ� field �� ��ó�� ������ �����մϴ�.
+property 를 사용하기 위해, java 내에 있는 field 인 것처럼 간단히 참조합니다.
 
 ---
 fun copyAddress(address: Address): Address {
@@ -59,9 +324,9 @@ fun copyAddress(address: Address): Address {
 }
 ---
 
-05.02.02. Getters and Setters
+04.02.02. Getters and Setters
 
-property �� �����ϱ� ���� full syntax �� �̷����ϴ�.
+property 를 선언하기 위한 full syntax 는 이렇습니다.
 
 ---
 var <propertyName>[: <PropertyType>] [= <property_initializer>]
@@ -69,30 +334,30 @@ var <propertyName>[: <PropertyType>] [= <property_initializer>]
     [<setter>]
 ---
 
-initializer, getter, setter �� �������Դϴ�. property type �� initializer ���κ��� (�Ǵ� �Ʒ��� �������� ��ó�� getter retury type ���κ���) ���ߵ� �� �ִٸ� �������Դϴ�.
+initializer, getter, setter 는 선택적입니다. property type 은 initializer 으로부터 (또는 아래에 보여지는 것처럼 getter retury type 으로부터) 유추될 수 있다면 선택적입니다.
 
-��:
+예:
 
 ---
 var allByDefault: Int? // error: explicit initializer required, default getter and setter implied
 var initialized = 1 // has type Int, default getter and setter
 ---
 
-read-only property ������ full syntax �� mutable property �� �� ���� ������� �ٸ��ϴ�. read-only property �� var ��� val �� ������ �� �ְ� setter �� ������� �ʽ��ϴ�.
+read-only property 선언의 full syntax 는 mutable property 와 두 가지 방법에서 다릅니다. read-only property 는 var 대신 val 로 시작할 수 있고 setter 를 허용하지 않습니다.
 
 ---
 val simple: Int? // has type Int, default getter, must be initialized in constructor
 val inferredType = 1 // has type Int and a default getter
 ---
 
-���� functions �� �ſ� �����ϰ� property ���� ���� �ٷ� custom accessors �� �ۼ��� �� �ֽ��ϴ�. ���� custom getter �� ���� �ֽ��ϴ�.
+보통 functions 와 매우 유사하게 property 선언 내에 바로 custom accessors 를 작성할 수 있습니다. 여기 custom getter 의 예가 있습니다.
 
 ---
 val isEmpty: Boolean
     get() = this.size == 0
 ---
 
-custom setter �� �̿� �����ϴ�.
+custom setter 는 이와 같습니다.
 
 ---
 val stringRepresentation: String
@@ -102,15 +367,15 @@ val stringRepresentation: String
     }
 ---
 
-��ӿ� ���� setter parameter �� �̸��� value ������ ��ȣ�ϴ� �̸��� �ִٸ� �ٸ� �̸��� ������ �� �ֽ��ϴ�.
+약속에 따라 setter parameter 의 이름은 value 이지만 선호하는 이름이 있다면 다른 이름을 선택할 수 있습니다.
 
-kotlin 1.1 ����, getter �� property type �� ������ �� �ִٸ� ������ �� �ֽ��ϴ�.
+kotlin 1.1 부터, getter 가 property type 을 유추할 수 있다면 생략할 수 있습니다.
 
 ---
 val isEmpty get() = this.size == 0  // has type Boolean
 ---
 
-accessor �� visibility �� �ٲٰų� annotate �ϱ� �������� �⺻ ������ �ٲٰ� ���� �ʴٸ� body �� �������� �ʰ� accessor �� ������ �� �ֽ��ϴ�.
+accessor 의 visibility 를 바꾸거나 annotate 하길 원하지만 기본 구현을 바꾸고 싶지 않다면 body 를 정의하지 않고 accessor 를 정의할 수 있습니다.
 
 ---
 var setterVisibility: String = "abc"
@@ -120,31 +385,31 @@ var setterWithAnnotation: Any? = null
     @Inject set // annotate the setter with Inject
 ---
 
-05.02.03. Backing Fields
+04.02.03. Backing Fields
 
-Kotlin �� classes �� fields �� ���� �� �����ϴ�. ������ ������ custom accessors �� ����� �� backing field �� ������ �� �ʿ䰡 �ֽ��ϴ�. �̷��� ������ ���� kotlin �� field identifier �� ����� ������ �� �ִ� autuomatic backing field �� �����մϴ�.
+Kotlin 의 classes 는 fields 를 가질 수 없습니다. 하지만 때때로 custom accessors 를 사용핼 때 backing field 를 가져야 할 필요가 있습니다. 이러한 목적을 위해 kotlin 은 field identifier 를 사용해 접근할 수 있는 autuomatic backing field 를 제공합니다.
 
 ---
 var counter = 0 // this initializer value is written directly to the backing field
     set(value) {
-        if (value >= 0 field = value
+        if (value >= 0) field = value
     }
 ---
 
-field identifier �� property �� accesors ������ ���� �� �ֽ��ϴ�.
+field identifier 는 property 의 accesors 에서만 사용될 수 있습니다.
 
-accessors �� ��� �ϳ��� �⺻ ������ ����ϰų� custom accesors �� field identifier �� ���� backing field �� �����ϰ� �ִٸ� property �� �ش��ϴ� backing field �� ������ ���Դϴ�.
+accessors 의 적어도 하나의 기본 구현을 사용하거나 custom accesors 가 field identifier 를 통해 backing field 를 참조하고 있다면 property 에 해당하는 backing field 가 생성될 것입니다.
 
-���� ���, ������ ��쿡�� backing field �� �������� ���� �̴ϴ�.
+예를 들어, 다음의 경우에서 backing field 는 존재하지 않을 겁니다.
 
 ---
 val isEmpty: Boolean
     get() = this.size == 0
 ---
 
-05.02.04. Backing Properties
+04.02.04. Backing Properties
 
-�̷��� "implicit bcking field" scheme �� ���� �ʴ� ���𰡸� �Ϸ��� �ϸ�, backing property �� ������ ������ ���ư� �� �ֽ��ϴ�.
+이러한 "implicit bcking field" scheme 에 맞지 않는 무언가를 하려고 하면, backing property 를 가지는 것으로 돌아갈 수 있습니다.
 
 ---
 private var _table: Map<String, Int>? = null
@@ -157,17 +422,17 @@ public val table: Map<String, Int>
     }
 ---
 
-��� �鿡��, �̰��� java �� ������, private properties �� getter �� setter ���� �����ϴ°� ����ȭ �� �ֱ� ������ � function call overhead �� �߻����� �ʽ��ϴ�.
+모든 면에서, 이것은 java 와 같은데, private properties 에 getter 와 setter 없이 접근하는게 최적화 돼 있기 때문에 어떤 function call overhead 도 발생하지 않습니다.
 
-05.02.05. Compile-Time Constants
+04.02.05. Compile-Time Constants
 
-compile �ð��� �˷����� properties values �� const modifier �� ����� compile time constants �� ǥ���� �� �ֽ��ϴ�. properties �� ������ �䱸������ ������ �ʿ䰡 �ֽ��ϴ�.
+compile 시간에 알려지는 properties values 는 const modifier 를 사용해 compile time constants 로 표시할 수 있습니다. properties 는 다음의 요구사항을 만족할 필요가 있습니다.
 
-- Top-level �Ǵ� object �� ���
-- String �̳� primitive type �� value �� �ʱ�ȭ �� ��
-- custom getter �� �ƴ�
+- Top-level 또는 object 의 멤버
+- String 이나 primitive type 의 value 로 초기화 된 것
+- custom getter 가 아님
 
-�̷��� properties �� annotations �� ���� �� �ֽ��ϴ�.
+이러한 properties 는 annotations 에 사용될 수 있습니다.
 
 ---
 const val SUBSYSTEM_DEPRECATED: String = "This subsystem is deprecated"
@@ -175,11 +440,11 @@ const val SUBSYSTEM_DEPRECATED: String = "This subsystem is deprecated"
 @Deprecated(SUBSYSTEM_DEPRECATED) fun foo() { ... }
 ---
 
-05.02.06. Last-Initialized Properties
+04.02.06. Last-Initialized Properties
 
-�Ϲ�������, non-null type �� �������� ����� properties �� constructor ���� �ʱ�ȭ�ž� �մϴ�. ������ ���� ������ �̰� ������ �� �ֽ��ϴ�. ���� ���, properties �� dependency injection �� ���� �ʱ�ȭ �� �� �ְų� unit test �� setup method ���� �ʱ�ȭ�� �� �ֽ��ϴ�. �� ���, constructor �� non-null initializer �� ������ �ʿ䰡 ������, ������ class �� body ���� �ִ� property �� ������ �� null checks �� ���ϰ� �ͽ��ϴ�.
+일반적으로, non-null type 을 가지도록 선언된 properties 는 constructor 에서 초기화돼야 합니다. 하지만 아주 가끔씩 이게 불편할 수 있습니다. 예를 들어, properties 가 dependency injection 을 통해 초기화 될 수 있거나 unit test 의 setup method 에서 초기화될 수 있습니다. 이 경우, constructor 내 non-null initializer 는 제공할 필요가 없지만, 여전히 class 의 body 내에 있는 property 를 참조할 때 null checks 를 피하고 싶습니다.
 
-�̷��� ��츦 �ٷ�� ���� property �� lateinit modifier �� ǥ���� �� �ֽ��ϴ�.
+이러한 경우를 다루기 위해 property 에 lateinit modifier 를 표시할 수 있습니다.
 
 ---
 public class MyTest {
@@ -195,16 +460,1480 @@ public class MyTest {
 }
 ---
 
-modifier �� class ( primary constructor �� �ƴ� ) �� body ������ ����� var properties ������ ���� �� ������ property �� custom getter �� setter �� �������� �ȵ˴ϴ�. propety Ÿ���� non-null �̾�� �ϰ� primitive type �̾�� �ȵ˴ϴ�.
+modifier 는 class ( primary constructor 가 아닌 ) 의 body 내에서 선언된 var properties 에서만 사용될 수 있으며 property 는 custom getter 나 setter 를 가져서는 안됩니다. propety 타입은 non-null 이어야 하고 primitive type 이어서는 안됩니다.
 
-�ʱ�ȭ�Ǳ� ���� lateinit property �� �����ϴ� ���� Ư���� exception �� �߻���Ű�µ�, ���ٵǴ� property �� initialized �� ���� ���ٴ� ����� ��Ȯ�� �ĺ��մϴ�.
+초기화되기 전에 lateinit property 에 접근하는 것은 특별한 exception 을 발생시키는데, 접근되는 property 와 initialized 된 적이 없다는 사실을 정확히 식별합니다.
 
-05.02.07. Overriding Properties
+04.02.07. Overriding Properties
 
 See Overrding Properties
 
-05.02.08. Delegated Properties
+04.02.08. Delegated Properties
 
-properties �� ��κ��� backing field �κ��� ������ �д� �� ���Դϴ�. (�׸��� �ۼ��ϱ⵵ �մϴ�). �ݸ� custom getters �� setters �� property �� � �ൿ�̵� ������ �� �ֽ��ϴ�. �� ���� ��𿣰� property �� �����ϴ����� ���� Ư���� �Ϲ��� pattern �� �ֽ��ϴ�. �� ���� ���� ��� lazy values, �־��� key �� ����� map �� �д� ��, database �� ����, access ���� listener ���� notify �ϱ�, ���� �ֽ��ϴ�.
+properties 의 대부분은 backing field 로부터 간단히 읽는 것 뿐입니다. (그리고 작성하기도 합니다). 반면 custom getters 와 setters 는 property 의 어떤 행동이든 구현할 수 있습니다. 그 사이 어디엔가 property 가 동작하는지에 대한 특정한 일반적 pattern 이 있습니다. 몇 가지 예를 들면 lazy values, 주어진 key 를 사용해 map 을 읽는 것, database 에 접근, access 에서 listener 에게 notify 하기, 등이 있습니다.
 
-�׷��� �Ϲ����� ���۵��� delegated properties �� ����ϴ� libraries �μ� ������ �� �ֽ��ϴ�.
+그러한 일반적인 동작들은 delegated properties 를 사용하는 libraries 로서 구현될 수 있습니다.
+
+04.03. Interfaces
+
+04.03.01. Interfaces
+
+kotlin 의 interfaces 는 java8 와 매우 유사합니다. abstract methods 의 선언과 method 구현 모두 포함할 수 있습니다. abstract classes 와 다른 점은 interface 는 state 를 저장하지 못한다는 것입니다. properties 를 가질 순 있지만 abstract 가 되거나 accessor implementations 를 제공할 필요가 없습니다.
+
+interface 는 interface keyword 를 사용해 정의합니다.
+
+---
+interface MyInterface {
+    fun bar()
+    fun foo() {
+        // optional body
+    }
+}
+---
+
+04.03.02. Implementing Interfaces
+
+class 나 object 는 한 개 이상의 interfaces 를 구현합니다.
+
+---
+class Child : MyInterface {
+    override fun bar() {
+        // body
+    }
+}
+---
+
+04.03.03. Properties in Interfaces
+
+interfaces 내에서 properties 를 선언할 수 있습니다. interfaces 내에 선언된 property 는 abstract 가 될 수도 있고 accessors 에 implementations 를 제공할 수 있습니다. interfaces 내에 선언된 Properties 는 backing fields 를 가질 수 없으므로 interfaces 내에 선언된 accessors 가 그것들을 참조할 수도 없습니다.
+
+---
+interface MyInterface {
+    val prop : Int // abstract
+
+    val propertyWithImplementation: String
+        get() = "foo"
+
+    fun foo() {
+        print(prop)
+    }
+}
+
+class Child : MyInterface {
+    override val prop: Int = 29
+}
+---
+
+04.03.04. Resolving overriding conflicts
+
+supertype list 에 있는 많은 types 를 선언할 때, 같은 methods 구현을 한 개 이상 상속할 지 모릅니다. 예를 들어,
+
+---
+interface A {
+    fun foo() { print("A") }
+    fun bar()
+}
+
+interface B {
+    fun foo() { print("B") }
+    fun bar() { print("bar") }
+}
+
+class C : A {
+    override fun bar() { print("bar") }
+}
+
+class D : A, B {
+    override fun foo() {
+        super<A>.foo()
+        super<B>.foo()
+    }
+
+    override fun bar() {
+        super<B>.bar()
+    }
+}
+---
+
+interfaces A 와 B 모두 foo() 와 bar() functions 를 선언하고 있습니다. 둘 다 foo() 를 구현하고 있지만 B 만이 bar() 를 구현하고 있습니다. (bar() 가 A 에서는 abstract 로 표시돼 있지 않은데, functin 에 body 가 없으면 그게 interfaces 에서 default 이기 때문입니다.) 이제 구체적인 class C 가 A 를 상속하면 분명 bar() 를 override 하고 구현을 제공해야 합니다.
+
+그러나 D 가 A 와 B 를 상속하면 여러 interfaces 로부터 상속받은 모든 methods 를 구현하고 D 가 그들을 어떻게 구현해야 하는지 명확히 명시해줄 필요가 있습니다. 이 규칙은 single implementation (bar()) 와 multiple implementations (foo()) 를 상속받는 methods 모두에 적용됩니다.
+
+04.04. Visibility Modifiers
+
+04.04.01. Visibility Modifiers
+
+classes, objects, interfaces, constructors, functions, properties 와 그들의 setters 는 visibility modifiers 를 가질 수 있습니다. (getters 는 항상 property 와 같은 visibility 를 가집니다.) kotlin 에는 4개의 modifiers 가 있는데, private, protected, internal, public 입니다. default visibility 는 public 이고 명시적인 modifiers 가 없을 때 사용됩니다.
+
+04.04.02. Packages
+
+functions, properties 와 classes, objects 와 interfaces 는 top-level, 즉 package 내에 직접 선언할 수 있습니다.
+
+---
+// file name: exmaple.kt
+package foo
+
+fun baz() {}
+class Bar {}
+---
+
+- 어떤 visibility modifiers 를 선언하지 않는다면, default 로 public 이 사용되고 이는 선언이 어디서든 visible 하다는 걸 의미합니다.
+
+- private 선언을 표시하면 선언을 포함하는 file 내에서만 visible 할 겁니다.
+
+- internal 을 표시하면, 같은 moudle 내 어디서든 visible 합니다.
+
+- protected 는 top-level 선언을 위해 사용할 수 없습니다.
+
+Note: 다른 package 에 있는 visible 한 top-level 선언을 사용하려면 import 를 사용하면 됩니다.
+
+---
+// file name: exmaple.kt
+package foo
+
+private fun foo() {} // visible inside example.kt
+
+public var bar: Int = 5 // property is visible everywhere
+    private set    // setter is visible only in example.kt
+
+internal val baz = 6 // visible inside the same module
+---
+
+04.04.03. Classes and Interfaces
+
+class 내에 선언된 member 를 위해 다음을 사용할 수 있습니다.
+
+- private 는 오직 (해당 members 들을 모두 포함하고 있는) 이 class 내에서만 visible 함을 의미합니다.
+
+- protected - private 와 같고 + subclasses 에서도 visible 합니다.
+
+- internal - 이 모듈 내, 선언하고 있는 class 를 보는 모든 client 는 그것의 internal members 를 봅니다.
+
+- public - 선언 class 를 보는 모든 client 는 그것의 public members 를 봅니다.
+
+NOTE for Java users: kotlin 에서 outer class 는 inner class 의 private members 를 볼 수 없습니다.
+
+예:
+
+---
+open class Outer {
+    private val a = 1
+    protected open val b = 2
+    internal val c = 3
+    val d = 4
+
+    protected class Nested {
+        public val e : Int = 5
+    }
+}
+
+class Subclass : Outer() {
+    // a is not visible
+    // b, c and d are visible
+    // Nested and e are visible
+
+    override val b = 5  // 'b' is protected
+}
+
+class Unrelated(o: Outer) {
+    // o.a, o.b are not visible
+    // o.c and o.d are visible (smae module)
+    // Outer.Nested is not visible, and Nested::e is not visible either
+}
+---
+
+04.04.04. Constructors
+
+class 의 primary constructor 의 visibility 를 기술하기 위해 다음의 syntax 를 사용하세요. (명시적인 constructor keyword 를 추가할 필요가 있다는 걸 알아두세요.)
+
+---
+class C private constructor(a: Int) { ... }
+---
+
+여기서 constructor 가 private 합니다. 기본적으로 모든 constructors 는 public 한데, class 가 visible 한 어디서든 constructor 도 실질적으로 visible 하다는 걸 보장합니다. (즉 internal class 의 constructor 는 오직 같은 모듈 내에서만 visible 합니다.)
+
+04.04.05. Local declarations
+
+Local variables, functions, classes 는 visibility modifiers 를 가질 수 없습니다.
+
+04.04.06. Modules
+
+internal visibility modifier 는 같은 module 내에서 member 가 visible 하다는 걸 의미합니다. 더 자세히 말하자면, module 은 다음과 함께 compile 된 kotlin files 의 집합입니다.
+
+- an IntelliJ IDEA module;
+- a Maven project;
+- a Gradle source set;
+- a set of files compiled with one invocation of the Ant task.
+
+04.05. Extensions
+
+04.05.01. Extensions
+
+Kotlin 은 C#, Gosu 와 유사하게 class 를 상속하거나 dcorator 와 같은 design pattern 의 어떠한 type 도 사용하지 않고 class 에 새로운 기능을 확장할 수 있는 방법을 제공합니다. 이는 extensions 라 불리는 특별한 declarations 를 통해 이뤄집니다. Kotlin 은 extension functions 와 extension properties 를 지원합니다.
+
+04.05.02. Extension Functions
+
+extension function 를 선언하기 위해 receiver type 즉 extended 될 type 으로 이름을 prefix 할 필요가 있습니다. 다음은 MutableList<Int> 에 swap function 을 추가합니다.
+
+---
+fun MutableList<Int>.swap(index1: Int, index2: Int)
+{
+    val tmp = this[index1]  // 'this' corresponds to the list
+    this[index1] = this[index2]
+    this[index2] = tmp
+}
+---
+
+extension function 내에 있는 this keyword 는 receiver object (dot 전에 오는 것) 에 해당합니다. 이제 어떠한 MutableList<Int> 에서라도 해당 function 을 call 할 수 있습니다.
+
+---
+val l = mutableListOf(1, 2, 3)
+l.swap(0, 2) // 'this' inside 'swap()' will hold the value of 'l'
+---
+
+물론 이 function 은 어떤 MutableList<T> 에서도 의미가 있고, 그것을 generic 하게 만들 수 있습니다.
+
+---
+fun <T> MutableList<T>.swap(index1: Int, index2: Int) {
+    val tmp = this[index1] // 'this' corresponds to the list
+    this[index1] = this[index2]
+    this[index2] = tmp
+}
+---
+
+receiver type 에서 사용 가능하게 하기 위해 function 이름 전에 generic type parameter 를 선언합니다. generic functions 를 보세요.
+
+04.05.03. Extensions are resolved statically
+
+Extensions 는 extend 한 classes 를 실제로 바꾸지는 않습니다. extension 을 정의함으로써 class 에 새로운 members 를 추가하는 게 아니라 이러한 type 의 variables 에 대해 dot-notation 으로 호출 가능한 새로운 functions 를 만들 뿐입니다.
+
+extension functions 는 statically 하게 dispatch 된다, 즉 receiver type 에 의해 virtual 하지 않다는 걸 강조하고 싶습니다. 이는 extension functions 가 호출되는 expression 의 type 에 의해 
+결정된다는 걸 의미하며 runtime 때 해당 expression 을 evaulating 한 결과의 type 에 의해 결정되는 건 아닙니다. 예를 들면 이렇습니다.
+
+---
+open class C
+
+class D : C()
+
+fun C.foo() = "c"
+
+fun D.foo() = "d"
+
+fun printFoo(c: C) {
+    println(c.foo())
+}
+
+printFoo(D())
+---
+
+이 예시는 c 를 print 할 겁니다. 왜냐하면 call 되는 extension function 이 오직 parameter c 의 선언된 타입에 의존하기 때문이며, 그건 C class 입니다.
+
+class 이 member function 을 가지고 있고 extension function 이 같은 receiver type 및 같은 name 으로 정의되어 주어진 arguments 에 적용가능하다면 member 가 항상 우선합니다. 예를 들자면 이렇습니다.
+
+---
+class C {
+    fun foo() { println("member") }
+}
+
+fun C.foo() { println("extension") }
+---
+
+만일 c.foo() 를 c type 의 어느 c 에서 부르더라도 "member" 를 print 하지 "extension" 을 print 하진 않습니다.
+
+그러나 extension fnctions 를 같은 이름을 가졌으나 다른 signature 를 가진 member functions 로 overload 하는 건 완전 괜찮습니다.
+
+--- 
+class C {
+    fun foo() { println("member") }
+}
+
+fun C.foo(i: Int) { println("extension") }
+---
+
+C().foo(1) 은 "extension" 을 print 합니다.
+
+04.05.04. Nullable Receiver
+
+extensions 는 nullable receiver type 으로 정의될 수 있습니다. 그러한 extensions 는 object variables 가 심지어 null 일지라도 call 이 가능하며 body 내에서 this == null 을 위한 check 를 할 수 있습니다. 이는 Kotlin 에서 null 을 check 하지 않고 toString() 을 call 할 수 있게 만들어줍니다. 그 check 는 extension function 내에서 일어납니다.
+
+---
+fun Any?.toString(): String {
+    if (this == null) return "null"
+    // after the null check, 'this' is autocast to a non-null type, so the toString() below
+    // resolves to the member function of the Any class
+
+    return toString()
+}
+---
+
+04.05.05. Extension Properties
+
+functions 와 유사하게 Kotlin 은 extension properties 를 제공합니다.
+
+---
+val <T> List<T>.lastIndex: Int
+    get() = size - 1
+---
+
+extensions 는 classes 에 실제로 members 를 추가하진 않기 때문에 extension property 가 backing field 를 가질 수 있는 효과적인 방법이 없습니다. 이것이 initializers 가 extension properties 를 허용하지 않는 이유입니다. 그들의 행위는 오직 명시적으로 제공하는 getters/setters 에서만 정의 가능합니다.
+
+예를 들자면 이렇습니다.
+
+---
+val Foo.bar = 1 // error: initializers are not allowed for extension properties
+---
+
+04.05.06. Companion Object Extensions
+
+class 가 companion objet 를 정의하고 있으면 companion obejct 를 위한 extension functions 와 properties 역시 정의할 수 있습니다.
+
+---
+class MyClass {
+    companion object { } // will be called "Companion"
+}
+
+fun MyClass.Companion.foo() {
+    // ...
+}
+---
+
+companion object 의 정규 members 처럼 qualifier 로 class name 사용하는 것만으로 call 할 수 있습니다.
+
+---
+MyClass.foo()
+---
+
+04.05.07. Scope of Extensions
+
+대부분 extensions 는 top level 에 정의합니다. 즉 packages 아래에 바로 정의합니다.
+
+---
+package foo.bar
+
+fun Baz.goo() { ... }
+---
+
+선언하는 package 바깥에서 이러한 extension 을 사용하기 위해서는 call site 에서 그것을 import 할 필요가 있습니다.
+
+---
+package com.example.usage
+
+import foo.bar.goo  // importing all extensions by name "goo"
+
+                    // or
+improt foo.bar.*    // importing everything from "foo.bar"
+
+fun usage(baz: Baz) {
+    baz.goo()
+}
+---
+
+더 많은 정보를 위해 imports 를 보세요.
+
+04.05.08. Declaring Extensions as Members
+
+class 내에, 또다른 class 를 위한 extensions 를 선언할 수 있습니다. 그러한 extension 내에서는 implicit receivers 가 다중으로 존재하는데 그것의 members 는 qualifier 없이 접근할 수 있습니다. extension 이 선언된 class 의 instance 를 dispatch receiver 라 부르고 extension method 의 receiver type 의 intance 를 extension receiver 라 부릅니다.
+
+---
+class D {
+    fun bar() { ... }
+}
+
+class C {
+    fun baz() { ... }
+
+    fun D.foo() {
+        bar()  // calls D.bar
+        baz()  // calls C.daz
+
+    fun caller(d: D) {
+        d.foo()  // call the extension function
+    }
+}
+
+dispatch receiver 와 extension receiver 의 members 사이에 name conflict 가 발생하는 경우 extension receiver 가 앞섭니다. dispatch receiver 의 member 를 참조하려면 qualified this syntax 를 사용할 수 있습니다.
+
+---
+class C {
+    fun D.foo() {
+        toString()         // calls D.toString()
+        this@C.toString()  // calls C.toString()
+    }
+}
+---
+
+members 로 선언된 Extensions 는 open 으로 선언해 subclasses 에서 override 할 수 있습니다. 이는 그러한 functions 의 dispatch 가 dispatch receiver type 에 대해 virtual 하지만 extension receiver type 에 대해선 static 하다는 걸 의미합니다.
+
+---
+open class D {
+}
+
+class D1 : D() {
+}
+
+open class C {
+    open fun D.foo() {
+        println("D.foo in C")
+    }
+
+    open fun D1.foo() {
+        println("D1.foo in C")
+
+    fun caller(d: D) {
+       d.foo()  // call the extension function
+    }
+}
+
+class C1 : C() {
+    override fun D.foo() {
+        println("D.foo in C1")
+
+    override fun D1.foo() {
+        println("D1.foo in C1")
+}
+
+C().caller(D())  // prints "D.foo in C"
+C1().caller(D()) // prints "D.foo in C1" - dispatch receiver is resolved virtually
+C().caller(D1()) // prints "D.foo in C" - extension receiver is resolved statically
+----
+
+04.05.09. Motivation
+
+java 에서 "*Utils" 라 명명된 classes 에 익숙합니다.FileUtils, StringUtils 그리고 기타 등등이 그렇죠. 유명한 java.utl.Collections 도 같은 부류입니다. 그리고 이러한 Utils classes 에 대해 불쾌한 부분은 사용하는 code 가 이와 같다는 겁니다.
+
+---
+// Java
+Collections.swap(list,
+Collections.binarySearch(list,
+Collections.max(otherList)), Collections.max(list));
+---
+
+이 방법으론 해당 class names 를 항상 줘야 합니다. static imports 를 사용해 이렇게 할 수 있습니다.
+
+---
+//Java
+swap(list, binarySearch(list, max(otherList)), max(list));
+---
+
+이는 약간 더 낫습니다만 IDE 의 강력한 code 완성으로부터 완전히 혹은 거의 도음을 받지 못합니다. 이렇게 말할 수 있다면 훨신 더 나을 겁니다.
+
+---
+// Java
+list.swap(list.binarySearch(otherList.max)),
+listmax());
+
+하지만 List class 내에 모든 가능한 methods 를 구현하고 싶진 않지요? 이것이 우리가 extensions 를 제공하는 이유입니다.
+
+04.06. Data Classes
+
+04.06.01. class 를 생성하는 주된 목적은 주로 데이터를 보관하는 것입니다. 그러한 class 에서 몇 가지 기초 기능과 uitility functions 는 종종 data 로부터 기계적으로 끌어낼 수 있습니다. Kotlin 에서는 이를 data class 라 부르고 data 로 표시합니다.
+
+---
+data class User(val name: String, val age: Int)
+---
+
+compiler 는 primary constructor 에 선언된 모든 properties 로부터 다음의 members 를 자동적으로 이끌어냅니다.
+
+- equals() / hasCode() pair;
+- "User(name=John, age=42)" 형태의 toString()
+- properties 선언 순서에 해당하는 componentN() functions
+- copy() function (아래를 보세요)
+
+생성된 code 의 일관성과 의미있는 동작을 보장하기 위해 data classes 는 다음의 요구조건을 충족시켜야 합니다.
+
+- primary constructor 는 적어도 한 개 이상의 parameter 를 가져야 합니다.
+- 모든 primary constructor parameters 는 val 또는 var 로 표시될 필요가 있습니다.
+- data classes 는 abstract, open, sealed, inner 가 될 수 없습니다.
+- (1.1 이전) data classes 는 단지 interfaces 를 구현할 수 있습니다.
+
+추가적으로 members genenation 은 members inheritance 에 대해 이러한 규칙들을 따릅니다.
+
+- equals(), hashCode(), toString() 의 명시적인 구현이 data class body 나 superclass 내 final implementations 에 있다면 이러한 functions 는 생성되지 않으며 이미 존재하는 implmentations 를 사용합니다.
+
+- supertype 이 componentN() functions 를 가지고 있고 그것이 open 돼 있거나 호환되는 types 를 return 한다면 해당 functions 는 data class 를 위해 생성되고 supertype 의 것을 override 합니다. suppertype 이 호환되지 않은 signatures 거나 final 로 되어있거나 하면 override 될 수 없고 error 를 보고합니다.
+
+- signature 에 매칭되는 copy(...) function 을 이미 가지고 있는 type 으로부터 data class 를 이끌어내는 것이 Kotlin 1.2 에서 deprecated 됐고 Kotlin 1.3 에서는 금지될 겁니다.
+
+- componentN() 과 copy() functions 를 위한 명시적인 implementation 을 제공하는 것은 허용되지 않습니다.
+
+1.1 부터 data classes 는 다른 classes 를 extend 할 수 있습니다. ( 예시는 Sealed classes 를 보세요).
+
+JVM 상에서, 생성된 class 가 parameter 없는 constructor 를 가져야 할 필요가 있다면 모든 properties 를 위한 default values 를 명시해야 합니다. (Constructors 를 보세요)
+
+---
+data class User(val name: String = "", val age: Int = 0)
+---
+
+04.06.02. Copying
+
+properties 의 일부가 바뀐 object 를 copy 할 필요가 있지만 나머지는 바뀌지 않게 유지하고 싶은 경우가 종종 있습니다. 이것이 copy() function 이 생성되는 이유입니다. 위에 있는 User class 의 경우 implementation 은 다음과 같을 것입니다.
+
+---
+fun copy(name: String = this.name, age: Int = this.age) = User(name, age)
+---
+
+이는 다음과 같이 쓸 수 있게 합니다.
+
+---
+val jack = User(name = "Jack", age = 1)
+val olderJack = jack.copy(age = 2)
+---
+
+04.06.03. Data Classes and Destructing Declarations
+
+data classes 를 위해 생성된 Component functions 는 destructuring declarations 에서 사용을 허용할 수 있습니다.
+
+---
+val jane = User("Jane", 35)
+val (name, age) = jane
+println("$name, $age years of age") // prints "Jane, 35 years of age"
+---
+
+04.06.04. Standard Data Classes
+
+standard library 는 Pair 와 Triple 를 제공합니다. 그럼에도 불구하고 대부분의 경우 명명된 data classes 가 더 나은 설계 선택이 될 수 있는데 왜냐하면 properties 를 위한 의미있는 이름을 제공함으로서 code 를 더 읽기 좋게 만들기 때문입니다.
+
+04.07.01. Sealed Classes
+
+Sealed classes 는 제한된 class hierarchies 를 표현하기 위해 사용되는데, 이때 하나의 value 는 제한된 set 으로부터 온 type 중 하나를 가질 수 있지만 다른 type 을 가질 수는 없습니다. 어떤 의미론 enum classes 의 확장으로 볼 수 있습니다. enum type 을 위한 values 의 set 또한 제한되지만 각각의 enum constant 는 오직 하나의 instance 로 존재하는 반면 sealed class 의 subclass 는 state 를 포함할 수 있는 여러개 instances 를 가질 수 있습니다.
+
+sealed class 를 선언하기 위해 sealed modifier 를 class 이름 전에 놓습니다. sealed class 는 subclasses 를 가질 수 있습니만 그들 전부 sealed class 과 같은 파일 안에 선언되어야 합니다. (Kotlin 1.1 이전에는 규칙이 훨씬 더 strict 했습니다: classes 는 sealed class 의 선언 내에 nested 돼야 했습니다.)
+
+---
+sealed class Expr
+data class Const(val number: Double) : Expr()
+data class Sum(val e1: Expr, val e2: Expr) : Expr()
+object NotANumber : Expr()
+---
+
+(위에 있는 예는 Kotlin 1.1 에 추가된 새로운 feature 사용하고 있습니다. data class 가 sealed classes 를 포함하면서 다른 classes 를 extend 할 수 있습니다.)
+
+sealed class 는 그 자체로 abstract 이고 직접 instantiate 할 수 없고 abstrct members 를 가질 수 있습니다.
+
+sealed class 는 non-private constructors 를 가지는 걸 허용하지 않습니다. (그들의 constructors 는 default 로 private 입니다.)
+
+sealed class 의 subclasses 을 extend 하는 classes 는 (간접적인 inheritors) 어디서든 위치할 수 있고 꼭 같은 파일 내에 존재할 필요가 없습니다.
+
+sealed classes 를 사용하는 것의 중요한 이점은 when expression 내에서 사용할 때 유용합니다. statement 가 모든 경우들을 cover 한다는 걸 검증할 수 있다면 else caluse 를 statement 에 추가할 필요가 없습니다. 그러나 이것은 when 을 statement 가 아닌 expression 으로 (결과를 사용하여) 사용할 때만 동작합니다.
+
+---
+fun eval(expr: Expr): Double = when(expr) {
+    is Const -> expr.number
+    is Sum -> eval(expr.e1) + eval(expr.e2)
+    NotANumber -> Double.NaN
+    // the 'else' clause is not required because we've covered all the cases
+}
+---
+
+04.08. Generics
+
+04.08.01. Generics
+
+java 에서와 같이 kotlin 의 classes 도 type parameters 를 가질 수 있습니다.
+
+---
+class Box<T>(t: T) {
+    var value = t
+}
+---
+
+일반적으로 해당 class 의 instance 를 생성하기 위해 type argument 를 제공할 필요가 있습니다.
+
+---
+val box: Box<Int> = Box<Int>(1)
+---
+
+예를 들어 constructor arguments 나 어떤 다른 means 에 의해 parameters 가 유추 가능한 경우, type arguments 를 생략해도 됩니다.
+
+---
+val box = Box(1) // 1 has type Int, so the compiler figures out that we are talking about Box<Int>
+---
+
+04.08.02. Variance
+
+java type system 의 가장 까다로운 부분 중 하나는 wildcard types 입니다. (java generics FAQ 를 보세요). Kotlin 은 어떤 것도 가지지 않습니다. 대신 두 가지 다른 점을 가지는데 declaration-site variance 와 type projections 입니다.
+
+먼저 java 가 왜 그러한 mysterious 한 wildcars 를 필요로 하는지에 대해 생각해보십니다. 그 문제는 Effective.java, item28: Use bounded wildcards to increase API flexibility 에 설명돼 있습니다. 첫째로 java 에서 generic type 은 invariant 하고 이는 List<String> 이 List<Object> 의 subtype 이 아니라는 걸 의미합니다. 왜 그럴까요? List 가 invariant 하지 않으면 java 의 arrays 보다 나을 게 없을 겁니다. 왜냐하면 다음의 code 를 compile 하고 runtime 때 exception 을 발생시키기 때문입니다.
+
+---
+// Java
+List<String> strs = new ArrayList<String>();
+List<Object> objs = strs; // !!! the cause of the upcoming problem site here. Java prohibit this!
+objs.add(1); // Here we put an Integer into a list of Strings
+String s = strs.get(0) // !!! ClassCastException: Cannot cast Integer to String
+---
+
+그래서 java 는 run-time safety 를 보장하기 위해 그러한 일을 금지합니다. 하지만 여기엔 몇 가지 의미가 있습니다. 예를 들어, Collection interface 에서 addAll() method 를 생각해보세요. 이 method 의 signature 는 무엇일까요. 직관적으로는 이렇게 놓을 겁니다.
+
+---
+// Java
+interface Collection<E> ... {
+    void addAll(Collection<E> items);
+}
+---
+
+하지만 그러면 다음의 간단한 일 (완벽히 안전한) 을 할 수 없을 겁니다.
+
+---
+// java
+void copyAll(Collection<Object> to, Collection<String> from) {
+    to.addAll(from); // !!! Would not compile with the naive declaration of addAll:
+                     //        Collection<String> is not a subtype of Collection<Object>
+}
+---
+
+( java 에서 어려운 방법으로 이 lesson 을 배웁니다. Effective Java, item25: Prefer lists to arrays 를 보세요)
+
+addAll() 의 실제 signature 가 다음과 같은 건 바로 이 때문입니다.
+
+---
+// Java
+interface Collection<E> ... {
+    void addAll(Collection<? extends E> items);
+}
+---
+
+wildcard type argument ? extends E 는 이 method 가 E 또는 E 자신이 아닌 아닌 E 의 어떤 subtype 의 objects collection 을 수용할 수 있음을 가리킵니다. 이는 items (이 collections 의 elements 는 E 의 subsclass 의 instances 입니다) 로부터 E의 것을 안전하게 읽을 수 있다는 걸 의미하지만 E 의 알려지지 않은 subtype 에 해당하는 objects 가 무엇인지 알지 못하기 때문에 그것에 쓰기는 할 수 없습니다. 이 제약사항에 대가로 원하는 동작은 바로 이것입니다. Collection<String> 이 Collection<? extends Object> 의 subtype 이 되는 겁니다. extends-bound(upper bound) 를 쓴 wildcard 는 "clever words" 로 covariant type 이라 합니다.
+
+이 trick 이 왜 작동하는지 이해하는 열쇠는 아주 간단합니다. collection 에서 items 를 오직 가져오기만 할 수 있다면 String s 의 collection 을 사용하고 그것으로부터 Object s 를 읽는 것은 괜찮습니다. 반대로 items 를 collection 에 오직 넣기만 할 수 있다면, Object s 의 collection 을 가져와 String s 를 그것에 넣어도 괜찮습니다. java 에서 List<? super String> 을 List<Object> 의 supertype 으로 할 수 있습니다.
+
+후자는 contravariance 라 하고 List<? super String> 에 있는 argument 로서 String 을 취하는 methods 만을 call 할 수 있습니다. (예를 들어 all(String) 이나 set(int, String) 을 call 할 수 있습니다.) 반면 만일 List<T> 에서 T 를 returns 하는 어떤 걸 call 한다면 String 이 아닌 Object 를 얻게 됩니다.
+
+Joshua Bloch 는 읽기만 하는 objects 를 Producers 에서, 쓰기만 하는 objects 를 Consumers 에서 부르라고 합니다. 그는 "최대한 유연하기 위해, producers 나 consumers 를 나타내는 input parameters 에 wildcard types 를 사용하라" 라고 추천하고 다음의 니모닉을 제안했습니다.
+
+PESC stands for Producer-Extends, Consumer-Super
+
+NOTE: producer-object, 말하자면 List<? extends Foo> 인 이 object 에서 add() 나 set() 을 call 하는 건 허용되지 않지만 이는 이 object 가 immutable 하다는 걸 의미하는 게 아닙니다. 예를 들어 list 로부터 모든 items 를 지우기 위해 clear() 를 호출하는 걸 금지하는 게 아무것도 없는데 clear() 가 어떠한 parameter 도 전혀 가지지 않기 때문입니다. wildcards ( 또는 다른 variance type) 에 의해 보장되는 건 type safety 입니다. Immutability 는 완전히 다른 이야기입니다.
+
+04.08.03. Declaration-site variance
+
+parameter 로 T 를 취하는 어떠한 methods 도 가지지 않고 오직 T 를 return 하는 methods 만을 가지고 있는 generic interface Source<T> 가 있다고 가정하겠습니다.
+
+---
+// Java
+interface Source<T> {
+    T nextT();
+}
+---
+
+그리고나서 Source<Object> type 의 variable 내에 Source<String> 의 instance 를 가리키는 참조자를 보관하는 건 완벽히 안전할 겁니다. call 할 어떤 consumer-methods 가 없기 때문입니다. 하지만 java 는 이를 알지 못하므로 여전히 그것을 금지합니다.
+
+---
+// Java
+void demo(Source<String> strs) {
+    Source<Object> objects = strs; // !!! Not allowed in Java
+    // ...
+}
+---
+
+이를 고치기 위해 Source<? extends Object> type 의 object 를 선언해야하는데, 이는 의미 없는 행위입니다. 전처럼 그러한 variable 에 대한 같은 methods 를 전부 call 할 수 있기 때문에 더 복잡한 type 에 의해 추가되는 어떠한 value 도 필요없습니다. 하지만 compiler 는 이를 알지 못합니다.
+
+Kotlin 에서는 이러한 종류의 일을 compiler 에게 설명합니다. 이를 declaration-site variance 라 부릅니다. Source 의 type parameter T 를 annotate 해서 Source<T> 의 members 로부터 오직 return(produced) 될 뿐 절대 consumed 되지 않을 거라는 걸 확실히 알려줄 수 있습니다. 이를 위해 out modifier 를 제공합니다.
+
+---
+abstract class Source<out T> {
+     abstract fun nextT(): T
+}
+
+fun demo(strs: Source<String>) {
+    val objects: Source<Any> = strs  // This is OK, since T is an out-parameter
+    // ...
+}
+---
+
+일반적인 규칙은 이렇습니다: class C 의 type parameter T 가 out 으로 선언됐을 때, C 의 members 내에는 오직 out-position 에서만 발생할 수 있지만 결과적으로 C<Base> 는 C<Derived> 의 supertype 으로 안전하게 될 수 있습니다.
+
+'clever words" 로는 C 가 parameter T 에서 covariant 하다 또는 T 가 covariant type parameter 라고 말합니다. C 는 T 의 것의 producer 로 생각할 수 있고 T 의 것의 consumer 가 아닌 걸로 생각할 수 있습니다.
+
+out modifier 는 variance annotation 으로 불리며 type parameter 가 선언되는 위치에서 제공되므로 declaration-site variance 라 이야기합니다. 이는 java 에서 type 사용 시 wildcards 가 types 를 covariant 하게 만드는 use-site variance 와 정반대입니다.
+
+out 에 추가적으로 kotlin 은 보완적인 variance annotation 인 in 을 제공합니다. 이는 type parameter 를 contravariant 하게 만듭니다. 오직 consume 될 뿐 produce 될 수 없습니다. contravariant class 의 좋은 예는 Comparable 입니다.
+
+---
+abstract class Comparable<in T> {
+    abstract fun compareTo(other: T): Int
+}
+
+fun demo(x: Comparable<Number>) {
+    x.compareTo(1.0)  // 1.0 has type Double, which is a subtype of Number
+    // Thus, we can assign x to a variable of type Comparable<Double>
+
+    val y: Comparable<Double> = x // OK!
+}
+---
+
+in 과 out 이 self-explaining(꽤 오랫동안 C# 에서 성공적으로 사용되어 온 것처럼) 하다고 믿습니다. 그러므로 위에서 언급한 mnemonic 은 실제론 필요없고 더 나은 목적을 위해 그것을 바꿔 말할 수 있습니다.
+
+The Existential Transformation: Consumer in, Producer out! :-)
+
+04.08.03. Type projections
+
+04.08.03.01. Use-site variance: Type projections
+
+type parameter T 로 out 를 선언하고 use site 에서 subtyping 하는 위험을 피하는 건 매우 편리합니다만 어떤 classes 는 실제로 T 의 것을 오직 return 만 해야 하는 제한이 생깁니다! 이에 대한 좋은 예는 Array 입니다.
+
+---
+class Array<T>(val size: Int) {
+    fun get(index: Int): T { /* ... */ }
+    fun set(index: Int, value: T) { /* ... */ }
+}
+---
+
+이 class 는 T 에서 covariant, contravariant 둘 다 될 수 없습니다. 이는 특정한 비유연성을 부과합니다. 다음 function 을 생각해보세요.
+
+---
+fun copy(from: Array<Any>, to: Array<Any>) {
+    assert(from.size == to.size)
+    for (i in from.indices)
+        to[i] = from[i]
+}
+---
+
+이 function 은 한 array 에서 다른 array 로 items 를 복사합니다. 실제로 적용해봅시다.
+
+---
+val ints: Array<Int> = arrayOf(1, 2, 3)
+val any = Array<Any>(3) { "" }
+copy(ints, any) // Error: expects (Array<Any>, Array<Any>)
+---
+
+여기서 똑같은 문제를 만났습니다. Array<T> 는 T 에서 invariant 하므로 Array<Int> 와 Array<Any> 어느쪽도 나머지의 subtype 이 될 수 없습니다. 왜일까요? copy 가 좋지 않은 행위였을지도 모릅니다. 즉 말하자면 from 으로 string 을 쓰려고 시도할 수 있고 실제로 Int 의 array 를 그곳으로 넘겼다면 ClassCaseException 이 나중에 발생할 겁니다.
+
+그러면 우리가 원하는 유일한 것은 copy() 가 나쁜 행위를 하지 않음을 보장하는 겁니다. from 에 쓰기를 금지하기 원하면 이렇게 할 수 있습니다.
+
+---
+fun copy(from: Array<out Any>, to: Array<Any>) {
+    // ...
+}
+---
+
+여기서 일어나는 일을 type projection 이라 부릅니다. from 은 단순히 array 가 아니라 제한된 (projected) array 입니다. 오직 type parameter T 를 return 하기만 하는 methods 를 call 할 수 있고 이 경우 단지 get() 을 call 하다는 걸 의미합니다. 이는 use-site variance 에서의 접근이고 java 의 Array<? extends Object> 에 해당합니다만 약간 더 쉬운 방법입니다.
+
+in 또한 type 을 project 하는데 사용할 수 있습니다.
+
+---
+fun fill(dest: Array<in String>, value: String) {
+    // ..
+}
+---
+
+Array<in String> 은 java 의 Array<? super String> 에 해당하는데 즉, CharSequence 의 array 나 Object 의 array 를 fill() function 으로 넘길 수 있습니다.
+
+04.08.03.02. Star-projections
+
+때때로 type argument 에 대해 어떤 것도 알지 못한다고 말하고 싶지만 여전히 안전한 방식으로 그것을 사용하길 원할 수 있습니다. 여기서 안전한 방식은 generic type 의 그러한 projection 을 정의하는 건데, 즉 generic type 의 모든 구체적인 instance 화는 해당 projection 의 subtype 이 됩니다.
+
+Kotlin 은 이를 위해 소위 star-projection syntax 를 지원합니다.
+
+- Foo<out T> 인 경우, T가 upper bound 가 TUpper 로 covariant type parameter 인 곳에서 Foo<*> 는 Foo<out TUpper> 와 동등합니다. 이는 T 가 알려져 있지 않을 때 Foo<*> 로부터 TUpper 의 values 를 안전하게 읽을 수 있다는 걸 의미합니다.
+
+- Foo<in T> 인 경우, T 가 contravariant type parameter 인 곳에서, Foo<*> 는 Foo<in Nothing> 과 동등합니다. 이는 T가 알려져 있지 않을 때 Foo<*> 에 안전한 방법으로 쓰기를 할 수 없다는 걸 의미합니다.
+
+- Foo<T> 인 경우, T 가 upper bound 가 TUpper 로 invariant type parameter 인 곳에서, Foo<*> 는 values 를 읽는 경우 Foo<out TUpper> 와 동등하고, values 를 쓰기하는 경우 Foo<in Nothing> 과 동등합니다.
+
+generic type 이 type parameters 를 여러 개 가지고 있다면 각각은 독립적으로 project 될 수 있습니다. 예를 들어, type 이 interace Function<in T, out U> 로 선언돼 있다면 다음의 star-projections 를 상상할 수 있습니다.
+
+- Function<*, String> 은 Function<in Nothing, String> 을 의미합니다.
+- Function<Int, *> 은 Function<Int, out Any?> 를 의미합니다.
+- Function>*, *> 은 Function<in Nothing, out Any?> 를 의미합니다.
+
+Note: star-projections 는 java 의 raw types 와 매우 유사하지만 안전합니다.
+
+04.08.04. Generic functions
+
+class 뿐 아니라 functions 도 type parameters 를 가질 수 있습니다. type parameter 는 function 이름 전에 위치합니다.
+
+---
+fun <T> singletonList(item: T): List<T> {
+    // ...
+}
+
+fun <T> T.basicToString() : String {  // extension function
+    // ...
+}
+---
+
+generic function 을 호출하기 위해 function 이름 뒤에 call site 에서 type arguments 를 명시하세요.
+
+---
+val l = singletonLIst<Int>(1)
+---
+
+04.08.05. Generic constraints
+
+주어진 type parameter 를 대체할 수 있는 모든 가능한 type 의 set 은 generic constraints 에 의해 제한됩니다.
+
+04.08.06. Upper bounds
+
+constraints 의 가장 일반적인 type 은 upper bound 인데 java 의 extends 키워드와 동등합니다.
+
+---
+fun <T : Comparable<T>> sort(list: List<T>) {
+    // ..
+}
+---
+
+colon 뒤에 명시된 type 은 upper bound 입니다. 오직 Comparable<T> 의 subtype 만이 T 를 대체할 수 있습니다. 예를 들자면 이렇습니다.
+
+---
+sort(listOf(1, 2, 3)) // OK. Int is a subtype of Comparable<Int>
+sort(listOf(HashMap<Int, String>())) .. Error: HashMap<Int, String> is not a subtype of Comparable<HashMap<Int, String>>
+---
+
+default upper bound (명시하지 않으면) 는 Any? 입니다. 오직 하나의 upper bound 만이 angle brackets 내에 명시할 수 있습니다. 같은 type parameter 가 한 개 이상 upper bound 를 필요로 한다면 분리된 where-clause 를 필요로 합니다.
+
+---
+fun <T> cloneWhenGreater(list: List<T>, threshold: T): LIst<T>
+    where T : Comparable<T>,
+          T : Cloneable {
+    return list.filter { it > threshold } . map { it.clone() }
+    }
+---
+
+04.09. Nested Classes
+
+04.09.01. Nested and Inner Classes
+
+classes 는 다른 classes 내에 nested 될 수 있습니다.
+
+---
+class Outer {
+    private val bar: Int = 1
+    class Nested {
+        fun foo() = 2
+    }
+}
+
+val demo = Outer.Nested().foo() // == 2
+---
+
+04.09.02. Inner classes
+
+class 는 inner 로 표시되어 outer class 의 members 에 접근할 수 있습니다. inner classes 는 outer class 의 object 차모자를 가져갑니다.
+
+---
+class Outer {
+    private val bar: Int = 1
+    inner class Inner {
+        fun foo() = bar
+    {
+{
+
+val demo = Outer().Inner().foo() // == 1
+---
+
+inner classes 내에 있는 this 의 disambiguation 에 대해 배우려면 Qualified this expression 를 보세요.
+
+04.09.03. Anonymous inner classes
+
+Anonymous inner class instances 는 object expression 을 사용해 생성됩니다.
+
+---
+window.addMouseListener(object: MouseAdapter() {
+    override fun mouseClicked(e: MouseEvent) {
+        // ...
+    }
+
+    override fun mouseEntered(e: MouseEvent) {
+        // ...
+    }
+})
+---
+
+object 가 기능이 있는 java interface (즉 single abstract method 를 가진 java interface) 의 instance 라면, interface type 으로 prefixed 된 lamda expression 을 사용하는데 그것을 생성할 수 있습니다.
+
+---
+val listener = ActionListener { println("clicked") }
+---
+
+04.10. Enum Classes
+
+04.10.01. Enum Classes
+
+enum classes 의 가장 기본적인 사용은 type-safe enums 을 구현하는 것입니다.
+
+---
+enum class Direction {
+    NORTH, SOUTH, WEST, EAST
+}
+---
+
+각 enum constant 는 object 입니다. Enum constants 는 commas 로 구분됩니다.
+
+04.10.02. Initialization
+
+각 enum 이 enum class 의 instance 이므로 다음과 같이 초기화 할 수 있습니다.
+
+---
+enum class Color(val rgb: Int) {
+    RED(0xFF0000),
+    GREEN(0x00FF00),
+    BLUE(0x0000FF)
+}
+---
+
+04.10.03. Anonymous Classes
+
+Enum constants 는 자기 자신의 anonymous classes 를 선언할 수도 있습니다.
+
+---
+enum class ProtocolState {
+    WAITING {
+        override fun signal() = TALKING
+    },
+    TALKING {
+        override fun signal() = WAITING
+    };
+
+    abstract fun signal(): ProtocolState
+}
+---
+
+선언할 때는 해당 methods 와 함께 할 수도 있고 base method 를 override 할 수도 있습니다. enum class 가 어떤 members 를 정의하려면 java 처럼 semicolon 을 사용해 enum constant definitions 와 member definitions 를 분리해야 합니다.
+
+Enum entries 는 inner class 가 아닌 nested types 를 포함할 수 없습니다.(Kotlin 1.2 에서 deperecated 됨)
+
+04.10.04. Working with Enum Constants
+
+java 처럼 Kotlin 에서 enum classes 는 정의된 enum constants 를 나열하고, 그 이름으로 enum constant 를 얻는 걸 허용하는 synthetic methods 를 가지고 있습니다. 이러한 methods 들의 signatures 는 다음과 같습니다. (enum class 의 이름이 EnumClass 라고 가정합니다)
+
+---
+EnumClass.valueOf(value: String): EnumClass
+EnumClass.values(): Array<EnumClass>
+---
+
+명시된 이름이 class 내에 정의된 enum constants 의 어느 것과도 매치되지 않으면 valueOf() 라는 method 는 IllegalArgumentExfception 을 던집니다.
+
+Kotlin 1.1 이후로, enumValues<T>() 와 enumValueOf<T>() functions 를 사용하면 enum class 내에서 generic 한 방법으로 constants 에 접근할 수 있습니다.
+
+---
+enum class RGB { RED, GREEN, BLUE }
+
+inline fun <reified T : Enum<T>> printAllValues() {
+    print(enumValues<T>().joinToString { it.name })
+}
+
+printAllValues<RGB>() // prints RED, GREEN, BLUE
+---
+
+모든 enum constant 는 enm class 선언 내에 이름과 position 을 가진 properties 를 가지고 있습니다.
+
+---
+val name: String
+val ordinal: Int
+---
+
+enum constants 는 Comparable interface 도 구현할 수 있는데 자연스런 순서는 enum class 내에 정의된 순서가 됩니다.
+
+04.11. objects
+
+04.11.01. Object Expressions and Declarations
+
+때때로 명시적으로 새로운 subclass 를 선언하지 않고 어떤 class 의 적은 변경의 object 를 생성하길 원합니다. Java 는 이러한 case 를 anonymous inner classes 로 handle 합니다. Kotlin 은 object expressions 와 object decalaration 으로 이 개념을 어느정도 구현합니다.
+
+04.11.02. Object expressions
+
+어떤 type (또는 types) 로부터 inherit 한 anonymous class 의 object 를 생성하기 위해 이렇게 씁니다.
+
+---
+window.addMousListener(object : MouseAdapter() {
+    override fun mouseClicked(e: MouseEvent) {
+        // ...
+    }
+
+    override fun mouseEntered(e: MouseEvent) {
+        // ...
+    }
+}
+---
+
+supertype 이 constructor 를 가지고 있다면, 정확한 constructor parameters 를 넘길 필요가 있습니다. 많은 supertypes 는 colon 뒤 comma 로 분리된 list 로 기술될 수 될 수 있습니다.
+
+---
+open class A(x: Int) {
+    public open val y: Int = x
+}
+
+interface B { ... }
+
+val ab: A = object : A(1), B {
+    override val y = 15
+}
+---
+
+만일 혹시라도 사소한 supertypes 전혀 없이 오직 object 만을 필요로 한다면 간단하게 이렇게 쓸 수 있습니다.
+
+---
+fun foo() {
+    val adHoc = object {
+        var x: Int = 0
+        var y: Int = 0
+    }
+    print(adHoc.x + adHoc.y)
+}
+---
+
+anonymous objects 는 오직 local 하고 private 한 선언에서만 types 로 사용될 수 있다는 걸 알아두세요. anonymous object 를 public function 의 return type 이나 public property 의 type 으로  사용한다면 해당 function 이나 property 의 실제 type 은 anonymous object 의 선언된 supertype  이 되거나 어떠한 super type 도 선언하지 않았다면 Any 가 됩니다. anonymous object 내에 추가된 members 는 접근할 수 없을 겁니다.
+
+---
+class C {
+    // Private function, so the return type is the anonymous object type
+    private fun foo() = object {
+        val x: String = "x"
+    }
+
+    // Public function, so the return type is Any
+    fun publicFoo() = object {
+        val x: String = "x"
+    }
+
+    fun bar() {
+        val x1 = foo().x        // Works
+        val x2 = publicFoo().x  // ERROR: Unresolved reference 'x'
+    }
+}
+---
+
+java 의 anonymous inner classes 처럼 object expressions 내 code 는 enclosing scope 로부터 variables 를 접근할 수 있습니다. (java 와 달리 final variables 에는 금지돼 있습니다.)
+
+---
+fun countClicks(window: JComponent) {
+    var clickCount = 0
+    var enterCount = 0
+
+    window.addMouseListener(object : MouseAdapter() {
+        override fun mouseClicke(e: MouseEvent) {
+            clickCount++
+        }
+
+        override fun mouseEntered(e: MouseEvent) {
+            enterCount++
+        }
+    })
+
+    // ...
+}
+---
+
+04.11.03. Object declarations
+
+singleton 은 매우 유용한 pattern 이며 kotlin (scala 이후) 은 singletons 를 쉽게 선언할 수 있습니다.
+
+---
+object DataProviderManager {
+    fun registerDataProvider(provider: DataProvider) {
+        // ...
+    }
+
+    val allDataProviders: Collection<DataProvider>
+        get() = // ...
+}
+---
+
+이를 object declaration 이라 부르며 항상 object keyword 에 이어서 이름을 가지고 있습니다. variable declaration 처럼 object declaration 은 expression 이 아니고 assignment statement 오른편에서 사용할 수 없습니다.
+
+object 를 참조하기 위해 이름을 직접적으로 사용합니다.
+
+---
+DataProviderManager.registerDataProvider(...)
+---
+
+그러한 objects 는 supertypes 를 가질 수 있습니다.
+
+---
+object DefaultListener : MouseAdapter() {
+    override fun mouseClicked(e: MouseEvent) {
+        // ...
+    }
+
+    override fun mouseEntered(e: MouseEvent) {
+        // ...
+    }
+}
+---
+
+NOTE: object declaration 은 local 이 될 수 없지만 (즉, function 내 직접적으로 nested 될 수 없습니다) 다른 object declarations 나 non-inner classes 내에 nested 될 수 없습니다.
+
+04.11.04. Companion Objects
+
+class 내에 object declaration 은 companion keyword 로 표시될 수 있습니다.
+
+---
+class MyClass {
+    companion object Factory {
+        fun create(): MyClass = MyClass()
+    }
+}
+---
+
+companion object 의 member 는 qualifier 로서 간단히 class 이름을 사용해 call 할 수 있습니다.
+
+---
+val instance = MyClass.create()
+---
+
+companion object 의 이름은 생략할 수 있으며 이 경우 Companion 은 다음과 같이 사용됩니다.
+
+---
+class MyClass {
+    companion object {
+    }
+}
+
+val x = MyClass.Companion
+---
+
+companion object 의 member 가 다른 언어에 있는 static members 처럼 보이더라도 runtime 때 그것들은 여전히 실제 objects 의 instance members 인데 예를 들자면 interfaces implement 할 수 있습니다.
+
+---
+interface Factory<T> {
+    fun create(): T
+}
+
+class MyClass {
+    companion object : Factory<MyClass> {
+        override fun create(): MyClass = MyClass()
+    }
+}
+---
+
+그러나 만일 @JVMStatic annotation 을 사용한다면 JVM 상에서 실제 static methods 와 fields 로 생성된 companion objects 의 members 를 가지고 있을 수 있습니다. 더 많은 상세 내용을 위해서 Java interoperability section 을 보세요.
+
+04.11.05. Semantic difference between object expressions and declarations
+
+object expressions 와 object declarations 사이에는 한 가지 중요한 semantic 한 차이가 있습니다.
+
+- object expressions 는 사용된 위치에서 즉시 실행 (초기화) 됩니다.
+- object declarations 는 처음 접근할 때 lazily 하게 초기화됩니다.
+- companion object 는 해당 class 가 load(resolved) 될 때 초기화되며 java static initializer 의 semantics 와 match 됩니다.
+
+04.12. Delegation
+
+04.12.01. Class Delegation
+
+Delegation pattern 은 상속 구현에 대한 좋은 대체제이며 Kotlin 은 이를 boilerplate code 요구 없이 natively 하게 제공합니다. class Derived 는 interface Base 로부터 inherit 할 수 있고 모든 public methods 는 기술된 object 에 delegate 할 수 있습니다.
+
+---
+interface Base {
+    fun print()
+}
+
+class BaseImpl(val x: Int) : Base {
+    override fun print() { print(x) }
+}
+
+class Derived(b: Base) : Base by b
+
+fun main(args: Array<String>) {
+    val b = BaseImpl(10)
+    Derived(b).print()    // prints 10
+}
+---
+
+Derived 를 위한 supertype list 에 있는 by-clause 는 b 가 Derived 의 objects 내에 내부적으로 보관이 될 거고 compiler 는 b 로 전달되는 Base 의 모든 methods 를 생성할 겁니다.
+
+overrides 는 기대한대로 동작한다는 걸 알아두세요: compiler 는 override implementations 를 delegate object 내에 있는 것들 대신 사용할 겁니다. 만일 override fun print() { print("abc") } 를 Derived 에 추가한다면 promgram 은 "10" 대신 "abc" 를 출력할 겁니다.
+
+04.13. Delegated Properties
+
+04.13.01. Delegated Properties
+
+우리가 필요로 할 때마다 manually 하게 구현할 수 있음에도 불구하고 한 번 implement 하고 라이브러리에 넣는 것이 매우 좋을 수 있는 특정 종류의 properties 가 있습니다. 예시는 다음을 포함합니다.
+
+- lazy properties: 오직 최초 접근 시 계산되어 얻어지는 value
+- observable properties: 이 property 에 변화에 대한 알림을 받는 listeners
+- 각 property 를 위해 분리된 field 대신 map 에 properties 를 저장하는 것
+
+이러한 경우 (그 외의 경우도) cover 하기 위해 kotlin 은 delegated properties 를 제공합니다.
+
+---
+class Example {
+    var p: String by Delegate()
+}
+---
+
+syntax 는 이렇습니다: val/var <property name>: <Type> by <expression>. by 뒤에 있는 expression 은 delegate 인데 그 property 에 해당하는 get() (그리고 set()) 가 getValue() 와 setValue() methods 에 delegate 되기 때문입니다. Property delegates 는 어떤 interface 도 구현할 필요가 없습니다만 getValue() function 을 (그리고 var 인 경우 setValue() 도) 제공할 필요가 있습니다. 예를 들면 이렇습니다.
+
+---
+class Delegate {
+    operator fun getValue(thisRef: Any?, property: KProperty<*>): String {
+        return "$thisRef, thank you for delegating ${property.name}' to me!"
+    }
+
+    operator fun setValue(thisRef: Any?, property: KProperty<*>, value: String) {
+        println("$value has been assigned to '${property.name} in $thisRef.'")
+    }
+}
+---
+
+Delegate 의 instance 를 delegates 하는 p 를 읽어올 때 Delegate 로부터 getValue() function 가 call 되므로 첫번째 parameter 는 p 를 읽어온 object 가 되고 두번째 parameter 는 p 자신에 대한 서술을 가집니다. (즉 그것의 이름을 가집니다). 예를 들자면 이렇습니다.
+
+---
+val e = Example()
+println(e.p)
+---
+
+이는 다음을 print 합니다.
+
+---
+Example@33a17727, thank you for delegating 'p' to me!
+---
+
+유사하게 p 에 assign 할 때 setValue() function 이 call 됩니다. 최초 두 parameters 는 같지만 세번째는 assigned 될 value 를 가집니다.
+
+---
+e.p = "NEW"
+---
+
+이는 다음을 print 합니다.
+
+---
+NEW has been assigned to 'p' in Example@33a17727.
+---
+
+delegated object 에 대한 요구 명세는 below 에서 찾을 수 있습니다.
+
+kotlin 1.1 이후로 function 이나 code block 내에서 delegated property 를 선언할 수 있음을 알아두세요. 그것은 class 의 member 일 필요가 없습니다. 아래에서 the example 을 찾을 수 있습니다.
+
+04.13.02. Standard Delegates
+
+Kotlin Standard library 는 몇 가지 유용한 종류의 delegates 를 위한 factory methods 를 제공합니다.
+
+- Lazy
+
+lazy() 는 lamda 를 얻어 Lazy<T> 의 instances 를 return 하여 lazy property 를 구현하는 delegate 를 제공하는 function 입니다. 최초 get() call 은 lazy() 로 넘겨진 lamda 를 실행하고 result 를 기억하며 그 이후 get() calls 은 간단히 기억된 result 를 return 합니다.
+
+---
+val lazyValue: String by lazy {
+    println("computed")
+    "Hello"
+}
+
+fun main(args: Array<String> {
+    println(lazyValue)
+    println(lazyValue)
+}
+---
+
+이 예는 다음을 print 합니다.
+
+---
+computed!
+Hello
+Hello
+---
+
+default 로 lazy properties 의 evaluation 은 synchronized 입니다. value 는 오직 한 thread 에서 계산되고 모든 thread 는 같은 value 를 봅니다. 초기화 delegate 의 synchronization 이 필요하지 않아서 여러 thread 가 동시에 실행할 수 있다면 LazyThreadSafetyMode.PUBLICATION 을 lazy() function 에 parameter 로 넘기세요. initialization 이 항상 single thread 에서 실행될 거라고 확신한다면 LazyThreadSafetyMode.NONE mode 를 사용할 수 있으며 이는 어떤 thread-safety guarantess 와 관련 overhead 를 발생시키지 않습니다.
+
+04.13.03. Observable
+
+Delegates.observable() 은 두 arguments 를 가집니다. 초기화 value 와 변경을 위한 handler 입니다. handler 는 property 에 assign 할 때마다 (assignement 가 실행된 뒤에) call 됩니다. 그것은 세 개의 parameters 를 갖습니다. assigned 될 property 와 old value, 그리고 새로운 value 입니다.
+
+---
+import kotlin.properties.Delegates
+
+class User {
+    var name: String by Delegates.observable("<no name>") {
+        prop, old, new ->
+        println("$old -> $new")
+    }
+}
+
+fun main(args: Array<String>) {
+    val user = User()
+    user.name = "first"
+    user.name = "second"
+}
+---
+
+이 예시는 다음을 print 합니다.
+
+---
+<no name> -> first
+first -> second
+---
+
+assignment 를 intercept 하고 이를 거부할 수 있길 원한다면 observable() 대신 vetoable() 을 사용하세요.  vetoable 로 넘겨진 handler 는 새로운 property value 의 assignedment 이전에 call 되어 수행됩니다.
+
+04.13.04. Storing Properties in a Map
+
+한가지 일반적인 사용 사례는 map 에 properties 의 values 를 보관하는 겁니다. 이는 JSON 을 parsing 하거나 다른 "dynamic" 한 것들을 수행하는 것처럼 applications 내에서 자주 사용됩니다. 이 경우 map instance 자체를 delegate property 를 위한 delegate 로 사용할 수 있습니다.
+
+---
+class User(val map: Map<String, Any?>) {
+    val name: String  by map
+    val age: Int      by map
+}
+---
+
+이 예에서 constructor 은 map 을 가집니다.
+
+---
+val user = User(mapOf(
+    "name" to "John Doe",
+    "age" to 25
+))
+---
+
+Delegated properties 는 이 map 으로부터 values 를 취합니다 (properties 의 이름으로서 string keys 를 사용하여)
+
+---
+println(user.name)
+println(user.age)
+---
+
+이는 var properties 를 위해서도 역시 사용할 수 있는데 read-only map 대신 Mutable map 을 사용하면 됩니다.
+
+---
+class MutableUser(val map: MutableMap<String, Any?>)
+{
+    var name: String  by map
+    var age: Int      by map
+}
+---
+
+04.13.05. Local Delegated Properties (since 1.1)
+
+local variables 를 delegated properties 로 사용할 수 있습니다. 예를 들면 local variable 을 lazy 하게 만들 수 있습니다.
+
+---
+fun example(computeFoo: () -> Foo) {
+    val memoizedFoo by lazy(computeFoo)
+
+    if (someCondition && memoizedFoo.isValid()) {
+        memoizedFoo.doSomething()
+    }
+}
+---
+
+memoizedFoo variable 은 오직 최초 접근 시 계산될 겁니다. someCondition 이 실패하면 variable 은 전혀 계산되지 않을 겁니다.
+
+04.13.06. Property Delegate Requirements
+
+delegate objects 에 대한 요구는 여기에 모아놨습니다.
+
+read-only property(즉, val) 인 경우 delegate 는 getValue 로 명명된 function 을 제공하고 다음의 parameters 를 취해야 합니다.
+
+- thisRef - property 소유자와 같거나 supertype 이어야 합니다(extension properties 라면 extended 된 type)
+- property - KProperty<*> type 이거나 supertype 이어야 합니다.
+
+mutable property(var) 인 경우, delegate 는 추가적으로 setValue 로 명명된 function 을 제공하고 다음의 parameters 를 취해야 합니다.
+
+- thisRef - getValue() 인 경우와 같습니다.
+- property - getValue() 인 경우와 같습니다.
+- new value - propetry 와 같은 type 이거나 supertype 이어야 합니다.
+
+getValue() 그리고/또는 setValue() functions 는 delegate class 의 member functions 나 extension functions 둘 다 제공됩니다. 후자는 이러한 functions 를 본래 제공하지 않는 object 에 property 를 delegate 할 필요가 있을 때 손수 해야합니다. functions 둘 다 operator keyword 로 표시될 필요가 있습니다.
+
+delegate class 는 요구되는 operator methods 를 포함하는 ReadOnlyProperty 와 ReadWriteProperty interfaces 중 하나를 implement 할 수 있습니다. 이러한 interfaces 는 kotlin standard library 에 선언돼 있습니다.
+
+---
+interface ReadOnlyProperty<in R, out T> {
+    operator fun getValue(thisRef: R, property KProperty<*>): T
+}
+
+interface ReadWriteProperty<in R, T> {
+    operator fun getValue(thisRef: R, property: KProperty<*>): T
+    operator fun setValue(thisRef: R, property: KProperty<*>, value: T)
+}
+---
+
+04.13.06. Translation Rules
+
+모든 delegated property 에 대해 내부적으로는 Kotlin compiler 가 보조 property 를 생성하고 그것에 delegates 합니다. 예를 들어 property prop 에 대해 hidden property 인 prop$delegate 가 생성되며 접근자의 code 는 간단히 이 추가적인 property 에 delegates 합니다.
+
+---
+class C {
+    var prop: Type by MyDelegate()
+}
+
+// this code is generated by the compiler instead:
+class C {
+    private val prop$delegate = MyDelegate()
+    var prop: Type
+        get() = prop$delegate.getValue(this, this::prop)
+        set(value: Type) = prop$delegate.setValue(this, this::prop, value)
+}
+---
+
+Kotlin compiler 는 arguments 내에 prop 에 대한 필요한 모든 정보를 제공합니다. 첫번째 argument 인 this 는 outer class C 의 instance 를 참조하고, this::prop 는 prop 그 자신을 설명하는 KProperty type 의 reflection object 입니다.
+
+직접적으로 code 내에 bound callable reference 를 참조하는 this::prop syntax 는 단지 kotlin 1.1 이후 가능합니다.
+
+04.13.07. Providing a delegate (since 1.1)
+
+provideDelegate operator 를 정의함으로서 object 를 생성하는 logic 을 property implmentation 이 delegate 하는데 extend 할 수 있습니다. by 오른편에 사용된 object 가 provideDelegate 를 member 또는 extension function 으로 정의한다면 해당 function 은 property delegate instance 를 생성하기 위해 call 될 겁니다.
+
+provideDelegate 의 가능한 사용 사례 중 하나는 getter 나 setter 만이 아닌 property 가 생성될 때 property consitency 를 check 하는 겁니다.
+
+예를 들어, binding 전에 property name 을 check 하길 원한다면 이처럼 쓸 수 있습니다.
+
+---
+class ResourceDelegate<T> : ReadOnlyProperty<MyUI, T> {
+    override fun getValue(thisRef: MyUI, property: KProperty<*>): T { ... }
+}
+
+class ResourceLoader<T>(id: ResourceID<T>) {
+    operator fun provideDelegate(
+        thisRef: MyUI,
+        prop: KProperty<*>
+    ): ReadOnlyProperty<MyUI, T> {
+        checkProperty(thisRef, prop.name)
+        // create delegate
+        return ResourceDelegate()
+    }
+
+    private fun checkProperty(thisRef: MyUI, name: String) { ... }
+}
+
+class MyUI {
+    fun <T> bindResource(id: ResourceID<T>): ResourceLoader<T> { ... }
+
+    val image by bindResource(ResourceID.image_id)
+    val text by bindResource(ResourceID.text_id)
+}
+---
+
+provideDelegate 의 paramters 는 getValue 와 의 경우와 같습니다.
+
+- thisRef - property 소유자와 같거나 supertype (extension properties 의 경우 extended 된 type) 이어야 합니다.
+- property - KProperty<*> 의 type 이거나 super type 이어야 합니다.
+
+provideDelegate method 는 MyUI instance 생성 동안 각각 property 를 위해 call 되고 바로 즉시 필요한 validation 을 수행합니다.
+
+property 와 delegate 사이에 binding 하는 걸 intercept 하는 이 능력 없이 동일한 기능을 달성하려면 property name 을 명시적으로 넘겨야하며 이는 매우 편리하지 않습니다.
+
+---
+// Checking the property name without "provideDelegate" functionality
+class MyUI {
+    val image by bindResource(ResourceID.image_id, "image")
+    val text by bindResource(ResourceID.text_id, "text")
+}
+
+fun <T> MyUI.bindResource(
+        id: ResourceID<T>,
+        propertyName: String
+): ReadOnlyProperty<MyUI, T> {
+    checkProperty(this, propertyName)
+    // create delegate
+}
+---
+
+생성된 code 내에서 provideDelegate method 는 보조자 prop$delegate property 를 초기화하기 위해 call 됩니다. property declaration 를 위해 생성된 code 인 val prop: Type by MyDelegate() 와 위에 생성된 code 를 비교하며 이렇습니다.(provideDelegate method 가 존재하지 않을 때입니다.)
+
+---
+class C {
+    var prop: Type by MyDelegate()
+}
+
+// this code is generated by the compiler
+// when the 'provideDelegate' function is available:
+class C {
+    // calling "provideDelegate" to create the additional "delegate" property
+    private val prop$delegate = MyDelegate().provideDelegate(this, this::prop)
+        val prop: Type
+            get() = prop$delegate.getValue(this, this::prop)
+}
+---
+
+provideDelegate method 는 오직 보조 property 의 생성에만 영향을 주고 getter 나 setter 를 위해 생성된 code 에는 영향을 주지 않음을 알아두세요.
